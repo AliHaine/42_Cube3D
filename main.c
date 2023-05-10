@@ -5,13 +5,13 @@
 #include <math.h>
 #include <unistd.h>
 
+#define PI 3.141592653589793
 #define MAP_HEIGHT 12
 #define MAP_WIDTH 20
 #define SCREEN_HEIGHT 768
 #define SCREEN_WIDTH 1280
 #define WALK_SPEED 5
-#define PI 3.141592653589793
-#define RAY_NUMBER 144
+#define RAY_NUMBER 720
 #define FOV 90 * (PI / 180)
 #define SENSIBILITY 0.1
 
@@ -69,36 +69,44 @@ void	engine(void *params) {
 
 	core = (struct t_core *) params;
 	if (mlx_is_key_down(core->mlx, MLX_KEY_D)
-		&& map[(int) (core->playerpos[1] / 64)][(int) (core->playerpos[0] + 8 + WALK_SPEED) / 64] != 1
-		&& map[(int) ((core->playerpos[1] + 8) / 64)][(int) (core->playerpos[0] + 8 + WALK_SPEED) / 64] != 1) {
-		core->playerpos[0] += WALK_SPEED;
+	&& map[(int)((core->playerpos[1] - (sinf(core->playerangle - PI / 2) * WALK_SPEED)) / 64)]
+	[(int)((core->playerpos[0] - (cosf(core->playerangle - PI / 2) * WALK_SPEED)) / 64)] != 1)
+	{
+			core->playerpos[0] -= cosf(core->playerangle - PI / 2) * WALK_SPEED;
+			core->playerpos[1] -= sinf(core->playerangle - PI / 2) * WALK_SPEED;
 	}
 	if (mlx_is_key_down(core->mlx, MLX_KEY_A)
-		&& map[(int) (core->playerpos[1] / 64)][(int) ((core->playerpos[0] - 8) - WALK_SPEED) / 64] != 1
-		&& map[(int) ((core->playerpos[1] + 8) / 64)][(int) (((core->playerpos[0] - 8) - WALK_SPEED)) / 64] != 1) {
-		core->playerpos[0] -= WALK_SPEED;
+		&& map[(int)(core->playerpos[1] + (sinf(core->playerangle - PI / 2) * WALK_SPEED)) / 64]
+		[(int)((core->playerpos[0] + (cosf(core->playerangle - PI / 2) * WALK_SPEED)) / 64)] != 1)
+	{
+		core->playerpos[0] += cosf(core->playerangle - PI / 2) * WALK_SPEED;
+		core->playerpos[1] += sinf(core->playerangle - PI / 2) * WALK_SPEED;
 	}
 	if (mlx_is_key_down(core->mlx, MLX_KEY_S)
-		&& map[(int) ((core->playerpos[1] + 8 + WALK_SPEED) / 64)][(int) (core->playerpos[0]) / 64] != 1
-		&& map[(int) ((core->playerpos[1] + WALK_SPEED) + 8) / 64][(int) (core->playerpos[0] + 8) / 64] != 1) {
-		core->playerpos[1] += WALK_SPEED;
+		&& map[(int)((core->playerpos[1] - (sinf(core->playerangle) * WALK_SPEED)) / 64)]
+		[(int)((core->playerpos[0] - (cosf(core->playerangle) * WALK_SPEED)) / 64)] != 1)
+	{
+		core->playerpos[0] -= cosf(core->playerangle) * WALK_SPEED;
+		core->playerpos[1] -= sinf(core->playerangle) * WALK_SPEED;
 	}
 	if (mlx_is_key_down(core->mlx, MLX_KEY_W)
-		&& map[(int) (((core->playerpos[1] + 8) - WALK_SPEED) / 64)][(int) (core->playerpos[0]) / 64] != 1
-		&& map[(int) ((core->playerpos[1] - WALK_SPEED) / 64)][(int) (core->playerpos[0] + 8) / 64] != 1) {
-		core->playerpos[1] -= WALK_SPEED;
+		&& map[(int)((core->playerpos[1] + (sinf(core->playerangle) * WALK_SPEED)) / 64)]
+		[(int)((core->playerpos[0] + (cosf(core->playerangle) * WALK_SPEED)) / 64)] != 1)
+	{
+		core->playerpos[0] += cosf(core->playerangle) * WALK_SPEED;
+		core->playerpos[1] += sinf(core->playerangle) * WALK_SPEED;
 	}
-	if (mlx_is_key_down(core->mlx, MLX_KEY_LEFT)) {
+	if (mlx_is_key_down(core->mlx, MLX_KEY_LEFT))
+	{
 		core->playerangle -= SENSIBILITY;
 		if (core->playerangle < 0)
 			core->playerangle += 6.28319;
-		printf("player angle: %f(degree) %f(radians)\n", core->playerangle, core->playerangle * (PI / 180));
 	}
-	if (mlx_is_key_down(core->mlx, MLX_KEY_RIGHT)) {
+	if (mlx_is_key_down(core->mlx, MLX_KEY_RIGHT))
+	{
 		core->playerangle += SENSIBILITY;
 		if (core->playerangle > 6.28319)
 			core->playerangle -= 6.28319;
-		printf("player angle: %f(degree) %f(radians)\n", core->playerangle, core->playerangle * (PI / 180));
 	}
 	if (mlx_is_key_down(core->mlx, MLX_KEY_ESCAPE)) {
 		mlx_close_window(core->mlx);
@@ -122,13 +130,12 @@ void	engine(void *params) {
 
 		while (ray_x >= 0 && ray_x < SCREEN_WIDTH && ray_y >= 0 && ray_y < SCREEN_HEIGHT && map[(int)ray_y / 64][(int)ray_x / 64] == 0)
 		{
-			ray_x += cos(ray_angle);
-			ray_y += sin(ray_angle);
+			ray_x += cosf(ray_angle);
+			ray_y += sinf(ray_angle);
 			mlx_put_pixel(core->img_map, ray_x, ray_y, core->ray_color);
 		}
 		ray++;
 	}
-	//printf("rx: %f ry: %f px: %f py: %f\n", ray_x, ray_y, core->playerpos[0], core->playerpos[1]);
 
 	mlx_image_to_window(core->mlx, core->img_map, 0, 0);
 	mlx_image_to_window(core->mlx, core->img_dot, core->playerpos[0] - 7.5, core->playerpos[1] - 7.5);
@@ -146,7 +153,7 @@ int	main(void)
 	core->texture_dot = mlx_load_png("red_dot.png");
 	core->img_dot = mlx_texture_to_image(core->mlx, core->texture_dot);
 	core->wall_color = (150<<24) + (150<<16) + (150<<8) + 255;
-	core->ray_color = (255<<24) + (0<<16) + (0<<8) + 255;
+	core->ray_color = (220<<24) + (20<<16) + (60<<8) + 255;
 	core->playerpos[0] = 5 * 64;
 	core->playerpos[1] = 5 * 64;
 	core->playerangle = 0;
