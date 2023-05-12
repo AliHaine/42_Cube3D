@@ -1,10 +1,12 @@
-SRCS		=	main.c
+SRCS		=	src/cub3d.c src/inputs/inputs.c src/inputs/moves.c src/graphics/display.c src/graphics/raycast.c
 
 OBJS		=	$(SRCS:.c=.o)
 
 NAME		=	cub3d
 
 FLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
+
+LIBFT		=	libft/libft.a
 
 MLX42		=	"/Users/ngalzand/sgoinfre/ngalzand/MLX42/build/libmlx42.a" -I include -lglfw -L "/Users/ngalzand/.brew/opt/glfw/lib"
 
@@ -18,14 +20,18 @@ RM			=	rm -rf
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			gcc $(FLAGS) $(OBJS) $(MLX42) -o $(NAME)
+			$(MAKE) -C Libft
+			gcc $(FLAGS) $(OBJS) $(LIBFT) $(MLX42) -o $(NAME)
 clean:
+			$(MAKE) -C Libft clean
 			$(RM) $(OBJS)
 
 fclean:		clean
+			$(MAKE) -C Libft fclean
 			$(RM) $(NAME)
 
 re:			fclean all
+			$(MAKE) -C Libft re
 
 bonus:		$(NAME)
 
