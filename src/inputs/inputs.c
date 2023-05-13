@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
-#include "../../includes/defines.h"
-#include "../../includes/structs.h"
 
 void	inputs(void *params)
 {

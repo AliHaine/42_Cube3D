@@ -1,4 +1,4 @@
-SRCS		=	src/cub3d.c src/inputs/inputs.c src/inputs/moves.c src/graphics/display.c src/graphics/raycast.c
+SRCS		=	src/cub3d.c src/inputs/inputs.c src/inputs/moves.c src/graphics/display.c src/graphics/raycast.c src/parsing/map_parse.c src/utils/map_utils.c src/utils/msg_utils.c src/utils/std_func_utils.c
 
 OBJS		=	$(SRCS:.c=.o)
 
@@ -8,9 +8,9 @@ FLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
 
 LIBFT		=	libft/libft.a
 
-MLX42		=	"/Users/ngalzand/sgoinfre/ngalzand/MLX42/build/libmlx42.a" -I include -lglfw -L "/Users/ngalzand/.brew/opt/glfw/lib"
+MLX42		=	../MLX42/build/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
 
-CFLAGS		=	-I include -I /Users/ngalzand/sgoinfre/ngalzand/MLX42/include
+CFLAGS		=	-I ../MLX42/include
 
 RM			=	rm -rf
 
