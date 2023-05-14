@@ -18,7 +18,7 @@ static bool	is_direction_code(char *s)
 
 static void get_texture_from_map(int fd_map)
 {
-	char *line;
+	char	*line;
 
 	line = get_next_line(fd_map);
 	while (line)
@@ -28,7 +28,6 @@ static void get_texture_from_map(int fd_map)
 		//get la texture
 		line = get_next_line(fd_map);
 	}
-
 	while (line)
 	{
 		if (line[0] && line[0] != 'F' && line[0] != 'C')

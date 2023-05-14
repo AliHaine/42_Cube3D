@@ -30,9 +30,9 @@ void	draw_map(t_core *core);
 void	raycast(t_core *core);
 
 void	inputs(void *params);
-void	move_right_left(t_core *core, int direction);
-void	move_forward_backward(t_core *core, int direction);
-void	move_rotate(t_core *core, int direction);
+void	move_right_left(t_player *player, char **map, int direction);
+void	move_forward_backward(t_player *player, char **map, int direction);
+void	move_rotate(t_player *player, int direction);
 
 //parsing//
 

@@ -25,12 +25,18 @@ typedef struct s_const
 	float			fov;
 }	t_const;
 
+typedef struct s_player
+{
+	float			playerpos[2];
+	float			playerangle;
+	int				health;
+}	t_player;
+
 typedef struct s_core
 {
 	mlx_t			*mlx;
-	float			playerpos[2];
-	float			playerangle;
-	t_const			*consts;
+	t_const			consts;
+	t_player		player;
 }	t_core;
 
 typedef struct s_three_i

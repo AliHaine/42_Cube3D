@@ -18,17 +18,17 @@ void	inputs(void *params)
 
 	core = (t_core *)params;
 	if (mlx_is_key_down(core->mlx, MLX_KEY_D))
-		move_right_left(core, 1);
+		move_right_left(&core->player, core->consts.map,  1);
 	if (mlx_is_key_down(core->mlx, MLX_KEY_A))
-		move_right_left(core, 0);
+		move_right_left(&core->player, core->consts.map, 0);
 	if (mlx_is_key_down(core->mlx, MLX_KEY_S))
-		move_forward_backward(core, 1);
+		move_forward_backward(&core->player, core->consts.map, 1);
 	if (mlx_is_key_down(core->mlx, MLX_KEY_W))
-		move_forward_backward(core, 0);
+		move_forward_backward(&core->player, core->consts.map, 0);
 	if (mlx_is_key_down(core->mlx, MLX_KEY_LEFT))
-		move_rotate(core, 0);
+		move_rotate(&core->player, 0);
 	if (mlx_is_key_down(core->mlx, MLX_KEY_RIGHT))
-		move_rotate(core, 1);
+		move_rotate(&core->player, 1);
 	if (mlx_is_key_down(core->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(core->mlx);
 }

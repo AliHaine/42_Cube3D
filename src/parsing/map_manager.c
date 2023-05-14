@@ -19,11 +19,18 @@ static bool	set_map_size_value(t_t_i *ti, int fd_map)
 	return (true);
 }
 
+/*static bool	check_map_validity(char **map)
+{
+
+
+	return (true);
+}*/
+
 void map_manager(char *str, t_core *core)
 {
 	int		fd;
 	char	*map;
-	t_t_i ti;
+	t_t_i	ti;
 
 	if (!is_cub(str))
 		msg_write(2, 1, ERROR_MAP_NAME);
@@ -42,7 +49,8 @@ void map_manager(char *str, t_core *core)
 	}
 	fd = open(map, O_RDONLY);
 	free(map);
-	core->consts->map = malloc(sizeof(char *) * (ti.c + 1));
-	core->consts->map[ti.c] = 0;
+	core->consts.map = malloc(sizeof(char *) * (ti.c + 1));
+	core->consts.map[ti.c] = 0;
 	parse_main(ti, fd, core);
+
 }
