@@ -1,4 +1,17 @@
-SRCS		=	src/cub3d.c src/inputs/inputs.c src/inputs/moves.c src/graphics/display.c src/graphics/raycast.c src/parsing/map_parse.c src/utils/map_utils.c src/utils/msg_utils.c src/utils/std_func_utils.c
+SRCS		=	src/cub3d.c \
+				src/inputs/inputs.c \
+				src/inputs/moves.c \
+				src/graphics/display.c \
+				src/graphics/raycast.c \
+				src/parsing/map_manager.c \
+				src/parsing/map_parse.c \
+				src/parsing/map_texture.c \
+				src/utils/map_utils.c \
+				src/utils/msg_utils.c \
+				src/utils/std_func_utils.c \
+				src/utils/struct_utils.c \
+				src/utils/get_next_line/get_next_line.c \
+				src/utils/get_next_line/get_next_line_utils.c
 
 OBJS		=	$(SRCS:.c=.o)
 

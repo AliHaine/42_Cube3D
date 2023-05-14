@@ -25,7 +25,7 @@ void	draw_map(t_core *core)
 		px = -1;
 		while (++px < SCREEN_WIDTH)
 		{
-			if (core->consts->map[(int)(py / 64)][(int)(px / 64)] != 1)
+			if (core->consts->map[(py / 64)][(px / 64)] != '1')
 				continue ;
 			mlx_put_pixel(core->consts->img_map, px, py,
 				core->consts->wall_color);

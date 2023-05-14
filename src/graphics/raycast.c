@@ -31,7 +31,7 @@ void	raycast(t_core *core)
 		ray_angle = start_angle + (ray * core->consts->dist_between_ray);
 		while (ray_x >= 0 && ray_x < SCREEN_WIDTH && ray_y >= 0
 			&& ray_y < SCREEN_HEIGHT
-			&& core->consts->map[(int)ray_y / 64][(int)ray_x / 64] == 0)
+			&& core->consts->map[(int)ray_y / 64][(int)ray_x / 64] == '0')
 		{
 			ray_x += cosf(ray_angle);
 			ray_y += sinf(ray_angle);

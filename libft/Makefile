@@ -1,7 +1,6 @@
 SRCS		=	ft_isalpha.c \
 				ft_isdigit.c \
 				ft_lstclear.c \
-			 	ft_lstiter.c \
 			 	ft_memcpy.c \
 			 	ft_lstmap.c
 

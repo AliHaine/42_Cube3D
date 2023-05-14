@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "structs.h"
+# include "utils.h"
 # include "../libft/libft.h"
 
 void	display(void *params);
@@ -35,22 +36,8 @@ void	move_rotate(t_core *core, int direction);
 
 //parsing//
 
-void	parse_main(char *str);
-
-//---utils---//
-
-bool	is_cub(const char *str);
-
-void	msg_write(int fd, int exitVal, MsgType msg);
-
-//map_utils//
-
-char	*convert_to_path(char *name);
-
-//std_func_utils//
-
-void	ft_strcpy(char *s1, const char *s2);
-void	ft_strcat(char *s1, const char *s2);
-int		ft_strlen(const char *s);
+void	map_manager(char *str, t_core *core);
+void	texture_main(int fd_map, t_core *core);
+void	parse_main(t_t_i ti, int fd_map, t_core *core);
 
 #endif

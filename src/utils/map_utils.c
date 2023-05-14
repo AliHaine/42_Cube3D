@@ -1,6 +1,21 @@
 #include "../../includes/includes.h"
 
-char *convert_to_path(char *name)
+bool	is_player_char(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (true);
+	return (false);
+}
+
+bool	is_allowed_char(char c)
+{
+	if (c == '0' || c == '1' || is_player_char(c)
+		||  c == 'Z' || c == 'V' || c == ' ')
+		return (true);
+	return (false);
+}
+
+char	*convert_to_path(char *name)
 {
 	char	*path;
 
@@ -10,7 +25,7 @@ char *convert_to_path(char *name)
 	return (path);
 }
 
-bool is_cub(const char *str)
+bool	is_cub(const char *str)
 {
 	int	i;
 

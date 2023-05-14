@@ -10,23 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-	#include "../includes/includes.h"
-	#include "../includes/defines.h"
-
-int	g_map[12][20] = {
-{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-{1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1},
-{1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-};
+#include "../includes/includes.h"
+#include "../includes/defines.h"
 
 static t_core	*core_init(void)
 {
@@ -48,7 +33,6 @@ static t_core	*core_init(void)
 	core->consts->fov = FOV * (PI / 180);
 	core->consts->dist_between_ray = core->consts->fov / RAY_NUMBER;
 	core->playerangle = 0;
-	ft_memcpy(core->consts->map, g_map, sizeof(g_map));
 	return (core);
 }
 
@@ -57,9 +41,9 @@ int	main(int argc, char *argv[])
 	t_core	*core;
 
 	if (argc != 2)
-		return (1);
-	parse_main(argv[1]);
+		msg_write(2, 1, ERROR_ARGS);
 	core = core_init();
+	map_manager(argv[1], core);
 	mlx_loop_hook(core->mlx, &display, core);
 	mlx_loop_hook(core->mlx, &inputs, core);
 	mlx_loop(core->mlx);
