@@ -25,10 +25,10 @@ void	draw_map(t_core *core)
 		px = -1;
 		while (++px < SCREEN_WIDTH)
 		{
-			if (core->consts->map[(int)(py / 64)][(int)(px / 64)] != 1)
+			if (core->consts.map[(py / 64)][(px / 64)] != '1')
 				continue ;
-			mlx_put_pixel(core->consts->img_map, px, py,
-				core->consts->wall_color);
+			mlx_put_pixel(core->consts.img_map, px, py,
+				core->consts.wall_color);
 		}
 	}
 }
@@ -38,17 +38,17 @@ void	display(void *params)
 	t_core	*core;
 
 	core = (t_core *) params;
-	mlx_delete_image(core->mlx, core->consts->img_dot);
-	mlx_delete_image(core->mlx, core->consts->img_map);
-	core->consts->img_map = mlx_new_image(core->mlx, SCREEN_WIDTH,
+	mlx_delete_image(core->mlx, core->consts.img_dot);
+	mlx_delete_image(core->mlx, core->consts.img_map);
+	core->consts.img_map = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
-	core->consts->img_dot = mlx_texture_to_image(core->mlx,
-			core->consts->texture_dot);
+	core->consts.img_dot = mlx_texture_to_image(core->mlx,
+			core->consts.texture_dot);
 	draw_map(core);
 	raycast(core);
-	mlx_image_to_window(core->mlx, core->consts->img_map, 0, 0);
-	mlx_image_to_window(core->mlx, core->consts->img_dot,
-		core->playerpos[0] - 7.5, core->playerpos[1] - 7.5);
-	core->consts->img_map->instances[0].z = 1;
-	core->consts->img_dot->instances[0].z = 2;
+	mlx_image_to_window(core->mlx, core->consts.img_map, 0, 0);
+	mlx_image_to_window(core->mlx, core->consts.img_dot,
+		core->player.playerpos[0] - 7.5, core->player.playerpos[1] - 7.5);
+	core->consts.img_map->instances[0].z = 1;
+	core->consts.img_dot->instances[0].z = 2;
 }

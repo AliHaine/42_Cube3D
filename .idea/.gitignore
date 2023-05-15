@@ -6,3 +6,9 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+/vcs.xml
+
+/.idea/modules.xml
+/.idea/
+/.idea/vcs.xml
+/cube3d.iml
