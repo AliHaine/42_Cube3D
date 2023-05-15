@@ -38,6 +38,9 @@ void	raycast(t_core *core)
 			mlx_put_pixel(core->consts->img_map, ray_x, ray_y,
 				core->consts->ray_color);
 		}
+//		printf("ray distance = %f\n", ((ray_x - core->playerpos[0]) * (ray_x - core->playerpos[0])) +
+//			((ray_y - core->playerpos[1]) * (ray_y - core->playerpos[1])));
+		printf("ray collision points = x:%f y:%f\n", ray_x, ray_y);
 		ray++;
 	}
 }

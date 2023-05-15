@@ -8,9 +8,9 @@ FLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
 
 LIBFT		=	libft/libft.a
 
-MLX42		=	"/Users/ngalzand/sgoinfre/ngalzand/MLX42/build/libmlx42.a" -I include -lglfw -L "/Users/ngalzand/.brew/opt/glfw/lib"
+MLX42		=	"../MLX42/build/libmlx42.a" -I include -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib"
 
-CFLAGS		=	-I include -I /Users/ngalzand/sgoinfre/ngalzand/MLX42/include
+CFLAGS		=	-I include -I ../MLX42/include
 
 RM			=	rm -rf
 

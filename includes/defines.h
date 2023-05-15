@@ -19,8 +19,8 @@
 # define SCREEN_HEIGHT 768
 # define SCREEN_WIDTH 1280
 # define WALK_SPEED 5
-# define RAY_NUMBER 360
-# define FOV 90
+# define RAY_NUMBER 1
+# define FOV 1
 # define SENSIBILITY 0.1
 
 #endif

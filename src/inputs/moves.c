@@ -25,7 +25,7 @@ void	move_right_left(t_core *core, int direction)
 		core->playerpos[0] -= cosf(core->playerangle - PI / 2) * WALK_SPEED;
 		core->playerpos[1] -= sinf(core->playerangle - PI / 2) * WALK_SPEED;
 	}
-	if (core->consts->map[(int)(core->playerpos[1]
+	else if (core->consts->map[(int)(core->playerpos[1]
 			+ (sinf(core->playerangle - PI / 2) * WALK_SPEED)) / 64]
 				[(int)((core->playerpos[0] + (cosf(core->playerangle - PI / 2)
 				* WALK_SPEED)) / 64)] != 1
@@ -47,7 +47,7 @@ void	move_forward_backward(t_core *core, int direction)
 		core->playerpos[0] -= cosf(core->playerangle) * WALK_SPEED;
 		core->playerpos[1] -= sinf(core->playerangle) * WALK_SPEED;
 	}
-	if (core->consts->map[(int)((core->playerpos[1] + (sinf(core->playerangle)
+	else if (core->consts->map[(int)((core->playerpos[1] + (sinf(core->playerangle)
 					* WALK_SPEED)) / 64)][(int)((core->playerpos[0] +
 					(cosf(core->playerangle) * WALK_SPEED)) / 64)] != 1
 					&& direction == 0)
@@ -65,7 +65,7 @@ void	move_rotate(t_core *core, int direction)
 		if (core->playerangle < 0)
 			core->playerangle += 6.28319;
 	}
-	if (direction == 1)
+	else if (direction == 1)
 	{
 		core->playerangle += SENSIBILITY;
 		if (core->playerangle > 6.28319)
