@@ -13,6 +13,15 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+typedef struct s_ray
+{
+	float	start_angle;
+	float	ray_x;
+	float	ray_y;
+	float	ray_angle;
+	float	ray_distance;
+}	t_ray;
+
 typedef struct s_const
 {
 	mlx_image_t		*img_map;
@@ -23,6 +32,7 @@ typedef struct s_const
 	float			dist_between_ray;
 	char			**map;
 	float			fov;
+	float			fog_distance;
 }	t_const;
 
 typedef struct s_player

@@ -26,7 +26,7 @@ static bool	set_map_size_value(t_t_i *ti, int fd_map)
 	return (true);
 }*/
 
-void map_manager(char *str, t_core *core)
+void	map_manager(char *str, t_core *core)
 {
 	int		fd;
 	char	*map;

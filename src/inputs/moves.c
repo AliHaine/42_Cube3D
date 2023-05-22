@@ -25,17 +25,10 @@ void	move_right_left(t_player *player, char **map, int direction)
 		player->playerpos[0] -= cosf(player->playerangle - PI / 2) * WALK_SPEED;
 		player->playerpos[1] -= sinf(player->playerangle - PI / 2) * WALK_SPEED;
 	}
-<<<<<<< HEAD
-	else if (core->consts->map[(int)(core->playerpos[1]
-			+ (sinf(core->playerangle - PI / 2) * WALK_SPEED)) / 64]
-				[(int)((core->playerpos[0] + (cosf(core->playerangle - PI / 2)
-				* WALK_SPEED)) / 64)] != 1
-=======
 	else if (map[(int)(player->playerpos[1]
 			+ (sinf(player->playerangle - PI / 2) * WALK_SPEED)) / 64]
 				[(int)((player->playerpos[0] + (cosf(player->playerangle - PI / 2)
 				* WALK_SPEED)) / 64)] != '1'
->>>>>>> origin/main
 				&& direction == 0)
 	{
 		player->playerpos[0] += cosf(player->playerangle - PI / 2) * WALK_SPEED;
@@ -54,15 +47,9 @@ void	move_forward_backward(t_player *player, char **map, int direction)
 		player->playerpos[0] -= cosf(player->playerangle) * WALK_SPEED;
 		player->playerpos[1] -= sinf(player->playerangle) * WALK_SPEED;
 	}
-<<<<<<< HEAD
-	else if (core->consts->map[(int)((core->playerpos[1] + (sinf(core->playerangle)
-					* WALK_SPEED)) / 64)][(int)((core->playerpos[0] +
-					(cosf(core->playerangle) * WALK_SPEED)) / 64)] != 1
-=======
 	else if (map[(int)((player->playerpos[1] + (sinf(player->playerangle)
 					* WALK_SPEED)) / 64)][(int)((player->playerpos[0] +
 					(cosf(player->playerangle) * WALK_SPEED)) / 64)] != '1'
->>>>>>> origin/main
 					&& direction == 0)
 	{
 		player->playerpos[0] += cosf(player->playerangle) * WALK_SPEED;

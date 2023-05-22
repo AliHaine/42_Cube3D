@@ -14,13 +14,12 @@
 # define DEFINES_H
 
 # define PI 3.141592653589793
-# define MAP_HEIGHT 12
-# define MAP_WIDTH 20
 # define SCREEN_HEIGHT 768
 # define SCREEN_WIDTH 1280
-# define WALK_SPEED 5
-# define RAY_NUMBER 1
-# define FOV 1
-# define SENSIBILITY 0.1
+# define WALK_SPEED 3
+# define RAY_NUMBER 1280
+# define FOV 60
+# define SENSIBILITY 0.05
+# define FOG_DISTANCE 800
 
 #endif
