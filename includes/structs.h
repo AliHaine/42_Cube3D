@@ -22,11 +22,20 @@ typedef struct s_ray
 	float	ray_distance;
 }	t_ray;
 
+typedef struct s_three_i
+{
+	int	a;
+	int	b;
+	int	c;
+}	t_t_i;
+
 typedef struct s_const
 {
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_dot;
 	mlx_texture_t	*texture_dot;
+	t_t_i			bot;
+	t_t_i			top;
 	uint32_t		wall_color;
 	uint32_t		ray_color;
 	float			dist_between_ray;
@@ -48,13 +57,6 @@ typedef struct s_core
 	t_const			consts;
 	t_player		player;
 }	t_core;
-
-typedef struct s_three_i
-{
-	int	a;
-	int	b;
-	int	c;
-}	t_t_i;
 
 typedef enum {
 	ERROR_MAP_CHAR,

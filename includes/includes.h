@@ -23,7 +23,6 @@
 # include <fcntl.h>
 # include "structs.h"
 # include "utils.h"
-# include "../libft/libft.h"
 
 void	display(void *params);
 void	draw_map(t_core *core);

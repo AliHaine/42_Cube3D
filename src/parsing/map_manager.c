@@ -38,7 +38,7 @@ void	map_manager(char *str, t_core *core)
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
 		msg_write(2, 1, ERROR_MAP_EXIST);
-	//texture_main(fd, core);
+	texture_main(fd, core);
 
 	init_tti_struct(&ti, 0, 0, 0);
 	if (!set_map_size_value(&ti, fd))
@@ -47,10 +47,10 @@ void	map_manager(char *str, t_core *core)
 		close(fd);
 		msg_write(2, 1, ERROR_MAP_CHAR);
 	}
+	close(fd);
 	fd = open(map, O_RDONLY);
 	free(map);
-	core->consts.map = malloc(sizeof(char *) * (ti.c + 1));
-	core->consts.map[ti.c] = 0;
+	core->consts.map = malloc(sizeof(char *) * (ti.c + 2));
+	core->consts.map[ti.c + 1] = 0;
 	parse_main(ti, fd, core);
-
 }
