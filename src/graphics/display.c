@@ -26,8 +26,8 @@ void	draw_map(t_core *core)
 		while (++px < MINIMAP_WIDTH - 10)
 		{
 			if (core->consts.map[py / (64 / M_SIZE)][px / (64 / M_SIZE)] == '0'
-				|| core->consts.map[py / (64 / M_SIZE)]
-				[px / (64 / M_SIZE)] == 'P')
+				|| is_player_char(core->consts.map[py / (64 / M_SIZE)]
+				[px / (64 / M_SIZE)]))
 				mlx_put_pixel(core->consts.img_map, px, py,
 					core->consts.floor_color);
 			else if (core->consts.map[py / (64 / M_SIZE)]
