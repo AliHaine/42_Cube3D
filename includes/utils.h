@@ -19,6 +19,7 @@ char	*convert_to_path(char *name);
 void	ft_strcpy(char *s1, const char *s2);
 void	ft_strcat(char *s1, const char *s2);
 int		ft_strlen(const char *s);
+int		ft_atoi_for_texture(const char *s);
 
 //struct//
 

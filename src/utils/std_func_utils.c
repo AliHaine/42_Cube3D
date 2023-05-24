@@ -31,3 +31,27 @@ int	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
+
+int	ft_atoi_for_texture(const char *s)
+{
+	int i;
+	int	val;
+
+	i = 0;
+	val = 0;
+	if (!s)
+		return (-1);
+	if (s[0] == '0')
+		return (0);
+	while (s[i])
+	{
+		if (s[i] > '9' || s[i] < '0')
+			return (-1);
+		val += (s[i++] - '0');
+		val *= 10;
+	}
+	val /= 10;
+	if (val > 255 || val < 0)
+		return (-1);
+	return (val);
+}

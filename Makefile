@@ -19,7 +19,6 @@ NAME		=	cub3d
 
 FLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
 
-
 MLX42		=	"../MLX42/libmlx42.a" -I include -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib"
 
 CFLAGS		=	-I include -I ../MLX42/include
