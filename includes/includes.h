@@ -36,7 +36,7 @@ void	move_rotate(t_player *player, int direction);
 //parsing//
 
 void	map_manager(char *str, t_core *core);
-void	texture_main(int fd_map, t_core *core);
+int		texture_main(int fd_map, t_core *core);
 void	parse_main(t_t_i ti, int fd_map, t_core *core);
 
 #endif

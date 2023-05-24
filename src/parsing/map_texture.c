@@ -47,7 +47,7 @@ static bool	set_color_value(const char *line, t_t_i *ti)
 	return (true);
 }
 
-static void get_texture_from_map(int fd_map, t_const *consts)
+static int	get_texture_from_map(int fd_map, t_const *consts, int size)
 {
 	char	*line;
 
@@ -57,6 +57,7 @@ static void get_texture_from_map(int fd_map, t_const *consts)
 		if (!is_direction_code(line))
 			break ;
 		line = get_next_line(fd_map);
+		size++;
 	}
 	while (line)
 	{
@@ -67,12 +68,22 @@ static void get_texture_from_map(int fd_map, t_const *consts)
 		else
 			set_color_value(line + 2, &consts->bot);
 		line = get_next_line(fd_map);
+		size++;
 	}
+	while (line && line[0] && line[0] == '\n') {
+		size++;
+		line = get_next_line(fd_map);
+	}
+	return (size);
 }
 
-void texture_main(int fd_map, t_core *core)
+int	texture_main(int fd_map, t_core *core)
 {
-	get_texture_from_map(fd_map, &core->consts);
+	int	size;
+
+	size = 0;
+	size = get_texture_from_map(fd_map, &core->consts, size);
 	printf("%d, %d, %d\n", core->consts.bot.a, core->consts.bot.b, core->consts.bot.c);
 	printf("%d, %d, %d\n", core->consts.top.a, core->consts.top.b, core->consts.top.c);
+	return (size);
 }
