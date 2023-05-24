@@ -19,16 +19,21 @@ void	draw_map(t_core *core)
 	int	py;
 	int	px;
 
-	py = -1;
-	while (++py < SCREEN_HEIGHT)
+	py = 10;
+	while (++py < MINIMAP_HEIGHT)
 	{
-		px = -1;
-		while (++px < SCREEN_WIDTH)
+		px = 10;
+		while (++px < MINIMAP_WIDTH - 10)
 		{
-			if (core->consts.map[(py / 64)][(px / 64)] != '1')
-				continue ;
-			mlx_put_pixel(core->consts.img_map, px, py,
-				core->consts.wall_color);
+			if (core->consts.map[py / (64 / M_SIZE)][px / (64 / M_SIZE)] == '0'
+				|| core->consts.map[py / (64 / M_SIZE)]
+				[px / (64 / M_SIZE)] == 'P')
+				mlx_put_pixel(core->consts.img_map, px, py,
+					core->consts.floor_color);
+			else if (core->consts.map[py / (64 / M_SIZE)]
+				[px / (64 / M_SIZE)] == '1')
+				mlx_put_pixel(core->consts.img_map, px, py,
+					core->consts.wall_color);
 		}
 	}
 }
@@ -38,18 +43,24 @@ void	display(void *params)
 	t_core	*core;
 
 	core = (t_core *) params;
-//	mlx_delete_image(core->mlx, core->consts.img_dot);
+	mlx_delete_image(core->mlx, core->consts.img_dot);
 	mlx_delete_image(core->mlx, core->consts.img_map);
-	core->consts.img_map = mlx_new_image(core->mlx, SCREEN_WIDTH,
+	mlx_delete_image(core->mlx, core->consts.img_3d);
+	core->consts.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
-//	core->consts.img_dot = mlx_texture_to_image(core->mlx,
-//			core->consts.texture_dot);
-	//draw_map(core);
+	core->consts.img_dot = mlx_texture_to_image(core->mlx,
+			core->consts.texture_dot);
+	core->consts.img_map = mlx_new_image(core->mlx, MINIMAP_WIDTH,
+			MINIMAP_HEIGHT);
+	draw_map(core);
 	raycast(core);
+	mlx_image_to_window(core->mlx, core->consts.img_3d, 0, 0);
 	mlx_image_to_window(core->mlx, core->consts.img_map, 0, 0);
-//	mlx_image_to_window(core->mlx, core->consts.img_dot,
-//		core->player.playerpos[0] - 7.5, core->player.playerpos[1] - 7.5);
-	core->consts.img_map->instances[0].z = 1;
-//	core->consts.img_dot->instances[0].z = 2;
+	mlx_image_to_window(core->mlx, core->consts.img_dot,
+		(core->player.playerpos[0] / M_SIZE) - 2.5,
+		(core->player.playerpos[1] / M_SIZE) - 2.5);
+	core->consts.img_3d->instances[0].z = 1;
+	core->consts.img_map->instances[0].z = 2;
+	core->consts.img_dot->instances[0].z = 3;
 
 }

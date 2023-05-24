@@ -24,10 +24,12 @@ typedef struct s_ray
 
 typedef struct s_const
 {
+	mlx_image_t		*img_3d;
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_dot;
 	mlx_texture_t	*texture_dot;
 	uint32_t		wall_color;
+	uint32_t		floor_color;
 	uint32_t		ray_color;
 	float			dist_between_ray;
 	char			**map;

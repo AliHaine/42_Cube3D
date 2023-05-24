@@ -14,6 +14,8 @@
 #include "../../includes/defines.h"
 #include "../../includes/structs.h"
 
+
+
 static uint32_t	apply_fog(uint32_t color, float distance, float max_distance)
 {
 	float		fog_strength;
@@ -32,39 +34,41 @@ static uint32_t	apply_fog(uint32_t color, float distance, float max_distance)
 	return ((r << 24) | (g << 16) | (b << 8) | a);
 }
 
-
 static void	draw_columns(t_core *core, t_ray ray, int r)
 {
-	int			start_y;
-	int			end_y;
-	int			wall_height;
-	int			py;
+	float		wall_height;
+	float		py;
 	uint32_t	color;
 
 	wall_height = (SCREEN_HEIGHT * 64) / ray.ray_distance;
-	start_y = (SCREEN_HEIGHT - wall_height) / 2;
-	end_y = (SCREEN_HEIGHT + wall_height) / 2;
-	py = start_y;
-	while (py < end_y)
+	py = (SCREEN_HEIGHT - wall_height) / 2;
+	if (py < 0)
+		py = 0;
+	while (py < (SCREEN_HEIGHT + wall_height) / 2 && py < SCREEN_HEIGHT)
 	{
-		if (py <= 0)
-			;
-		else if (py >= SCREEN_HEIGHT)
-			break ;
-		else
-		{
-			color = apply_fog(core->consts.wall_color, ray.ray_distance, FOG_DISTANCE);
-			mlx_put_pixel(core->consts.img_map, r, py, color);
-		}
+		color = apply_fog(((150 << 24) + (150 << 16) + (150 << 8) + 255), ray.ray_distance, FOG_DISTANCE);
+		mlx_put_pixel(core->consts.img_3d, r, py, color);
 		py++;
 	}
+}
+
+float	calc_ray_distance(t_core *core, t_ray ray)
+{
+	float	ray_distance;
+
+	ray_distance = sqrtf(((ray.ray_x - core->player.playerpos[0]) * (
+					ray.ray_x - core->player.playerpos[0]) + ((ray.ray_y
+						- core->player.playerpos[1]) * (ray.ray_y
+						- core->player.playerpos[1]))));
+	ray_distance *= cos(ray.ray_angle - core->player.playerangle);
+	return (ray_distance);
 }
 
 void	raycast(t_core *core)
 {
 	int		r;
 	t_ray	ray;
-
+	float	thales[2];
 	r = -1;
 	ray.start_angle = core->player.playerangle - (core->consts.fov / 2);
 	while (++r < RAY_NUMBER)
@@ -72,19 +76,18 @@ void	raycast(t_core *core)
 		ray.ray_x = core->player.playerpos[0];
 		ray.ray_y = core->player.playerpos[1];
 		ray.ray_angle = ray.start_angle + (r * core->consts.dist_between_ray);
+		thales[0] = cosf(ray.ray_angle);
+		thales[1] = sin(ray.ray_angle);
 		while (ray.ray_x >= 0 && ray.ray_x < SCREEN_WIDTH && ray.ray_y >= 0
 			&& ray.ray_y < SCREEN_HEIGHT
-			&& core->consts.map[(int)ray.ray_y / 64][(int)ray.ray_x / 64] != '1')
+			&& core->consts.map[(int)ray.ray_y / 64]
+			[(int)ray.ray_x / 64] != '1')
 		{
-			ray.ray_x += cosf(ray.ray_angle);
-			ray.ray_y += sinf(ray.ray_angle);
+			ray.ray_x += thales[0];
+			ray.ray_y += thales[1];
+			mlx_put_pixel(core->consts.img_map, (ray.ray_x / M_SIZE), (ray.ray_y / M_SIZE), core->consts.ray_color);
 		}
-		ray.ray_distance = sqrtf(((ray.ray_x - core->player.playerpos[0]) * (
-						ray.ray_x - core->player.playerpos[0]) + ((ray.ray_y
-							- core->player.playerpos[1]) * (ray.ray_y
-							- core->player.playerpos[1]))));
-		ray.ray_distance *= cos(fabs(ray.ray_angle - core->player.playerangle));
-
+		ray.ray_distance = calc_ray_distance(core, ray);
 		draw_columns(core, ray, r);
 	}
 }

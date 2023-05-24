@@ -19,7 +19,6 @@ NAME		=	cub3d
 
 FLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
 
-LIBFT		=	libft/libft.a
 
 MLX42		=	"../MLX42/libmlx42.a" -I include -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib"
 
@@ -37,18 +36,14 @@ RM			=	rm -rf
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			$(MAKE) -C Libft
 			gcc $(FLAGS) $(OBJS) $(LIBFT) $(MLX42) -o $(NAME)
 clean:
-			$(MAKE) -C Libft clean
 			$(RM) $(OBJS)
 
 fclean:		clean
-			$(MAKE) -C Libft fclean
 			$(RM) $(NAME)
 
 re:			fclean all
-			$(MAKE) -C Libft re
 
 bonus:		$(NAME)
 
