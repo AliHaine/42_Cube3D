@@ -18,8 +18,8 @@ void	move_right_left(t_player *player, char **map, int direction)
 {
 	if (map[(int)((player->playerpos[1]
 				- (sinf(player->playerangle - PI / 2) * WALK_SPEED)) / 64)]
-				[(int)((player->playerpos[0] -(cosf(player->playerangle - PI / 2)
-				* WALK_SPEED)) / 64)] != '1'
+				[(int)((player->playerpos[0] - (cosf(player->playerangle
+				- PI / 2) * WALK_SPEED)) / 64)] != '1'
 				&& direction == 1)
 	{
 		player->playerpos[0] -= cosf(player->playerangle - PI / 2) * WALK_SPEED;
@@ -42,7 +42,8 @@ void	move_forward_backward(t_player *player, char **map, int direction)
 				- (sinf(player->playerangle) * WALK_SPEED)) / 64)]
 				[(int)((player->playerpos[0] - (cosf(player->playerangle)
 				* WALK_SPEED)) / 64)] != '1'
-					&& direction == 1)
+					&& direction == 1
+					&& map[(int)(player->playerpos[1] / 64)][(int)(player->playerpos[0] / 64)] != 1)
 	{
 		player->playerpos[0] -= cosf(player->playerangle) * WALK_SPEED;
 		player->playerpos[1] -= sinf(player->playerangle) * WALK_SPEED;

@@ -85,7 +85,8 @@ void	raycast(t_core *core)
 		{
 			ray.ray_x += thales[0];
 			ray.ray_y += thales[1];
-			mlx_put_pixel(core->consts.img_map, (ray.ray_x / M_SIZE), (ray.ray_y / M_SIZE), core->consts.ray_color);
+			if (r % 12 == 0)
+				mlx_put_pixel(core->consts.img_map, (ray.ray_x / M_SIZE), (ray.ray_y / M_SIZE), core->consts.ray_color);
 		}
 		ray.ray_distance = calc_ray_distance(core, ray);
 		draw_columns(core, ray, r);

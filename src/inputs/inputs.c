@@ -18,7 +18,7 @@ void	inputs(void *params)
 
 	core = (t_core *)params;
 	if (mlx_is_key_down(core->mlx, MLX_KEY_D))
-		move_right_left(&core->player, core->consts.map,  1);
+		move_right_left(&core->player, core->consts.map, 1);
 	if (mlx_is_key_down(core->mlx, MLX_KEY_A))
 		move_right_left(&core->player, core->consts.map, 0);
 	if (mlx_is_key_down(core->mlx, MLX_KEY_S))
