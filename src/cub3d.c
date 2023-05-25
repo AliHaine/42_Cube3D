@@ -24,8 +24,11 @@ static t_core	*core_init(t_core *core)
 	core->consts.texture_dot = mlx_load_png("assets/red_dot.png");
 	core->consts.img_dot = mlx_texture_to_image(core->mlx,
 			core->consts.texture_dot);
-	core->consts.wall_color = (32 << 24) + (32 << 16) + (32 << 8) + 255;
-	core->consts.floor_color = (96 << 24) + (96 << 16) + (96 << 8) + 255;
+	core->consts.minimap_wall_color = (32 << 24) + (32 << 16) + (32 << 8) + 255;
+	//core->consts.minimap_wall_color = core->consts.minimap_wall_color;
+	core->consts.minimap_floor_color = (96 << 24) + (96 << 16) + (96 << 8) + 255;
+	core->consts.top_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
+	core->consts.bot_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
 	core->consts.ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 255;
 	core->consts.fov = FOV * (PI / 180);
 	core->consts.dist_between_ray = core->consts.fov / RAY_NUMBER;

@@ -11,7 +11,7 @@ static bool	set_map_size_value(t_t_i *ti, int fd_map)
 		line = get_next_line(fd_map);
 		size = ft_strlen(line);
 		if (size > ti->b)
-			ti->b = size;
+			ti->b = size - 1;
 		ti->c++;
 	}
 	if (ti->b <= 0 || ti->c <= 0)
@@ -31,7 +31,6 @@ static int	map_value_init(t_t_i *ti, int fd, char *map, t_const *consts)
 	close(fd);
 	fd = open(map, O_RDONLY);
 	free(map);
-	printf("%d\n", ti->c);
 	consts->map = malloc(sizeof(char *) * (ti->c + 2));
 	consts->map[ti->c + 1] = 0;
 	return (fd);

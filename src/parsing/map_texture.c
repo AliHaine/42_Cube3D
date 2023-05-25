@@ -1,22 +1,6 @@
 #include "../../includes/includes.h"
 
-static bool	is_direction_code(char *s)
-{
-	if (ft_strlen(s) < 1)
-		return (false);
-	if (s[0] == 'N' && s[1] == 'O')
-		return (true);
-	if (s[0] == 'S' && s[1] == 'O')
-		return (true);
-	if (s[0] == 'W' && s[1] == 'E')
-		return (true);
-	if (s[0] == 'E' && s[1] == 'A')
-		return (true);
-	return (false);
-
-}
-
-static bool	set_color_value(const char *line, t_t_i *ti)
+static bool	set_color_value(const char *line, uint32_t *target_color)
 {
 	int		i;
 	int		b;
@@ -41,9 +25,19 @@ static bool	set_color_value(const char *line, t_t_i *ti)
 		value[i][b++] = *line++;
 	}
 	value[i][b-1] = '\0';
-	ti->a = ft_atoi_for_texture(value[0]);
-	ti->b = ft_atoi_for_texture(value[1]);
-	ti->c = ft_atoi_for_texture(value[2]);
+	*target_color = (ft_atoi_for_texture(value[0]) << 24) + (ft_atoi_for_texture(value[1]) << 16) + (ft_atoi_for_texture(value[2]) << 8) + 255;
+	free(value);
+	return (true);
+}
+
+static bool	set_texture_from_path(char *line, mlx_texture_t *texture)
+{
+	while (*line && *line == ' ')
+		line++;
+	printf("%s\n", line);
+	texture = mlx_load_png("assets/grasss.png");
+	if (!texture)
+		return (false);
 	return (true);
 }
 
@@ -56,6 +50,7 @@ static int	get_texture_from_map(int fd_map, t_const *consts, int size)
 	{
 		if (!is_direction_code(line))
 			break ;
+		set_texture_from_path(line + 2, consts->north);
 		line = get_next_line(fd_map);
 		size++;
 	}
@@ -64,9 +59,9 @@ static int	get_texture_from_map(int fd_map, t_const *consts, int size)
 		if (line[0] && line[0] != 'F' && line[0] != 'C')
 			break;
 		if (line[0] != 'F')
-			set_color_value(line + 2, &consts->top);
+			set_color_value(line + 2, &consts->top_color);
 		else
-			set_color_value(line + 2, &consts->bot);
+			set_color_value(line + 2, &consts->bot_color);
 		line = get_next_line(fd_map);
 		size++;
 	}
@@ -74,6 +69,7 @@ static int	get_texture_from_map(int fd_map, t_const *consts, int size)
 		size++;
 		line = get_next_line(fd_map);
 	}
+	consts->minimap_wall_color = consts->top_color;
 	return (size);
 }
 
@@ -83,7 +79,5 @@ int	texture_main(int fd_map, t_core *core)
 
 	size = 0;
 	size = get_texture_from_map(fd_map, &core->consts, size);
-	printf("%d, %d, %d\n", core->consts.bot.a, core->consts.bot.b, core->consts.bot.c);
-	printf("%d, %d, %d\n", core->consts.top.a, core->consts.top.b, core->consts.top.c);
 	return (size);
 }

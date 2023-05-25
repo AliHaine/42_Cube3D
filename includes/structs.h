@@ -35,10 +35,14 @@ typedef struct s_const
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_dot;
 	mlx_texture_t	*texture_dot;
-	t_t_i			bot;
-	t_t_i			top;
-	uint32_t		wall_color;
-	uint32_t		floor_color;
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*west;
+	mlx_texture_t	*est;
+	uint32_t		bot_color;
+	uint32_t		top_color;
+	uint32_t		minimap_wall_color;
+	uint32_t		minimap_floor_color;
 	uint32_t		ray_color;
 	float			dist_between_ray;
 	char			**map;
