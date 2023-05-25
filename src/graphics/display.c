@@ -29,11 +29,11 @@ void	draw_map(t_core *core)
 				|| is_player_char(core->consts.map[py / (64 / M_SIZE)]
 				[px / (64 / M_SIZE)]))
 				mlx_put_pixel(core->consts.img_map, px, py,
-					core->consts.floor_color);
+					core->consts.minimap_floor_color);
 			else if (core->consts.map[py / (64 / M_SIZE)]
 				[px / (64 / M_SIZE)] == '1')
 				mlx_put_pixel(core->consts.img_map, px, py,
-					core->consts.wall_color);
+					core->consts.minimap_wall_color);
 		}
 	}
 }

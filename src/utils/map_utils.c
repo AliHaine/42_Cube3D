@@ -40,3 +40,19 @@ bool	is_cub(const char *str)
 		return (false);
 	return (true);
 }
+
+bool	is_direction_code(char *s)
+{
+	if (ft_strlen(s) < 1)
+		return (false);
+	if (s[0] == 'N' && s[1] == 'O')
+		return (true);
+	if (s[0] == 'S' && s[1] == 'O')
+		return (true);
+	if (s[0] == 'W' && s[1] == 'E')
+		return (true);
+	if (s[0] == 'E' && s[1] == 'A')
+		return (true);
+	return (false);
+
+}
