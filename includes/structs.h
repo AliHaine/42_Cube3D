@@ -33,7 +33,7 @@ typedef struct s_const
 {
 	mlx_image_t		*img_3d;
 	mlx_image_t		*img_map;
-	mlx_image_t		*img_dot;
+	mlx_image_t		*img_player;
 	mlx_texture_t	*texture_dot;
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
@@ -48,6 +48,9 @@ typedef struct s_const
 	char			**map;
 	float			fov;
 	float			fog_distance;
+	int				map_width;
+	int				map_height;
+	int				minimap_size;
 }	t_const;
 
 typedef struct s_player

@@ -60,4 +60,6 @@ void	map_manager(char *str, t_core *core)
 	fd = map_value_init(&ti, fd, map, &core->consts);
 	map_go_to_line(m_start_line, fd);
 	parse_main(ti, fd, core);
+	core->consts.map_width = ti.b;
+	core->consts.map_height = ti.c;
 }

@@ -1,6 +1,6 @@
 #include "../../includes/includes.h"
 
-static bool set_player(int x, int y, t_player *player)
+static bool	set_player(int x, int y, t_player *player)
 {
 	static bool havePlayer = false;
 
@@ -15,7 +15,7 @@ static bool set_player(int x, int y, t_player *player)
 
 static bool	fill_map_tab(char *line, char *tab, t_t_i ti, t_player *player)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] && line[i] != '\n')
@@ -60,5 +60,4 @@ void	parse_main(t_t_i ti, int fd_map, t_core *core)
 			printf("\n");
 		}
 	}
-
 }

@@ -69,7 +69,6 @@ static int	get_texture_from_map(int fd_map, t_const *consts, int size)
 		size++;
 		line = get_next_line(fd_map);
 	}
-	consts->minimap_wall_color = consts->top_color;
 	return (size);
 }
 
