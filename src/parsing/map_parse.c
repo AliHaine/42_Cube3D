@@ -60,5 +60,4 @@ void	parse_main(t_t_i ti, int fd_map, t_core *core)
 			printf("\n");
 		}
 	}
-
 }
