@@ -34,26 +34,18 @@ static bool	set_texture_from_path(char *line, mlx_texture_t *texture)
 {
 	while (*line && *line == ' ')
 		line++;
-	printf("%s\n", line);
-	texture = mlx_load_png("assets/grasss.png");
+	line[ft_strlen(line) - 1] = '\0';
+	texture = mlx_load_png(line);
 	if (!texture)
 		return (false);
 	return (true);
 }
 
-static int	get_texture_from_map(int fd_map, t_const *consts, int size)
+static int	get_color_from_map(char *line, int fd_map, t_const *consts)
 {
-	char	*line;
+	int size;
 
-	line = get_next_line(fd_map);
-	while (line)
-	{
-		if (!is_direction_code(line))
-			break ;
-		set_texture_from_path(line + 2, consts->north);
-		line = get_next_line(fd_map);
-		size++;
-	}
+	size = 0;
 	while (line)
 	{
 		if (line[0] && line[0] != 'F' && line[0] != 'C')
@@ -72,11 +64,34 @@ static int	get_texture_from_map(int fd_map, t_const *consts, int size)
 	return (size);
 }
 
-int	texture_main(int fd_map, t_core *core)
+static int	get_image_from_map(char **line, int fd_map, t_const *consts)
 {
-	int	size;
+	int size;
 
 	size = 0;
-	size = get_texture_from_map(fd_map, &core->consts, size);
+	while (line)
+	{
+		if (!is_direction_code(*line))
+			break ;
+		set_texture_from_path(*line + 2, consts->north);
+		*line = get_next_line(fd_map);
+		size++;
+	}
+	while (line && *line[0] == '\n')
+	{
+		*line = get_next_line(fd_map);
+		size++;
+	}
+	return (size);
+}
+
+int	texture_main(int fd_map, t_core *core)
+{
+	int		size;
+	char	*line;
+
+	line = get_next_line(fd_map);
+	size = get_image_from_map(&line, fd_map, &core->consts);
+	size += get_color_from_map(line, fd_map, &core->consts);
 	return (size);
 }
