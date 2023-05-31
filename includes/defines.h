@@ -17,11 +17,12 @@
 # define SCREEN_HEIGHT 720
 # define SCREEN_WIDTH 1280
 # define MINIMAP_SIZE 8
-# define WALK_SPEED 5
+# define WALK_SPEED 10
 # define RAY_NUMBER 1280
 # define MINIMAP_PLAYER_SIZE (MINIMAP_SIZE/3)
 # define FOV 60
-# define SENSIBILITY 0.075
+# define SENSIBILITY 0.125
 # define FOG_DISTANCE 1000
+# define TEXTURE_SIZE 64
 
 #endif

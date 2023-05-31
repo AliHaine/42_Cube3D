@@ -46,14 +46,14 @@ static t_core	*core_init(t_core *core)
 	core->consts.minimap_floor_color = (128 << 24) + (128 << 16) + (128 << 8) + 255;
 	core->consts.top_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
 	core->consts.bot_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
-	core->consts.ray_color = (72 << 24) + (61 << 16) + (139 << 8) + 255;
+	core->consts.ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 255;
 	//Le FOV est en degres et hop ptite formule qui le met en radians parce-que les fonctions cosf et sinf ne prennent que les radians
 	core->consts.fov = FOV * (PI / 180);
 	//Calcul de la distance que les rayons doivent avoir entre eux
 	core->consts.dist_between_ray = core->consts.fov / RAY_NUMBER;
 	core->consts.minimap_size = (int)(64 / MINIMAP_SIZE);
 	core->consts.img_player = create_minimap_player(core);
-	core->consts.wall_texture = mlx_load_png("assets/brick.png");
+	core->consts.wall_texture = mlx_load_png("assets/brick64.png");
 	mlx_image_to_window(core->mlx, core->consts.img_player, 0, 0);
 	return (core);
 }

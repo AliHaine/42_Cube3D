@@ -17,30 +17,30 @@
 
 
 // Ca c'est pas ptite feature personnelle, attention epilepsie, a mettre dans un variable color
-//static uint32_t	fade(void)
-//{
-//	static uint8_t	r = 255;
-//	static uint8_t	g = 0;
-//	static uint8_t	b = 0;
-//
-//	if (r > 0 && b == 0)
-//	{
-//		r--;
-//		g++;
-//	}
-//	else if (g > 0 && r == 0)
-//	{
-//		g--;
-//		b++;
-//	}
-//	else if (b > 0 && g == 0)
-//	{
-//		b--;
-//		r++;
-//	}
-//	return (((uint32_t)r << 24) | ((uint32_t)g << 16)
-//		| ((uint32_t)b << 8) | 0xFF);
-//}
+static uint32_t	fade(void)
+{
+	static uint8_t	r = 255;
+	static uint8_t	g = 0;
+	static uint8_t	b = 0;
+
+	if (r > 0 && b == 0)
+	{
+		r--;
+		g++;
+	}
+	else if (g > 0 && r == 0)
+	{
+		g--;
+		b++;
+	}
+	else if (b > 0 && g == 0)
+	{
+		b--;
+		r++;
+	}
+	return (((uint32_t)r << 24) | ((uint32_t)g << 16)
+		| ((uint32_t)b << 8) | 0xFF);
+}
 
 
 static uint32_t	apply_fog(t_core *core, float fog_strength, int x, int y)
@@ -68,6 +68,14 @@ static void	draw_columns(t_core *core, t_ray ray, int r)
 	float		wall_height;
 	int			py;
 	uint32_t	color;
+	int			texture_offset;
+	int			texture_y;
+
+	// Connaitre la position x de la texture pour l'affichage 3D
+	if ((int)ray.ray_y % 64 == 0)
+		texture_offset = (int)ray.ray_x % 64;
+	else
+		texture_offset = (int)ray.ray_y % 64;
 
 	// Savoir la hauteur du mur
 	wall_height = (SCREEN_HEIGHT * 64) / ray.ray_distance;
@@ -76,24 +84,25 @@ static void	draw_columns(t_core *core, t_ray ray, int r)
 	// Ciel
 	while (py < (SCREEN_HEIGHT - wall_height) / 2 && py < SCREEN_HEIGHT)
 	{
-		mlx_put_pixel(core->consts.img_3d, r, py, core->consts.top_color);
+		mlx_put_pixel(core->consts.img_3d, r, py, fade());
 		py++;
 	}
 	// Murs
 	while (py < (SCREEN_HEIGHT + wall_height) / 2 && py < SCREEN_HEIGHT)
 	{
+		texture_y = ((py * 2 - SCREEN_HEIGHT + wall_height) * TEXTURE_SIZE) / wall_height / 2;
 		// Fonction qui va permettre d'avoir le pixel correspondant a la texture et qui
 		// appliquera du brouillard selon la distance (ca devient juste noir quoi)
 		// Ca va economiser des calculs, car a partir d'une certaine distance
 		// plus besoin de chercher le pixel qui correspond a la texture, juste on met un pixel noir par defaut
-		color = apply_fog(core, ray.ray_distance / FOG_DISTANCE, r, py);
+		color = apply_fog(core, ray.ray_distance / FOG_DISTANCE, texture_offset, texture_y);
 		mlx_put_pixel(core->consts.img_3d, r, py, color);
 		py++;
 	}
 	// Sols
 	while (py < SCREEN_HEIGHT)
 	{
-		mlx_put_pixel(core->consts.img_3d, r, py, core->consts.bot_color);
+		mlx_put_pixel(core->consts.img_3d, r, py, fade());
 		py++;
 	}
 }
