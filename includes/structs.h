@@ -39,6 +39,7 @@ typedef struct s_const
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
 	mlx_texture_t	*est;
+	mlx_texture_t	*wall_texture;
 	uint32_t		bot_color;
 	uint32_t		top_color;
 	uint32_t		minimap_wall_color;

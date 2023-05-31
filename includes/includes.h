@@ -24,9 +24,10 @@
 # include "structs.h"
 # include "utils.h"
 
-void	display(void *params);
-void	draw_map(t_core *core);
-void	raycast(t_core *core);
+void		display(void *params);
+void		draw_map(t_core *core);
+void		raycast(t_core *core);
+uint32_t	wall_texture(t_core *core, int x, int y);
 
 void	inputs(void *params);
 void	move_right_left(t_player *player, char **map, int direction);

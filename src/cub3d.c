@@ -13,6 +13,8 @@
 #include "../includes/includes.h"
 #include "../includes/defines.h"
 
+
+//C'est juste pour creer un point qui represente le joueur sur la minimap
 static mlx_image_t	*create_minimap_player(t_core *core)
 {
 	mlx_image_t	*img;
@@ -38,19 +40,20 @@ static t_core	*core_init(t_core *core)
 	core->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d", true);
 	core->consts.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
-	core->consts.img_map = mlx_new_image(core->mlx, (core->consts.map_width * 64) / core->consts.minimap_size,
-			(core->consts.map_height * 64) / core->consts.minimap_size);
-	core->consts.texture_dot = mlx_load_png("assets/red_dot.png");
+	core->consts.texture_dot = mlx_load_png("assets/red_dot.png"); // Ca on peut supprimer
 	core->consts.ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 150;
-	core->consts.minimap_wall_color = (210 << 24) + (180 << 16) + (140 << 8) + 255;
-	core->consts.minimap_floor_color = (255 << 24) + (222 << 16) + (173 << 8) + 255;
+	core->consts.minimap_wall_color = (42 << 24) + (42 << 16) + (42 << 8) + 255;
+	core->consts.minimap_floor_color = (128 << 24) + (128 << 16) + (128 << 8) + 255;
 	core->consts.top_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
 	core->consts.bot_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
-	core->consts.ray_color = (255 << 24) + (239 << 16) + (213 << 8) + 255;
+	core->consts.ray_color = (72 << 24) + (61 << 16) + (139 << 8) + 255;
+	//Le FOV est en degres et hop ptite formule qui le met en radians parce-que les fonctions cosf et sinf ne prennent que les radians
 	core->consts.fov = FOV * (PI / 180);
+	//Calcul de la distance que les rayons doivent avoir entre eux
 	core->consts.dist_between_ray = core->consts.fov / RAY_NUMBER;
 	core->consts.minimap_size = (int)(64 / MINIMAP_SIZE);
 	core->consts.img_player = create_minimap_player(core);
+	core->consts.wall_texture = mlx_load_png("assets/brick.png");
 	mlx_image_to_window(core->mlx, core->consts.img_player, 0, 0);
 	return (core);
 }
@@ -63,6 +66,11 @@ int	main(int argc, char *argv[])
 		msg_write(2, 1, ERROR_ARGS);
 	core_init(&core);
 	map_manager(argv[1], &core);
+	// J'init l'image la psq elle a besoin des variables initialisees par map_manager
+	// C'est censé adapter la minimap a la taille de la carte mais pas a la resolution donc ca segfault tjr
+	core.consts.img_map = mlx_new_image(core.mlx, (int)
+			((core.consts.map_width * 64) / core.consts.minimap_size), (int)
+			(((core.consts.map_height + 1) * 64) / core.consts.minimap_size));
 	mlx_loop_hook(core.mlx, &display, &core);
 	mlx_loop_hook(core.mlx, &inputs, &core);
 	mlx_loop(core.mlx);

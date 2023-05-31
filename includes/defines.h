@@ -22,6 +22,6 @@
 # define MINIMAP_PLAYER_SIZE (MINIMAP_SIZE/3)
 # define FOV 60
 # define SENSIBILITY 0.075
-# define FOG_DISTANCE 2000
+# define FOG_DISTANCE 1000
 
 #endif

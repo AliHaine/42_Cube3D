@@ -3,6 +3,7 @@ SRCS		=	src/cub3d.c \
 				src/inputs/moves.c \
 				src/graphics/display.c \
 				src/graphics/raycast.c \
+				src/graphics/textures.c \
 				src/parsing/map_manager.c \
 				src/parsing/map_parse.c \
 				src/parsing/map_texture.c \
