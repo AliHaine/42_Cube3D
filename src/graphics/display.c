@@ -54,7 +54,6 @@ void	display(void *params)
 	core = (t_core *) params;
 	mlx_delete_image(core->mlx, core->consts.img_map);
 	mlx_delete_image(core->mlx, core->consts.img_3d);
-
 	//Image du point du joueur
 	//Playerpos c'est selon la resolution de l'ecran
 	//Sinon c'est que des ptits calculs pour adapter la position du joueur

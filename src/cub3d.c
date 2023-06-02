@@ -53,7 +53,7 @@ static t_core	*core_init(t_core *core)
 	core->consts.dist_between_ray = core->consts.fov / RAY_NUMBER;
 	core->consts.minimap_size = (int)(64 / MINIMAP_SIZE);
 	core->consts.img_player = create_minimap_player(core);
-	core->consts.wall_texture = mlx_load_png("assets/brick64.png");
+	core->consts.wall_texture = mlx_load_png("assets/brickpoivron.png");
 	mlx_image_to_window(core->mlx, core->consts.img_player, 0, 0);
 	return (core);
 }
