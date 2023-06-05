@@ -12,7 +12,6 @@ void	msg_write(int fd, int exitVal, MsgType msg);
 
 bool	is_player_char(char c);
 bool	is_allowed_char(char c);
-char	*convert_to_path(char *name);
 bool	is_direction_code(char *s);
 
 //std_func_utils//

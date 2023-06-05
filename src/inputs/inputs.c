@@ -16,8 +16,10 @@ void	inputs(void *params)
 {
 	t_core	*core;
 
+
 	core = (t_core *)params;
 
+	mouse(core->mlx, &core->player);
 	// Je sais pas expliquer les calculs qu'il y a dans ces fonctions inutile de demander
 	// C'est de la trigonometrie c'est tout ce que je peux dire
 	// Renseigne toi sur les cercles trigo et tu comprendras ptetre
