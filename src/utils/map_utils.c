@@ -15,16 +15,6 @@ bool	is_allowed_char(char c)
 	return (false);
 }
 
-char	*convert_to_path(char *name)
-{
-	char	*path;
-
-	path = malloc(sizeof(char) * (ft_strlen(name) + 6));
-	ft_strcpy(path, "maps/");
-	ft_strcat(path, name);
-	return (path);
-}
-
 bool	is_cub(const char *str)
 {
 	int	i;

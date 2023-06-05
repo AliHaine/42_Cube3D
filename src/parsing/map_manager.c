@@ -23,14 +23,12 @@ static int	map_value_init(t_t_i *ti, int fd, char *map, t_const *consts)
 {
 	if (!set_map_size_value(ti, fd))
 	{
-		free(map);
 		close(fd);
 		msg_write(2, 1, ERROR_MAP_CHAR);
 		return (-1);
 	}
 	close(fd);
 	fd = open(map, O_RDONLY);
-	free(map);
 	consts->map = malloc(sizeof(char *) * (ti->c + 2));
 	consts->map[ti->c + 1] = 0;
 	return (fd);
@@ -42,22 +40,20 @@ static void	map_go_to_line(int line, int fd)
 		get_next_line(fd);
 }
 
-void	map_manager(char *str, t_core *core)
+void	map_manager(char *map_name, t_core *core)
 {
 	int		fd;
-	char	*map;
 	t_t_i	ti;
 	int		m_start_line;
 
-	if (!is_cub(str))
+	if (!is_cub(map_name))
 		msg_write(2, 1, ERROR_MAP_NAME);
-	map = convert_to_path(str);
-	fd = open(map, O_RDONLY);
+	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
 		msg_write(2, 1, ERROR_MAP_EXIST);
 	init_tti_struct(&ti, 0, 0, 0);
 	m_start_line = texture_main(fd, core);
-	fd = map_value_init(&ti, fd, map, &core->consts);
+	fd = map_value_init(&ti, fd, map_name, &core->consts);
 	map_go_to_line(m_start_line, fd);
 	parse_main(ti, fd, core);
 	core->consts.map_width = ti.b;
