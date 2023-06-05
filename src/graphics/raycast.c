@@ -63,30 +63,48 @@ static uint32_t	apply_fog(t_core *core, float fog_strength, int x, int y)
 	return ((r << 24) | (g << 16) | (b << 8) | (color & 0xFF));
 }
 
-static int  get_offset(t_core *core, t_ray ray)
+//static int  get_offset(t_core *core, t_ray ray)
+//{
+//    (void)core;
+//    (void)ray;
+//    if (ray.ray_angle > ((3 * PI) / 4) && ray.ray_angle < ((5 * PI) / 4))
+//    {
+//        printf("Ouest\n");
+//        return (64 - ((int)ray.ray_y % 64));
+//    }
+//    if (ray.ray_angle > (PI / 4) && ray.ray_angle < ((3 * PI) / 4))
+//    {
+//        printf("Sud\n");
+//        return (64 - ((int)ray.ray_x % 64));
+//    }
+//    if (ray.ray_angle > ((5 * PI) / 4) && ray.ray_angle < ((7 * PI) / 4))
+//    {
+//        printf("Nord\n");
+//        return (((int)ray.ray_x % 64));
+//    }
+//    if (ray.ray_angle < (PI / 4) || ray.ray_angle > ((7 * PI) / 4))
+//    {
+//        printf("Est\n");
+//        return (((int)ray.ray_y % 64));
+//    }
+//    return (0);
+//}
+
+
+static int	get_offset(t_core *core, t_ray ray)
 {
+	char	direction;
+
     (void)core;
-    (void)ray;
-    if (ray.ray_angle > ((3 * PI) / 4) && ray.ray_angle < ((5 * PI) / 4))
-    {
-        printf("Ouest\n");
-        return (((int)ray.ray_y % 64));
-    }
-    if (ray.ray_angle > (PI / 4) && ray.ray_angle < ((3 * PI) / 4))
-    {
-        printf("Sud\n");
-        return (64 - ((int)ray.ray_x % 64));
-    }
-    if (ray.ray_angle > ((5 * PI) / 4) && ray.ray_angle < ((7 * PI) / 4))
-    {
-        printf("Nord\n");
-        return (((int)ray.ray_x % 64));
-    }
-    if (ray.ray_angle < (PI / 4) || ray.ray_angle > ((7 * PI) / 4))
-    {
-        printf("Est\n");
-        return (((int)ray.ray_y % 64));
-    }
+	direction = wall_direction(core, ray);
+	if (direction == 'E')
+		return (63 - (int)ray.ray_y % 64);
+	else if (direction == 'W')
+		return ((int)ray.ray_y % 64);
+	else if (direction == 'N')
+		return ((int)ray.ray_x % 64);
+	else if (direction == 'S')
+		return (63 - (int)ray.ray_x % 64);
     return (0);
 }
 
