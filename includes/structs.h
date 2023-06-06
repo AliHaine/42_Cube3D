@@ -13,6 +13,12 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+typedef struct s_point
+{
+	float x;
+	float y;
+}	t_point;
+
 typedef struct s_ray
 {
 	float	start_angle;

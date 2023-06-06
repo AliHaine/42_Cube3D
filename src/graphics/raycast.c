@@ -90,21 +90,32 @@ static uint32_t	apply_fog(t_core *core, float fog_strength, int x, int y)
 //    return (0);
 //}
 
-
 static int	get_offset(t_core *core, t_ray ray)
 {
 	char	direction;
 
     (void)core;
-	direction = wall_direction(core, ray);
+	direction = wall_direction(ray);
 	if (direction == 'E')
-		return (63 - (int)ray.ray_y % 64);
-	else if (direction == 'W')
+	{
+		//printf("Est\n");
 		return ((int)ray.ray_y % 64);
+	}
+	else if (direction == 'W')
+	{
+		//printf("Ouest\n");
+		return (63 - (int)ray.ray_y % 64);
+	}
 	else if (direction == 'N')
+	{
+		//printf("Nord\n");
 		return ((int)ray.ray_x % 64);
+	}
 	else if (direction == 'S')
+	{
+		//printf("Sud\n");
 		return (63 - (int)ray.ray_x % 64);
+	}
     return (0);
 }
 
