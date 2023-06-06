@@ -34,12 +34,6 @@ static int	map_value_init(t_t_i *ti, int fd, char *map, t_const *consts)
 	return (fd);
 }
 
-static void	map_go_to_line(int line, int fd)
-{
-	while (line-- > 0)
-		get_next_line(fd);
-}
-
 void	map_manager(char *map_name, t_core *core)
 {
 	int		fd;
@@ -54,7 +48,8 @@ void	map_manager(char *map_name, t_core *core)
 	init_tti_struct(&ti, 0, 0, 0);
 	m_start_line = texture_main(fd, core);
 	fd = map_value_init(&ti, fd, map_name, &core->consts);
-	map_go_to_line(m_start_line, fd);
+	while (m_start_line-- > 0)
+		get_next_line(fd);
 	parse_main(ti, fd, core);
 	core->consts.map_width = ti.b;
 	core->consts.map_height = ti.c;

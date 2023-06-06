@@ -54,6 +54,9 @@ static t_core	*core_init(t_core *core)
 	core->consts.minimap_size = (int)(64 / MINIMAP_SIZE);
 	core->consts.img_player = create_minimap_player(core);
 	core->consts.wall_texture = mlx_load_png("assets/brickpoivron.png");
+    core->screen_size[0] = SCREEN_WIDTH;
+    core->screen_size[1] = SCREEN_HEIGHT;
+	mlx_set_cursor(core->mlx, mlx_create_cursor(mlx_load_png("assets/trans.png")));
 	mlx_image_to_window(core->mlx, core->consts.img_player, 0, 0);
 	return (core);
 }
@@ -73,6 +76,7 @@ int	main(int argc, char *argv[])
 			(((core.consts.map_height + 1) * 64) / core.consts.minimap_size));
 	mlx_loop_hook(core.mlx, &display, &core);
 	mlx_loop_hook(core.mlx, &inputs, &core);
+    mlx_resize_hook(core.mlx, &resize_hook, &core.screen_size);
 	mlx_loop(core.mlx);
 	mlx_delete_image(core.mlx, core.consts.img_3d);
 	mlx_delete_image(core.mlx, core.consts.img_player);

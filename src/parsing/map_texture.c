@@ -93,5 +93,6 @@ int	texture_main(int fd_map, t_core *core)
 	line = get_next_line(fd_map);
 	size = get_image_from_map(&line, fd_map, &core->consts);
 	size += get_color_from_map(line, fd_map, &core->consts);
+	free(line);
 	return (size);
 }

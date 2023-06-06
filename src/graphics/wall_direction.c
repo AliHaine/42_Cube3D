@@ -2,42 +2,46 @@
 #include "../../includes/defines.h"
 #include "../../includes/structs.h"
 
+static short wall_calc(float angle)
+{
+	if (angle >= (M_PI / 4) && angle < ((3 * M_PI) / 4))
+		return (0);
+	else if (angle >= ((3 * M_PI) / 4) && angle < ((5 * M_PI) / 4))
+		return (1);
+	else if (angle >= ((5 * M_PI) / 4) && angle < ((7 * M_PI) / 4))
+		return (2);
+	else
+		return (3);
+}
+
+static char	get_direction_x(int x, int i)
+{
+	if ((x % 64) >= 63)
+		return ('W');
+	else if ((x % 64) <= 0)
+		return ('E');
+	else
+		return ('N' + i);
+}
+
+static char	get_direction_y(int y, int i)
+{
+	if ((y % 64) >= 63)
+		return ('N');
+	else if ((y % 64) <= 0)
+		return ('S');
+	else
+		return ('E' + i);
+}
+
 char	wall_direction(t_ray ray)
 {
-	if (ray.ray_angle >= (M_PI / 4) && ray.ray_angle < ((3 * M_PI) / 4))
-	{
-		if ((int)ray.ray_x % 64 >= 63)
-			return ('W');
-		else if ((int)ray.ray_x % 64 <= 0)
-			return ('E');
-		else
-			return ('S');
-	}
-	else if (ray.ray_angle >= ((3 * M_PI) / 4) && ray.ray_angle < ((5 * M_PI) / 4))
-	{
-		if ((int)ray.ray_y % 64 >= 63)
-			return ('N');
-		else if ((int)ray.ray_y % 64 <= 0)
-			return ('S');
-		else
-			return ('W');
-	}
-	else if (ray.ray_angle >= ((5 * M_PI) / 4) && ray.ray_angle < ((7 * M_PI) / 4))
-	{
-		if ((int)ray.ray_x % 64 >= 63)
-			return ('W');
-		else if ((int)ray.ray_x % 64 <= 0)
-			return ('E');
-		else
-			return ('N');
-	}
+	if (wall_calc(ray.ray_angle) == 0)
+		return (get_direction_x((int)ray.ray_x, 5));
+	else if (wall_calc(ray.ray_angle) == 1)
+		return (get_direction_y((int)ray.ray_y, 18));
+	else if (wall_calc(ray.ray_angle) == 2)
+		return (get_direction_x((int)ray.ray_x, 0));
 	else
-	{
-		if ((int)ray.ray_y % 64 >= 63)
-			return ('N');
-		else if ((int)ray.ray_y % 64 <= 0)
-			return ('S');
-		else
-			return ('E');
-	}
+		return (get_direction_y((int)ray.ray_y, 0));
 }

@@ -72,6 +72,7 @@ typedef struct s_core
 	mlx_t			*mlx;
 	t_const			consts;
 	t_player		player;
+    int             screen_size[2];
 }	t_core;
 
 typedef enum {

@@ -49,15 +49,4 @@ void	parse_main(t_t_i ti, int fd_map, t_core *core)
 			continue;
 		ti.a++;
 	}
-	int i = 0; int a = 0;
-	while (core->consts.map[i])
-	{
-		printf("%c", core->consts.map[i][a]);
-		a++;
-		if (!core->consts.map[i][a]) {
-			i++;
-			a = 0;
-			printf("\n");
-		}
-	}
 }

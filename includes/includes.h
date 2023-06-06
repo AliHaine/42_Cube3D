@@ -34,7 +34,8 @@ void	inputs(void *params);
 void	move_right_left(t_player *player, char **map, int direction);
 void	move_forward_backward(t_player *player, char **map, int direction);
 void	move_rotate(t_player *player, int direction);
-bool	mouse(mlx_t *mlx, t_player *player);
+void	mouse(mlx_t *mlx, t_player *player, const int screen_size[2]);
+void    resize_hook(int height, int width, void *params);
 
 //parsing//
 

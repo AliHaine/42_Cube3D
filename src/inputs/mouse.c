@@ -1,20 +1,21 @@
 #include "../../includes/includes.h"
 
-bool	mouse(mlx_t *mlx, t_player *player)
+
+void    resize_hook(int height, int width, void *params)
 {
-	static int	mouse_posx = 999999;
+    *((int*)params) = height;
+    *((int*)params + 1) = width;
+}
+
+void	mouse(mlx_t *mlx, t_player *player, const int screen_size[2])
+{
 	int			x;
 	int			y;
 
 	mlx_get_mouse_pos(mlx, &x, &y);
-	if (mouse_posx == 999999)
-		mouse_posx = x;
-	if (x != mouse_posx && x >= 0) {
-		if (x > mouse_posx)
-			move_rotate(player, 1);
-		else
-			move_rotate(player, 0);
-		mouse_posx = x;
-	}
-	return (true);
+	if (x > screen_size[0] / 2)
+		move_rotate(player, 1);
+	else if (x < screen_size[0] / 2)
+		move_rotate(player, 0);
+	mlx_set_mouse_pos(mlx, (screen_size[0] / 2), (screen_size[1] / 2));
 }
