@@ -2,13 +2,13 @@
 #include "../../includes/defines.h"
 #include "../../includes/structs.h"
 
-static short wall_calc(float angle)
+static int  wall_calc(float angle)
 {
-	if (angle >= (M_PI / 4) && angle < ((3 * M_PI) / 4))
+	if (angle >= SOUTH_EAST && angle < SOUTH_WEST)
 		return (0);
-	else if (angle >= ((3 * M_PI) / 4) && angle < ((5 * M_PI) / 4))
+	else if (angle >= SOUTH_WEST && angle < NORTH_WEST)
 		return (1);
-	else if (angle >= ((5 * M_PI) / 4) && angle < ((7 * M_PI) / 4))
+	else if (angle >= NORTH_WEST && angle < NORTH_EAST)
 		return (2);
 	else
 		return (3);
@@ -36,11 +36,14 @@ static char	get_direction_y(int y, int i)
 
 char	wall_direction(t_ray ray)
 {
-	if (wall_calc(ray.ray_angle) == 0)
+    int res;
+
+    res = wall_calc(ray.ray_angle);
+	if (res == 0)
 		return (get_direction_x((int)ray.ray_x, 5));
-	else if (wall_calc(ray.ray_angle) == 1)
+	else if (res == 1)
 		return (get_direction_y((int)ray.ray_y, 18));
-	else if (wall_calc(ray.ray_angle) == 2)
+	else if (res == 2)
 		return (get_direction_x((int)ray.ray_x, 0));
 	else
 		return (get_direction_y((int)ray.ray_y, 0));

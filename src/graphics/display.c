@@ -16,30 +16,25 @@
 
 void	draw_map(t_core *core)
 {
-	int	py;  // Pixel y
-	int	px;  // Pixel x
+	int     	py;
+	int	        px;
+    const int   limit_x1 = ((core->consts.map_width) * 64) / core->consts.minimap_size;
+    const int   limit_y1 = ((core->consts.map_height + 1) * 64) / core->consts.minimap_size;
 
 	py = -1;
-	// * 64 car j'ai decidé que chaque carré de la map correspondrait a 64 pixels
-	// Sinon c'est que de l'adaption par rapport a la taille de la map, pour qu'elle soit bien proportionée
-	while (++py < ((core->consts.map_height + 1) * 64) / core->consts.minimap_size
-		&& py / (64 / core->consts.minimap_size) < core->consts.map_height + 1
-		&& py < SCREEN_HEIGHT)
+	while (++py < limit_y1 && py / RESIZE < core->consts.map_height + 1
+        && py < SCREEN_HEIGHT)
 	{
 		px = -1;
-		while (++px < ((core->consts.map_width) * 64) / core->consts.minimap_size
-			&& px / (64 / core->consts.minimap_size) < core->consts.map_width
+		while (++px < limit_x1 && px / RESIZE < core->consts.map_width
 			&& px < SCREEN_WIDTH)
 		{
-			// Pour chaque pixel, je le divise par 64 / taille de la minimap pour savoir si le pixel est positionné
-			// dans un mur ou dans un sol
-			if (core->consts.map[py / (64 / core->consts.minimap_size)][px / (64 / core->consts.minimap_size)] == '0'
-				|| is_player_char(core->consts.map[py / (64 / core->consts.minimap_size)]
+			if (core->consts.map[py / RESIZE][px / RESIZE] == '0'
+				|| is_player_char(core->consts.map[py / RESIZE]
 				[px / (64 / core->consts.minimap_size)]))
 				mlx_put_pixel(core->consts.img_map, px, py,
 					core->consts.minimap_floor_color);
-			else if (core->consts.map[py / (64 / core->consts.minimap_size)]
-				[px / (64 / core->consts.minimap_size)] == '1')
+			else if (core->consts.map[py / RESIZE][px / RESIZE] == '1')
 				mlx_put_pixel(core->consts.img_map, px, py,
 					core->consts.minimap_wall_color);
 		}

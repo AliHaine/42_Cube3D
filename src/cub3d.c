@@ -42,8 +42,8 @@ static t_core	*core_init(t_core *core)
 			SCREEN_HEIGHT);
 	core->consts.texture_dot = mlx_load_png("assets/red_dot.png"); // Ca on peut supprimer
 	core->consts.ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 150;
-	core->consts.minimap_wall_color = (42 << 24) + (42 << 16) + (42 << 8) + 255;
-	core->consts.minimap_floor_color = (128 << 24) + (128 << 16) + (128 << 8) + 255;
+	core->consts.minimap_wall_color = (42 << 24) + (42 << 16) + (42 << 8) + 200;
+	core->consts.minimap_floor_color = (128 << 24) + (128 << 16) + (128 << 8) + 200;
 	core->consts.top_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
 	core->consts.bot_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
 	core->consts.ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 255;
@@ -53,7 +53,7 @@ static t_core	*core_init(t_core *core)
 	core->consts.dist_between_ray = core->consts.fov / RAY_NUMBER;
 	core->consts.minimap_size = (int)(64 / MINIMAP_SIZE);
 	core->consts.img_player = create_minimap_player(core);
-	core->consts.wall_texture = mlx_load_png("assets/brickpoivron.png");
+	core->consts.wall_texture = mlx_load_png("assets/brick64.png");
     core->screen_size[0] = SCREEN_WIDTH;
     core->screen_size[1] = SCREEN_HEIGHT;
 	mlx_set_cursor(core->mlx, mlx_create_cursor(mlx_load_png("assets/trans.png")));

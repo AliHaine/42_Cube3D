@@ -90,32 +90,19 @@ static uint32_t	apply_fog(t_core *core, float fog_strength, int x, int y)
 //    return (0);
 //}
 
-static int	get_offset(t_core *core, t_ray ray)
+static int	get_offset(t_ray ray)
 {
 	char	direction;
 
-    (void)core;
 	direction = wall_direction(ray);
 	if (direction == 'E')
-	{
-		//printf("Est\n");
 		return ((int)ray.ray_y % 64);
-	}
 	else if (direction == 'W')
-	{
-		//printf("Ouest\n");
 		return (63 - (int)ray.ray_y % 64);
-	}
 	else if (direction == 'N')
-	{
-		//printf("Nord\n");
 		return ((int)ray.ray_x % 64);
-	}
 	else if (direction == 'S')
-	{
-		//printf("Sud\n");
 		return (63 - (int)ray.ray_x % 64);
-	}
     return (0);
 }
 
@@ -128,11 +115,7 @@ static void	draw_columns(t_core *core, t_ray ray, int r)
 	int			texture_y;
 
 	// Connaitre la position x de la texture pour l'affichage 3D
-    texture_offset = get_offset(core, ray);
-//	if ((int)ray.ray_y % 64 == 0)
-//		texture_offset = (int)ray.ray_y % 64;
-//	else
-//        texture_offset = (int)ray.ray_x % 64;
+    texture_offset = get_offset(ray);
 	// Savoir la hauteur du mur
 	wall_height = (SCREEN_HEIGHT * 64) / ray.ray_distance;
 	py = 0;

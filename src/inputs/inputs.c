@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
+#include "../../includes/defines.h"
 
 void	inputs(void *params)
 {
@@ -34,9 +35,9 @@ void	inputs(void *params)
 		|| mlx_is_key_down(core->mlx, MLX_KEY_UP))
 		move_forward_backward(&core->player, core->consts.map, 0);
 	if (mlx_is_key_down(core->mlx, MLX_KEY_LEFT))
-		move_rotate(&core->player, 0);
+        move_rotate(&core->player, 0, (float)SENSIBILITY / 6);
 	if (mlx_is_key_down(core->mlx, MLX_KEY_RIGHT))
-		move_rotate(&core->player, 1);
+		move_rotate(&core->player, 1, (float)SENSIBILITY / 6);
 	if (mlx_is_key_down(core->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(core->mlx);
 }

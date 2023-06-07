@@ -58,17 +58,17 @@ void	move_forward_backward(t_player *player, char **map, int direction)
 	}
 }
 
-void	move_rotate(t_player *player, int direction)
+void	move_rotate(t_player *player, int direction, float speed)
 {
 	if (direction == 0)
 	{
-		player->playerangle -= SENSIBILITY;
+		player->playerangle -= speed;
 		if (player->playerangle < 0)
 			player->playerangle += 6.28319;
 	}
 	else if (direction == 1)
 	{
-		player->playerangle += SENSIBILITY;
+		player->playerangle += speed;
 		if (player->playerangle > 6.28319)
 			player->playerangle -= 6.28319;
 	}

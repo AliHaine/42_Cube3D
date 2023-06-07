@@ -8,7 +8,7 @@ uint32_t	wall_texture(t_core *core, int x, int y)
 	static unsigned int			bx = 0; //byte x
 	static unsigned int			by = 0; // byte y
 	unsigned int				total;
-	unsigned int				scale;
+	static unsigned int			scale;
 	uint32_t					color;
 
 	scale = core->consts.wall_texture->width / 64; // J'essayai de mettre a la bonne echelle mais c'est bof
