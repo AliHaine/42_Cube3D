@@ -40,12 +40,15 @@ void	map_manager(char *map_name, t_core *core)
 	t_t_i	ti;
 	int		m_start_line;
 
+	msg_write(2, -1, CHECK_MAP);
+	usleep(500000);
 	if (!is_cub(map_name))
 		msg_write(2, 1, ERROR_MAP_NAME);
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
 		msg_write(2, 1, ERROR_MAP_EXIST);
 	init_tti_struct(&ti, 0, 0, 0);
+	msg_write(1, -1, NO_ERROR);
 	m_start_line = texture_main(fd, core);
 	fd = map_value_init(&ti, fd, map_name, &core->consts);
 	while (m_start_line-- > 0)

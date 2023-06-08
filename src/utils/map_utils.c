@@ -1,4 +1,5 @@
 #include "../../includes/includes.h"
+#include "../../includes/defines.h"
 
 bool	is_player_char(char c)
 {
@@ -44,4 +45,25 @@ short	get_direction_code(char *s)
 	if (s[0] == 'E' && s[1] == 'A')
 		return (1);
 	return (4);
+}
+
+bool	set_default_wall_texture(t_const *consts)
+{
+	int				max;
+	mlx_texture_t	*default_wall;
+
+	max = 0;
+	msg_write(1, -1, EMPTY_WALL);
+	msg_write_multiple(1, Messages[TRY_LOAD_TEXTURE], DEFAULT_WALL);
+	default_wall = mlx_load_png(DEFAULT_WALL);
+	if (!default_wall)
+		msg_write(2, 1, ERROR_FATAL);
+	while (max < 4)
+	{
+		if (consts->wall_texture[max] == 0)
+			consts->wall_texture[max] = default_wall;
+		max++;
+	}
+	msg_write(1, -1, SUCCESS);
+	return (true);
 }

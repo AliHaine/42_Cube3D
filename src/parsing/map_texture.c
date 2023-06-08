@@ -1,6 +1,6 @@
 #include "../../includes/includes.h"
 
-static bool	set_color_value(const char *line, uint32_t *target_color)
+static void	set_color_value(const char *line, uint32_t *target_color)
 {
 	int		i;
 	int		b;
@@ -20,14 +20,16 @@ static bool	set_color_value(const char *line, uint32_t *target_color)
 			b = 0;
 			line++;
 		}
-		if (b > 3 || i > 3)
-			return (false);
+		if (b > 3 || i > 3) {
+			msg_write(1, -1, FAILURE);
+			break ;
+		}
 		value[i][b++] = *line++;
 	}
 	value[i][b-1] = '\0';
 	*target_color = (ft_atoi_for_texture(value[0]) << 24) + (ft_atoi_for_texture(value[1]) << 16) + (ft_atoi_for_texture(value[2]) << 8) + 255;
 	free(value);
-	return (true);
+	msg_write(1, -1, SUCCESS);
 }
 
 static bool	set_texture_from_path(char *line, mlx_texture_t **texture)
@@ -36,8 +38,12 @@ static bool	set_texture_from_path(char *line, mlx_texture_t **texture)
 		line++;
 	line[ft_strlen(line) - 1] = '\0';
 	*texture = mlx_load_png(line);
-	if (!*texture)
+	msg_write_multiple(1, Messages[TRY_LOAD_TEXTURE], line);
+	if (!*texture) {
+		msg_write(2, -1, FAILURE);
 		return (false);
+	}
+	msg_write(1, -1, SUCCESS);
 	return (true);
 }
 
@@ -50,6 +56,8 @@ static int	get_color_from_map(char *line, int fd_map, t_const *consts)
 	{
 		if (line[0] && line[0] != 'F' && line[0] != 'C')
 			break;
+		msg_write_multiple(1, Messages[TRY_LOAD_COLOR], line);
+		usleep(300000);
 		if (line[0] != 'F')
 			set_color_value(line + 2, &consts->top_color);
 		else
@@ -70,7 +78,6 @@ static int	get_image_from_map(char **line, int fd_map, t_const *consts)
 	short	direction;
 
 	size = 0;
-	consts->wall_texture[0] = 0;
 	while (line)
 	{
 		direction = get_direction_code(*line);
@@ -78,8 +85,11 @@ static int	get_image_from_map(char **line, int fd_map, t_const *consts)
 			break ;
 		set_texture_from_path(*line + 2, &consts->wall_texture[direction]);
 		*line = get_next_line(fd_map);
+		usleep(500000);
 		size++;
 	}
+	if (size != 4)
+		set_default_wall_texture(consts);
 	while (line && *line[0] == '\n')
 	{
 		*line = get_next_line(fd_map);
@@ -93,9 +103,12 @@ int	texture_main(int fd_map, t_core *core)
 	int		size;
 	char	*line;
 
+	msg_write(1, -1, GET_MAP_CONTENT);
+	usleep(500000);
 	line = get_next_line(fd_map);
 	size = get_image_from_map(&line, fd_map, &core->consts);
 	size += get_color_from_map(line, fd_map, &core->consts);
 	free(line);
+	msg_write(1, -1, SUCCESS);
 	return (size);
 }
