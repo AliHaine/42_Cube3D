@@ -37,7 +37,7 @@ static mlx_image_t	*create_minimap_player(t_core *core)
 static t_core	*core_init(t_core *core)
 {
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	core->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d", true);
+	core->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "セグメンテーションフォルトのないプログラムは、鋭い剣のように正確に使える。", true);
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
 	core->consts.ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 150;
@@ -56,7 +56,8 @@ static t_core	*core_init(t_core *core)
 	core->consts.dist_between_ray = core->consts.fov / RAY_NUMBER;
 	core->consts.minimap_size = (int)(64 / MINIMAP_SIZE);
 	core->imgs.img_player = create_minimap_player(core);
-	core->consts.wall_texture = mlx_load_png("assets/brick64.png");
+	//core->consts.wall_texture = mlx_load_png("assets/brick64.png");
+    core->consts.door_texture = mlx_load_png("assets/door.png");
     core->screen_size[0] = SCREEN_WIDTH;
     core->screen_size[1] = SCREEN_HEIGHT;
 	mlx_set_cursor(core->mlx, mlx_create_cursor(mlx_load_png("assets/trans.png")));

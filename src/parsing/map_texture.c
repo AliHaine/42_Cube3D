@@ -30,13 +30,13 @@ static bool	set_color_value(const char *line, uint32_t *target_color)
 	return (true);
 }
 
-static bool	set_texture_from_path(char *line, mlx_texture_t *texture)
+static bool	set_texture_from_path(char *line, mlx_texture_t **texture)
 {
 	while (*line && *line == ' ')
 		line++;
 	line[ft_strlen(line) - 1] = '\0';
-	texture = mlx_load_png(line);
-	if (!texture)
+	*texture = mlx_load_png(line);
+	if (!*texture)
 		return (false);
 	return (true);
 }
@@ -66,14 +66,17 @@ static int	get_color_from_map(char *line, int fd_map, t_const *consts)
 
 static int	get_image_from_map(char **line, int fd_map, t_const *consts)
 {
-	int size;
+	int		size;
+	short	direction;
 
 	size = 0;
+	consts->wall_texture[0] = 0;
 	while (line)
 	{
-		if (!is_direction_code(*line))
+		direction = get_direction_code(*line);
+		if (direction >= 4)
 			break ;
-		set_texture_from_path(*line + 2, consts->north);
+		set_texture_from_path(*line + 2, &consts->wall_texture[direction]);
 		*line = get_next_line(fd_map);
 		size++;
 	}

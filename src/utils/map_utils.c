@@ -10,7 +10,7 @@ bool	is_player_char(char c)
 bool	is_allowed_char(char c)
 {
 	if (c == '0' || c == '1' || is_player_char(c)
-		||  c == 'Z' || c == 'V' || c == ' ')
+		||  c == 'Z' || c == 'V' || c == 'D' || c == ' ')
 		return (true);
 	return (false);
 }
@@ -31,18 +31,17 @@ bool	is_cub(const char *str)
 	return (true);
 }
 
-bool	is_direction_code(char *s)
+short	get_direction_code(char *s)
 {
 	if (ft_strlen(s) < 1)
-		return (false);
+		return (4);
 	if (s[0] == 'N' && s[1] == 'O')
-		return (true);
+		return (0);
 	if (s[0] == 'S' && s[1] == 'O')
-		return (true);
+		return (2);
 	if (s[0] == 'W' && s[1] == 'E')
-		return (true);
+		return (3);
 	if (s[0] == 'E' && s[1] == 'A')
-		return (true);
-	return (false);
-
+		return (1);
+	return (4);
 }

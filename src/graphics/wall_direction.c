@@ -2,7 +2,7 @@
 #include "../../includes/defines.h"
 #include "../../includes/structs.h"
 
-static int  wall_calc(t_const *consts, float angle)
+int  wall_calc(t_const *consts, float angle)
 {
 	if (angle >= consts->south_east && angle < consts->south_west)
 		return (0);

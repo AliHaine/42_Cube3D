@@ -19,6 +19,13 @@ typedef struct s_point
 	float y;
 }	t_point;
 
+typedef struct s_imgs
+{
+	mlx_image_t		*img_3d;
+	mlx_image_t		*img_map;
+	mlx_image_t		*img_player;
+}	t_imgs;
+
 typedef struct s_ray
 {
 	float	start_angle;
@@ -35,20 +42,15 @@ typedef struct s_three_i
 	int	c;
 }	t_t_i;
 
-typedef struct s_imgs
-{
-	mlx_image_t		*img_3d;
-	mlx_image_t		*img_map;
-	mlx_image_t		*img_player;
-}	t_imgs;
-
 typedef struct s_const
 {
+	mlx_texture_t	*wall_texture[4];
+	mlx_texture_t	*door_texture;
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
 	mlx_texture_t	*est;
-	mlx_texture_t	*wall_texture;
+	//mlx_texture_t	*wall_texture;
 	uint32_t		bot_color;
 	uint32_t		top_color;
 	uint32_t		minimap_wall_color;
@@ -80,7 +82,7 @@ typedef struct s_core
 	t_const			consts;
 	t_player		player;
 	t_imgs			imgs;
-	int				screen_size[2];
+    int             screen_size[2];
 }	t_core;
 
 typedef enum {

@@ -12,7 +12,7 @@ void	msg_write(int fd, int exitVal, MsgType msg);
 
 bool	is_player_char(char c);
 bool	is_allowed_char(char c);
-bool	is_direction_code(char *s);
+short	get_direction_code(char *s);
 
 //std_func_utils//
 

@@ -27,8 +27,9 @@
 void		display(void *params);
 void		draw_map(t_core *core);
 void		raycast(t_core *core);
-uint32_t	wall_texture(t_core *core, int x, int y);
+uint32_t	get_color_from_wall_texture(mlx_texture_t *wall_texture, const int texture_xy[2]);
 char		wall_direction(t_core *core, t_ray ray);
+int			wall_calc(t_const *consts, float angle);
 
 void	inputs(void *params);
 void	move_right_left(t_player *player, char **map, int direction);
