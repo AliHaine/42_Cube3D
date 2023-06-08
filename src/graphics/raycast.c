@@ -90,11 +90,11 @@ static uint32_t	apply_fog(t_core *core, float fog_strength, int x, int y)
 //    return (0);
 //}
 
-static int	get_offset(t_ray ray)
+static int	get_offset(t_core *core, t_ray ray)
 {
 	char	direction;
 
-	direction = wall_direction(ray);
+	direction = wall_direction(core, ray);
 	if (direction == 'E')
 		return ((int)ray.ray_y % 64);
 	else if (direction == 'W')
@@ -115,7 +115,7 @@ static void	draw_columns(t_core *core, t_ray ray, int r)
 	int			texture_y;
 
 	// Connaitre la position x de la texture pour l'affichage 3D
-    texture_offset = get_offset(ray);
+    texture_offset = get_offset(core, ray);
 	// Savoir la hauteur du mur
 	wall_height = (SCREEN_HEIGHT * 64) / ray.ray_distance;
 	py = 0;
@@ -123,7 +123,7 @@ static void	draw_columns(t_core *core, t_ray ray, int r)
 	// Ciel
 	while (py < (SCREEN_HEIGHT - wall_height) / 2 && py < SCREEN_HEIGHT)
 	{
-		mlx_put_pixel(core->consts.img_3d, r, py, core->consts.top_color);
+		mlx_put_pixel(core->imgs.img_3d, r, py, core->consts.top_color);
 		py++;
 	}
 	// Murs
@@ -136,13 +136,13 @@ static void	draw_columns(t_core *core, t_ray ray, int r)
 		// Ca va economiser des calculs, car a partir d'une certaine distance
 		// plus besoin de chercher le pixel qui correspond a la texture, juste on met un pixel noir par defaut
 		color = apply_fog(core, ray.ray_distance / FOG_DISTANCE, texture_offset, texture_y);
-		mlx_put_pixel(core->consts.img_3d, r, py, color);
+		mlx_put_pixel(core->imgs.img_3d, r, py, color);
 		py++;
 	}
 	// Sols
 	while (py < SCREEN_HEIGHT)
 	{
-		mlx_put_pixel(core->consts.img_3d, r, py, core->consts.bot_color);
+		mlx_put_pixel(core->imgs.img_3d, r, py, core->consts.bot_color);
 		py++;
 	}
 }
@@ -185,7 +185,7 @@ void	raycast(t_core *core)
 			ray.ray_x += thales[0]; // On fait avancer le rayon
 			ray.ray_y += thales[1];
 			// On dessiner le rayon sur la minimap
-			mlx_put_pixel(core->consts.img_map, (ray.ray_x / MINIMAP_SIZE),(ray.ray_y / MINIMAP_SIZE), core->consts.ray_color);
+			mlx_put_pixel(core->imgs.img_map, (ray.ray_x / MINIMAP_SIZE),(ray.ray_y / MINIMAP_SIZE), core->consts.ray_color);
 		}
 		// Calcul de la distance du point final du rayon par rapport au joueur pour ensuite voir comment afficher les murs
 		ray.ray_distance = calc_ray_distance(core, ray);

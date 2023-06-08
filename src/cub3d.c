@@ -38,26 +38,29 @@ static t_core	*core_init(t_core *core)
 {
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	core->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d", true);
-	core->consts.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
+	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
-	core->consts.texture_dot = mlx_load_png("assets/red_dot.png"); // Ca on peut supprimer
 	core->consts.ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 150;
 	core->consts.minimap_wall_color = (42 << 24) + (42 << 16) + (42 << 8) + 200;
 	core->consts.minimap_floor_color = (128 << 24) + (128 << 16) + (128 << 8) + 200;
 	core->consts.top_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
 	core->consts.bot_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
 	core->consts.ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 255;
+	core->consts.south_east = PI / 4;
+	core->consts.south_west = (3 * PI) / 4;
+	core->consts.north_east = (7 * PI) / 4;
+	core->consts.north_west = (5 * PI) / 4;
 	//Le FOV est en degres et hop ptite formule qui le met en radians parce-que les fonctions cosf et sinf ne prennent que les radians
 	core->consts.fov = FOV * (PI / 180);
 	//Calcul de la distance que les rayons doivent avoir entre eux
 	core->consts.dist_between_ray = core->consts.fov / RAY_NUMBER;
 	core->consts.minimap_size = (int)(64 / MINIMAP_SIZE);
-	core->consts.img_player = create_minimap_player(core);
+	core->imgs.img_player = create_minimap_player(core);
 	core->consts.wall_texture = mlx_load_png("assets/brick64.png");
     core->screen_size[0] = SCREEN_WIDTH;
     core->screen_size[1] = SCREEN_HEIGHT;
 	mlx_set_cursor(core->mlx, mlx_create_cursor(mlx_load_png("assets/trans.png")));
-	mlx_image_to_window(core->mlx, core->consts.img_player, 0, 0);
+	mlx_image_to_window(core->mlx, core->imgs.img_player, 0, 0);
 	return (core);
 }
 
@@ -71,17 +74,16 @@ int	main(int argc, char *argv[])
 	map_manager(argv[1], &core);
 	// J'init l'image la psq elle a besoin des variables initialisees par map_manager
 	// C'est censé adapter la minimap a la taille de la carte mais pas a la resolution donc ca segfault tjr
-	core.consts.img_map = mlx_new_image(core.mlx, (int)
+	core.imgs.img_map = mlx_new_image(core.mlx, (int)
 			((core.consts.map_width * 64) / core.consts.minimap_size), (int)
 			(((core.consts.map_height + 1) * 64) / core.consts.minimap_size));
 	mlx_loop_hook(core.mlx, &display, &core);
 	mlx_loop_hook(core.mlx, &inputs, &core);
     mlx_resize_hook(core.mlx, &resize_hook, &core.screen_size);
 	mlx_loop(core.mlx);
-	mlx_delete_image(core.mlx, core.consts.img_3d);
-	mlx_delete_image(core.mlx, core.consts.img_player);
-	mlx_delete_image(core.mlx, core.consts.img_map);
-	mlx_delete_texture(core.consts.texture_dot);
+	mlx_delete_image(core.mlx, core.imgs.img_3d);
+	mlx_delete_image(core.mlx, core.imgs.img_player);
+	mlx_delete_image(core.mlx, core.imgs.img_map);
 	mlx_close_window(core.mlx);
 	mlx_terminate(core.mlx);
 	return (0);

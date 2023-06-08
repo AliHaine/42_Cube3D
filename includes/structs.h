@@ -35,12 +35,15 @@ typedef struct s_three_i
 	int	c;
 }	t_t_i;
 
-typedef struct s_const
+typedef struct s_imgs
 {
 	mlx_image_t		*img_3d;
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_player;
-	mlx_texture_t	*texture_dot;
+}	t_imgs;
+
+typedef struct s_const
+{
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
@@ -58,6 +61,10 @@ typedef struct s_const
 	int				map_width;
 	int				map_height;
 	int				minimap_size;
+	float			north_east;
+	float			north_west;
+	float			south_east;
+	float			south_west;
 }	t_const;
 
 typedef struct s_player
@@ -72,7 +79,8 @@ typedef struct s_core
 	mlx_t			*mlx;
 	t_const			consts;
 	t_player		player;
-    int             screen_size[2];
+	t_imgs			imgs;
+	int				screen_size[2];
 }	t_core;
 
 typedef enum {

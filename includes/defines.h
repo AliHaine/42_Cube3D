@@ -24,9 +24,5 @@
 # define SENSIBILITY 2
 # define FOG_DISTANCE 1000
 # define TEXTURE_SIZE 64
-# define SOUTH_EAST (PI/4)
-# define SOUTH_WEST ((3*PI)/4)
-# define NORTH_WEST ((5*PI)/4)
-# define NORTH_EAST ((7*PI)/4)
 # define RESIZE (64 / (64 / MINIMAP_SIZE))
 #endif
