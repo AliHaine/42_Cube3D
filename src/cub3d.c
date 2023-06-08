@@ -58,6 +58,7 @@ static t_core	*core_init(t_core *core)
 	core->imgs.img_player = create_minimap_player(core);
 	//core->consts.wall_texture = mlx_load_png("assets/brick64.png");
     core->consts.door_texture = mlx_load_png("assets/door.png");
+	core->consts.wall_texture[3] = mlx_load_png("assets/default_wall.png");
     core->screen_size[0] = SCREEN_WIDTH;
     core->screen_size[1] = SCREEN_HEIGHT;
 	mlx_set_cursor(core->mlx, mlx_create_cursor(mlx_load_png("assets/trans.png")));

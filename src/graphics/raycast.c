@@ -85,6 +85,18 @@ static int	get_offset(char direction, t_ray ray)
     return (0);
 }
 
+short convertor_temp(char c)
+{
+	if(c == 'N')
+		return(0);
+	else if (c == 'E')
+		return (1);
+	else if (c == 'S')
+		return (2);
+	else
+		return (3);
+}
+
 static void	draw_columns(t_core *core, t_ray ray, int r)
 {
 	float		wall_height;
@@ -105,7 +117,7 @@ static void	draw_columns(t_core *core, t_ray ray, int r)
 	while (py < (SCREEN_HEIGHT + wall_height) / 2 && py < SCREEN_HEIGHT)
 	{
 		texture_xy[1] = ((py * 2 - SCREEN_HEIGHT + wall_height) * TEXTURE_SIZE) / wall_height / 2;
-		color = get_color(core->consts.wall_texture[0], ray.ray_distance / FOG_DISTANCE,texture_xy);
+		color = get_color(core->consts.wall_texture[convertor_temp(direction)], ray.ray_distance / FOG_DISTANCE,texture_xy);
 		mlx_put_pixel(core->imgs.img_3d, r, py, color);
 		py++;
 	}
