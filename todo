@@ -1,6 +1,6 @@
 MAP
 
-N,S,W,E = player, 1 = mur, 0 = vide, V = creeper, Z = zombie
+N,S,W,E = player, 1 = mur, 0 = vide, V = creeper, Z = zombie, D = porte
 
 verif que ya une sortie en gros flood fill ??
 Commencer a ajouter des ennemis

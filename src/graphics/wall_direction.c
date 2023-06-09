@@ -2,7 +2,7 @@
 #include "../../includes/defines.h"
 #include "../../includes/structs.h"
 
-static int  wall_calc(t_const *consts, float angle)
+int  wall_calc(t_const *consts, float angle)
 {
 	if (angle >= consts->south_east && angle < consts->south_west)
 		return (0);
@@ -14,35 +14,35 @@ static int  wall_calc(t_const *consts, float angle)
 		return (3);
 }
 
-static char	get_direction_x(int x, int i)
+static short	get_direction_x(int x, short i)
 {
 	if ((x % 64) >= 63)
-		return ('W');
+		return (3);
 	else if ((x % 64) <= 0)
-		return ('E');
+		return (1);
 	else
-		return ('N' + i);
+		return (0 + i);
 }
 
-static char	get_direction_y(int y, int i)
+static short	get_direction_y(int y, short i)
 {
 	if ((y % 64) >= 63)
-		return ('N');
+		return (0);
 	else if ((y % 64) <= 0)
-		return ('S');
+		return (2);
 	else
-		return ('E' + i);
+		return (1 + i);
 }
 
-char	wall_direction(t_core *core, t_ray ray)
+short	wall_direction(t_core *core, t_ray ray)
 {
     int res;
 
     res = wall_calc(&core->consts, ray.ray_angle);
 	if (res == 0)
-		return (get_direction_x((int)ray.ray_x, 5));
+		return (get_direction_x((int)ray.ray_x, 2));
 	else if (res == 1)
-		return (get_direction_y((int)ray.ray_y, 18));
+		return (get_direction_y((int)ray.ray_y, 2));
 	else if (res == 2)
 		return (get_direction_x((int)ray.ray_x, 0));
 	else

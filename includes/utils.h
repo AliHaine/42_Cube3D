@@ -6,13 +6,15 @@
 
 bool	is_cub(const char *str);
 
+void	msg_write_multiple(int fd, const char *str1, const char *str2);
 void	msg_write(int fd, int exitVal, MsgType msg);
 
 //map_utils//
 
 bool	is_player_char(char c);
 bool	is_allowed_char(char c);
-bool	is_direction_code(char *s);
+short	get_direction_code(char *s);
+bool	set_default_wall_texture(t_const *consts);
 
 //std_func_utils//
 

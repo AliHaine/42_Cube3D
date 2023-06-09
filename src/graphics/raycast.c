@@ -43,19 +43,28 @@
 //}
 
 
-static uint32_t	apply_fog(t_core *core, float fog_strength, int x, int y)
+static uint32_t	apply_fog(float fog_strength)
 {
-	uint32_t		color;
-	uint8_t			r;
-	uint8_t			g;
-	uint8_t			b;
 	static uint32_t	black = ((0 << 24) | (0 << 16) | (0 << 8) | 255);
 
 	if (fog_strength > 1.0)
 		fog_strength = 1.0;
 	if (fog_strength == 1.0)
-		return (black); // Renvoi noir si le mur est trop loin
-	color = wall_texture(core, x, y); // Sinon see fait chier a chercher la bonne couleur
+		return (black);
+	return (0);
+}
+
+static uint32_t	get_color(mlx_texture_t *wall_texture, float fog_strength, const int texture_xy[2])
+{
+	uint32_t		color;
+	uint8_t			r;
+	uint8_t			g;
+	uint8_t			b;
+
+	color = apply_fog(fog_strength);
+	if (color != 0)
+		return (color);
+	color = get_color_from_wall_texture(wall_texture, texture_xy);
 	// Je comprend pas ces calculs, on les refera plus tard pour mieux les comprendre
 	r = ((color >> 24) & 0xFF) * (1.0 - fog_strength);
 	g = ((color >> 16) & 0xFF) * (1.0 - fog_strength);
@@ -63,45 +72,15 @@ static uint32_t	apply_fog(t_core *core, float fog_strength, int x, int y)
 	return ((r << 24) | (g << 16) | (b << 8) | (color & 0xFF));
 }
 
-//static int  get_offset(t_core *core, t_ray ray)
-//{
-//    (void)core;
-//    (void)ray;
-//    if (ray.ray_angle > ((3 * PI) / 4) && ray.ray_angle < ((5 * PI) / 4))
-//    {
-//        printf("Ouest\n");
-//        return (64 - ((int)ray.ray_y % 64));
-//    }
-//    if (ray.ray_angle > (PI / 4) && ray.ray_angle < ((3 * PI) / 4))
-//    {
-//        printf("Sud\n");
-//        return (64 - ((int)ray.ray_x % 64));
-//    }
-//    if (ray.ray_angle > ((5 * PI) / 4) && ray.ray_angle < ((7 * PI) / 4))
-//    {
-//        printf("Nord\n");
-//        return (((int)ray.ray_x % 64));
-//    }
-//    if (ray.ray_angle < (PI / 4) || ray.ray_angle > ((7 * PI) / 4))
-//    {
-//        printf("Est\n");
-//        return (((int)ray.ray_y % 64));
-//    }
-//    return (0);
-//}
-
-static int	get_offset(t_core *core, t_ray ray)
+static int	get_offset(short direction, t_ray ray)
 {
-	char	direction;
-
-	direction = wall_direction(core, ray);
-	if (direction == 'E')
+	if (direction == 1)
 		return ((int)ray.ray_y % 64);
-	else if (direction == 'W')
+	else if (direction == 3)
 		return (63 - (int)ray.ray_y % 64);
-	else if (direction == 'N')
+	else if (direction == 0)
 		return ((int)ray.ray_x % 64);
-	else if (direction == 'S')
+	else if (direction == 2)
 		return (63 - (int)ray.ray_x % 64);
     return (0);
 }
@@ -111,35 +90,25 @@ static void	draw_columns(t_core *core, t_ray ray, int r)
 	float		wall_height;
 	int			py;
 	uint32_t	color;
-	int			texture_offset;
-	int			texture_y;
+	int			texture_xy[2];
+	short		direction;
 
-	// Connaitre la position x de la texture pour l'affichage 3D
-    texture_offset = get_offset(core, ray);
-	// Savoir la hauteur du mur
+	direction = wall_direction(core, ray);
+	texture_xy[0] = get_offset(direction, ray);
 	wall_height = (SCREEN_HEIGHT * 64) / ray.ray_distance;
 	py = 0;
-	// On dessine la colonne a partir du haut
-	// Ciel
 	while (py < (SCREEN_HEIGHT - wall_height) / 2 && py < SCREEN_HEIGHT)
 	{
 		mlx_put_pixel(core->imgs.img_3d, r, py, core->consts.top_color);
 		py++;
 	}
-	// Murs
 	while (py < (SCREEN_HEIGHT + wall_height) / 2 && py < SCREEN_HEIGHT)
 	{
-		texture_y = ((py * 2 - SCREEN_HEIGHT + wall_height) * TEXTURE_SIZE) / wall_height / 2;
-
-		// Fonction qui va permettre d'avoir le pixel correspondant a la texture et qui
-		// appliquera du brouillard selon la distance (ca devient juste noir quoi)
-		// Ca va economiser des calculs, car a partir d'une certaine distance
-		// plus besoin de chercher le pixel qui correspond a la texture, juste on met un pixel noir par defaut
-		color = apply_fog(core, ray.ray_distance / FOG_DISTANCE, texture_offset, texture_y);
+		texture_xy[1] = ((py * 2 - SCREEN_HEIGHT + wall_height) * TEXTURE_SIZE) / wall_height / 2;
+		color = get_color(core->consts.wall_texture[direction], ray.ray_distance / FOG_DISTANCE,texture_xy);
 		mlx_put_pixel(core->imgs.img_3d, r, py, color);
 		py++;
 	}
-	// Sols
 	while (py < SCREEN_HEIGHT)
 	{
 		mlx_put_pixel(core->imgs.img_3d, r, py, core->consts.bot_color);
@@ -151,25 +120,22 @@ float	calc_ray_distance(t_core *core, t_ray ray)
 {
 	float	ray_distance;
 
-	// calcul que j'ai trouvé sur internet
 	// voir "calcul distance euclidienne dans un espace en 2 dimensions"
 	ray_distance = sqrtf(((ray.ray_x - core->player.playerpos[0]) * (
 					ray.ray_x - core->player.playerpos[0]) + ((ray.ray_y
 						- core->player.playerpos[1]) * (ray.ray_y
 						- core->player.playerpos[1]))));
-	// calcul pour corriger l'effet fisheye (murs courbés)
 	ray_distance *= cos(ray.ray_angle - core->player.playerangle);
 	return (ray_distance);
 }
 
 void	raycast(t_core *core)
 {
-	int		r; // indice du rayon actuel
-	t_ray	ray; // Donnees du rayon actuel
-	float	thales[2]; // Stocker le cosinus[0] et le sinus[1], ca evite de recalculer h24
+	int		r;
+	t_ray	ray;
+	float	thales[2];
 
 	r = -1;
-	// Donne l'angle du tout premier rayon sachant que core->player.playerangle est le milieu du FOV (logik)
 	ray.start_angle = core->player.playerangle - (core->consts.fov / 2);
 	while (++r < RAY_NUMBER)
 	{

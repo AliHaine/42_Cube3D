@@ -1,4 +1,5 @@
 #include "../../includes/includes.h"
+#include "../../includes/defines.h"
 
 bool	is_player_char(char c)
 {
@@ -10,7 +11,7 @@ bool	is_player_char(char c)
 bool	is_allowed_char(char c)
 {
 	if (c == '0' || c == '1' || is_player_char(c)
-		||  c == 'Z' || c == 'V' || c == ' ')
+		||  c == 'Z' || c == 'V' || c == 'D' || c == ' ')
 		return (true);
 	return (false);
 }
@@ -31,18 +32,38 @@ bool	is_cub(const char *str)
 	return (true);
 }
 
-bool	is_direction_code(char *s)
+short	get_direction_code(char *s)
 {
 	if (ft_strlen(s) < 1)
-		return (false);
+		return (4);
 	if (s[0] == 'N' && s[1] == 'O')
-		return (true);
+		return (0);
 	if (s[0] == 'S' && s[1] == 'O')
-		return (true);
+		return (2);
 	if (s[0] == 'W' && s[1] == 'E')
-		return (true);
+		return (3);
 	if (s[0] == 'E' && s[1] == 'A')
-		return (true);
-	return (false);
+		return (1);
+	return (4);
+}
 
+bool	set_default_wall_texture(t_const *consts)
+{
+	int				max;
+	mlx_texture_t	*default_wall;
+
+	max = 0;
+	msg_write(1, -1, EMPTY_WALL);
+	msg_write_multiple(1, Messages[TRY_LOAD_TEXTURE], DEFAULT_WALL);
+	default_wall = mlx_load_png(DEFAULT_WALL);
+	if (!default_wall)
+		msg_write(2, 1, ERROR_FATAL);
+	while (max < 4)
+	{
+		if (consts->wall_texture[max] == 0)
+			consts->wall_texture[max] = default_wall;
+		max++;
+	}
+	msg_write(1, -1, SUCCESS);
+	return (true);
 }
