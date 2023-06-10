@@ -16,7 +16,7 @@ bool	is_allowed_char(char c)
 	return (false);
 }
 
-bool	is_cub(const char *str)
+static bool	is_cub(const char *str)
 {
 	int	i;
 
@@ -30,6 +30,18 @@ bool	is_cub(const char *str)
 		&& str[i - 3] != '.')
 		return (false);
 	return (true);
+}
+
+void	basical_map_check(char *map_name)
+{
+	int	fd;
+
+	if (!is_cub(map_name))
+		msg_write(2, 1, ERROR_MAP_NAME);
+	fd = open(map_name, O_RDONLY);
+	if (fd == -1)
+		msg_write(2, 1, ERROR_MAP_EXIST);
+	close(fd);
 }
 
 short	get_direction_code(char *s)
@@ -66,4 +78,18 @@ bool	set_default_wall_texture(t_const *consts)
 	}
 	msg_write(1, -1, SUCCESS);
 	return (true);
+}
+
+bool	is_wall_empty(const t_const *consts)
+{
+	int	i = 0;
+	while (i < 4)
+	{
+		printf("s\n");
+		if (!consts->wall_texture[i])
+			return (true);
+		i++;
+	}
+	printf("fin\n");
+	return (false);
 }

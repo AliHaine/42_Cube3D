@@ -4,7 +4,7 @@
 #include "includes.h"
 #include "../src/utils/get_next_line/get_next_line.h"
 
-bool	is_cub(const char *str);
+void	basical_map_check(char *map_name);
 
 void	msg_write_multiple(int fd, const char *str1, const char *str2);
 void	msg_write(int fd, int exitVal, MsgType msg);
@@ -15,6 +15,7 @@ bool	is_player_char(char c);
 bool	is_allowed_char(char c);
 short	get_direction_code(char *s);
 bool	set_default_wall_texture(t_const *consts);
+bool	is_wall_empty(const t_const *consts);
 
 //std_func_utils//
 
@@ -26,6 +27,12 @@ int		ft_atoi_for_texture(const char *s);
 //struct//
 
 void	init_tti_struct(t_t_i *ti, int a, int b, int c);
+
+//file//
+
+void	go_to_line(t_file *file, int line);
+void	reopen_file(t_file *file, int line, int flags);
+bool	open_file(t_file *file, char *file_path, int flags);
 
 
 #endif

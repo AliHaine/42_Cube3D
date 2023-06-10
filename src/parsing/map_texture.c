@@ -1,4 +1,5 @@
 #include "../../includes/includes.h"
+#include "../../includes/defines.h"
 
 static void	set_color_value(const char *line, uint32_t *target_color)
 {
@@ -38,77 +39,66 @@ static bool	set_texture_from_path(char *line, mlx_texture_t **texture)
 		line++;
 	line[ft_strlen(line) - 1] = '\0';
 	*texture = mlx_load_png(line);
-	msg_write_multiple(1, Messages[TRY_LOAD_TEXTURE], line);
 	if (!*texture) {
 		msg_write(2, -1, FAILURE);
 		return (false);
 	}
-	msg_write(1, -1, SUCCESS);
 	return (true);
 }
 
-static int	get_color_from_map(char *line, int fd_map, t_const *consts)
+static void	get_color_from_map(t_file *file, t_const *consts)
 {
-	int size;
-
-	size = 0;
-	while (line)
+	while (file->line)
 	{
-		if (line[0] && line[0] != 'F' && line[0] != 'C')
-			break;
-		msg_write_multiple(1, Messages[TRY_LOAD_COLOR], line);
-		usleep(300000);
-		if (line[0] != 'F')
-			set_color_value(line + 2, &consts->top_color);
+		if (file->line[0] && file->line[0] != 'F' && file->line[0] != 'C') {
+			if (file->line[0] == '\n')
+				break ;
+			get_next_line(file);
+			continue ;
+		}
+		msg_write_multiple(1, Messages[TRY_LOAD_COLOR], file->line);
+		usleep(300000 * LOAD);
+		if (file->line[0] != 'F')
+			set_color_value(file->line + 2, &consts->top_color);
 		else
-			set_color_value(line + 2, &consts->bot_color);
-		line = get_next_line(fd_map);
-		size++;
+			set_color_value(file->line + 2, &consts->bot_color);
+		get_next_line(file);
 	}
-	while (line && line[0] && line[0] == '\n') {
-		size++;
-		line = get_next_line(fd_map);
-	}
-	return (size);
+	while (file->line && file->line[0] && file->line[0] == '\n')
+		get_next_line(file);
 }
 
-static int	get_image_from_map(char **line, int fd_map, t_const *consts)
+static void	get_image_from_map(t_file *file, t_const *consts)
 {
-	int		size;
 	short	direction;
 
-	size = 0;
-	while (line)
+	while (file->line)
 	{
-		direction = get_direction_code(*line);
-		if (direction >= 4)
-			break ;
-		set_texture_from_path(*line + 2, &consts->wall_texture[direction]);
-		*line = get_next_line(fd_map);
-		usleep(500000);
-		size++;
+		direction = get_direction_code(file->line);
+		if (direction >= 4) {
+			if (file->line[0] == '\n')
+				break ;
+			get_next_line(file);
+			continue ;
+		}
+		msg_write_multiple(1, Messages[TRY_LOAD_TEXTURE], file->line);
+		usleep(500000 * LOAD);
+		set_texture_from_path(file->line + 2, &consts->wall_texture[direction]);
+		msg_write(1, -1, SUCCESS);
+		get_next_line(file);
 	}
-	if (size != 4)
+	if (is_wall_empty(consts) == true)
 		set_default_wall_texture(consts);
-	while (line && *line[0] == '\n')
-	{
-		*line = get_next_line(fd_map);
-		size++;
-	}
-	return (size);
+	while (file->line && file->line[0] == '\n')
+		get_next_line(file);
 }
 
-int	texture_main(int fd_map, t_core *core)
+void	texture_main(t_file *file, t_core *core)
 {
-	int		size;
-	char	*line;
-
 	msg_write(1, -1, GET_MAP_CONTENT);
-	usleep(500000);
-	line = get_next_line(fd_map);
-	size = get_image_from_map(&line, fd_map, &core->consts);
-	size += get_color_from_map(line, fd_map, &core->consts);
-	free(line);
+	usleep(500000 * LOAD);
+	get_next_line(file);
+	get_image_from_map(file, &core->consts);
+	get_color_from_map(file, &core->consts);
 	msg_write(1, -1, SUCCESS);
-	return (size);
 }
