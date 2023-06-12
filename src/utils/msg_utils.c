@@ -1,7 +1,5 @@
 #include "../../includes/includes.h"
 
-
-
 void	msg_write_multiple(int fd, const char *str1, const char *str2)
 {
 	while (*str1)

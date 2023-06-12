@@ -32,6 +32,7 @@ short		wall_direction(t_core *core, t_ray ray);
 int			wall_calc(t_const *consts, float angle);
 
 void	inputs(void *params);
+void	inputs_hook(struct mlx_key_data key, void *params);
 void	move_right_left(t_player *player, char **map, int direction);
 void	move_forward_backward(t_player *player, char **map, int direction);
 void	move_rotate(t_player *player, int direction, float speed);
@@ -41,8 +42,8 @@ void    resize_hook(int height, int width, void *params);
 //parsing//
 
 void	map_manager(char *str, t_core *core);
-int		texture_main(int fd_map, t_core *core);
-void	parse_main(t_t_i ti, int fd_map, t_core *core);
+void	texture_main(t_file *file, t_core *core);
+bool	parse_main(t_t_i ti, t_file *file, t_core *core);
 
 
 

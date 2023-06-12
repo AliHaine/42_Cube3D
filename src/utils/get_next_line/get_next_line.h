@@ -25,14 +25,10 @@
 
 /* Lib for get_next_line */
 
-// char //
-
-char	*get_next_line(int fd);
-
 // int //
 
 int		check_newline(char c, char *s);
 char	*ft_strjoin(char *s1, char *s2);
-char	*get_next_line(int fd);
+bool	get_next_line(t_file *file);
 
 #endif

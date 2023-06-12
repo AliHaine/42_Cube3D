@@ -42,6 +42,15 @@ typedef struct s_three_i
 	int	c;
 }	t_t_i;
 
+typedef struct s_file
+{
+	int		fd;
+	int		file_size;
+	int		line_num;
+	char	*line;
+	char	*file_path;
+}	t_file;
+
 typedef struct s_const
 {
 	mlx_texture_t	*wall_texture[4];
@@ -69,6 +78,8 @@ typedef struct s_player
 	float			playerpos[2];
 	float			playerangle;
 	int				health;
+	bool			have_player;
+	int				move_speed;
 }	t_player;
 
 typedef struct s_core
@@ -86,6 +97,7 @@ typedef enum {
 	ERROR_MAP_IMG,
 	ERROR_MAP_EXIST,
 	ERROR_ARGS,
+	ERROR_PLAYER,
 	STARTING,
 	SUCCESS,
 	NO_ERROR,
@@ -102,11 +114,12 @@ typedef enum {
 
 
 static const char *Messages[] = {
-		"Error \nThere is an unknow char in the map",
-		"Error \nThe name of the map is not compliant",
-		"Error \nCan't load the img",
-		"Error \nCan't open the map file",
-		"Error \nArgs",
+		"\e[40;31mError \nThere is an unknow char in the map",
+		"\e[40;31mError \nThe name of the map is not compliant",
+		"\e[40;31mError \nCan't load the img",
+		"\e[40;31mError \nCan't open the map file",
+		"\e[40;31mError \nArgs",
+		"\e[40;31mError \nNo player in the map",
 		"\e[40;33mStarting..",
 		"\e[40;32mSucces.",
 		"\e[40;32mNo errors found.",
