@@ -24,6 +24,7 @@ typedef struct s_imgs
 	mlx_image_t		*img_3d;
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_player;
+	mlx_image_t 	*cursor;
 }	t_imgs;
 
 typedef struct s_ray

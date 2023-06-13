@@ -32,15 +32,12 @@ void	inputs(void *params)
 	else if (mlx_is_key_down(core->mlx, MLX_KEY_W)
 		|| mlx_is_key_down(core->mlx, MLX_KEY_UP))
 		move_forward_backward(&core->player, core->consts.map, 0);
-	else if (mlx_is_key_down(core->mlx, MLX_KEY_LEFT))
+    if (mlx_is_key_down(core->mlx, MLX_KEY_LEFT))
         move_rotate(&core->player, 0, (float)SENSIBILITY / 10);
-	else if (mlx_is_key_down(core->mlx, MLX_KEY_RIGHT))
+    if (mlx_is_key_down(core->mlx, MLX_KEY_RIGHT))
 		move_rotate(&core->player, 1, (float)SENSIBILITY / 10);
-	else if (mlx_is_key_down(core->mlx, MLX_KEY_ESCAPE))
+    if (mlx_is_key_down(core->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(core->mlx);
-	else if (mlx_is_key_down(core->mlx, MLX_KEY_LEFT_SHIFT)) {
-		core->player.move_speed = 20;
-	}
 }
 
 void	inputs_hook(struct mlx_key_data key, void *params)
