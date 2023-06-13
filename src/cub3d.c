@@ -54,6 +54,8 @@ static t_core	*core_init(t_core *core)
 	core->consts.dist_between_ray = core->consts.fov / RAY_NUMBER;
 	core->consts.minimap_size = (int)(64 / MINIMAP_SIZE);
 	core->imgs.img_player = create_minimap_player(core);
+	core->imgs.cursor = mlx_texture_to_image(core->mlx, mlx_load_png("assets/.d/cursor.png"));
+	mlx_image_to_window(core->mlx, core->imgs.cursor, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
     core->consts.door_texture = mlx_load_png("assets/door.png");
     core->screen_size[0] = SCREEN_WIDTH;
     core->screen_size[1] = SCREEN_HEIGHT;
@@ -63,8 +65,10 @@ static t_core	*core_init(t_core *core)
 	core->consts.wall_texture[3] = 0;
 	core->player.have_player = false;
 	core->player.move_speed = 10;
-	mlx_set_cursor(core->mlx, mlx_create_cursor(mlx_load_png("assets/trans.png")));
+	mlx_set_cursor(core->mlx, mlx_create_cursor(mlx_load_png("assets/.d/trans.png")));
+	mlx_set_mouse_pos(core->mlx, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_image_to_window(core->mlx, core->imgs.img_player, 0, 0);
+	mlx_image_to_window(core->mlx, core->imgs.cursor, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_set_mouse_pos(core->mlx, core->screen_size[0], core->screen_size[1] / 2);
 	msg_write(2, -1, SUCCESS);
 	return (core);
@@ -91,7 +95,7 @@ int	main(int argc, char *argv[])
 	mlx_loop_hook(core.mlx, &display, &core);
 	mlx_loop_hook(core.mlx, &inputs, &core);
 	mlx_key_hook(core.mlx, &inputs_hook, &core);
-    mlx_resize_hook(core.mlx, &resize_hook, &core.screen_size);
+    mlx_resize_hook(core.mlx, &resize_hook, &core);
 	mlx_loop(core.mlx);
 	mlx_delete_image(core.mlx, core.imgs.img_3d);
 	mlx_delete_image(core.mlx, core.imgs.img_player);

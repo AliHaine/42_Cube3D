@@ -85,11 +85,9 @@ bool	is_wall_empty(const t_const *consts)
 	int	i = 0;
 	while (i < 4)
 	{
-		printf("s\n");
 		if (!consts->wall_texture[i])
 			return (true);
 		i++;
 	}
-	printf("fin\n");
 	return (false);
 }
