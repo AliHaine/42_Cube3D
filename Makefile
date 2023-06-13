@@ -6,6 +6,7 @@ SRCS		=	src/cub3d.c \
 				src/graphics/raycast.c \
 				src/graphics/textures.c \
 				src/graphics/wall_direction.c \
+				src/graphics/obstacle_direction.c \
 				src/parsing/map_manager.c \
 				src/parsing/map_parse.c \
 				src/parsing/map_texture.c \
@@ -14,6 +15,7 @@ SRCS		=	src/cub3d.c \
 				src/utils/std_func_utils.c \
 				src/utils/struct_utils.c \
 				src/utils/file_utils.c \
+				src/utils/raycast_utils.c \
 				src/utils/get_next_line/get_next_line.c \
 				src/utils/get_next_line/get_next_line_utils.c
 

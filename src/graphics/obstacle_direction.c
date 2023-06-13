@@ -18,9 +18,9 @@ static int	get_direction_x(float x, int i)
 
 	res = (int)(x) % 64;
 	if (res >= 63)
-    {
-        return (3);
-    }
+	{
+		return (3);
+	}
 	else if (res <= 0)
 		return (1);
 	else
@@ -29,41 +29,41 @@ static int	get_direction_x(float x, int i)
 
 static int	get_direction_y(float y, int i)
 {
-    int res;
+	int res;
 
-    res = (int)(y) % 64;
-    if (res >= 63)
-        return (0);
-    else if (res <= 0)
-        return (2);
-    else
-        return (1 + i);
-}
-
-int	wall_direction(t_core *core, t_ray ray)
-{
-    int res;
-
-    res = wall_calc(&core->consts, ray.ray_angle);
-	if (res == 0)
-		return (get_direction_x(ray.ray_x, 2));
-	else if (res == 1)
-		return (get_direction_y(ray.ray_y, 2));
-	else if (res == 2)
-		return (get_direction_x(ray.ray_x, 0));
+	res = (int)(y) % 64;
+	if (res >= 63)
+		return (0);
+	else if (res <= 0)
+		return (2);
 	else
-		return (get_direction_y(ray.ray_y, 0));
+		return (1 + i);
 }
 
-int	get_offset(int direction, t_ray ray)
+int	obstacle_direction(t_core *core, t_ray ray)
+{
+	int	res;
+
+	res = wall_calc(&core->consts, ray.ray_angle);
+	if (res == 0)
+		return (get_direction_x(ray.checkpoint_x, 2));
+	else if (res == 1)
+		return (get_direction_y(ray.checkpoint_y, 2));
+	else if (res == 2)
+		return (get_direction_x(ray.checkpoint_x, 0));
+	else
+		return (get_direction_y(ray.checkpoint_y, 0));
+}
+
+int	get_obstacle_offset(int direction, t_ray ray)
 {
 	if (direction == 1)
-		return ((int)ray.ray_y % 64);
+		return ((int)ray.checkpoint_y % 64);
 	else if (direction == 3)
-		return (63 - (int)ray.ray_y % 64);
+		return (63 - (int)ray.checkpoint_y % 64);
 	else if (direction == 0)
-		return ((int)ray.ray_x % 64);
+		return ((int)ray.checkpoint_x % 64);
 	else if (direction == 2)
-		return (63 - (int)ray.ray_x % 64);
+		return (63 - (int)ray.checkpoint_x % 64);
 	return (0);
 }

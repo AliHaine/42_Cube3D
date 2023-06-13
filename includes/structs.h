@@ -32,7 +32,11 @@ typedef struct s_ray
 	float	ray_x;
 	float	ray_y;
 	float	ray_angle;
-	float	ray_distance;
+	float	ray_dist;
+	bool	have_checkpoint;
+	float	checkpoint_x;
+	float	checkpoint_y;
+	char	obstacle;
 }	t_ray;
 
 typedef struct s_three_i

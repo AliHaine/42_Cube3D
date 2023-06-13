@@ -23,13 +23,28 @@
 # include <fcntl.h>
 # include "structs.h"
 # include "utils.h"
+# include "defines.h"
 
+//display.c
 void		display(void *params);
 void		draw_map(t_core *core);
+
+//raycast.c
 void		raycast(t_core *core);
-uint32_t	get_color_from_wall_texture(mlx_texture_t *wall_texture, const int texture_xy[2]);
-short		wall_direction(t_core *core, t_ray ray);
-int			wall_calc(t_const *consts, float angle);
+
+//wall_direction.c
+int			wall_direction(t_core *core, t_ray ray);
+int			get_offset(int direction, t_ray ray);
+
+//obstacle_direction.c
+int			obstacle_direction(t_core *core, t_ray ray);
+int			get_obstacle_offset(int direction, t_ray ray);
+
+//textures.c
+uint32_t	get_color(mlx_texture_t *wall_texture, float fog_strength, int texture_xy[2]);
+
+//raycast_utils.c
+float		calc_ray_dist(t_core *core, float ray_x, float ray_y, float ray_angle);
 
 void	inputs(void *params);
 void	inputs_hook(struct mlx_key_data key, void *params);
@@ -37,7 +52,7 @@ void	move_right_left(t_player *player, char **map, int direction);
 void	move_forward_backward(t_player *player, char **map, int direction);
 void	move_rotate(t_player *player, int direction, float speed);
 void	mouse(mlx_t *mlx, t_player *player, const int screen_size[2]);
-void    resize_hook(int height, int width, void *params);
+void	resize_hook(int height, int width, void *params);
 
 //parsing//
 
