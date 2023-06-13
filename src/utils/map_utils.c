@@ -59,7 +59,7 @@ short	get_direction_code(char *s)
 	return (4);
 }
 
-bool	set_default_wall_texture(t_const *consts)
+bool	set_default_wall_texture(t_imgs *imgs)
 {
 	int				max;
 	mlx_texture_t	*default_wall;
@@ -72,20 +72,20 @@ bool	set_default_wall_texture(t_const *consts)
 		msg_write(2, 1, ERROR_FATAL);
 	while (max < 4)
 	{
-		if (consts->wall_texture[max] == 0)
-			consts->wall_texture[max] = default_wall;
+		if (imgs->wall_texture[max] == 0)
+			imgs->wall_texture[max] = default_wall;
 		max++;
 	}
 	msg_write(1, -1, SUCCESS);
 	return (true);
 }
 
-bool	is_wall_empty(const t_const *consts)
+bool	is_wall_empty(const t_imgs *imgs)
 {
 	int	i = 0;
 	while (i < 4)
 	{
-		if (!consts->wall_texture[i])
+		if (!imgs->wall_texture[i])
 			return (true);
 		i++;
 	}

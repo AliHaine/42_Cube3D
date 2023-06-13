@@ -33,19 +33,6 @@ static void	set_color_value(const char *line, uint32_t *target_color)
 	msg_write(1, -1, SUCCESS);
 }
 
-static bool	set_texture_from_path(char *line, mlx_texture_t **texture)
-{
-	while (*line && *line == ' ')
-		line++;
-	line[ft_strlen(line) - 1] = '\0';
-	*texture = mlx_load_png(line);
-	if (!*texture) {
-		msg_write(2, -1, FAILURE);
-		return (false);
-	}
-	return (true);
-}
-
 static void	get_color_from_map(t_file *file, t_const *consts)
 {
 	while (file->line)
@@ -68,7 +55,7 @@ static void	get_color_from_map(t_file *file, t_const *consts)
 		get_next_line(file);
 }
 
-static void	get_image_from_map(t_file *file, t_const *consts)
+static void	get_image_from_map(t_file *file, t_imgs *imgs)
 {
 	short	direction;
 
@@ -81,14 +68,15 @@ static void	get_image_from_map(t_file *file, t_const *consts)
 			get_next_line(file);
 			continue ;
 		}
-		msg_write_multiple(1, Messages[TRY_LOAD_TEXTURE], file->line);
 		usleep(500000 * LOAD);
-		set_texture_from_path(file->line + 2, &consts->wall_texture[direction]);
-		msg_write(1, -1, SUCCESS);
+		if (set_texture_from_path((file->line + 3), &imgs->wall_texture[direction]))
+			msg_write(1, -1, SUCCESS);
+		else
+			msg_write(2, -1, FAILURE);
 		get_next_line(file);
 	}
-	if (is_wall_empty(consts) == true)
-		set_default_wall_texture(consts);
+	if (is_wall_empty(imgs) == true)
+		set_default_wall_texture(imgs);
 	while (file->line && file->line[0] == '\n')
 		get_next_line(file);
 }
@@ -98,7 +86,7 @@ void	texture_main(t_file *file, t_core *core)
 	msg_write(1, -1, GET_MAP_CONTENT);
 	usleep(500000 * LOAD);
 	get_next_line(file);
-	get_image_from_map(file, &core->consts);
+	get_image_from_map(file, &core->imgs);
 	get_color_from_map(file, &core->consts);
 	msg_write(1, -1, SUCCESS);
 }

@@ -14,8 +14,8 @@ void	msg_write(int fd, int exitVal, MsgType msg);
 bool	is_player_char(char c);
 bool	is_allowed_char(char c);
 short	get_direction_code(char *s);
-bool	set_default_wall_texture(t_const *consts);
-bool	is_wall_empty(const t_const *consts);
+bool	set_default_wall_texture(t_imgs *imgs);
+bool	is_wall_empty(const t_imgs *imgs);
 
 //std_func_utils//
 
@@ -33,6 +33,12 @@ void	init_tti_struct(t_t_i *ti, int a, int b, int c);
 void	go_to_line(t_file *file, int line);
 void	reopen_file(t_file *file, int line, int flags);
 bool	open_file(t_file *file, char *file_path, int flags);
+
+//mlx image utiles//
+
+bool	set_texture_from_path(char *line, mlx_texture_t **texture);
+bool	set_image_from_path(mlx_t *mlx, char *path, mlx_image_t **image);
+void	delete_image_from_struct(mlx_t *mlx, t_imgs *imgs);
 
 
 #endif

@@ -16,6 +16,7 @@ SRCS		=	src/cub3d.c \
 				src/utils/struct_utils.c \
 				src/utils/file_utils.c \
 				src/utils/raycast_utils.c \
+				src/utils/mlx_texture_utils.c \
 				src/utils/get_next_line/get_next_line.c \
 				src/utils/get_next_line/get_next_line_utils.c
 

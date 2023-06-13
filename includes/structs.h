@@ -25,6 +25,9 @@ typedef struct s_imgs
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_player;
 	mlx_image_t 	*cursor;
+	mlx_texture_t	*trans;
+	mlx_texture_t	*wall_texture[4];
+	mlx_texture_t	*door_texture;
 }	t_imgs;
 
 typedef struct s_ray
@@ -58,8 +61,6 @@ typedef struct s_file
 
 typedef struct s_const
 {
-	mlx_texture_t	*wall_texture[4];
-	mlx_texture_t	*door_texture;
 	uint32_t		bot_color;
 	uint32_t		top_color;
 	uint32_t		minimap_wall_color;

@@ -11,67 +11,79 @@
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
-#include "../includes/defines.h"
 
-static mlx_image_t	*create_minimap_player(t_core *core)
+static mlx_image_t	*create_minimap_player(mlx_t *mlx, uint32_t ray_color)
 {
 	mlx_image_t	*img;
 	int			x;
 	int			y;
 
 	y = -1;
-	img = mlx_new_image(core->mlx, MINIMAP_PLAYER_SIZE, MINIMAP_PLAYER_SIZE);
+	img = mlx_new_image(mlx, MINIMAP_PLAYER_SIZE, MINIMAP_PLAYER_SIZE);
 	while (++y < MINIMAP_PLAYER_SIZE)
 	{
 		x = -1;
 		while (++x < MINIMAP_PLAYER_SIZE)
-		{
-			mlx_put_pixel(img, x, y, core->consts.ray_color);
-		}
+			mlx_put_pixel(img, x, y, ray_color);
 	}
 	return (img);
 }
 
-static t_core	*core_init(t_core *core)
+static void	const_init(t_const *consts)
+{
+	consts->ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 150;
+	consts->minimap_wall_color = (42 << 24) + (42 << 16) + (42 << 8) + 200;
+	consts->minimap_floor_color = (128 << 24) + (128 << 16) + (128 << 8) + 200;
+	consts->top_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
+	consts->bot_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
+	consts->ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 255;
+	consts->south_east = PI / 4;
+	consts->south_west = (3 * PI) / 4;
+	consts->north_east = (7 * PI) / 4;
+	consts->north_west = (5 * PI) / 4;
+	consts->fov = FOV * (PI / 180);
+	consts->dist_between_ray = consts->fov / RAY_NUMBER;
+	consts->minimap_size = (int)(64 / MINIMAP_SIZE);
+}
+
+static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
+{
+	imgs->wall_texture[0] = 0;
+	imgs->wall_texture[1] = 0;
+	imgs->wall_texture[2] = 0;
+	imgs->wall_texture[3] = 0;
+	imgs->door_texture = mlx_load_png("assets/door.png");
+	imgs->img_3d = mlx_new_image(mlx, SCREEN_WIDTH,
+									  SCREEN_HEIGHT);
+	imgs->img_player = create_minimap_player(mlx, ray_color);
+	if (!set_texture_from_path(".d/trans.png", &imgs->trans))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_image_from_path(mlx, ".d/cursor.png", &imgs->cursor))
+		msg_write(2, 2, ERROR_FATAL);
+}
+
+static void	core_init(t_core *core)
 {
 	msg_write(2, -1, CORE_INIT);
 	usleep(600000 * LOAD);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	core->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "セグメンテーションフォルトのないプログラムは、鋭い剣のように正確に使える。", true);
+	const_init(&core->consts);
+	imgs_init(core->mlx, &core->imgs, core->consts.ray_color);
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
-	core->consts.ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 150;
-	core->consts.minimap_wall_color = (42 << 24) + (42 << 16) + (42 << 8) + 200;
-	core->consts.minimap_floor_color = (128 << 24) + (128 << 16) + (128 << 8) + 200;
-	core->consts.top_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
-	core->consts.bot_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
-	core->consts.ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 255;
-	core->consts.south_east = PI / 4;
-	core->consts.south_west = (3 * PI) / 4;
-	core->consts.north_east = (7 * PI) / 4;
-	core->consts.north_west = (5 * PI) / 4;
-	core->consts.fov = FOV * (PI / 180);
-	core->consts.dist_between_ray = core->consts.fov / RAY_NUMBER;
-	core->consts.minimap_size = (int)(64 / MINIMAP_SIZE);
-	core->imgs.img_player = create_minimap_player(core);
-	core->imgs.cursor = mlx_texture_to_image(core->mlx, mlx_load_png("assets/.d/cursor.png"));
-	mlx_image_to_window(core->mlx, core->imgs.cursor, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-    core->consts.door_texture = mlx_load_png("assets/door.png");
-    core->screen_size[0] = SCREEN_WIDTH;
-    core->screen_size[1] = SCREEN_HEIGHT;
-	core->consts.wall_texture[0] = 0;
-	core->consts.wall_texture[1] = 0;
-	core->consts.wall_texture[2] = 0;
-	core->consts.wall_texture[3] = 0;
-	core->player.have_player = false;
-	core->player.move_speed = 10;
-	mlx_set_cursor(core->mlx, mlx_create_cursor(mlx_load_png("assets/.d/trans.png")));
+	core->imgs.img_player = create_minimap_player(core->mlx, core->consts.ray_color);
+	mlx_set_cursor(core->mlx, mlx_create_cursor(core->imgs.trans));
 	mlx_set_mouse_pos(core->mlx, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	//voir pourquoi on est obliger de mettre 2 fois le cursor
+	mlx_image_to_window(core->mlx, core->imgs.cursor, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_image_to_window(core->mlx, core->imgs.img_player, 0, 0);
 	mlx_image_to_window(core->mlx, core->imgs.cursor, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-	mlx_set_mouse_pos(core->mlx, core->screen_size[0], core->screen_size[1] / 2);
+    core->screen_size[0] = SCREEN_WIDTH;
+    core->screen_size[1] = SCREEN_HEIGHT;
+	core->player.have_player = false;
+	core->player.move_speed = 10;
 	msg_write(2, -1, SUCCESS);
-	return (core);
 }
 
 int	main(int argc, char *argv[])
@@ -97,9 +109,7 @@ int	main(int argc, char *argv[])
 	mlx_key_hook(core.mlx, &inputs_hook, &core);
     mlx_resize_hook(core.mlx, &resize_hook, &core);
 	mlx_loop(core.mlx);
-	mlx_delete_image(core.mlx, core.imgs.img_3d);
-	mlx_delete_image(core.mlx, core.imgs.img_player);
-	mlx_delete_image(core.mlx, core.imgs.img_map);
+	delete_image_from_struct(core.mlx, &core.imgs);
 	mlx_close_window(core.mlx);
 	mlx_terminate(core.mlx);
 	return (0);

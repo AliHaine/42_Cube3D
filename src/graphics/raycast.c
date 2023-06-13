@@ -26,7 +26,7 @@ static void	draw_obstacle(t_core *core, t_ray ray, int r)
 	wall_height = (SCREEN_HEIGHT * 64) / ray_distance;
 	py = (SCREEN_HEIGHT - wall_height) / 2;
 	if (ray.obstacle == 'D')
-		texture = core->consts.door_texture;
+		texture = core->imgs.door_texture;
 	while (py >= 0 && py < (SCREEN_HEIGHT + wall_height) / 2 && py < SCREEN_HEIGHT)
 	{
 		texture_xy[1] = ((py * 2 - SCREEN_HEIGHT + wall_height)
@@ -54,7 +54,7 @@ static void	draw_columns(t_core *core, t_ray ray, int r)
 	{
 		texture_xy[1] = ((py * 2 - SCREEN_HEIGHT + wall_height)
 				* TEXTURE_SIZE) / wall_height / 2;
-		color = get_color(core->consts.wall_texture[direction],
+		color = get_color(core->imgs.wall_texture[direction],
 				ray.ray_dist / FOG_DISTANCE, texture_xy);
 		mlx_put_pixel(core->imgs.img_3d, r, py++, color);
 	}
