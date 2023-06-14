@@ -62,14 +62,32 @@ static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
 		msg_write(2, 2, ERROR_FATAL);
 }
 
+static void	sound_init(t_core *core)
+{
+	msg_write(1, -1, SOUND_INIT);
+	usleep(450000 * LOAD);
+	init_sound_empty(&core->sounds);
+	if (!load_sound(&(core->sounds.ambiant), "assets/sounds/ambiant.mp3"))
+		msg_write(2, 2, ERROR_FATAL);
+	else
+		msg_write(1, -1, SUCCESS);
+	if (!load_sound(&core->sounds.hurt, "assets/sounds/hurt.mp3"))
+		msg_write(2, 2, ERROR_FATAL);
+	else
+		msg_write(1, -1, SUCCESS);
+	play_sound(core->sounds.ambiant);
+	msg_write(1, -1, SUCCESS);
+}
+
 static void	core_init(t_core *core)
 {
-	msg_write(2, -1, CORE_INIT);
+	msg_write(1, -1, CORE_INIT);
 	usleep(600000 * LOAD);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	core->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "セグメンテーションフォルトのないプログラムは、鋭い剣のように正確に使える。", true);
 	const_init(&core->consts);
 	imgs_init(core->mlx, &core->imgs, core->consts.ray_color);
+	sound_init(core);
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
 	core->imgs.img_player = create_minimap_player(core->mlx, core->consts.ray_color);
@@ -83,7 +101,7 @@ static void	core_init(t_core *core)
     core->screen_size[1] = SCREEN_HEIGHT;
 	core->player.have_player = false;
 	core->player.move_speed = 10;
-	msg_write(2, -1, SUCCESS);
+	msg_write(1, -1, SUCCESS);
 }
 
 int	main(int argc, char *argv[])
@@ -93,10 +111,6 @@ int	main(int argc, char *argv[])
 
 	msg_write(1, -1, STARTING);
 	core_init(&core);
-	core.sounds.hurt = 0;
-	load_sound(&(core.sounds.ambiant), "assets/sounds/ambiant.mp3");
-	load_sound(&(core.sounds.hurt), "assets/sounds/hurt.mp3");
-	play_sound(core.sounds.ambiant);
 	usleep(60000);
 	map_manager(argv, &core);
 	// J'init l'image la psq elle a besoin des variables initialisees par map_manager

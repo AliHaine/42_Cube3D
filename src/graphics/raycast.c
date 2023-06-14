@@ -62,6 +62,7 @@ static void	draw_columns(t_core *core, t_ray ray, int r)
 
 static void	init_ray_variables(t_core *core, t_ray *ray, float *cosi, float *sinu, int r)
 {
+	(void)r;
 	ray->have_checkpoint = false;
 	ray->ray_x = core->player.playerpos[0];
 	ray->ray_y = core->player.playerpos[1];

@@ -22,6 +22,7 @@
 
 void	init_sound_empty(t_sounds *sounds)
 {
+	sounds->ambiant = 0;
 	sounds->hurt = 0;
 }
 
@@ -36,6 +37,7 @@ bool	load_sound(uint32_t *s, char *path)
 {
 	static bool loaded;
 
+	msg_write_multiple(1, Messages[TRY_LOAD_SOUND], path);
 	loaded |= BASS_Init(-1, 48000, 0, 0, 0);
 	if (!loaded || *s)
 		return (false);

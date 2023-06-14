@@ -13,7 +13,7 @@ static bool	set_map_size_value(t_t_i *ti, t_file *file)
 		get_next_line(file);
 		ti->c++;
 	}
-	if (ti->b <= 0 || ti->c <= 0)
+	if (ti->b <= 2 || ti->c <= 1 || ti->b > 84 || ti->c > 30)
 		return (false);
 	return (true);
 }
@@ -23,7 +23,7 @@ static bool	map_value_init(t_t_i *ti, t_file *file, t_const *consts, int start)
 	if (!set_map_size_value(ti, file))
 	{
 		close(file->fd);
-		msg_write(2, 1, ERROR_MAP_CHAR);
+		msg_write(2, 1, ERROR_MAP_SIZE);
 		return (0);
 	}
 	reopen_file(file, start, O_RDONLY);
