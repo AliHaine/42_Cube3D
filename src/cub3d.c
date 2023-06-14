@@ -93,6 +93,10 @@ int	main(int argc, char *argv[])
 
 	msg_write(1, -1, STARTING);
 	core_init(&core);
+	core.sounds.hurt = 0;
+	load_sound(&(core.sounds.ambiant), "assets/sounds/ambiant.mp3");
+	load_sound(&(core.sounds.hurt), "assets/sounds/hurt.mp3");
+	play_sound(core.sounds.ambiant);
 	usleep(60000);
 	map_manager(argv, &core);
 	// J'init l'image la psq elle a besoin des variables initialisees par map_manager
@@ -107,6 +111,7 @@ int	main(int argc, char *argv[])
 	mlx_loop_hook(core.mlx, &inputs, &core);
 	mlx_key_hook(core.mlx, &inputs_hook, &core);
     mlx_resize_hook(core.mlx, &resize_hook, &core);
+	mlx_mouse_hook(core.mlx, &mouse, &core.sounds);
 	mlx_loop(core.mlx);
 	delete_image_from_struct(core.mlx, &core.imgs);
 	mlx_close_window(core.mlx);

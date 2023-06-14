@@ -13,11 +13,11 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct s_point
+typedef struct	s_sounds
 {
-	float x;
-	float y;
-}	t_point;
+	uint32_t	ambiant;
+	uint32_t	hurt;
+}				t_sounds;
 
 typedef struct s_imgs
 {
@@ -94,6 +94,7 @@ typedef struct s_core
 	t_const			consts;
 	t_player		player;
 	t_imgs			imgs;
+	t_sounds		sounds;
     int             screen_size[2];
 }	t_core;
 

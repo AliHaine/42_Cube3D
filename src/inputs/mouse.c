@@ -1,38 +1,12 @@
 #include "../../includes/includes.h"
-#include "../../includes/defines.h"
 
-void	set_cursor_at_pos(int height, int width, mlx_image_t *image)
+void	mouse(enum mouse_key key, enum action action, enum modifier_key mkey, void *param)
 {
-	image->instances[0].x = height;
-	(image)->instances[0].y = width;
 
-}
+	t_sounds *s = (t_sounds *)param;
 
-void    resize_hook(int height, int width, void *params)
-{
-	t_core *core;
-
-	core = (t_core *)params;
-	core->screen_size[0] = height;
-	core->screen_size[1] = width;
-	set_cursor_at_pos(height, width, core->imgs.cursor);
-}
-
-void    mouse(mlx_t *mlx, t_player *player, const int screen_size[2])
-{
-    int x;
-    int y;
-    int diff;
-    int screen_middle_x;
-    float rotation_speed;
-
-    screen_middle_x = screen_size[0] / 2;
-    mlx_get_mouse_pos(mlx, &x, &y);
-    mlx_set_mouse_pos(mlx, screen_middle_x, screen_size[1] / 2);
-    diff = abs(screen_middle_x - x);
-    rotation_speed = (float)diff / screen_middle_x * SENSIBILITY;
-    if (x > screen_middle_x)
-        move_rotate(player, 1, rotation_speed);
-    else if (x < screen_middle_x)
-        move_rotate(player, 0, rotation_speed);
+	play_sound(s->hurt);
+	printf("debut\n");
+	printf("%d %d %d\n", key, action, mkey);
+	printf("fin\n");
 }
