@@ -32,7 +32,7 @@ static bool	map_value_init(t_t_i *ti, t_file *file, t_const *consts, int start)
 	return (1);
 }
 
-void	map_manager(char *map_path, t_core *core)
+void	map_manager(char *argv[], t_core *core)
 {
 	t_file	file;
 	t_t_i	ti;
@@ -40,9 +40,9 @@ void	map_manager(char *map_path, t_core *core)
 
 	msg_write(2, -1, CHECK_MAP);
 	usleep(500000 * LOAD);
-	basical_map_check(map_path);
+	basical_map_check(argv);
 	init_tti_struct(&ti, 0, 0, -1);
-	open_file(&file, map_path, O_RDONLY);
+	open_file(&file, argv[1], O_RDONLY);
 	msg_write(1, -1, NO_ERROR);
 	texture_main(&file, core);
 	save = file.line_num;

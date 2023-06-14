@@ -56,7 +56,7 @@ void	resize_hook(int height, int width, void *params);
 
 //parsing//
 
-void	map_manager(char *str, t_core *core);
+void	map_manager(char *argv[], t_core *core);
 void	texture_main(t_file *file, t_core *core);
 bool	parse_main(t_t_i ti, t_file *file, t_core *core);
 

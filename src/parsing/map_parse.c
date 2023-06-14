@@ -2,8 +2,8 @@
 
 static bool	set_player(int x, int y, t_player *player)
 {
-	player->playerpos[0] = y * 64;
-	player->playerpos[1] = x * 64;
+	player->playerpos[0] = (y * 64) + 32;
+	player->playerpos[1] = (x * 64) + 32;
 	player->playerangle = 0;
 	return (true);
 }

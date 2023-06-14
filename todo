@@ -10,3 +10,5 @@ Verifie que y'a quun seul player
 quand on met un truc qui existe pas segfault
 tres grande map
 si le png nest pas un png
+et si la map n'est pas un fichier
+et si ya pas d'argument ?

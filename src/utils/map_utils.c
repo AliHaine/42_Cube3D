@@ -32,15 +32,32 @@ static bool	is_cub(const char *str)
 	return (true);
 }
 
-void	basical_map_check(char *map_name)
+void	basical_map_check(char **map_name)
 {
-	int	fd;
+	int		fd;
 
-	if (!is_cub(map_name))
-		msg_write(2, 1, ERROR_MAP_NAME);
-	fd = open(map_name, O_RDONLY);
+	if (!map_name[1])
+	{
+		msg_write(2, -1, ERROR_ARGS);
+		msg_write(1, -1, SET_DEFAULT_MAP);
+		map_name[1] = ".d/default.cub";
+	}
+	if (!is_cub(map_name[1]))
+	{
+		msg_write(2, -1, ERROR_MAP_NAME);
+		msg_write(1, -1, SET_DEFAULT_MAP);
+		map_name[1] = ".d/default.cub";
+	}
+	fd = open(map_name[1], O_RDONLY);
 	if (fd == -1)
-		msg_write(2, 1, ERROR_MAP_EXIST);
+	{
+		msg_write(2, -1, ERROR_MAP_EXIST);
+		msg_write(1, -1, SET_DEFAULT_MAP);
+		map_name[1] = ".d/default.cub";
+		fd = open(map_name[1], O_RDONLY);
+		if (fd == -1)
+			msg_write(2, 2, ERROR_FATAL);
+	}
 	close(fd);
 }
 

@@ -4,7 +4,7 @@
 #include "includes.h"
 #include "../src/utils/get_next_line/get_next_line.h"
 
-void	basical_map_check(char *map_name);
+void	basical_map_check(char **map_name);
 
 void	msg_write_multiple(int fd, const char *str1, const char *str2);
 void	msg_write(int fd, int exitVal, MsgType msg);

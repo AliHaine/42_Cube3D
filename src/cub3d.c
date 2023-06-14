@@ -89,13 +89,12 @@ static void	core_init(t_core *core)
 int	main(int argc, char *argv[])
 {
 	t_core	core;
+	(void)argc;
 
 	msg_write(1, -1, STARTING);
-	if (argc != 2)
-		msg_write(2, 1, ERROR_ARGS);
 	core_init(&core);
 	usleep(60000);
-	map_manager(argv[1], &core);
+	map_manager(argv, &core);
 	// J'init l'image la psq elle a besoin des variables initialisees par map_manager
 	// C'est censé adapter la minimap a la taille de la carte mais pas a la resolution donc ca segfault tjr
 	msg_write(1, -1, MINIMAP_INIT);
