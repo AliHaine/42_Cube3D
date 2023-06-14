@@ -24,7 +24,7 @@
 # define FOG_DISTANCE 1000
 # define TEXTURE_SIZE 64
 # define RESIZE (64 / (64 / MINIMAP_SIZE))
-# define DEFAULT_WALL "assets/default_wall.png"
+# define DEFAULT_WALL ".d/default_wall.png"
 # define LOAD 0
 
 #endif
