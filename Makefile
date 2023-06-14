@@ -24,9 +24,9 @@ OBJS		=	$(SRCS:.c=.o)
 
 NAME		=	cub3d
 
-FLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS		=	-g3 -fsanitize=address
 
-MLX42		=	"../MLX42/build/libmlx42.a" -I include -lglfw -lm -ldl -framework Cocoa -framework OpenGL -framework IOKit -L "/Users/$$USER/.brew/opt/glfw/lib"
+MLX42		=	"../MLX42/build/libmlx42.a" -I include -lglfw -lm -ldl -L "/Users/$$USER/.brew/opt/glfw/lib"
 
 CFLAGS		=	-I include -I ../MLX42/include
 

@@ -45,6 +45,7 @@ uint32_t	get_color(mlx_texture_t *wall_texture, float fog_strength, int texture_
 
 //raycast_utils.c
 float		calc_ray_dist(t_core *core, float ray_x, float ray_y, float ray_angle);
+int	        is_obstacle(t_core *core, t_ray *ray);
 
 void	inputs(void *params);
 void	inputs_hook(struct mlx_key_data key, void *params);
