@@ -41,6 +41,7 @@ typedef struct s_ray
 	float	checkpoint_x;
 	float	checkpoint_y;
 	char	obstacle;
+    int     wall_direction;
 }	t_ray;
 
 typedef struct s_three_i

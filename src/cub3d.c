@@ -56,9 +56,9 @@ static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
 	imgs->img_3d = mlx_new_image(mlx, SCREEN_WIDTH,
 									  SCREEN_HEIGHT);
 	imgs->img_player = create_minimap_player(mlx, ray_color);
-	if (!set_texture_from_path(".d/trans.png", &imgs->trans))
+	if (!set_texture_from_path("assets/trans.png", &imgs->trans))
 		msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, ".d/cursor.png", &imgs->cursor))
+	if (!set_image_from_path(mlx, "assets/cursor.png", &imgs->cursor))
 		msg_write(2, 2, ERROR_FATAL);
 }
 
