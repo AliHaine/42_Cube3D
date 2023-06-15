@@ -27,12 +27,16 @@ static void	draw_obstacle(t_core *core, t_ray ray, int r)
 	py = (SCREEN_HEIGHT - wall_height) / 2;
 	if (ray.obstacle == 'D')
 		texture = core->imgs.door_texture;
+    else if (ray.obstacle == 'Z')
+        texture = core->imgs.enemy;
 	while (py >= 0 && py < (SCREEN_HEIGHT + wall_height) / 2 && py < SCREEN_HEIGHT)
 	{
 		texture_xy[1] = ((py * 2 - SCREEN_HEIGHT + wall_height)
 				* TEXTURE_SIZE) / wall_height / 2;
 		color = get_color(texture, ray_distance / FOG_DISTANCE, texture_xy);
-		mlx_put_pixel(core->imgs.img_3d, r, py++, color);
+		if (color != 0)
+			mlx_put_pixel(core->imgs.img_3d, r, py, color);
+		py++;
 	}
 }
 

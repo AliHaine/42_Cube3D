@@ -25,6 +25,8 @@ typedef struct s_imgs
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_player;
 	mlx_image_t 	*cursor;
+    mlx_image_t 	*hearth[3];
+    mlx_texture_t	*enemy;
 	mlx_texture_t	*trans;
 	mlx_texture_t	*wall_texture[4];
 	mlx_texture_t	*door_texture;
