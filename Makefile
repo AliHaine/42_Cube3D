@@ -27,11 +27,11 @@ OBJS		=	$(SRCS:.c=.o)
 NAME		=	cub3d
 
 FLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
-LDFLAGS		+=	-L/Users/ayagmur/Cursus/cube3d/src/sound/bass
+LDFLAGS		+=	-L./src/sound/bass
 LDLIBS		+=	-lbass
 
-BASS_CFLAGS	=	-I/Users/ayagmur/Cursus/cube3d/src/sound/bass
-BASS_LDFLAGS	=	-L/Users/ayagmur/Cursus/cube3d/src/sound/bass
+BASS_CFLAGS	=	-I./src/sound/bass
+BASS_LDFLAGS	=	-L./src/sound/bass
 BASS_LDLIBS	=	-lbass
 
 MLX42		=	"../MLX42/build/libmlx42.a" -I include -lglfw -lm -ldl -framework Cocoa -framework OpenGL -framework IOKit -L "/Users/$$USER/.brew/opt/glfw/lib"
@@ -47,7 +47,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 	gcc $(FLAGS) $(OBJS) $(LIBFT) $(MLX42) $(BASS_LDFLAGS) $(BASS_LDLIBS) -o $(NAME)
-	install_name_tool -change @loader_path/libbass.dylib /Users/ayagmur/Cursus/cube3d/src/sound/bass/libbass.dylib $(NAME)
+	install_name_tool -change @loader_path/libbass.dylib ./src/sound/bass/libbass.dylib $(NAME)
 clean:
 			$(RM) $(OBJS)
 

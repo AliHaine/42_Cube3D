@@ -42,6 +42,9 @@ static void	draw_columns(t_core *core, t_ray ray, int r)
 	int			py;
 	uint32_t	color;
 	int			texture_xy[2];
+	float		floorX;
+	float		floorY;
+	float		rayDistance;
 
 	texture_xy[0] = get_offset(ray.wall_direction, ray);
 	wall_height = (SCREEN_HEIGHT * 64) / ray.ray_dist;
@@ -57,34 +60,40 @@ static void	draw_columns(t_core *core, t_ray ray, int r)
 		mlx_put_pixel(core->imgs.img_3d, r, py++, color);
 	}
 	while (py < SCREEN_HEIGHT)
-		mlx_put_pixel(core->imgs.img_3d, r, py++, core->consts.bot_color);
+	{
+		rayDistance = 1.0 / (2.0 * py / SCREEN_HEIGHT - 1.0);
+		floorX = core->player.playerpos[0] + rayDistance * ray.cosinus;
+		floorY = core->player.playerpos[1] + rayDistance * ray.sinus;
+		texture_xy[0] = (int)(floorX * TEXTURE_SIZE) % TEXTURE_SIZE;
+		texture_xy[1] = (int)(floorY * TEXTURE_SIZE) % TEXTURE_SIZE;
+		color = get_color(core->imgs.grass_texture, rayDistance / FOG_DISTANCE, texture_xy);
+		mlx_put_pixel(core->imgs.img_3d, r, py++, color);
+	}
+
 }
 
-static void	init_ray_variables(t_core *core, t_ray *ray, float *cosi, float *sinu, int r)
+static void	init_ray_variables(t_core *core, t_ray *ray)
 {
-	(void)r;
 	ray->have_checkpoint = false;
 	ray->ray_x = core->player.playerpos[0];
 	ray->ray_y = core->player.playerpos[1];
-	*cosi = cosf(ray->ray_angle);
-	*sinu = sinf(ray->ray_angle);
+	ray->cosinus = cosf(ray->ray_angle);
+	ray->sinus = sinf(ray->ray_angle);
 }
 
-static void    do_ray(t_core *core, t_ray *ray, float start_angle, int r)
+static void	do_ray(t_core *core, t_ray *ray, float start_angle, int r)
 {
-    int     act;
-    float   cosinus;
-    float   sinus;
+	int	act;
 
     ray->ray_angle = start_angle + (r * core->consts.dist_between_ray);
-    init_ray_variables(core, ray, &cosinus, &sinus, r);
+    init_ray_variables(core, ray);
     while (1)
     {
         act = is_obstacle(core, ray);
         if (act == -1 || act == 1)
             break ;
-        ray->ray_x += cosinus;
-        ray->ray_y += sinus;
+        ray->ray_x += ray->cosinus;
+        ray->ray_y += ray->sinus;
         mlx_put_pixel(core->imgs.img_map, (ray->ray_x / MINIMAP_SIZE),
                       (ray->ray_y / MINIMAP_SIZE), core->consts.ray_color);
     }

@@ -28,6 +28,7 @@ typedef struct s_imgs
 	mlx_texture_t	*trans;
 	mlx_texture_t	*wall_texture[4];
 	mlx_texture_t	*door_texture;
+	mlx_texture_t	*grass_texture;
 }	t_imgs;
 
 typedef struct s_ray
@@ -41,7 +42,9 @@ typedef struct s_ray
 	float	checkpoint_x;
 	float	checkpoint_y;
 	char	obstacle;
-    int     wall_direction;
+	int		wall_direction;
+	float	cosinus;
+	float	sinus;
 }	t_ray;
 
 typedef struct s_three_i
@@ -81,6 +84,7 @@ typedef struct s_const
 
 typedef struct s_player
 {
+	float			origin[2];
 	float			playerpos[2];
 	float			playerangle;
 	int				health;
