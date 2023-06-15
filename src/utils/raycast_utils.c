@@ -28,7 +28,7 @@ int	is_obstacle(t_core *core, t_ray *ray)
     [(int) ray->ray_x / 64];
     if (c == '1')
         return (1);
-    else if (c == 'D' && ray->have_checkpoint == false) {
+    else if ((c == 'D' || c == 'Z') && ray->have_checkpoint == false) {
         ray->have_checkpoint = true;
         ray->checkpoint_x = ray->ray_x;
         ray->checkpoint_y = ray->ray_y;

@@ -60,6 +60,14 @@ static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/cursor.png", &imgs->cursor))
 		msg_write(2, 2, ERROR_FATAL);
+    if (!set_image_from_path(mlx, "assets/hearth1.png", &imgs->hearth[0]))
+        msg_write(2, 2, ERROR_FATAL);
+    if (!set_image_from_path(mlx, "assets/hearth2.png", &imgs->hearth[1]))
+        msg_write(2, 2, ERROR_FATAL);
+    if (!set_image_from_path(mlx, "assets/hearth3.png", &imgs->hearth[2]))
+        msg_write(2, 2, ERROR_FATAL);
+    if (!set_texture_from_path("assets/e_0.png", &imgs->enemy))
+        msg_write(2, 2, ERROR_FATAL);
 }
 
 static void	sound_init(t_core *core)
@@ -96,6 +104,7 @@ static void	core_init(t_core *core)
 	//voir pourquoi on est obliger de mettre 2 fois le cursor
 	mlx_image_to_window(core->mlx, core->imgs.cursor, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_image_to_window(core->mlx, core->imgs.img_player, 0, 0);
+    mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH - SCREEN_WIDTH + 10,SCREEN_HEIGHT - 75);
 	mlx_image_to_window(core->mlx, core->imgs.cursor, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
     core->screen_size[0] = SCREEN_WIDTH;
     core->screen_size[1] = SCREEN_HEIGHT;
