@@ -14,7 +14,7 @@ void    resize_hook(int height, int width, void *params)
 	core = (t_core *)params;
 	core->screen_size[0] = height;
 	core->screen_size[1] = width;
-	set_cursor_at_pos(height, width, core->imgs.cursor);
+	set_cursor_at_pos(height, width, core->imgs.crosshair);
 }
 
 void    mouse_cursor(mlx_t *mlx, t_player *player, const int screen_size[2])

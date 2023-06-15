@@ -29,5 +29,5 @@ void	delete_image_from_struct(mlx_t *mlx, t_imgs *imgs)
 	mlx_delete_image(mlx, imgs->img_3d);
 	mlx_delete_image(mlx, imgs->img_player);
 	mlx_delete_image(mlx, imgs->img_map);
-	mlx_delete_image(mlx, imgs->cursor);
+	mlx_delete_image(mlx, imgs->crosshair);
 }

@@ -24,8 +24,9 @@ typedef struct s_imgs
 	mlx_image_t		*img_3d;
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_player;
-	mlx_image_t 	*cursor;
+	mlx_image_t 	*crosshair;
     mlx_image_t 	*hearth[3];
+	mlx_image_t 	*sword[4];
     mlx_texture_t	*enemy;
 	mlx_texture_t	*trans;
 	mlx_texture_t	*wall_texture[4];
@@ -96,6 +97,7 @@ typedef struct s_player
 
 typedef struct s_core
 {
+	bool			test;
 	mlx_t			*mlx;
 	t_const			consts;
 	t_player		player;

@@ -16,20 +16,12 @@
 
 void	move_right_left(t_player *player, char **map, int direction)
 {
-	if (map[(int)((player->playerpos[1]
-				- (sinf(player->playerangle - PI / 2) * player->move_speed)) / 64)]
-				[(int)((player->playerpos[0] - (cosf(player->playerangle
-				- PI / 2) * player->move_speed)) / 64)] != '1'
-				&& direction == 1)
+	if (get_right_char(player, map) != '1' && direction == 1)
 	{
 		player->playerpos[0] -= cosf(player->playerangle - PI / 2) * player->move_speed;
 		player->playerpos[1] -= sinf(player->playerangle - PI / 2) * player->move_speed;
 	}
-	else if (map[(int)(player->playerpos[1]
-			+ (sinf(player->playerangle - PI / 2) * player->move_speed)) / 64]
-				[(int)((player->playerpos[0] + (cosf(player->playerangle - PI / 2)
-				* player->move_speed)) / 64)] != '1'
-				&& direction == 0)
+	else if (get_left_char(player, map) != '1' && direction == 0)
 	{
 		player->playerpos[0] += cosf(player->playerangle - PI / 2) * player->move_speed;
 		player->playerpos[1] += sinf(player->playerangle - PI / 2) * player->move_speed;
@@ -38,20 +30,13 @@ void	move_right_left(t_player *player, char **map, int direction)
 
 void	move_forward_backward(t_player *player, char **map, int direction)
 {
-	if (map[(int)((player->playerpos[1]
-				- (sinf(player->playerangle) * player->move_speed)) / 64)]
-				[(int)((player->playerpos[0] - (cosf(player->playerangle)
-				* player->move_speed)) / 64)] != '1'
-					&& direction == 1
-					&& map[(int)(player->playerpos[1] / 64)][(int)(player->playerpos[0] / 64)] != 1)
+	if (get_backward_char(player, map) != '1'&& direction == 1
+		&& map[(int)(player->playerpos[1] / 64)][(int)(player->playerpos[0] / 64)] != 1)
 	{
 		player->playerpos[0] -= cosf(player->playerangle) * player->move_speed;
 		player->playerpos[1] -= sinf(player->playerangle) * player->move_speed;
 	}
-	else if (map[(int)((player->playerpos[1] + (sinf(player->playerangle)
-					* player->move_speed)) / 64)][(int)((player->playerpos[0] +
-					(cosf(player->playerangle) * player->move_speed)) / 64)] != '1'
-					&& direction == 0)
+	else if (get_forward_char(player, map) != '1' && direction == 0)
 	{
 		player->playerpos[0] += cosf(player->playerangle) * player->move_speed;
 		player->playerpos[1] += sinf(player->playerangle) * player->move_speed;

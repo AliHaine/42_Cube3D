@@ -60,7 +60,7 @@ static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_texture_from_path("assets/trans.png", &imgs->trans))
 		msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, "assets/cursor.png", &imgs->cursor))
+	if (!set_image_from_path(mlx, "assets/crosshair.png", &imgs->crosshair))
 		msg_write(2, 2, ERROR_FATAL);
     if (!set_image_from_path(mlx, "assets/hearth1.png", &imgs->hearth[0]))
         msg_write(2, 2, ERROR_FATAL);
@@ -68,6 +68,14 @@ static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
         msg_write(2, 2, ERROR_FATAL);
     if (!set_image_from_path(mlx, "assets/hearth3.png", &imgs->hearth[2]))
         msg_write(2, 2, ERROR_FATAL);
+	if (!set_image_from_path(mlx, "assets/texture/sword1resize.png", &imgs->sword[0]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_image_from_path(mlx, "assets/texture/sword2resize.png", &imgs->sword[1]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_image_from_path(mlx, "assets/texture/sword3resize.png", &imgs->sword[2]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_image_from_path(mlx, "assets/texture/sword4resize.png", &imgs->sword[3]))
+		msg_write(2, 2, ERROR_FATAL);
     if (!set_texture_from_path("assets/e_0.png", &imgs->enemy))
         msg_write(2, 2, ERROR_FATAL);
 }
@@ -104,11 +112,18 @@ static void	core_init(t_core *core)
 	mlx_set_cursor(core->mlx, mlx_create_cursor(core->imgs.trans));
 	mlx_set_mouse_pos(core->mlx, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	//voir pourquoi on est obliger de mettre 2 fois le cursor
-	mlx_image_to_window(core->mlx, core->imgs.cursor, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	mlx_image_to_window(core->mlx, core->imgs.crosshair, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_image_to_window(core->mlx, core->imgs.img_player, 0, 0);
     mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH - SCREEN_WIDTH + 10,SCREEN_HEIGHT - 75);
-	mlx_image_to_window(core->mlx, core->imgs.cursor, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-    core->screen_size[0] = SCREEN_WIDTH;
+	mlx_image_to_window(core->mlx, core->imgs.crosshair, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	mlx_image_to_window(core->mlx, core->imgs.sword[0], SCREEN_WIDTH / 1.4, SCREEN_HEIGHT - 290);
+	mlx_image_to_window(core->mlx, core->imgs.sword[1], SCREEN_WIDTH / 1.6, SCREEN_HEIGHT - 310);
+	mlx_image_to_window(core->mlx, core->imgs.sword[2], SCREEN_WIDTH / 1.7, SCREEN_HEIGHT - 320);
+	mlx_image_to_window(core->mlx, core->imgs.sword[3], SCREEN_WIDTH / 1.8, SCREEN_HEIGHT - 330);
+	core->imgs.sword[1]->enabled = 0;
+	core->imgs.sword[2]->enabled = 0;
+	core->imgs.sword[3]->enabled = 0;
+	core->screen_size[0] = SCREEN_WIDTH;
     core->screen_size[1] = SCREEN_HEIGHT;
 	core->player.have_player = false;
 	core->player.move_speed = 10;
@@ -120,6 +135,7 @@ int	main(int argc, char *argv[])
 	t_core	core;
 	(void)argc;
 
+	core.test = 0;
 	msg_write(1, -1, STARTING);
 	core_init(&core);
 	usleep(60000);
@@ -136,7 +152,7 @@ int	main(int argc, char *argv[])
 	mlx_loop_hook(core.mlx, &inputs, &core);
 	mlx_key_hook(core.mlx, &inputs_hook, &core);
     mlx_resize_hook(core.mlx, &resize_hook, &core);
-	mlx_mouse_hook(core.mlx, &mouse, &core.sounds);
+	mlx_mouse_hook(core.mlx, &mouse, &core);
 	mlx_loop(core.mlx);
 	delete_image_from_struct(core.mlx, &core.imgs);
 	mlx_close_window(core.mlx);

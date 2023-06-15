@@ -40,5 +40,12 @@ bool	set_texture_from_path(char *line, mlx_texture_t **texture);
 bool	set_image_from_path(mlx_t *mlx, char *path, mlx_image_t **image);
 void	delete_image_from_struct(mlx_t *mlx, t_imgs *imgs);
 
+//move_utils//
+void	set_char_at_forward(char c, t_player *player, char **map);
+char	get_backward_char(t_player *player, char **map);
+char	get_forward_char(t_player *player, char **map);
+char	get_right_char(t_player *player, char **map);
+char	get_left_char(t_player *player, char **map);
+
 
 #endif

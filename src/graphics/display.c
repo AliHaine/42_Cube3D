@@ -41,12 +41,32 @@ void	draw_map(t_core *core)
 	}
 }
 
+void	testa(t_core *core)
+{
+	static double	time;
+	static int		i = 0;
+	if (time - mlx_get_time() > -0.05)
+		return;
+	time = mlx_get_time();
+	if (i == 3) {
+		core->imgs.sword[3]->enabled = 0;
+		core->imgs.sword[0]->enabled = 1;
+		core->test = 0;
+		i = 0;
+		return ;
+	}
+	core->imgs.sword[i++]->enabled = 0;
+	core->imgs.sword[i]->enabled = 1;
+}
+
 //Loop hook qui va supprimer les images, les recreer, et les reafficher en boucle
 void	display(void *params)
 {
 	t_core	*core;
 
 	core = (t_core *) params;
+	if (core->test)
+		testa(core);
 	mlx_delete_image(core->mlx, core->imgs.img_map);
 	mlx_delete_image(core->mlx, core->imgs.img_3d);
 	//Image du point du joueur
