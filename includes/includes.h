@@ -69,4 +69,7 @@ bool	load_sound(uint32_t *s, char *path);
 void	play_sound_alt(uint32_t s, bool play, bool loop);
 void	play_sound(uint32_t s);
 
+//animation//
+void	attack_animation(t_core *core);
+
 #endif

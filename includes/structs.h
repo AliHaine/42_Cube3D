@@ -21,6 +21,7 @@ typedef struct	s_sounds
 
 typedef struct s_imgs
 {
+    short           animation;
 	mlx_image_t		*img_3d;
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_player;
@@ -97,7 +98,6 @@ typedef struct s_player
 
 typedef struct s_core
 {
-	bool			test;
 	mlx_t			*mlx;
 	t_const			consts;
 	t_player		player;
@@ -129,7 +129,13 @@ typedef enum {
 	EMPTY_WALL,
 	TRY_LOAD_COLOR,
 	MINIMAP_INIT,
+    DEATH_PLAYER,
 } MsgType;
+
+typedef enum {
+    NO_ANIMATION,
+    SWORD_NETHERITE_ATTACK,
+} AttackType;
 
 
 static const char *Messages[] = {
@@ -155,6 +161,7 @@ static const char *Messages[] = {
 		"\e[40;35mAll wall direction don't have texture, trying to set default.. ",
 		"\e[40;33mTrying to load color: ",
 		"\n\e[40;33mInitialization of Minimap.. ",
+        "\e[40;31mYou died.",
 };
 
 #endif

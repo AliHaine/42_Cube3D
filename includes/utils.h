@@ -46,6 +46,7 @@ char	get_backward_char(t_player *player, char **map);
 char	get_forward_char(t_player *player, char **map);
 char	get_right_char(t_player *player, char **map);
 char	get_left_char(t_player *player, char **map);
+bool    hit_player(t_player *player, t_imgs *imgs);
 
 
 #endif

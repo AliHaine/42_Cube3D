@@ -8,6 +8,7 @@ SRCS		=	src/cub3d.c \
 				src/graphics/textures.c \
 				src/graphics/wall_direction.c \
 				src/graphics/obstacle_direction.c \
+				src/graphics/animations.c \
 				src/parsing/map_manager.c \
 				src/parsing/map_parse.c \
 				src/parsing/map_texture.c \

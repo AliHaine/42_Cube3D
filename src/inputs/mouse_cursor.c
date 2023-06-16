@@ -26,6 +26,11 @@ void    mouse_cursor(mlx_t *mlx, t_player *player, const int screen_size[2])
     float rotation_speed;
 
     screen_middle_x = screen_size[0] / 2;
+    if (mlx_get_time() < 0.8)
+    {
+        mlx_set_mouse_pos(mlx, screen_middle_x, screen_size[1] / 2);
+        return ;
+    }
     mlx_get_mouse_pos(mlx, &x, &y);
     mlx_set_mouse_pos(mlx, screen_middle_x, screen_size[1] / 2);
     diff = abs(screen_middle_x - x);
