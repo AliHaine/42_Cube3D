@@ -16,7 +16,6 @@
 	https://github.com/ttranche/cub3D/blob/main/bonus/cub_sound_bonus.c
 */
 
-
 # include "bass/bass.h"
 # include "../../includes/includes.h"
 

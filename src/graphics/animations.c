@@ -5,7 +5,7 @@ void	attack_animation(t_core *core)
     static double	time;
     static int		i = 0;
 
-    if (time - mlx_get_time() > -0.05)
+    if (time - mlx_get_time() > -0.01)
         return;
     time = mlx_get_time();
     if (i == 3)

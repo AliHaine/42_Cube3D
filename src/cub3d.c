@@ -61,13 +61,17 @@ static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_texture_from_path("assets/trans.png", &imgs->trans))
 		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/e_0.png", &imgs->enemy))
+		msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/crosshair.png", &imgs->crosshair))
 		msg_write(2, 2, ERROR_FATAL);
-    if (!set_image_from_path(mlx, "assets/hearth1.png", &imgs->hearth[2]))
+	if (!set_image_from_path(mlx, "assets/invbar.png", &imgs->invbar))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_image_from_path(mlx, "assets/engbar.png", &imgs->engbar))
+		msg_write(2, 2, ERROR_FATAL);
+    if (!set_image_from_path(mlx, "assets/hearth_full.png", &imgs->hearth[1]))
         msg_write(2, 2, ERROR_FATAL);
-    if (!set_image_from_path(mlx, "assets/hearth2.png", &imgs->hearth[1]))
-        msg_write(2, 2, ERROR_FATAL);
-    if (!set_image_from_path(mlx, "assets/hearth3.png", &imgs->hearth[0]))
+    if (!set_image_from_path(mlx, "assets/hearth_empty.png", &imgs->hearth[0]))
         msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/texture/sword1resize.png", &imgs->sword[0]))
         msg_write(2, 2, ERROR_FATAL);
@@ -77,8 +81,6 @@ static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/texture/sword4resize.png", &imgs->sword[3]))
 		msg_write(2, 2, ERROR_FATAL);
-    if (!set_texture_from_path("assets/e_0.png", &imgs->enemy))
-        msg_write(2, 2, ERROR_FATAL);
 }
 
 static void	sound_init(t_core *core)
@@ -114,10 +116,17 @@ static void	core_init(t_core *core)
 	//voir pourquoi on est obliger de mettre 2 fois le cursor
 	mlx_image_to_window(core->mlx, core->imgs.crosshair, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_image_to_window(core->mlx, core->imgs.img_player, 0, 0);
-    mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH - SCREEN_WIDTH + 10,SCREEN_HEIGHT - 75);
-    mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH - SCREEN_WIDTH + 10,SCREEN_HEIGHT - 75);
-    mlx_image_to_window(core->mlx, core->imgs.hearth[2], SCREEN_WIDTH - SCREEN_WIDTH + 10,SCREEN_HEIGHT - 75);
-    mlx_image_to_window(core->mlx, core->imgs.crosshair, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	mlx_image_to_window(core->mlx, core->imgs.invbar, SCREEN_WIDTH / 3.17,SCREEN_HEIGHT - 95);
+	mlx_image_to_window(core->mlx, core->imgs.engbar, SCREEN_WIDTH / 3,SCREEN_HEIGHT - 115);
+	mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH / 2.9,SCREEN_HEIGHT - 155);
+	mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH / 2.69,SCREEN_HEIGHT - 155);
+	mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH / 2.51,SCREEN_HEIGHT - 155);
+
+	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.9,SCREEN_HEIGHT - 155);
+	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.69,SCREEN_HEIGHT - 155);
+	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.51,SCREEN_HEIGHT - 155);
+
+	mlx_image_to_window(core->mlx, core->imgs.crosshair, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_image_to_window(core->mlx, core->imgs.sword[0], SCREEN_WIDTH / 1.4, SCREEN_HEIGHT - 290);
 	mlx_image_to_window(core->mlx, core->imgs.sword[1], SCREEN_WIDTH / 1.6, SCREEN_HEIGHT - 310);
 	mlx_image_to_window(core->mlx, core->imgs.sword[2], SCREEN_WIDTH / 1.7, SCREEN_HEIGHT - 320);
@@ -125,8 +134,8 @@ static void	core_init(t_core *core)
 	core->imgs.sword[1]->enabled = 0;
 	core->imgs.sword[2]->enabled = 0;
 	core->imgs.sword[3]->enabled = 0;
-    core->imgs.hearth[0]->enabled = 0;
-    core->imgs.hearth[1]->enabled = 0;
+    core->imgs.hearth[0]->enabled = 1;
+    core->imgs.hearth[1]->enabled = 1;
 	core->screen_size[0] = SCREEN_WIDTH;
     core->screen_size[1] = SCREEN_HEIGHT;
 	core->player.have_player = false;

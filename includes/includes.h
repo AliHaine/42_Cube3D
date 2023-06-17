@@ -72,4 +72,11 @@ void	play_sound(uint32_t s);
 //animation//
 void	attack_animation(t_core *core);
 
+//player interaction//
+
+void	set_char_at_forward(char c, t_player *player, char **map);
+
+bool    hit_player(t_player *player, t_imgs *imgs);
+void	heal_player(t_player *player, t_imgs *imgs);
+
 #endif

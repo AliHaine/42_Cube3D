@@ -2,11 +2,7 @@ MAP
 
 N,S,W,E = player, 1 = mur, 0 = vide, V = creeper, Z = zombie, D = porte
 
-verif que ya une sortie en gros flood fill ??
 Commencer a ajouter des ennemis
-ajouter l'arme du perso
-Verifie que y'a quun seul player
-
 quand on met un truc qui existe pas segfault
 tres grande map
 si le png nest pas un png

@@ -26,7 +26,9 @@ typedef struct s_imgs
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_player;
 	mlx_image_t 	*crosshair;
-    mlx_image_t 	*hearth[3];
+	mlx_image_t 	*invbar;
+	mlx_image_t 	*engbar;
+    mlx_image_t 	*hearth[2];
 	mlx_image_t 	*sword[4];
     mlx_texture_t	*enemy;
 	mlx_texture_t	*trans;
@@ -85,6 +87,11 @@ typedef struct s_const
 	float			south_east;
 	float			south_west;
 }	t_const;
+
+typedef struct s_item
+{
+
+}	t_item;
 
 typedef struct s_player
 {

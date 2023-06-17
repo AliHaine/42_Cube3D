@@ -7,10 +7,14 @@ void	mouse(enum mouse_key key, enum action action, enum modifier_key mkey, void 
 
 	(void) mkey;
 	core = (t_core *)param;
-    hit_player(&core->player, &core->imgs);
+	if (key == 0 && action == 0)
+    	hit_player(&core->player, &core->imgs);
+	else if (key == 1 && action == 0)
+		heal_player(&core->player, &core->imgs);
+
 	if (key != 0 || action == 1)
 		return ;
-	if (time - mlx_get_time() >= -1)
+	if (time - mlx_get_time() >= -0.1)
 		return ;
 	time = mlx_get_time();
 	core->imgs.animation = SWORD_NETHERITE_ATTACK;

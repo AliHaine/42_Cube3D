@@ -13,6 +13,8 @@ SRCS		=	src/cub3d.c \
 				src/parsing/map_parse.c \
 				src/parsing/map_texture.c \
 				src/sound/sound.c \
+				src/player_interaction/heal.c \
+				src/player_interaction/build.c \
 				src/utils/map_utils.c \
 				src/utils/msg_utils.c \
 				src/utils/std_func_utils.c \
@@ -20,7 +22,6 @@ SRCS		=	src/cub3d.c \
 				src/utils/file_utils.c \
 				src/utils/raycast_utils.c \
 				src/utils/move_utils.c \
-				src/utils/hit_utils.c \
 				src/utils/mlx_texture_utils.c \
 				src/utils/get_next_line/get_next_line.c \
 				src/utils/get_next_line/get_next_line_utils.c

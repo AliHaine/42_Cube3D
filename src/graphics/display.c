@@ -31,9 +31,10 @@ void	draw_map(t_core *core)
 		{
 			if (core->consts.map[py / RESIZE][px / RESIZE] == '0'
 				|| is_player_char(core->consts.map[py / RESIZE]
-				[px / (64 / core->consts.minimap_size)]))
+				[px / (64 / core->consts.minimap_size)])) {
 				mlx_put_pixel(core->imgs.img_map, px, py,
-					core->consts.minimap_floor_color);
+							  core->consts.minimap_floor_color);
+			}
 			else if (core->consts.map[py / RESIZE][px / RESIZE] == '1')
 				mlx_put_pixel(core->imgs.img_map, px, py,
 					core->consts.minimap_wall_color);
@@ -57,7 +58,7 @@ void	display(void *params)
 	core->imgs.img_player->instances[0].x = ((core->player.playerpos[0]
 				/ core->consts.minimap_size) - (MINIMAP_PLAYER_SIZE / 2)) + 10;
 	core->imgs.img_player->instances[0].y = ((core->player.playerpos[1]
-				/ core->consts.minimap_size) - (MINIMAP_PLAYER_SIZE / 2)) + 10;
+				/ core->consts.minimap_size) - (MINIMAP_PLAYER_SIZE / 2)) + core->screen_size[1];
 
 	//Image avec toute la 3D
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
@@ -71,7 +72,7 @@ void	display(void *params)
 	//Dessiner la 3D
 	raycast(core);
 	mlx_image_to_window(core->mlx, core->imgs.img_3d, 0, 0);
-	mlx_image_to_window(core->mlx, core->imgs.img_map, 10, 10);
+	mlx_image_to_window(core->mlx, core->imgs.img_map, 10, core->screen_size[1] - 202);
 	//Definir l'ordre des images / qui est au dessus de qui
 	core->imgs.img_3d->instances[0].z = 1;
 	core->imgs.img_map->instances[0].z = 2;
