@@ -101,6 +101,7 @@ typedef struct s_player
 	int				health;
 	bool			have_player;
 	int				move_speed;
+	short			energy;
 }	t_player;
 
 typedef struct s_core

@@ -141,6 +141,7 @@ static void	core_init(t_core *core)
 	core->player.have_player = false;
 	core->player.move_speed = 10;
     core->player.health = 2;
+	core->player.energy = 100;
 	msg_write(1, -1, SUCCESS);
 }
 
@@ -163,6 +164,7 @@ int	main(int argc, char *argv[])
 	msg_write(1, -1, SUCCESS);
 	mlx_loop_hook(core.mlx, &display, &core);
 	mlx_loop_hook(core.mlx, &inputs, &core);
+	mlx_loop_hook(core.mlx, &player_listener, &core);
 	mlx_key_hook(core.mlx, &inputs_hook, &core);
     mlx_resize_hook(core.mlx, &resize_hook, &core);
 	mlx_mouse_hook(core.mlx, &mouse, &core);

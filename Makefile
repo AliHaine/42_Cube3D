@@ -13,8 +13,10 @@ SRCS		=	src/cub3d.c \
 				src/parsing/map_parse.c \
 				src/parsing/map_texture.c \
 				src/sound/sound.c \
+				src/player_interaction/player_listener.c \
 				src/player_interaction/heal.c \
 				src/player_interaction/build.c \
+				src/player_interaction/energy.c \
 				src/utils/map_utils.c \
 				src/utils/msg_utils.c \
 				src/utils/std_func_utils.c \

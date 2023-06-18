@@ -49,6 +49,7 @@ void	display(void *params)
 	core = (t_core *) params;
 	if (core->imgs.animation)
 		attack_animation(core);
+	draw_energy_bar(core->imgs.engbar, core->player.energy);
 	mlx_delete_image(core->mlx, core->imgs.img_map);
 	mlx_delete_image(core->mlx, core->imgs.img_3d);
 	//Image du point du joueur

@@ -12,7 +12,7 @@
 
 /*
 	TTRANCHE C file https://github.com/ttranche
-	See the for more detailed :
+	See for more details :
 	https://github.com/ttranche/cub3D/blob/main/bonus/cub_sound_bonus.c
 */
 

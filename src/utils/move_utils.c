@@ -31,3 +31,10 @@ char	get_left_char(t_player *player, char **map)
 			[(int)((player->playerpos[0] + (cosf(player->playerangle - PI / 2)
 			* player->move_speed)) / 64)]);
 }
+
+bool	is_player_running(t_player *player)
+{
+	if (player->move_speed > 10)
+		return (true);
+	return (false);
+}

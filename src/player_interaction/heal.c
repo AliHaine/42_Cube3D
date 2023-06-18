@@ -1,6 +1,6 @@
 #include "../../includes/includes.h"
 
-static bool	is_player_death(int player_health)
+bool	is_player_death(int player_health)
 {
 	if (player_health < 0)
 		return (true);
@@ -19,6 +19,7 @@ bool    hit_player(t_player *player, t_imgs *imgs)
 	if (is_player_death(player->health))
 		return (true);
 	player->health--;
+	take_energy(player, 15);
 	imgs->hearth[1]->instances[player->health + 1].enabled = false;
 	return (false);
 }

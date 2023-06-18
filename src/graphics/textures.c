@@ -50,3 +50,35 @@ uint32_t	get_color(mlx_texture_t *wall_texture, float fog_strength, int texture_
 	b = ((color >> 8) & 0xFF) * (1.0 - fog_strength);
 	return ((r << 24) | (g << 16) | (b << 8) | (color & 0xFF));
 }
+
+void	draw_energy_bar(mlx_image_t *img, short energy)
+{
+	t_t_i		ti;
+	uint32_t	full_color;
+	uint32_t	empty_color;
+
+	init_tti_struct(&ti, ((energy * 4.3)), 3, 2);
+	full_color = get_rgb_color(192, 19, 186);
+	empty_color = get_rgb_color(100, 80, 190);
+	while (ti.c != 10)
+	{
+		if (ti.c == 9 || ti.c == 2)
+		{
+			ti.b++;
+			ti.a -= 2;
+		}
+		draw_pixel_to_img(img, ti, full_color);
+		if (energy < 100)
+		{
+			if (ti.c == 9 || ti.c == 2)
+				ti.a += 4;
+			ti.a -= 100 * 4.3;
+			ti.a = abs(ti.a);
+			ti.b += energy * 4.3;
+			draw_pixel_to_img(img, ti, empty_color);
+		}
+		ti.b = 3;
+		ti.c++;
+		ti.a = energy * 4.3;
+	}
+}

@@ -42,6 +42,7 @@ int			get_obstacle_offset(int direction, t_ray ray);
 
 //textures.c
 uint32_t	get_color(mlx_texture_t *wall_texture, float fog_strength, int texture_xy[2]);
+void		draw_energy_bar(mlx_image_t *img, short energy);
 
 //raycast_utils.c
 float		calc_ray_dist(t_core *core, float ray_x, float ray_y, float ray_angle);
@@ -72,11 +73,20 @@ void	play_sound(uint32_t s);
 //animation//
 void	attack_animation(t_core *core);
 
-//player interaction//
+	//player interaction//
+void	player_listener(void *params);
+
 
 void	set_char_at_forward(char c, t_player *player, char **map);
 
+//heal//
+bool	is_player_death(int player_health);
 bool    hit_player(t_player *player, t_imgs *imgs);
 void	heal_player(t_player *player, t_imgs *imgs);
+
+//energy
+void	take_energy(t_player *player, short value);
+void	add_energy(t_player *player, short value);
+
 
 #endif
