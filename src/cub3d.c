@@ -67,12 +67,16 @@ static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/invbar.png", &imgs->invbar))
 		msg_write(2, 2, ERROR_FATAL);
+	if (!set_image_from_path(mlx, "assets/invbar_selector.png", &imgs->invbar_selector))
+		msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/engbar.png", &imgs->engbar))
 		msg_write(2, 2, ERROR_FATAL);
     if (!set_image_from_path(mlx, "assets/hearth_full.png", &imgs->hearth[1]))
         msg_write(2, 2, ERROR_FATAL);
     if (!set_image_from_path(mlx, "assets/hearth_empty.png", &imgs->hearth[0]))
         msg_write(2, 2, ERROR_FATAL);
+	if (!set_image_from_path(mlx, "assets/icon_sword_nether.png", &imgs->icon_sword_nether))
+		msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/texture/sword1resize.png", &imgs->sword[0]))
         msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/texture/sword2resize.png", &imgs->sword[1]))
@@ -117,6 +121,7 @@ static void	core_init(t_core *core)
 	mlx_image_to_window(core->mlx, core->imgs.crosshair, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_image_to_window(core->mlx, core->imgs.img_player, 0, 0);
 	mlx_image_to_window(core->mlx, core->imgs.invbar, SCREEN_WIDTH / 3.17,SCREEN_HEIGHT - 95);
+	mlx_image_to_window(core->mlx, core->imgs.invbar_selector, SCREEN_WIDTH / 3.17,SCREEN_HEIGHT - 95);
 	mlx_image_to_window(core->mlx, core->imgs.engbar, SCREEN_WIDTH / 3,SCREEN_HEIGHT - 115);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH / 2.9,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH / 2.69,SCREEN_HEIGHT - 155);
@@ -125,6 +130,7 @@ static void	core_init(t_core *core)
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.9,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.69,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.51,SCREEN_HEIGHT - 155);
+	mlx_image_to_window(core->mlx, core->imgs.icon_sword_nether, SCREEN_WIDTH / 3.05,SCREEN_HEIGHT - 80);
 
 	mlx_image_to_window(core->mlx, core->imgs.crosshair, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_image_to_window(core->mlx, core->imgs.sword[0], SCREEN_WIDTH / 1.4, SCREEN_HEIGHT - 290);
@@ -142,6 +148,7 @@ static void	core_init(t_core *core)
 	core->player.move_speed = 10;
     core->player.health = 2;
 	core->player.energy = 100;
+	core->player.toolbar_slot = 0;
 	msg_write(1, -1, SUCCESS);
 }
 
@@ -168,6 +175,7 @@ int	main(int argc, char *argv[])
 	mlx_key_hook(core.mlx, &inputs_hook, &core);
     mlx_resize_hook(core.mlx, &resize_hook, &core);
 	mlx_mouse_hook(core.mlx, &mouse, &core);
+	mlx_scroll_hook(core.mlx, &scroll_hook, &core);
 	mlx_loop(core.mlx);
 	delete_image_from_struct(core.mlx, &core.imgs);
 	mlx_close_window(core.mlx);

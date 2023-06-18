@@ -56,6 +56,7 @@ void	move_rotate(t_player *player, int direction, float speed);
 void	mouse_cursor(mlx_t *mlx, t_player *player, const int screen_size[2]);
 void	mouse(enum mouse_key, enum action, enum modifier_key, void *param);
 void	resize_hook(int height, int width, void *params);
+void	scroll_hook(double x, double y, void *param);
 
 //parsing//
 
@@ -87,6 +88,7 @@ void	heal_player(t_player *player, t_imgs *imgs);
 //energy
 void	take_energy(t_player *player, short value);
 void	add_energy(t_player *player, short value);
+bool	player_have_energy(short value);
 
 
 #endif

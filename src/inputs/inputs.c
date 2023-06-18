@@ -45,11 +45,8 @@ void	inputs_hook(struct mlx_key_data key, void *params)
 	t_core	*core;
 
 	core = (t_core *)params;
-	if (key.key == 340)
-	{
-		if (core->player.move_speed == 25)
-			core->player.move_speed = 10;
-		else
-			core->player.move_speed = 25;
-	}
+	if (key.key == 340 && key.action == 1)
+		core->player.move_speed = 25;
+	else if (key.key == 340 && key.action == 0)
+		core->player.move_speed = 10;
 }

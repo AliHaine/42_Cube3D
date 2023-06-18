@@ -15,3 +15,10 @@ void	add_energy(t_player *player, short value)
 	else
 		player->energy += value;
 }
+
+bool	player_have_energy(short value)
+{
+	if (value <= 0)
+		return (false);
+	return (true);
+}

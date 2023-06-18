@@ -27,9 +27,11 @@ typedef struct s_imgs
 	mlx_image_t		*img_player;
 	mlx_image_t 	*crosshair;
 	mlx_image_t 	*invbar;
+	mlx_image_t 	*invbar_selector;
 	mlx_image_t 	*engbar;
     mlx_image_t 	*hearth[2];
 	mlx_image_t 	*sword[4];
+	mlx_image_t		*icon_sword_nether;
     mlx_texture_t	*enemy;
 	mlx_texture_t	*trans;
 	mlx_texture_t	*wall_texture[4];
@@ -102,6 +104,7 @@ typedef struct s_player
 	bool			have_player;
 	int				move_speed;
 	short			energy;
+	short			toolbar_slot;
 }	t_player;
 
 typedef struct s_core
@@ -144,7 +147,6 @@ typedef enum {
     NO_ANIMATION,
     SWORD_NETHERITE_ATTACK,
 } AttackType;
-
 
 static const char *Messages[] = {
 		"\e[40;31mError \nThere is an unknow char in the map",
