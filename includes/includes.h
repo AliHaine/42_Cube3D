@@ -71,8 +71,9 @@ bool	load_sound(uint32_t *s, char *path);
 void	play_sound_alt(uint32_t s, bool play, bool loop);
 void	play_sound(uint32_t s);
 
-//animation//
+//animations//
 void	attack_animation(t_core *core);
+void    animation_manager(t_animation *animation);
 
 	//player interaction//
 void	player_listener(void *params);
@@ -90,5 +91,10 @@ void	take_energy(t_player *player, short value);
 void	add_energy(t_player *player, short value);
 bool	player_have_energy(short value);
 
+	//struct
+void	struct_setup(t_core *core);
 
+void	setup_slot_struct(t_player *player);
+
+void	texture_loader(mlx_t *mlx, t_imgs *imgs);
 #endif

@@ -47,8 +47,10 @@ void	display(void *params)
 	t_core	*core;
 
 	core = (t_core *) params;
-	if (core->imgs.animation)
-		attack_animation(core);
+	if(core->animations[0].is_playing)
+		animation_manager(&core->animations[0]);
+	/*if (core->imgs.animations)
+		attack_animation(core);*/
 	draw_energy_bar(core->imgs.engbar, core->player.energy);
 	mlx_delete_image(core->mlx, core->imgs.img_map);
 	mlx_delete_image(core->mlx, core->imgs.img_3d);

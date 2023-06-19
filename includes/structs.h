@@ -13,6 +13,8 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+# include "../includes/enum.h"
+
 typedef struct	s_sounds
 {
 	uint32_t	ambiant;
@@ -30,7 +32,8 @@ typedef struct s_imgs
 	mlx_image_t 	*invbar_selector;
 	mlx_image_t 	*engbar;
     mlx_image_t 	*hearth[2];
-	mlx_image_t 	*sword[4];
+	mlx_image_t 	*sword_nether[5];
+	mlx_image_t 	*hand[9];
 	mlx_image_t		*icon_sword_nether;
     mlx_texture_t	*enemy;
 	mlx_texture_t	*trans;
@@ -90,10 +93,33 @@ typedef struct s_const
 	float			south_west;
 }	t_const;
 
+typedef struct s_animation
+{
+	mlx_image_t		**image;
+	Animation		animation;
+	bool			is_playing;
+	double			speed;
+}	t_animation;
+
 typedef struct s_item
 {
-
+    Item			name;
+    int				durability;
+    int				damage;
+    int				strength;
+    int				scope;
+    mlx_image_t		*image;
+	mlx_image_t		*icon;
+	t_animation 	*animation;
 }	t_item;
+
+typedef struct s_slot
+{
+	short	slot_id;
+	t_item	*item;
+	struct s_slot	*next;
+	struct s_slot	*prev;
+}	t_slot;
 
 typedef struct s_player
 {
@@ -104,7 +130,7 @@ typedef struct s_player
 	bool			have_player;
 	int				move_speed;
 	short			energy;
-	short			toolbar_slot;
+	t_slot			*slot;
 }	t_player;
 
 typedef struct s_core
@@ -114,64 +140,9 @@ typedef struct s_core
 	t_player		player;
 	t_imgs			imgs;
 	t_sounds		sounds;
+	t_item			items[2];
+	t_animation 	animations[2];
     int             screen_size[2];
 }	t_core;
-
-typedef enum {
-	ERROR_MAP_CHAR,
-	ERROR_MAP_NAME,
-	ERROR_MAP_IMG,
-	ERROR_MAP_EXIST,
-	ERROR_ARGS,
-	ERROR_PLAYER,
-	ERROR_MAP_SIZE,
-	SET_DEFAULT_MAP,
-	STARTING,
-	SUCCESS,
-	NO_ERROR,
-	FAILURE,
-	ERROR_FATAL,
-	CORE_INIT,
-	SOUND_INIT,
-	CHECK_MAP,
-	GET_MAP_CONTENT,
-	TRY_LOAD_TEXTURE,
-	TRY_LOAD_SOUND,
-	EMPTY_WALL,
-	TRY_LOAD_COLOR,
-	MINIMAP_INIT,
-    DEATH_PLAYER,
-} MsgType;
-
-typedef enum {
-    NO_ANIMATION,
-    SWORD_NETHERITE_ATTACK,
-} AttackType;
-
-static const char *Messages[] = {
-		"\e[40;31mError \nThere is an unknow char in the map",
-		"\e[40;31mError \nThe name of the map is not compliant",
-		"\e[40;31mError \nCan't load the img",
-		"\e[40;31mError \nCan't open the map file",
-		"\e[40;31mError \nArgs",
-		"\e[40;31mError \nNo player in the map",
-		"\e[40;31mError \nThe size of the map is not supported",
-		"\e[40;33mSet default map..",
-		"\e[40;33mStarting..",
-		"\e[40;32mSucces.",
-		"\e[40;32mNo errors found.",
-		"\e[40;31mFailure.",
-		"\e[101;90mFATAL ERROR.",
-		"\n\e[40;33mInitialization of Core values..",
-		"\n\e[40;33mInitialization of sounds..",
-		"\n\e[40;33mChecking the map contents..",
-		"\n\e[40;33mStarting to get the map contents..",
-		"\e[40;33mTrying to load texture: ",
-		"\e[40;33mTrying to load sound: ",
-		"\e[40;35mAll wall direction don't have texture, trying to set default.. ",
-		"\e[40;33mTrying to load color: ",
-		"\n\e[40;33mInitialization of Minimap.. ",
-        "\e[40;31mYou died.",
-};
 
 #endif

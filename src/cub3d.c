@@ -63,28 +63,19 @@ static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_texture_from_path("assets/e_0.png", &imgs->enemy))
 		msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, "assets/crosshair.png", &imgs->crosshair))
+	if (!set_image_from_path(mlx, "assets/icons/crosshair.png", &imgs->crosshair))
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/invbar.png", &imgs->invbar))
 		msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, "assets/invbar_selector.png", &imgs->invbar_selector))
+	if (!set_image_from_path(mlx, "assets/icons/invbar_selector.png", &imgs->invbar_selector))
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/engbar.png", &imgs->engbar))
 		msg_write(2, 2, ERROR_FATAL);
-    if (!set_image_from_path(mlx, "assets/hearth_full.png", &imgs->hearth[1]))
+    if (!set_image_from_path(mlx, "assets/icons/hearth_full.png", &imgs->hearth[1]))
         msg_write(2, 2, ERROR_FATAL);
-    if (!set_image_from_path(mlx, "assets/hearth_empty.png", &imgs->hearth[0]))
+    if (!set_image_from_path(mlx, "assets/icons/hearth_empty.png", &imgs->hearth[0]))
         msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, "assets/icon_sword_nether.png", &imgs->icon_sword_nether))
-		msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, "assets/texture/sword1resize.png", &imgs->sword[0]))
-        msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, "assets/texture/sword2resize.png", &imgs->sword[1]))
-		msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, "assets/texture/sword3resize.png", &imgs->sword[2]))
-		msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, "assets/texture/sword4resize.png", &imgs->sword[3]))
-		msg_write(2, 2, ERROR_FATAL);
+	texture_loader(mlx, imgs);
 }
 
 static void	sound_init(t_core *core)
@@ -111,6 +102,7 @@ static void	core_init(t_core *core)
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	core->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "セグメンテーションフォルトのないプログラムは、鋭い剣のように正確に使える。", true);
 	const_init(&core->consts);
+	struct_setup(core);
 	imgs_init(core->mlx, &core->imgs, core->consts.ray_color);
 	sound_init(core);
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
@@ -133,13 +125,13 @@ static void	core_init(t_core *core)
 	mlx_image_to_window(core->mlx, core->imgs.icon_sword_nether, SCREEN_WIDTH / 3.05,SCREEN_HEIGHT - 80);
 
 	mlx_image_to_window(core->mlx, core->imgs.crosshair, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-	mlx_image_to_window(core->mlx, core->imgs.sword[0], SCREEN_WIDTH / 1.4, SCREEN_HEIGHT - 290);
-	mlx_image_to_window(core->mlx, core->imgs.sword[1], SCREEN_WIDTH / 1.6, SCREEN_HEIGHT - 310);
-	mlx_image_to_window(core->mlx, core->imgs.sword[2], SCREEN_WIDTH / 1.7, SCREEN_HEIGHT - 320);
-	mlx_image_to_window(core->mlx, core->imgs.sword[3], SCREEN_WIDTH / 1.8, SCREEN_HEIGHT - 330);
-	core->imgs.sword[1]->enabled = 0;
-	core->imgs.sword[2]->enabled = 0;
-	core->imgs.sword[3]->enabled = 0;
+	mlx_image_to_window(core->mlx, core->imgs.sword_nether[0], SCREEN_WIDTH / 1.4, SCREEN_HEIGHT - 290);
+	mlx_image_to_window(core->mlx, core->imgs.sword_nether[1], SCREEN_WIDTH / 1.6, SCREEN_HEIGHT - 310);
+	mlx_image_to_window(core->mlx, core->imgs.sword_nether[2], SCREEN_WIDTH / 1.7, SCREEN_HEIGHT - 320);
+	mlx_image_to_window(core->mlx, core->imgs.sword_nether[3], SCREEN_WIDTH / 1.8, SCREEN_HEIGHT - 330);
+	core->imgs.sword_nether[1]->enabled = 0;
+	core->imgs.sword_nether[2]->enabled = 0;
+	core->imgs.sword_nether[3]->enabled = 0;
     core->imgs.hearth[0]->enabled = 1;
     core->imgs.hearth[1]->enabled = 1;
 	core->screen_size[0] = SCREEN_WIDTH;
@@ -148,7 +140,6 @@ static void	core_init(t_core *core)
 	core->player.move_speed = 10;
     core->player.health = 2;
 	core->player.energy = 100;
-	core->player.toolbar_slot = 0;
 	msg_write(1, -1, SUCCESS);
 }
 

@@ -16,7 +16,8 @@ void	mouse(enum mouse_key key, enum action action, enum modifier_key mkey, void 
 	if (time - mlx_get_time() >= -0.1)
 		return ;
 	time = mlx_get_time();
-	core->imgs.animation = SWORD_NETHERITE_ATTACK;
+	core->animations[0].is_playing = true;
+	//core->imgs.animations = SWORD_NETHER_ATTACK;
 	if (get_forward_char(&core->player, core->consts.map) == '1') {
 		set_char_at_forward(0, &core->player, core->consts.map);
 	}

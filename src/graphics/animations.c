@@ -1,26 +1,25 @@
 #include "../../includes/includes.h"
 
-void	attack_animation(t_core *core)
+static void	play_animation(t_animation *animation)
 {
-    static double	time;
-    static int		i = 0;
-
-    if (time - mlx_get_time() > -0.01)
-        return;
-    time = mlx_get_time();
-    if (i == 3)
-    {
-        core->imgs.sword[3]->enabled = 0;
-        core->imgs.sword[0]->enabled = 1;
-        core->imgs.animation = NO_ANIMATION;
-        i = 0;
-        return ;
-    }
-    core->imgs.sword[i++]->enabled = 0;
-    core->imgs.sword[i]->enabled = 1;
+	static double	time;
+	static int		i = 0;
+	if (time - mlx_get_time() > animation->speed)
+		return;
+	time = mlx_get_time();
+	if (!animation->image[i + 1])
+	{
+		animation->image[i]->enabled = false;
+		animation->image[0]->enabled = true;
+		i = 0;
+		animation->is_playing = false;
+		return ;
+	}
+	animation->image[i++]->enabled = 0;
+	animation->image[i]->enabled = 1;
 }
 
-void    animation_manager(t_imgs *imgs)
+void    animation_manager(t_animation *animation)
 {
-    (void)imgs;
+	play_animation(animation);
 }
