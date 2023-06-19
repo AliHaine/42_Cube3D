@@ -23,7 +23,6 @@ typedef struct	s_sounds
 
 typedef struct s_imgs
 {
-    short           animation;
 	mlx_image_t		*img_3d;
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_player;
@@ -96,7 +95,6 @@ typedef struct s_const
 typedef struct s_animation
 {
 	mlx_image_t		**image;
-	Animation		animation;
 	bool			is_playing;
 	double			speed;
 }	t_animation;
@@ -107,10 +105,10 @@ typedef struct s_item
     int				durability;
     int				damage;
     int				strength;
-    int				scope;
+    int				range;
     mlx_image_t		*image;
 	mlx_image_t		*icon;
-	t_animation 	*animation;
+	t_animation 	animation;
 }	t_item;
 
 typedef struct s_slot

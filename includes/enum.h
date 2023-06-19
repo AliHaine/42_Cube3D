@@ -34,16 +34,10 @@ typedef enum {
     DEATH_PLAYER,
 } MsgType;
 
-typedef enum {
-    NO_ANIMATION,
-	HAND_ATTACK,
-    SWORD_NETHER_ATTACK,
-} Animation;
-
 static const char *ItemName[] = {
-		"Hand",
-		"Sword nether",
-		"Sword diamond",
+		"hand",
+		"sword_nether",
+		"sword_diamond",
 		"Wood bow",
 };
 

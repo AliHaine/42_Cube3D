@@ -48,51 +48,13 @@ static void	const_init(t_const *consts)
 
 static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
 {
-    imgs->animation = NO_ANIMATION;
 	imgs->wall_texture[0] = 0;
 	imgs->wall_texture[1] = 0;
 	imgs->wall_texture[2] = 0;
 	imgs->wall_texture[3] = 0;
-	imgs->door_texture = mlx_load_png("assets/door.png");
 	imgs->img_3d = mlx_new_image(mlx, SCREEN_WIDTH,
 									  SCREEN_HEIGHT);
 	imgs->img_player = create_minimap_player(mlx, ray_color);
-	if (!set_texture_from_path("assets/grass.png", &imgs->grass_texture))
-		msg_write(2, 2, ERROR_FATAL);
-	if (!set_texture_from_path("assets/trans.png", &imgs->trans))
-		msg_write(2, 2, ERROR_FATAL);
-	if (!set_texture_from_path("assets/e_0.png", &imgs->enemy))
-		msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, "assets/icons/crosshair.png", &imgs->crosshair))
-		msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, "assets/invbar.png", &imgs->invbar))
-		msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, "assets/icons/invbar_selector.png", &imgs->invbar_selector))
-		msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, "assets/engbar.png", &imgs->engbar))
-		msg_write(2, 2, ERROR_FATAL);
-    if (!set_image_from_path(mlx, "assets/icons/hearth_full.png", &imgs->hearth[1]))
-        msg_write(2, 2, ERROR_FATAL);
-    if (!set_image_from_path(mlx, "assets/icons/hearth_empty.png", &imgs->hearth[0]))
-        msg_write(2, 2, ERROR_FATAL);
-	texture_loader(mlx, imgs);
-}
-
-static void	sound_init(t_core *core)
-{
-	msg_write(1, -1, SOUND_INIT);
-	usleep(450000 * LOAD);
-	init_sound_empty(&core->sounds);
-	if (!load_sound(&(core->sounds.ambiant), "assets/sounds/ambiant.mp3"))
-		msg_write(2, 2, ERROR_FATAL);
-	else
-		msg_write(1, -1, SUCCESS);
-	if (!load_sound(&core->sounds.hurt, "assets/sounds/hurt.mp3"))
-		msg_write(2, 2, ERROR_FATAL);
-	else
-		msg_write(1, -1, SUCCESS);
-	play_sound(core->sounds.ambiant);
-	msg_write(1, -1, SUCCESS);
 }
 
 static void	core_init(t_core *core)
@@ -102,9 +64,11 @@ static void	core_init(t_core *core)
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	core->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "セグメンテーションフォルトのないプログラムは、鋭い剣のように正確に使える。", true);
 	const_init(&core->consts);
+	texture_loader(core);
 	struct_setup(core);
+	sound_loader(&core->sounds);
 	imgs_init(core->mlx, &core->imgs, core->consts.ray_color);
-	sound_init(core);
+	sound_loader(&core->sounds);
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
 	core->imgs.img_player = create_minimap_player(core->mlx, core->consts.ray_color);
@@ -122,16 +86,8 @@ static void	core_init(t_core *core)
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.9,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.69,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.51,SCREEN_HEIGHT - 155);
-	mlx_image_to_window(core->mlx, core->imgs.icon_sword_nether, SCREEN_WIDTH / 3.05,SCREEN_HEIGHT - 80);
 
 	mlx_image_to_window(core->mlx, core->imgs.crosshair, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-	mlx_image_to_window(core->mlx, core->imgs.sword_nether[0], SCREEN_WIDTH / 1.4, SCREEN_HEIGHT - 290);
-	mlx_image_to_window(core->mlx, core->imgs.sword_nether[1], SCREEN_WIDTH / 1.6, SCREEN_HEIGHT - 310);
-	mlx_image_to_window(core->mlx, core->imgs.sword_nether[2], SCREEN_WIDTH / 1.7, SCREEN_HEIGHT - 320);
-	mlx_image_to_window(core->mlx, core->imgs.sword_nether[3], SCREEN_WIDTH / 1.8, SCREEN_HEIGHT - 330);
-	core->imgs.sword_nether[1]->enabled = 0;
-	core->imgs.sword_nether[2]->enabled = 0;
-	core->imgs.sword_nether[3]->enabled = 0;
     core->imgs.hearth[0]->enabled = 1;
     core->imgs.hearth[1]->enabled = 1;
 	core->screen_size[0] = SCREEN_WIDTH;
@@ -150,6 +106,8 @@ int	main(int argc, char *argv[])
 
 	msg_write(1, -1, STARTING);
 	core_init(&core);
+	item_loader(&core);
+	core.player.slot->item = &core.items[SWORD_NETHER];
 	usleep(60000);
 	map_manager(argv, &core);
 	// J'init l'image la psq elle a besoin des variables initialisees par map_manager
@@ -160,14 +118,7 @@ int	main(int argc, char *argv[])
 			((core.consts.map_width * 64) / core.consts.minimap_size), (int)
 			(((core.consts.map_height + 1) * 64) / core.consts.minimap_size));
 	msg_write(1, -1, SUCCESS);
-	mlx_loop_hook(core.mlx, &display, &core);
-	mlx_loop_hook(core.mlx, &inputs, &core);
-	mlx_loop_hook(core.mlx, &player_listener, &core);
-	mlx_key_hook(core.mlx, &inputs_hook, &core);
-    mlx_resize_hook(core.mlx, &resize_hook, &core);
-	mlx_mouse_hook(core.mlx, &mouse, &core);
-	mlx_scroll_hook(core.mlx, &scroll_hook, &core);
-	mlx_loop(core.mlx);
+	mlx_hook_loader(&core);
 	delete_image_from_struct(core.mlx, &core.imgs);
 	mlx_close_window(core.mlx);
 	mlx_terminate(core.mlx);

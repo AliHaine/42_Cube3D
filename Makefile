@@ -10,7 +10,10 @@ SRCS		=	src/cub3d.c \
 				src/graphics/wall_direction.c \
 				src/graphics/obstacle_direction.c \
 				src/graphics/animations.c \
-				src/graphics/texture_loader.c \
+				src/loading/texture_loader.c \
+				src/loading/sound_loader.c \
+				src/loading/item_loader.c \
+				src/loading/other_loader.c \
 				src/parsing/map_manager.c \
 				src/parsing/map_parse.c \
 				src/parsing/map_texture.c \
