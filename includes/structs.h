@@ -96,7 +96,6 @@ typedef struct s_animation
 {
 	mlx_image_t		**image;
 	bool			is_playing;
-	double			speed;
 }	t_animation;
 
 typedef struct s_item
@@ -138,8 +137,8 @@ typedef struct s_core
 	t_player		player;
 	t_imgs			imgs;
 	t_sounds		sounds;
-	t_item			items[2];
-	t_animation 	animations[2];
+	t_item			items[4];
+	t_animation 	animations[4];
     int             screen_size[2];
 }	t_core;
 

@@ -4,11 +4,8 @@
 
 static void	play_attack_animation(t_animation *animation, mlx_image_t *def)
 {
-	static double	time;
 	static int		i = 0;
-	if (time - mlx_get_time() > animation->speed)
-		return;
-	time = mlx_get_time();
+
 	def->enabled = false;
 	if (!animation->image[i + 1])
 	{
@@ -36,5 +33,9 @@ void    animation_listener(t_core *core)
 		play_attack_animation(&core->items[0].animation, core->items[0].image);
 	} else if (core->items[1].animation.is_playing) {
 		play_attack_animation(&core->items[1].animation, core->items[1].image);
-	}
+	} else if (core->items[2].animation.is_playing) {
+        play_attack_animation(&core->items[2].animation, core->items[2].image);
+    } else if (core->items[3].animation.is_playing) {
+        play_attack_animation(&core->items[3].animation, core->items[3].image);
+    }
 }

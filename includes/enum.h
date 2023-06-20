@@ -2,13 +2,6 @@
 #define ENUM_H
 
 typedef enum {
-	HAND,
-    SWORD_NETHER,
-    SWORD_DIAMOND,
-    WOOD_BOW,
-}   Item;
-
-typedef enum {
     ERROR_MAP_CHAR,
     ERROR_MAP_NAME,
     ERROR_MAP_IMG,
@@ -34,10 +27,20 @@ typedef enum {
     DEATH_PLAYER,
 } MsgType;
 
+
+typedef enum {
+    HAND,
+    SWORD_NETHER,
+    SWORD_DIAMOND,
+    SWORD_RUBY,
+    WOOD_BOW,
+}   Item;
+
 static const char *ItemName[] = {
 		"hand",
 		"sword_nether",
 		"sword_diamond",
+        "sword_ruby",
 		"Wood bow",
 };
 

@@ -21,6 +21,7 @@ SRCS		=	src/cub3d.c \
 				src/struct/struct_manager.c \
 				src/struct/struct_slot.c \
 				src/player_interaction/player_listener.c \
+				src/player_interaction/item.c \
 				src/player_interaction/heal.c \
 				src/player_interaction/build.c \
 				src/player_interaction/energy.c \

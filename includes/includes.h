@@ -24,6 +24,7 @@
 # include "structs.h"
 # include "utils.h"
 # include "defines.h"
+# include <sys/time.h>
 
 //display.c
 void		display(void *params);
@@ -87,6 +88,9 @@ void	player_listener(void *params);
 
 
 void	set_char_at_forward(char c, t_player *player, char **map);
+
+//item//
+void    give_item(t_slot *slot, t_item *item);
 
 //heal//
 bool	is_player_death(int player_health);
