@@ -1,26 +1,41 @@
 #include "../../includes/includes.h"
 
-void	attack_animation(t_core *core)
-{
-    static double	time;
-    static int		i = 0;
+//playing any animation attack
 
-    if (time - mlx_get_time() > -0.01)
-        return;
-    time = mlx_get_time();
-    if (i == 3)
-    {
-        core->imgs.sword[3]->enabled = 0;
-        core->imgs.sword[0]->enabled = 1;
-        core->imgs.animation = NO_ANIMATION;
-        i = 0;
-        return ;
-    }
-    core->imgs.sword[i++]->enabled = 0;
-    core->imgs.sword[i]->enabled = 1;
+static void	play_attack_animation(t_animation *animation, mlx_image_t *def)
+{
+	static int		i = 0;
+
+	def->enabled = false;
+	if (!animation->image[i + 1])
+	{
+		animation->image[i - 1]->instances->x += 150;
+		animation->image[i - 1]->instances[0].enabled = false;
+		def->enabled = true;
+		animation->is_playing = false;
+		i = 0;
+		return ;
+	}
+	if (i > 0)
+	{
+		animation->image[i - 1]->instances->x += 150;
+		animation->image[i - 1]->instances[0].enabled = 0;
+	}
+	animation->image[i]->instances[0].x -= 150;
+	animation->image[i++]->instances[0].enabled = 1;
 }
 
-void    animation_manager(t_imgs *imgs)
+void    animation_listener(t_core *core)
 {
-    (void)imgs;
+	//changer pour une quantite indefini d'anim
+	if (core->items[0].animation.is_playing)
+	{
+		play_attack_animation(&core->items[0].animation, core->items[0].image);
+	} else if (core->items[1].animation.is_playing) {
+		play_attack_animation(&core->items[1].animation, core->items[1].image);
+	} else if (core->items[2].animation.is_playing) {
+        play_attack_animation(&core->items[2].animation, core->items[2].image);
+    } else if (core->items[3].animation.is_playing) {
+        play_attack_animation(&core->items[3].animation, core->items[3].image);
+    }
 }

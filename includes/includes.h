@@ -24,6 +24,7 @@
 # include "structs.h"
 # include "utils.h"
 # include "defines.h"
+# include <sys/time.h>
 
 //display.c
 void		display(void *params);
@@ -48,6 +49,13 @@ int			get_obstacle_offset(int direction, t_checkpoint check);
 //textures.c
 uint32_t	get_color(mlx_texture_t *wall_texture, float fog_strength, int texture_xy[2]);
 void		draw_energy_bar(mlx_image_t *img, short energy);
+
+//loader//
+
+void	sound_loader(t_sounds *sounds);
+void	texture_loader(t_core *core);
+void	mlx_hook_loader(t_core *core);
+void	item_loader(t_core *core);
 
 //raycast_utils.c
 float		calc_ray_dist(t_core *core, float ray_x, float ray_y, float ray_angle);
@@ -76,14 +84,18 @@ bool	load_sound(uint32_t *s, char *path);
 void	play_sound_alt(uint32_t s, bool play, bool loop);
 void	play_sound(uint32_t s);
 
-//animation//
+//animations//
 void	attack_animation(t_core *core);
+void    animation_listener(t_core *core);
 
 	//player interaction//
 void	player_listener(void *params);
 
 
 void	set_char_at_forward(char c, t_player *player, char **map);
+
+//item//
+void    give_item(t_slot *slot, t_item *item);
 
 //heal//
 bool	is_player_death(int player_health);
@@ -94,6 +106,12 @@ void	heal_player(t_player *player, t_imgs *imgs);
 void	take_energy(t_player *player, short value);
 void	add_energy(t_player *player, short value);
 bool	player_have_energy(short value);
+bool	player_have_enough_energy(t_player *player, short value);
 
+	//struct
+void	struct_setup(t_core *core);
+
+void	setup_slot_struct(t_player *player, t_item *item);
+t_slot	*get_first_slot(t_slot *slot);
 
 #endif

@@ -22,3 +22,10 @@ bool	player_have_energy(short value)
 		return (false);
 	return (true);
 }
+
+bool	player_have_enough_energy(t_player *player, short value)
+{
+	if (player->energy < value)
+		return (false);
+	return (true);
+}

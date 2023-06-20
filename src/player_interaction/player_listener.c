@@ -4,7 +4,7 @@ static void	energy_listener(t_player *player)
 {
 	if (is_player_running(player))
 	{
-		take_energy(player, 1);
+		take_energy(player, 3);
 		if (!player_have_energy(player->energy))
 			player->move_speed = 10;
 	}
