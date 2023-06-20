@@ -39,20 +39,25 @@ typedef struct s_imgs
 	mlx_texture_t	*grass_texture;
 }	t_imgs;
 
-typedef struct s_ray
+typedef struct	s_checkpoint
 {
-	float	start_angle;
-	float	ray_x;
-	float	ray_y;
-	float	ray_angle;
-	float	ray_dist;
-	bool	have_checkpoint;
 	float	checkpoint_x;
 	float	checkpoint_y;
 	char	obstacle;
-	int		wall_direction;
-	float	cosinus;
-	float	sinus;
+}	t_checkpoint;
+
+typedef struct s_ray
+{
+	float			start_angle;
+	float			ray_x;
+	float			ray_y;
+	float			ray_angle;
+	float			ray_dist;
+	int				checkpoint_number;
+	t_checkpoint	*checkpoints;
+	int				wall_direction;
+	float			cosinus;
+	float			sinus;
 }	t_ray;
 
 typedef struct s_three_i
@@ -97,7 +102,7 @@ typedef struct s_item
 
 typedef struct s_player
 {
-	float			origin[2];
+	float 			origin[2];
 	float			playerpos[2];
 	float			playerangle;
 	int				health;

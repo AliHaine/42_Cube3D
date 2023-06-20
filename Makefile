@@ -6,6 +6,7 @@ SRCS		=	src/cub3d.c \
 				src/inputs/scroll_hook.c \
 				src/graphics/display.c \
 				src/graphics/raycast.c \
+				src/graphics/draw.c \
 				src/graphics/textures.c \
 				src/graphics/wall_direction.c \
 				src/graphics/obstacle_direction.c \
@@ -33,7 +34,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 NAME		=	cub3d
 
-FLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS		=	-g3 -fsanitize=address
 LDFLAGS		+=	-L./src/sound/bass
 LDLIBS		+=	-lbass
 

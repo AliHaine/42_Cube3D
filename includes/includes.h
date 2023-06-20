@@ -31,14 +31,19 @@ void		draw_map(t_core *core);
 
 //raycast.c
 void		raycast(t_core *core);
+void		draw_obstacles(t_core *core, t_ray ray, int r);
+
+//draw.c
+void	draw_columns(t_core *core, t_ray ray, int r);
+
 
 //wall_direction.c
 int			wall_direction(t_core *core, t_ray ray);
 int			get_offset(int direction, t_ray ray);
 
 //obstacle_direction.c
-int			obstacle_direction(t_core *core, t_ray ray);
-int			get_obstacle_offset(int direction, t_ray ray);
+int			obstacle_direction(t_core *core, t_checkpoint check, t_ray ray);
+int			get_obstacle_offset(int direction, t_checkpoint check);
 
 //textures.c
 uint32_t	get_color(mlx_texture_t *wall_texture, float fog_strength, int texture_xy[2]);

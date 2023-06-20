@@ -21,7 +21,7 @@
 # define MINIMAP_PLAYER_SIZE (MINIMAP_SIZE/3)
 # define FOV 60
 # define SENSIBILITY 2
-# define FOG_DISTANCE 1000
+# define FOG_DISTANCE 500
 # define TEXTURE_SIZE 64
 # define RESIZE (64 / (64 / MINIMAP_SIZE))
 # define DEFAULT_WALL ".d/default_wall.png"
