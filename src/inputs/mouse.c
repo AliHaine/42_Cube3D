@@ -7,7 +7,7 @@ void	mouse(enum mouse_key key, enum action action, enum modifier_key mkey, void 
 
 	(void) mkey;
 	core = (t_core *)param;
-	if (!player_have_enough_energy(&core->player, 20))
+	if (core->player.is_in_inventory == true || !player_have_enough_energy(&core->player, 20))
 		return ;
 	if (key == 0 && action == 0)
     	hit_player(&core->player, &core->imgs);

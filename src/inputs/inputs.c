@@ -19,9 +19,6 @@ void	inputs(void *params)
 
 	core = (t_core *)params;
 	mouse_cursor(core->mlx, &core->player, core->screen_size);
-	// Je sais pas expliquer les calculs qu'il y a dans ces fonctions inutile de demander
-	// C'est de la trigonometrie c'est tout ce que je peux dire
-	// Renseigne toi sur les cercles trigo et tu comprendras ptetre
 	if (mlx_is_key_down(core->mlx, MLX_KEY_D))
 		move_right_left(&core->player, core->consts.map, 1);
 	else if (mlx_is_key_down(core->mlx, MLX_KEY_A))
@@ -49,4 +46,6 @@ void	inputs_hook(struct mlx_key_data key, void *params)
 		core->player.move_speed = 25;
 	else if (key.key == 340 && key.action == 0)
 		core->player.move_speed = 10;
+    if (key.key == 69 && key.action == 0)
+        inventory(core);
 }

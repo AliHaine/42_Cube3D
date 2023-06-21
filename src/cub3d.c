@@ -55,6 +55,7 @@ static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
 	imgs->img_3d = mlx_new_image(mlx, SCREEN_WIDTH,
 									  SCREEN_HEIGHT);
 	imgs->img_player = create_minimap_player(mlx, ray_color);
+	imgs->inventory_gui = mlx_texture_to_image(mlx, imgs->inventory_gui_texture);
 }
 
 static void	core_init(t_core *core)
@@ -96,6 +97,7 @@ static void	core_init(t_core *core)
 	core->player.move_speed = 10;
     core->player.health = 2;
 	core->player.energy = 100;
+	core->player.is_in_inventory = false;
 	msg_write(1, -1, SUCCESS);
 }
 

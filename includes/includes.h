@@ -90,7 +90,7 @@ void    animation_listener(t_core *core);
 
 	//player interaction//
 void	player_listener(void *params);
-
+void	inventory(t_core *core);
 
 void	set_char_at_forward(char c, t_player *player, char **map);
 

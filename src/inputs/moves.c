@@ -45,6 +45,8 @@ void	move_forward_backward(t_player *player, char **map, int direction)
 
 void	move_rotate(t_player *player, int direction, float speed)
 {
+    if (player->is_in_inventory == true)
+        return ;
 	if (direction == 0)
 	{
 		player->playerangle -= speed;

@@ -34,11 +34,13 @@ typedef struct s_imgs
 	mlx_image_t 	*sword_nether[5];
 	mlx_image_t 	*hand[9];
 	mlx_image_t		*icon_sword_nether;
+	mlx_image_t		*inventory_gui;
     mlx_texture_t	*enemy;
 	mlx_texture_t	*trans;
 	mlx_texture_t	*wall_texture[4];
 	mlx_texture_t	*door_texture;
 	mlx_texture_t	*grass_texture;
+	mlx_texture_t	*inventory_gui_texture;
 }	t_imgs;
 
 typedef struct	s_checkpoint
@@ -60,6 +62,7 @@ typedef struct s_ray
 	int				wall_direction;
 	float			cosinus;
 	float			sinus;
+    char            obstacle;
 }	t_ray;
 
 typedef struct s_three_i
@@ -125,7 +128,6 @@ typedef struct s_slot
 
 typedef struct s_player
 {
-	float 			origin[2];
 	float			playerpos[2];
 	float			playerangle;
 	int				health;
@@ -133,6 +135,7 @@ typedef struct s_player
 	int				move_speed;
 	short			energy;
 	t_slot			*slot;
+	bool			is_in_inventory;
 }	t_player;
 
 typedef struct s_core

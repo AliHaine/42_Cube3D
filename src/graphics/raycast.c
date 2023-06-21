@@ -51,9 +51,9 @@ static void	good_wall(t_ray *rays)
     while (++i < RAY_NUMBER)
     {
         if (rays[i].wall_direction == rays[i - 1].wall_direction)
-            continue;
+            continue ;
         dist = rays[i].ray_dist * rays[i].ray_dist;
-        j = (int)((1.0f / (sqrt(dist) / 70.0f)) * 50.0f);
+        j = (int)((1.0f / (sqrt(dist) / 70.0f) * 50.0f));
         if (j + i >= RAY_NUMBER - 1 || j + i < 0)
             j = 0;
         if (j + i < RAY_NUMBER)

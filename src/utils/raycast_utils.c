@@ -57,7 +57,6 @@ static int	is_already_detected(int x, int y, t_ray *ray)
 
 int	is_obstacle(t_core *core, t_ray *ray)
 {
-	char	c;
 	int		ix;
 	int		iy;
 
@@ -66,10 +65,10 @@ int	is_obstacle(t_core *core, t_ray *ray)
 	if (ix < 0 || iy < 0 || ix > core->consts.map_width
 		|| iy > core->consts.map_height)
 		return (-1);
-	c = core->consts.map[iy][ix];
-	if ((c == 'Z' || c == 'D') && !is_already_detected(ix, iy, ray))
-		add_checkpoint(ray, c);
-	if (c == '1')
+	ray->obstacle = core->consts.map[iy][ix];
+	if ((ray->obstacle == 'Z') && !is_already_detected(ix, iy, ray))
+		add_checkpoint(ray, ray->obstacle);
+	if (ray->obstacle == '1')
 		return (1);
 	return (0);
 }

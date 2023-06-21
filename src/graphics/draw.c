@@ -49,10 +49,10 @@ void	draw_obstacles(t_core *core, t_ray ray, int r)
 
 void	draw_columns(t_core *core, t_ray ray, int r)
 {
-	float		wall_height;
-	int			py;
-	uint32_t	color;
-	int			texture_xy[2];
+	float			wall_height;
+	int				py;
+	uint32_t		color;
+	int				texture_xy[2];
 
 	texture_xy[0] = get_offset(ray.wall_direction, ray);
 	wall_height = (SCREEN_HEIGHT * 64) / ray.ray_dist;

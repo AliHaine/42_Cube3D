@@ -25,6 +25,8 @@ void    mouse_cursor(mlx_t *mlx, t_player *player, const int screen_size[2])
     int screen_middle_x;
     float rotation_speed;
 
+    if (player->is_in_inventory == true)
+        return ;
     screen_middle_x = screen_size[0] / 2;
     if (mlx_get_time() < 0.8)
     {
