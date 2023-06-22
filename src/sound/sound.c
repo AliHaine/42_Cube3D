@@ -61,7 +61,7 @@ void	play_sound(uint32_t s)
 {
 	if (!s)
 		return ;
-	BASS_ChannelStop(s);
-	BASS_ChannelSetPosition(s, 0, 0);
-	BASS_ChannelPlay(s, 0);
+//	BASS_ChannelStop(s);
+//	BASS_ChannelSetPosition(s, 0, 0);
+//	BASS_ChannelPlay(s, 0);
 }

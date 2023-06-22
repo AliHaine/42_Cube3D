@@ -14,7 +14,7 @@ static void	other_loader(mlx_t *mlx, t_imgs *imgs)
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_texture_from_path("assets/grass.png", &imgs->grass_texture))
 		msg_write(2, 2, ERROR_FATAL);
-    if (!set_texture_from_path("assets/inventory_gui.png", &imgs->inventory_gui_texture))
+    if (!set_texture_from_path("assets/inventory_gui2.png", &imgs->inventory_gui_texture))
         msg_write(2, 2, ERROR_FATAL);
 }
 
@@ -24,6 +24,8 @@ static void	icon_loader(mlx_t *mlx, t_imgs *imgs)
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/icons/invbar_selector.png", &imgs->invbar_selector))
 		msg_write(2, 2, ERROR_FATAL);
+	mlx_resize_image(imgs->invbar_selector, imgs->invbar_selector->width / 1.5,
+		imgs->invbar_selector->height / 1.5);
 	if (!set_image_from_path(mlx, "assets/icons/hearth_full.png", &imgs->hearth[1]))
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/icons/hearth_empty.png", &imgs->hearth[0]))

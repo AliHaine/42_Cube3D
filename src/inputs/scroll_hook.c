@@ -2,25 +2,25 @@
 
 static void	right_move(t_player *player, mlx_image_t *img)
 {
-	if (player->slot->slot_id >= 6)
+	if (!player->slot->next)
 		return ;
-	img->instances->x += 80;
+	img->instances->x += 61;
 	player->slot = player->slot->next;
 }
 
 static void	left_move(t_player *player, mlx_image_t *img)
 {
-	if (player->slot->slot_id <= 1)
+	if (!player->slot->prev)
 		return ;
-	img->instances->x -= 80;
+	img->instances->x -= 61;
 	player->slot = player->slot->prev;
 }
 
 void	scroll_hook(double x, double y, void *param)
 {
-	(void)x;
 	t_core	*core;
 
+	(void)x;
 	core = param;
 	if (y > 0)
 		right_move(&core->player, core->imgs.invbar_selector);

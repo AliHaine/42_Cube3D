@@ -14,7 +14,7 @@ static t_slot	*add_first_noed(t_item *hand_item)
 	t_slot *first;
 
 	first = malloc(sizeof(t_slot));
-	first->slot_id = 6;
+	first->slot_id = 9;
 	first->item = hand_item;
 	first->next = 0;
 	return (first);
@@ -24,7 +24,7 @@ void	setup_slot_struct(t_player *player, t_item *hand_item)
 {
 	int	i;
 
-	i = 6;
+	i = 9;
 	player->slot = add_first_noed(hand_item);
 	while (i-- > 1)
 	{

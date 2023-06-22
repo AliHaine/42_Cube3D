@@ -120,8 +120,8 @@ typedef struct s_item
 
 typedef struct s_slot
 {
-	short	slot_id;
-	t_item	*item;
+	short			slot_id;
+	t_item			*item;
 	struct s_slot	*next;
 	struct s_slot	*prev;
 }	t_slot;
