@@ -37,5 +37,7 @@ void    animation_listener(t_core *core)
         play_attack_animation(&core->items[2].animation, core->items[2].image);
     } else if (core->items[3].animation.is_playing) {
         play_attack_animation(&core->items[3].animation, core->items[3].image);
-    }
+    } else if (core->items[4].animation.is_playing) {
+		play_attack_animation(&core->items[4].animation, core->items[4].image);
+	}
 }

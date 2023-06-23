@@ -37,10 +37,15 @@ static void	const_init(t_const *consts)
 	consts->top_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
 	consts->bot_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
 	consts->ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 255;
-	consts->south_east = PI / 4;
+	//??
+	/*consts->south_east = PI / 4;
 	consts->south_west = (3 * PI) / 4;
 	consts->north_east = (7 * PI) / 4;
-	consts->north_west = (5 * PI) / 4;
+	consts->north_west = (5 * PI) / 4;*/
+	consts->north_east = PI / 4;
+	consts->north_west = (3 * PI) / 4;
+	consts->south_east = (7 * PI) / 4;
+	consts->south_west = (5 * PI) / 4;
 	consts->fov = FOV * (PI / 180);
 	consts->dist_between_ray = consts->fov / RAY_NUMBER;
 	consts->minimap_size = (int)(64 / MINIMAP_SIZE);
@@ -55,7 +60,6 @@ static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
 	imgs->img_3d = mlx_new_image(mlx, SCREEN_WIDTH,
 									  SCREEN_HEIGHT);
 	imgs->img_player = create_minimap_player(mlx, ray_color);
-	imgs->inventory_gui = mlx_texture_to_image(mlx, imgs->inventory_gui_texture);
 }
 
 static void	core_init(t_core *core)
@@ -77,8 +81,8 @@ static void	core_init(t_core *core)
 	//voir pourquoi on est obliger de mettre 2 fois le cursor
 	mlx_image_to_window(core->mlx, core->imgs.crosshair, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_image_to_window(core->mlx, core->imgs.img_player, 0, 0);
-	mlx_image_to_window(core->mlx, core->imgs.invbar, SCREEN_WIDTH / 3.43,SCREEN_HEIGHT - 95);
-	mlx_image_to_window(core->mlx, core->imgs.invbar_selector, SCREEN_WIDTH / 3.43,SCREEN_HEIGHT - 95);
+	mlx_image_to_window(core->mlx, core->imgs.invbar, SCREEN_WIDTH / 3.17,SCREEN_HEIGHT - 95);
+	mlx_image_to_window(core->mlx, core->imgs.invbar_selector, SCREEN_WIDTH / 3.17,SCREEN_HEIGHT - 95);
 	mlx_image_to_window(core->mlx, core->imgs.engbar, SCREEN_WIDTH / 3,SCREEN_HEIGHT - 115);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH / 2.9,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH / 2.69,SCREEN_HEIGHT - 155);
@@ -89,8 +93,6 @@ static void	core_init(t_core *core)
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.51,SCREEN_HEIGHT - 155);
 
 	mlx_image_to_window(core->mlx, core->imgs.crosshair, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-	mlx_image_to_window(core->mlx, core->imgs.inventory_gui, 0, 0);
-	core->imgs.inventory_gui->enabled = false;
     core->imgs.hearth[0]->enabled = 1;
     core->imgs.hearth[1]->enabled = 1;
 	core->screen_size[0] = SCREEN_WIDTH;
@@ -99,7 +101,6 @@ static void	core_init(t_core *core)
 	core->player.move_speed = 10;
     core->player.health = 2;
 	core->player.energy = 100;
-	core->player.is_in_inventory = false;
 	msg_write(1, -1, SUCCESS);
 }
 
@@ -111,8 +112,9 @@ int	main(int argc, char *argv[])
 	msg_write(1, -1, STARTING);
 	core_init(&core);
 	item_loader(&core);
-    give_item(core.player.slot, &core.items[SWORD_NETHER]);
+    give_item(core.player.slot, &core.items[SWORD_RUBY]);
     give_item(core.player.slot->next, &core.items[SWORD_DIAMOND]);
+
     usleep(60000);
 	map_manager(argv, &core);
 	// J'init l'image la psq elle a besoin des variables initialisees par map_manager

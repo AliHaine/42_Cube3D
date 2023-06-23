@@ -33,6 +33,7 @@ typedef enum {
     SWORD_NETHER,
     SWORD_DIAMOND,
     SWORD_RUBY,
+	SWORD_IRON,
     WOOD_BOW,
 }   Item;
 
@@ -41,6 +42,7 @@ static const char *ItemName[] = {
 		"sword_nether",
 		"sword_diamond",
         "sword_ruby",
+		"sword_iron",
 		"Wood bow",
 };
 
