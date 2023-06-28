@@ -26,6 +26,9 @@
 # include "defines.h"
 # include <sys/time.h>
 
+//raycast2//
+void	raycasting(t_core *core);
+
 //display.c
 void		display(void *params);
 void		draw_map(t_core *core);

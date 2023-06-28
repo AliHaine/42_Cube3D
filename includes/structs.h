@@ -50,18 +50,28 @@ typedef struct	s_checkpoint
 	char	obstacle;
 }	t_checkpoint;
 
+typedef struct s_ray2
+{
+	int		d_xy[2];
+	int		cell_valuexy[2];
+	float	ray_angle;
+	int		direction;
+	bool	face;
+
+}	t_ray2;
+
 typedef struct s_ray
 {
-	float			start_angle;
-	float			ray_x;
-	float			ray_y;
-	float			ray_angle;
-	float			ray_dist;
-	int				checkpoint_number;
-	t_checkpoint	*checkpoints;
-	int				wall_direction;
-	float			cosinus;
-	float			sinus;
+    float			start_angle;
+    float			ray_x;
+    float			ray_y;
+    float			ray_angle;
+    float			ray_dist;
+    int				checkpoint_number;
+    t_checkpoint	*checkpoints;
+    int				wall_direction;
+    float			cosinus;
+    float			sinus;
     char            obstacle;
 }	t_ray;
 
@@ -148,8 +158,8 @@ typedef struct s_core
 	t_player		player;
 	t_imgs			imgs;
 	t_sounds		sounds;
-	t_item			items[4];
-	t_animation 	animations[4];
+	t_item			items[5];
+	t_animation 	animations[5];
     int             screen_size[2];
 }	t_core;
 

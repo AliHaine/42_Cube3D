@@ -44,7 +44,10 @@ static void	create_item(t_item *item, mlx_t *mlx, Item item_name, int anim_size)
 	{
 		put_two_string(path, "assets/items/", ItemName[item_name], i);
 		if (!set_image_from_path(mlx, path, &item->animation.image[i - 1]))
+		{
+			free(path);
 			msg_write(2, 2, ERROR_FATAL);
+		}
 		mlx_image_to_window(mlx, item->animation.image[i - 1], SCREEN_WIDTH / 1.4, SCREEN_HEIGHT - 290);
 		item->animation.image[i - 1]->instances[0].enabled = false;
 		free(path);
@@ -72,4 +75,6 @@ void	item_loader(t_core *core)
     create_item_stats(&core->items[SWORD_DIAMOND], 10, 5, 1, 3);
     create_item(&core->items[SWORD_RUBY], core->mlx, SWORD_RUBY, 5);
     create_item_stats(&core->items[SWORD_RUBY], 10, 5, 1, 3);
+	create_item(&core->items[SWORD_IRON], core->mlx, SWORD_IRON, 4);
+	create_item_stats(&core->items[SWORD_IRON], 10, 5, 1, 3);
 }
