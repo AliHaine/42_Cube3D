@@ -95,7 +95,7 @@ void	inventory(t_core *core);
 void	set_char_at_forward(char c, t_player *player, char **map);
 
 //item//
-void    give_item(t_slot *slot, t_item *item);
+void    give_item(t_core *core, t_item *item, int slot_id);
 
 //heal//
 bool	is_player_death(int player_health);

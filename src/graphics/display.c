@@ -44,20 +44,26 @@ void	draw_map(t_core *core)
 
 static void	display_icon_in_invbar(t_slot *slot)
 {
-	t_slot	*iterator;
+	t_slot				*iterator;
+	static const int	div = SCREEN_WIDTH / 3.35;
 
 	iterator = slot;
-	while (iterator->next)
+	while (iterator->prev)
+		iterator = iterator->prev;
+	while (iterator->next && iterator->next->slot_id < 11)
 	{
 		if (iterator->item->name != HAND)
-			iterator->item->icon->instances[0].enabled = true;
+		{
+			iterator->item->icon->instances[iterator->bar_icon_instance].x = div + ((iterator->slot_id - 1) * 61);
+			iterator->item->icon->instances[iterator->bar_icon_instance].enabled = true;
+		}
 		iterator = iterator->next;
 	}
 }
 
 static void	display_item_in_hand(t_player *player)
 {
-	t_slot *tempo;
+	t_slot	*tempo;
 
 	tempo = get_first_slot(player->slot);
 	while (tempo->next)

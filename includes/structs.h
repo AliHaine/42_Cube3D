@@ -115,6 +115,7 @@ typedef struct s_item
     int				range;
     mlx_image_t		*image;
 	mlx_image_t		*icon;
+    int             instance_number;
 	t_animation 	animation;
 }	t_item;
 
@@ -122,6 +123,8 @@ typedef struct s_slot
 {
 	short			slot_id;
 	t_item			*item;
+    uint32_t		icon_instance;
+    uint32_t		bar_icon_instance;
 	struct s_slot	*next;
 	struct s_slot	*prev;
 }	t_slot;

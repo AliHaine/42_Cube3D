@@ -36,9 +36,8 @@ static void	create_item(t_item *item, mlx_t *mlx, Item item_name, int anim_size)
 	path = malloc(sizeof(char) * (ft_strlen(ItemName[item_name]) + 19));
 	mlx_resize_image(item->icon, 40, 40);
 	mlx_image_to_window(mlx, item->image, SCREEN_WIDTH / 1.37, SCREEN_HEIGHT - item->image->height);
-	mlx_image_to_window(mlx, item->icon, SCREEN_WIDTH / 3.35,SCREEN_HEIGHT - 85);
+	item->instance_number = 0;
 	item->image->instances[0].enabled = false;
-	item->icon->instances[0].enabled = false;
 	item->animation.is_playing = false;
 	item->animation.image = malloc(sizeof(mlx_image_t) * (anim_size + 1));
 	while (i++ < anim_size)

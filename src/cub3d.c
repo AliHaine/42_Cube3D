@@ -83,11 +83,9 @@ static void	core_init(t_core *core)
 	mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH / 2.9,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH / 2.69,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH / 2.51,SCREEN_HEIGHT - 155);
-
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.9,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.69,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.51,SCREEN_HEIGHT - 155);
-
 	mlx_image_to_window(core->mlx, core->imgs.crosshair, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_image_to_window(core->mlx, core->imgs.inventory_gui, 0, 0);
 	core->imgs.inventory_gui->enabled = false;
@@ -111,8 +109,10 @@ int	main(int argc, char *argv[])
 	msg_write(1, -1, STARTING);
 	core_init(&core);
 	item_loader(&core);
-    give_item(core.player.slot, &core.items[SWORD_NETHER]);
-    give_item(core.player.slot->next, &core.items[SWORD_DIAMOND]);
+    give_item(&core, &core.items[SWORD_NETHER], 5);
+    give_item(&core, &core.items[SWORD_DIAMOND], 11);
+	give_item(&core, &core.items[SWORD_DIAMOND], 24);
+	give_item(&core, &core.items[SWORD_DIAMOND], 36);
     usleep(60000);
 	map_manager(argv, &core);
 	// J'init l'image la psq elle a besoin des variables initialisees par map_manager

@@ -3,6 +3,8 @@
 static t_slot	*add_new_noed(short val, t_slot *current, t_item *hand_item)
 {
 	current->prev = malloc(sizeof(t_slot));
+	current->prev->icon_instance = -1;
+	current->prev->bar_icon_instance = -1;
 	current->prev->slot_id = val;
 	current->prev->item = hand_item;
 	current->prev->next = current;
@@ -11,10 +13,12 @@ static t_slot	*add_new_noed(short val, t_slot *current, t_item *hand_item)
 
 static t_slot	*add_first_noed(t_item *hand_item)
 {
-	t_slot *first;
+	t_slot	*first;
 
 	first = malloc(sizeof(t_slot));
-	first->slot_id = 9;
+	first->slot_id = 37;
+	first->icon_instance = -1;
+	first->bar_icon_instance = -1;
 	first->item = hand_item;
 	first->next = 0;
 	return (first);
@@ -24,7 +28,7 @@ void	setup_slot_struct(t_player *player, t_item *hand_item)
 {
 	int	i;
 
-	i = 9;
+	i = 37;
 	player->slot = add_first_noed(hand_item);
 	while (i-- > 1)
 	{
@@ -33,9 +37,9 @@ void	setup_slot_struct(t_player *player, t_item *hand_item)
 	player->slot->prev = 0;
 }
 
-t_slot *get_first_slot(t_slot *slot)
+t_slot	*get_first_slot(t_slot *slot)
 {
-	t_slot *copy;
+	t_slot	*copy;
 
 	copy = slot;
 	while (copy->slot_id != 1)
