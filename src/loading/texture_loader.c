@@ -16,6 +16,8 @@ static void	other_loader(mlx_t *mlx, t_imgs *imgs)
 		msg_write(2, 2, ERROR_FATAL);
     if (!set_texture_from_path("assets/inventory_gui2.png", &imgs->inventory_gui_texture))
         msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/cursor.png", &imgs->cursor))
+		msg_write(2, 2, ERROR_FATAL);
 }
 
 static void	icon_loader(mlx_t *mlx, t_imgs *imgs)

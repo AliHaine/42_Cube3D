@@ -41,6 +41,7 @@ typedef struct s_imgs
 	mlx_texture_t	*door_texture;
 	mlx_texture_t	*grass_texture;
 	mlx_texture_t	*inventory_gui_texture;
+	mlx_texture_t	*cursor;
 }	t_imgs;
 
 typedef struct	s_checkpoint

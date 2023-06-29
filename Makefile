@@ -27,6 +27,7 @@ SRCS		=	src/cub3d.c \
 				src/player_interaction/build.c \
 				src/player_interaction/energy.c \
 				src/player_interaction/inventory.c \
+				src/player_interaction/inventory_manager.c \
 				src/utils/map_utils.c \
 				src/utils/msg_utils.c \
 				src/utils/std_func_utils.c \
@@ -42,7 +43,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 NAME		=	cub3d
 
-FLAGS		=	-g3 -fsanitize=address
+FLAGS		=
 LDFLAGS		+=	-L./src/sound/bass
 LDLIBS		+=	-lbass
 
