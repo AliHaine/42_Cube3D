@@ -112,4 +112,5 @@ void	display(void *params)
 	core->imgs.img_3d->instances[0].z = 1;
 	core->imgs.img_map->instances[0].z = 2;
 	core->imgs.img_player->instances[0].z = 3;
+	raycasting(core);
 }

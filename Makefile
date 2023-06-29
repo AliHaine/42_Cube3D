@@ -4,6 +4,7 @@ SRCS		=	src/cub3d.c \
 				src/inputs/mouse_cursor.c \
 				src/inputs/mouse.c \
 				src/inputs/scroll_hook.c \
+				src/graphics/digital_differential_analysis.c \
 				src/graphics/display.c \
 				src/graphics/raycast.c \
 				src/graphics/draw.c \
