@@ -53,12 +53,13 @@ typedef struct	s_checkpoint
 
 typedef struct s_dda
 {
+	int	ray;
 	int m_xy[2];
     float r_xy[2];
 	float v_xy[2];
 	float cos;
 	float sin;
-    float dist_vh[2];
+    float dist_hv[2];
 	float current_angle;
 
 }	t_dda;

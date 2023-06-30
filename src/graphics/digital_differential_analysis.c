@@ -12,21 +12,40 @@
 
 #include "../../includes/includes.h"
 
-void	horizontal_cast(t_dda *dda, t_player player, char **map, t_core *core)
+static void	jump_to_next(t_dda *dda, float o_xy[2], char **map, float playerpos[2], bool val, int max)
 {
-	float tan;
-	bool hit;
-	float o_xy[2];
+	int	m_xy[2];
+
+	while (1)
+	{
+		m_xy[0] = (int)dda->r_xy[0] / 64;
+		m_xy[1] = (int)dda->r_xy[1] / 64;
+		if (m_xy[val] > max || dda->r_xy[val] < 0) {
+			break;
+		}
+		if (map[m_xy[1]][m_xy[0]] == '1')
+		{
+			dda->dist_hv[val] = dda->cos * (dda->r_xy[0] - playerpos[0])
+					- -dda->sin * (dda->r_xy[1] - playerpos[1]);
+			break ;
+		}
+		dda->r_xy[0] += o_xy[0];
+		dda->r_xy[1] += o_xy[1];
+	}
+}
+
+static void	horizontal_cast(t_dda *dda, t_player player, char **map, t_core *core)
+{
+	float	tan;
+	float	o_xy[2];
 
 	tan = -1.0 / tanf(dda->current_angle);
-	hit = true;
+	dda->r_xy[0] = player.playerpos[0];
+	dda->r_xy[1] = player.playerpos[1];
 	if (dda->sin > 0.001) //look down
 	{
 		dda->r_xy[1] = ((int)(player.playerpos[1] / 64) * 64) + 64;
-		dda->r_xy[0] = ((int)player.playerpos[1] - dda->r_xy[1]) * tan + player.playerpos[0];
-		//if (dda->r_xy[0] > 0 && dda->r_xy[0] < SCREEN_WIDTH)
-		//	mlx_put_pixel(core->imgs.img_map, dda->r_xy[0]/ MINIMAP_SIZE, dda->r_xy[1]/ MINIMAP_SIZE,(0 << 24) + (255 << 16) + (255 << 8) + 255);
-
+		dda->r_xy[0] = (player.playerpos[1] - dda->r_xy[1]) * tan + player.playerpos[0];
 		o_xy[1] = 64;
 		o_xy[0] = -o_xy[1] * tan;
 
@@ -34,102 +53,60 @@ void	horizontal_cast(t_dda *dda, t_player player, char **map, t_core *core)
 	else if (dda->sin < -0.001) //look up
 	{
 		dda->r_xy[1] = ((int)(player.playerpos[1] / 64) * 64) - 0.0001;
-		dda->r_xy[0] = ((int)player.playerpos[1] - dda->r_xy[1]) * tan + player.playerpos[0];
-		//if (dda->r_xy[0] > 0 && dda->r_xy[0] < SCREEN_WIDTH)
-		//	mlx_put_pixel(core->imgs.img_map, dda->r_xy[0]/ MINIMAP_SIZE, dda->r_xy[1]/ MINIMAP_SIZE, (0 << 24) + (255 << 16) + (0 << 8) + 255);
+		dda->r_xy[0] = (player.playerpos[1] - dda->r_xy[1]) * tan + player.playerpos[0];
 		o_xy[1] = -64;
 		o_xy[0] = -o_xy[1] * tan;
 	}
 	else
-	{
-		dda->r_xy[0] = player.playerpos[0];
-		dda->r_xy[1] = player.playerpos[1];
-		hit = false;
-	}
-
-	while (hit)
-	{
-		dda->m_xy[0] = dda->r_xy[0] / 64;
-		dda->m_xy[1] = dda->r_xy[1] / 64;
-		if (dda->r_xy[0] >= SCREEN_WIDTH || dda->r_xy[0] < 0)
-			break;
-		if (map[dda->m_xy[1]][dda->m_xy[0]] == '1')
-		{
-
-			dda->dist_vh[1] = dda->cos * (dda->r_xy[0] - player.playerpos[0]) - -sin(dda->current_angle) * (dda->r_xy[1] - player.playerpos[1]);
-			//mlx_put_pixel(core->consts.img_map, rx, ry,(255 << 24) + (80 << 16) + (255 << 8) + 255);
-			break ;
-		}
-		dda->r_xy[0] += o_xy[0];
-		dda->r_xy[1] += o_xy[1];
-	}
+		return ;
+	jump_to_next(dda, o_xy, map, player.playerpos, 0, core->consts.map_width);
 }
 
-void	vertical_cast(t_dda *dda, t_player player, char **map, t_core *core)
+static void	vertical_cast(t_dda *dda, t_player player, char **map, t_core *core)
 {
-	float tan;
-	bool hit;
-	float o_xy[2];
+	float	tan;
+	bool	hit;
+	float	o_xy[2];
 
 	tan = -tanf(dda->current_angle);
 	hit = true;
+	dda->r_xy[0] = player.playerpos[0];
+	dda->r_xy[1] = player.playerpos[1];
 	if (dda->cos > 0.001) //look right
 	{
 		dda->r_xy[0] = ((int)(player.playerpos[0] / 64) * 64) + 64;
-		dda->r_xy[1] = ((int)player.playerpos[0] - dda->r_xy[0]) * tan + player.playerpos[1];
-		//if (dda->r_xy[1] > 0 && dda->r_xy[1] < SCREEN_HEIGHT)
-		//	mlx_put_pixel(core->imgs.img_map, dda->r_xy[0]/ MINIMAP_SIZE, dda->r_xy[1]/ MINIMAP_SIZE,(0 << 24) + (255 << 16) + (255 << 8) + 255);
+		dda->r_xy[1] = (player.playerpos[0] - dda->r_xy[0]) * tan + player.playerpos[1];
 		o_xy[0] = 64;
 		o_xy[1] = -o_xy[0] * tan;
 	}
 	else if (dda->cos < -0.001) //look left
 	{
 		dda->r_xy[0] = ((int)(player.playerpos[0] / 64) * 64) - 0.0001;
-		dda->r_xy[1] = ((int)player.playerpos[0] - dda->r_xy[0]) * tan + player.playerpos[1];
-		//if (dda->r_xy[1] < SCREEN_HEIGHT && dda->r_xy[1] > 0)
-		//	mlx_put_pixel(core->imgs.img_map, dda->r_xy[0] / MINIMAP_SIZE, dda->r_xy[1] / MINIMAP_SIZE, (0 << 24) + (255 << 16) + (0 << 8) + 255);
+		dda->r_xy[1] = (player.playerpos[0] - dda->r_xy[0]) * tan + player.playerpos[1];
 		o_xy[0] = -64;
 		o_xy[1] = -o_xy[0] * tan;
 	}
 	else
-	{
-		dda->r_xy[0] = player.playerpos[0];
-		dda->r_xy[1] = player.playerpos[1];
 		hit = false;
-	}
 
-	while (hit)
-	{
-		dda->m_xy[0] = (int)dda->r_xy[0] / 64;
-		dda->m_xy[1] = (int)dda->r_xy[1] / 64;
-		if (dda->r_xy[1] >= SCREEN_HEIGHT || dda->r_xy[1] < 0)
-			break ;
-		if (map[dda->m_xy[1]][dda->m_xy[0]] == '1')
-		{
-			dda->dist_vh[0] = dda->cos * (dda->r_xy[0] - player.playerpos[0]) - -sin(dda->current_angle) * (dda->r_xy[1] - player.playerpos[1]);
-			//mlx_put_pixel(core->consts.img_map, rx, ry,(0 << 24) + (255 << 16) + (255 << 8) + 255);
-			break ;
-		}
-		dda->r_xy[0] += o_xy[0];
-		dda->r_xy[1] += o_xy[1];
-	}
+	if (hit == true)
+		jump_to_next(dda, o_xy, map, player.playerpos, 1, core->consts.map_height);
 	dda->v_xy[0] = dda->r_xy[0];
 	dda->v_xy[1] = dda->r_xy[1];
 }
 
 void	raycasting(t_core *core)
 {
-	int ray;
 	float start_angle;
 	t_dda dda;
 
-	ray = -1;
+	dda.ray = -1;
 	start_angle = core->player.playerangle - (core->consts.fov / 2);
-	while (ray++ < RAY_NUMBER)
+	while (dda.ray++ < RAY_NUMBER)
 	{
-		dda.dist_vh[0] = 10000;
-		dda.dist_vh[1] = 10000;
-		dda.current_angle = start_angle + (ray * core->consts.dist_between_ray);
+		dda.dist_hv[0] = 10000;
+		dda.dist_hv[1] = 10000;
+		dda.current_angle = start_angle + (dda.ray * core->consts.dist_between_ray);
 		if (dda.current_angle < 0)
 			dda.current_angle += 6.28319;
 		if (dda.current_angle > 6.28319)
@@ -138,17 +115,16 @@ void	raycasting(t_core *core)
 		dda.sin = sin(dda.current_angle);
 		vertical_cast(&dda, core->player, core->consts.map, core);
 		horizontal_cast(&dda, core->player, core->consts.map, core);
-		if (dda.dist_vh[0] < dda.dist_vh[1])
+		if (dda.dist_hv[1] < dda.dist_hv[0])
 		{
 			dda.r_xy[0] = dda.v_xy[0];
 			dda.r_xy[1] = dda.v_xy[1];
-			dda.dist_vh[1] = dda.dist_vh[0];
+			dda.dist_hv[0] = dda.dist_hv[1];
 		}
-		if (dda.r_xy[0] > 0 && dda.r_xy[0] < SCREEN_WIDTH && dda.r_xy[1] > 0 && dda.r_xy[1] < SCREEN_HEIGHT)
-		{
-			mlx_put_pixel(core->imgs.img_map, dda.r_xy[0] / MINIMAP_SIZE, dda.r_xy[1] / MINIMAP_SIZE,
-						  (255 << 24) + (255 << 16) + (0 << 8) + 255);
-		}
+		fisheyes_fixor(&dda, core->player.playerangle);
+		columns_drawing(core, &dda);
+		mlx_put_pixel(core->imgs.img_map, dda.r_xy[0] / MINIMAP_SIZE, dda.r_xy[1] / MINIMAP_SIZE,
+					  (255 << 24) + (255 << 16) + (0 << 8) + 255);
 	}
 
 }
