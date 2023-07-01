@@ -74,6 +74,8 @@ int	is_obstacle(t_core *core, t_ray *ray)
 	return (0);
 }
 
+
+
 void	fisheyes_fixor(t_dda *dda, float player_angle)
 {
 	float fix_angle;

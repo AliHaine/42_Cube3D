@@ -61,6 +61,8 @@ typedef struct s_dda
 	float sin;
     float dist_hv[2];
 	float current_angle;
+	int hit_hv;
+	int hit_direction[2];
 
 }	t_dda;
 

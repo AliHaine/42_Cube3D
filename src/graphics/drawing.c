@@ -12,15 +12,29 @@
 
 #include "../../includes/includes.h"
 
+static uint32_t	get_color_from_wall_texture(mlx_texture_t *wall_texture, const int texture_xy)
+{
+	//TODO
+	return (0);
+}
+
 static int	wall_drawing(t_core *core, t_dda *dda, int i, float wall_height)
 {
+	uint32_t color;
+
 	while (i < (SCREEN_HEIGHT + wall_height) / 2 && i < SCREEN_HEIGHT)
 	{
 		/*texture_xy[1] = ((py * 2 - SCREEN_HEIGHT + wall_height)
 						 * TEXTURE_SIZE) / wall_height / 2;*/
-		//color = get_color(core->imgs.wall_texture[ray.wall_direction],
-		//ray.ray_dist / FOG_DISTANCE, texture_xy);
-		mlx_put_pixel(core->imgs.img_3d, dda->ray, i++, get_rgb_color(0, 255,0));
+		if (dda->hit_hv == 1 && dda->hit_direction[0] == 1)
+            color = get_rgb_color(255, 255, 255);
+        else if (dda->hit_hv == 1 && dda->hit_direction[0] == 3)
+            color = get_rgb_color(255, 0, 255);
+        else if (dda->hit_hv == 0 && dda->hit_direction[1] == 0)
+            color = get_rgb_color(0, 255, 0);
+        else
+            color = get_rgb_color(255, 255, 0);
+		mlx_put_pixel(core->imgs.img_3d, dda->ray, i++, color);
 	}
 	return (i);
 }
@@ -29,11 +43,7 @@ void	columns_drawing(t_core *core, t_dda *dda)
 {
 	float			wall_height;
 	int				i;
-	uint32_t		color;
-	int				texture_xy[2];
 
-	//texture_xy[0] = get_
-	// offset(ray.wall_direction, ray);
 	if (dda->dist_hv[0] == 10000)
 		wall_height = (SCREEN_HEIGHT * 64) / dda->dist_hv[1];
 	else
