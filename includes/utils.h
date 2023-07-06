@@ -51,4 +51,8 @@ char	get_right_char(t_player *player, char **map);
 char	get_left_char(t_player *player, char **map);
 bool	is_player_running(t_player *player);
 
+//raycastin and drawing
+
+void	fisheyes_fixor(t_dda *dda, float player_angle);
+
 #endif

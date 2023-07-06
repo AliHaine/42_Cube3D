@@ -38,6 +38,7 @@ void		raycast(t_core *core);
 void		draw_obstacles(t_core *core, t_ray ray, int r);
 
 //draw.c
+void	columns_drawing(t_core *core, t_dda *dda);
 void	draw_columns(t_core *core, t_ray ray, int r);
 
 

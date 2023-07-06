@@ -73,3 +73,19 @@ int	is_obstacle(t_core *core, t_ray *ray)
 		return (1);
 	return (0);
 }
+
+
+
+void	fisheyes_fixor(t_dda *dda, float player_angle)
+{
+	float fix_angle;
+	float two_pi;
+
+	fix_angle = player_angle - dda->current_angle;
+	two_pi = 2 * PI;
+	if (fix_angle < 0)
+		fix_angle += two_pi;
+	if (fix_angle > two_pi)
+		fix_angle -= two_pi;
+	dda->dist_hv[0] = dda->dist_hv[0] * cos(fix_angle);
+}

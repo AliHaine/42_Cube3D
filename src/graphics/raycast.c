@@ -79,12 +79,12 @@ void	raycast(t_core *core)
 		rays[r].wall_direction = wall_direction(core, rays[r]);
 	}
 	r = -1;
-	while (++r < RAY_NUMBER)
+	/*while (++r < RAY_NUMBER)
 	{
 		good_wall(rays);
 		draw_columns(core, rays[r], r);
 		if (rays[r].checkpoint_number > 0)
 			draw_obstacles(core, rays[r], r);
-	}
+	}*/
 	free(rays);
 }
