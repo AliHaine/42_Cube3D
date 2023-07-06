@@ -23,10 +23,12 @@ void	ft_strcpy(char *s1, const char *s2);
 void	ft_strcat(char *s1, const char *s2);
 int		ft_strlen(const char *s);
 int		ft_atoi_for_texture(const char *s);
+char	*ft_itoa(int n);
 
 //struct//
 
 void	init_tti_struct(t_t_i *ti, int a, int b, int c);
+t_slot	*get_slot(t_core *core, int s);
 
 //file//
 

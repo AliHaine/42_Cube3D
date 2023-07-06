@@ -34,7 +34,7 @@ void	clear_sounds(t_sounds *sounds)
 
 bool	load_sound(uint32_t *s, char *path)
 {
-	static bool loaded;
+	static bool	loaded;
 
 	msg_write_multiple(1, Messages[TRY_LOAD_SOUND], path);
 	loaded |= BASS_Init(-1, 48000, 0, 0, 0);

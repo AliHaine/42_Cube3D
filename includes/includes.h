@@ -100,7 +100,7 @@ void	display_item(t_core *core, t_slot *slot);
 void	set_char_at_forward(char c, t_player *player, char **map);
 
 //item//
-void    give_item(t_core *core, t_item *item, int slot_id);
+void    give_item(t_core *core, t_item *item, int slot_id, int number);
 
 //heal//
 bool	is_player_death(int player_health);
@@ -116,7 +116,7 @@ bool	player_have_enough_energy(t_player *player, short value);
 	//struct
 void	struct_setup(t_core *core);
 
-void	setup_slot_struct(t_player *player, t_item *item);
+void	setup_slot_struct(t_core *core, t_player *player, t_item *item);
 t_slot	*get_first_slot(t_slot *slot);
 
 #endif

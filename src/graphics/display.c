@@ -52,11 +52,15 @@ static void	display_icon_in_invbar(t_slot *slot)
 		iterator = iterator->prev;
 	while (iterator->next && iterator->next->slot_id < 11)
 	{
-		if (iterator->item->name != HAND)
+		if (iterator->item->name != HAND && !iterator->bar_mutex)
 		{
+			iterator->items_number_img_bar->instances[0].x = (div + ((iterator->slot_id - 1) * 61)) + 23;
+			iterator->items_number_img_bar->instances[0].enabled = true;
 			iterator->item->icon->instances[iterator->bar_icon_instance].x = div + ((iterator->slot_id - 1) * 61);
 			iterator->item->icon->instances[iterator->bar_icon_instance].enabled = true;
 		}
+		else
+			iterator->items_number_img_bar->instances[0].enabled = false;
 		iterator = iterator->next;
 	}
 }
@@ -112,4 +116,7 @@ void	display(void *params)
 	core->imgs.img_3d->instances[0].z = 1;
 	core->imgs.img_map->instances[0].z = 2;
 	core->imgs.img_player->instances[0].z = 3;
+	core->imgs.crosshair->instances[0].z = 4;
+	core->imgs.invbar->instances[0].z = 5;
+	core->imgs.invbar_selector->instances[0].z = 6;
 }

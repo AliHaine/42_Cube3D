@@ -136,6 +136,10 @@ typedef struct s_slot
 	t_item			*item;
     uint32_t		icon_instance;
     uint32_t		bar_icon_instance;
+	short			items_number;
+	mlx_image_t		*items_number_img;
+	mlx_image_t		*items_number_img_bar;
+	bool			bar_mutex;
 	struct s_slot	*next;
 	struct s_slot	*prev;
 }	t_slot;
