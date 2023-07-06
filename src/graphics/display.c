@@ -109,7 +109,7 @@ void	display(void *params)
 	//Dessiner la minimap
 	draw_map(core);
 	//Dessiner la 3D
-	raycast(core);
+	raycasting(core);
 	mlx_image_to_window(core->mlx, core->imgs.img_3d, 0, 0);
 	mlx_image_to_window(core->mlx, core->imgs.img_map, 10, core->screen_size[1] - 202);
 	//Definir l'ordre des images / qui est au dessus de qui
