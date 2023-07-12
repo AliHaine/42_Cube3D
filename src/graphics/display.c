@@ -16,28 +16,27 @@
 
 void	draw_map(t_core *core)
 {
-	int     	py;
-	int	        px;
-    const int   limit_x1 = ((core->consts.map_width) * 64) / core->consts.minimap_size;
-    const int   limit_y1 = ((core->consts.map_height + 1) * 64) / core->consts.minimap_size;
+	const int start_y = (core->player.playerpos[1] / 4) - (286 / 2);
+	const int start_x = (core->player.playerpos[0] / 4) - (286 / 2);
+	int                 case_y;
+	int                 case_x;
+	int                 py;
+	int                 px;
 
 	py = -1;
-	while (++py < limit_y1 && py / RESIZE < core->consts.map_height + 1
-        && py < SCREEN_HEIGHT)
+	while (++py < 286)
 	{
 		px = -1;
-		while (++px < limit_x1 && px / RESIZE < core->consts.map_width
-			&& px < SCREEN_WIDTH)
+		case_y = (py + start_y) / 16;
+		while (++px < 286)
 		{
-			if (core->consts.map[py / RESIZE][px / RESIZE] == '0'
-				|| is_player_char(core->consts.map[py / RESIZE]
-				[px / (64 / core->consts.minimap_size)])) {
-				mlx_put_pixel(core->imgs.img_map, px, py,
-							  core->consts.minimap_floor_color);
-			}
-			else if (core->consts.map[py / RESIZE][px / RESIZE] == '1')
-				mlx_put_pixel(core->imgs.img_map, px, py,
-					core->consts.minimap_wall_color);
+			case_x = (px + start_x) / 16;
+			if (get_pixel(core->imgs.map_texture, px, py) != -692152577)
+				continue ;
+			else if (case_y < 0 || case_x < 0 ||case_y > core->consts.map_height || case_x > core->consts.map_width - 1)
+				mlx_put_pixel(core->imgs.img_map, px, py, core->consts.minimap_wall_color);
+			else if (core->consts.map[case_y][case_x] == '1')
+				mlx_put_pixel(core->imgs.img_map, px, py, core->consts.minimap_wall_color);
 		}
 	}
 }
@@ -90,33 +89,30 @@ void	display(void *params)
 	draw_energy_bar(core->imgs.engbar, core->player.energy);
 	mlx_delete_image(core->mlx, core->imgs.img_map);
 	mlx_delete_image(core->mlx, core->imgs.img_3d);
+	mlx_delete_image(core->mlx, core->imgs.img_player);
 	//Image du point du joueur
 	//Playerpos c'est selon la resolution de l'ecran
 	//Sinon c'est que des ptits calculs pour adapter la position du joueur
 	//selon la taille de la map, de l'ecran et du decalage de la minimap de 10 pixels
-	core->imgs.img_player->instances[0].x = ((core->player.playerpos[0]
-				/ core->consts.minimap_size) - (MINIMAP_PLAYER_SIZE / 2)) + 10;
-	core->imgs.img_player->instances[0].y = ((core->player.playerpos[1]
-				/ core->consts.minimap_size) - (MINIMAP_PLAYER_SIZE / 2)) + core->screen_size[1];
-
 	//Image avec toute la 3D
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
 	//Image de la minimap
-	core->imgs.img_map = mlx_new_image(core->mlx, (int)
-			((core->consts.map_width * 64) / core->consts.minimap_size), (int)
-			(((core->consts.map_height + 1) * 64) / core->consts.minimap_size));
+	core->imgs.img_map = mlx_texture_to_image(core->mlx, core->imgs.map_texture);
 	//Dessiner la minimap
 	draw_map(core);
 	//Dessiner la 3D
 	raycasting(core);
+	mlx_resize_image(core->imgs.img_map, 250, 250);
+	//draw_player(core);
 	mlx_image_to_window(core->mlx, core->imgs.img_3d, 0, 0);
-	mlx_image_to_window(core->mlx, core->imgs.img_map, 10, core->screen_size[1] - 202);
+	mlx_image_to_window(core->mlx, core->imgs.img_map, 20, 445);
 	//Definir l'ordre des images / qui est au dessus de qui
 	core->imgs.img_3d->instances[0].z = 1;
-	core->imgs.img_map->instances[0].z = 2;
-	core->imgs.img_player->instances[0].z = 3;
-	core->imgs.crosshair->instances[0].z = 4;
-	core->imgs.invbar->instances[0].z = 5;
-	core->imgs.invbar_selector->instances[0].z = 6;
+	//core->imgs.map_background->instances[0].z = 2;
+	core->imgs.img_map->instances[0].z = 3;
+	//core->imgs.img_player->instances[0].z = 4;
+	core->imgs.crosshair->instances[0].z = 5;
+	core->imgs.invbar->instances[0].z = 6;
+	core->imgs.invbar_selector->instances[0].z = 7;
 }

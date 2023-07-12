@@ -12,28 +12,11 @@
 
 #include "../includes/includes.h"
 
-static mlx_image_t	*create_minimap_player(mlx_t *mlx, uint32_t ray_color)
-{
-	mlx_image_t	*img;
-	int			x;
-	int			y;
-
-	y = -1;
-	img = mlx_new_image(mlx, MINIMAP_PLAYER_SIZE, MINIMAP_PLAYER_SIZE);
-	while (++y < MINIMAP_PLAYER_SIZE)
-	{
-		x = -1;
-		while (++x < MINIMAP_PLAYER_SIZE)
-			mlx_put_pixel(img, x, y, ray_color);
-	}
-	return (img);
-}
-
 static void	const_init(t_const *consts)
 {
 	consts->ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 150;
-	consts->minimap_wall_color = (42 << 24) + (42 << 16) + (42 << 8) + 200;
-	consts->minimap_floor_color = (128 << 24) + (128 << 16) + (128 << 8) + 200;
+	consts->minimap_wall_color = (109 << 24) + (96 << 16) + (77 << 8) + 255;
+	consts->minimap_floor_color = (128 << 24) + (128 << 16) + (128 << 8) + 255;
 	consts->top_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
 	consts->bot_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
 	consts->ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 255;
@@ -54,8 +37,8 @@ static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
 	imgs->wall_texture[3] = 0;
 	imgs->img_3d = mlx_new_image(mlx, SCREEN_WIDTH,
 									  SCREEN_HEIGHT);
-	imgs->img_player = create_minimap_player(mlx, ray_color);
 	imgs->inventory_gui = mlx_texture_to_image(mlx, imgs->inventory_gui_texture);
+	imgs->map_background = mlx_texture_to_image(mlx, imgs->map_texture);
 }
 
 static void	core_init(t_core *core)
@@ -72,11 +55,9 @@ static void	core_init(t_core *core)
 	sound_loader(&core->sounds);
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
-	core->imgs.img_player = create_minimap_player(core->mlx, core->consts.ray_color);
 	mlx_set_cursor(core->mlx, mlx_create_cursor(core->imgs.trans));
 	//voir pourquoi on est obliger de mettre 2 fois le cursor
 	mlx_image_to_window(core->mlx, core->imgs.crosshair, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-	mlx_image_to_window(core->mlx, core->imgs.img_player, 0, 0);
 	mlx_image_to_window(core->mlx, core->imgs.invbar, SCREEN_WIDTH / 3.43,SCREEN_HEIGHT - 95);
 	mlx_image_to_window(core->mlx, core->imgs.invbar_selector, SCREEN_WIDTH / 3.43,SCREEN_HEIGHT - 95);
 	mlx_image_to_window(core->mlx, core->imgs.engbar, SCREEN_WIDTH / 3,SCREEN_HEIGHT - 115);
@@ -87,6 +68,7 @@ static void	core_init(t_core *core)
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.9,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.69,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.51,SCREEN_HEIGHT - 155);
+//	mlx_image_to_window(core->mlx, core->imgs.map_background, 5, SCREEN_HEIGHT - 291);
 
 	mlx_image_to_window(core->mlx, core->imgs.inventory_gui, 0, 0);
 	core->imgs.inventory_gui->enabled = false;
@@ -111,6 +93,7 @@ int	main(int argc, char *argv[])
 	core_init(&core);
 	item_loader(&core);
     give_item(&core, &core.items[SWORD_NETHER], 2, 32);
+	give_item(&core, &core.items[SWORD_NETHER], 32, 52);
     give_item(&core, &core.items[SWORD_DIAMOND], 5, 1);
     give_item(&core, &core.items[SWORD_IRON], 1, 1);
     give_item(&core, &core.items[SWORD_RUBY], 8, 1);
@@ -121,9 +104,7 @@ int	main(int argc, char *argv[])
 	// C'est censé adapter la minimap a la taille de la carte mais pas a la resolution donc ca segfault tjr
 	msg_write(1, -1, MINIMAP_INIT);
 	usleep(800000 * LOAD);
-	core.imgs.img_map = mlx_new_image(core.mlx, (int)
-			((core.consts.map_width * 64) / core.consts.minimap_size), (int)
-			(((core.consts.map_height + 1) * 64) / core.consts.minimap_size));
+	core.imgs.img_map = mlx_new_image(core.mlx, 256, 256);
 	msg_write(1, -1, SUCCESS);
 	mlx_hook_loader(&core);
 	delete_image_from_struct(core.mlx, &core.imgs);

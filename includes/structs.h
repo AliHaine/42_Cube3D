@@ -33,8 +33,10 @@ typedef struct s_imgs
     mlx_image_t 	*hearth[2];
 	mlx_image_t 	*sword_nether[5];
 	mlx_image_t 	*hand[9];
+	mlx_image_t		*map_background;
 	mlx_image_t		*icon_sword_nether;
 	mlx_image_t		*inventory_gui;
+	mlx_texture_t	*map_texture;
     mlx_texture_t	*enemy;
 	mlx_texture_t	*trans;
 	mlx_texture_t	*wall_texture[4];
@@ -42,6 +44,7 @@ typedef struct s_imgs
 	mlx_texture_t	*grass_texture;
 	mlx_texture_t	*inventory_gui_texture;
 	mlx_texture_t	*cursor;
+	mlx_texture_t	*img_player_texture;
 }	t_imgs;
 
 typedef struct	s_checkpoint

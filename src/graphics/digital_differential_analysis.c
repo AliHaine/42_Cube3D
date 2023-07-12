@@ -126,8 +126,6 @@ void	raycasting(t_core *core)
 		}
 		fisheyes_fixor(&dda, core->player.playerangle);
 		columns_drawing(core, &dda);
-		mlx_put_pixel(core->imgs.img_map, dda.r_xy[0] / MINIMAP_SIZE, dda.r_xy[1] / MINIMAP_SIZE,
-					  (255 << 24) + (255 << 16) + (0 << 8) + 255);
 	}
 
 }

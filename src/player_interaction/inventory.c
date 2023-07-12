@@ -5,24 +5,21 @@ void	display_item(t_core *core, t_slot *slot)
 {
 	if (slot && slot->item && slot->item->icon && slot->item->name != HAND)
 	{
-        if (slot->slot_id >= 0 && slot->slot_id < 10)
+        if (slot->slot_id >= 1 && slot->slot_id <= 9)
 		    slot->item->icon->instances[slot->icon_instance].y = 495;
-        else if (slot->slot_id >= 10 && slot->slot_id < 20)
+        else if (slot->slot_id >= 10 && slot->slot_id <= 18)
             slot->item->icon->instances[slot->icon_instance].y = 430;
-        else if (slot->slot_id >= 20 && slot->slot_id < 30)
+        else if (slot->slot_id >= 19 && slot->slot_id <= 27)
             slot->item->icon->instances[slot->icon_instance].y = 375;
-        else if (slot->slot_id >= 30 && slot->slot_id < 40)
+        else if (slot->slot_id >= 28 && slot->slot_id <= 36)
             slot->item->icon->instances[slot->icon_instance].y = 325;
 		slot->item->icon->instances[slot->icon_instance].x
 				= 405 + (54 * ((slot->slot_id - 1) % 9));
 		slot->item->icon->instances[slot->icon_instance].enabled = true;
-		if (slot->items_number > 0)
-		{
-			slot->items_number_img->instances[0].x = slot->item->icon->instances[slot->icon_instance].x + 23;
-			slot->items_number_img->instances[0].y = slot->item->icon->instances[slot->icon_instance].y + 25;
-			slot->items_number_img->instances[0].enabled = true;
-			slot->items_number_img->instances[0].z = 8;
-		}
+		slot->items_number_img->instances[0].x = slot->item->icon->instances[slot->icon_instance].x + 23;
+		slot->items_number_img->instances[0].y = slot->item->icon->instances[slot->icon_instance].y + 25;
+		slot->items_number_img->instances[0].enabled = true;
+		slot->items_number_img->instances[0].z = 9;
 	}
 }
 
@@ -65,12 +62,8 @@ void	inventory(t_core *core)
 {
 	if (core->player.is_in_inventory == false)
 	{
-		if (core->imgs.inventory_gui->width != core->screen_size[0]
-			|| core->imgs.inventory_gui->height != core->screen_size[1])
-			mlx_resize_image(core->imgs.inventory_gui, core->screen_size[0],
-				core->screen_size[1]);
 		core->imgs.inventory_gui->enabled = true;
-		core->imgs.inventory_gui->instances->z = 7;
+		core->imgs.inventory_gui->instances->z = 8;
 		core->player.is_in_inventory = true;
 		mlx_set_cursor(core->mlx, mlx_create_cursor(core->imgs.cursor));
 		open_inv(core);

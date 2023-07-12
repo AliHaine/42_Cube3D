@@ -19,4 +19,6 @@ void	give_item(t_core *core, t_item *item, int slot_id, int number)
     slot->items_number = number;
     slot->items_number_img = mlx_put_string(core->mlx, ft_itoa(number), 0, 0);
     slot->items_number_img_bar = mlx_put_string(core->mlx, ft_itoa(number), 0, (SCREEN_HEIGHT - 85) + 25);
+	slot->items_number_img->instances[0].enabled = false;
+	slot->items_number_img_bar->instances[0].enabled = false;
 }
