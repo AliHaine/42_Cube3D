@@ -41,7 +41,7 @@ bool	open_file(t_file *file, char *file_path, int flags);
 bool	set_texture_from_path(char *line, mlx_texture_t **texture);
 bool	set_image_from_path(mlx_t *mlx, char *path, mlx_image_t **image);
 void		delete_image_from_struct(mlx_t *mlx, t_imgs *imgs);
-uint32_t	get_rgb_color(unsigned short r, unsigned short g, unsigned short b);
+uint32_t	get_rgb_color(unsigned short r, unsigned short g, unsigned short b, unsigned short a);
 void	draw_pixel_to_img(mlx_image_t *img, t_t_i ti, uint32_t color);
 uint32_t	get_pixel(mlx_texture_t *texture, int x, int y);
 mlx_image_t *rotate_image(mlx_t *mlx, mlx_image_t *image, int img_width, int img_height, int angle);

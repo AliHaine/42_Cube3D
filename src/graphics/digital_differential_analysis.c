@@ -12,7 +12,7 @@
 
 #include "../../includes/includes.h"
 
-static void	jump_to_next(t_dda *dda, float o_xy[2], char **map, float playerpos[2], bool val, int max)
+static void	jump_to_next(t_dda *dda, const float o_xy[2], char **map, const float playerpos[2], bool val, int max)
 {
 	int	m_xy[2];
 
@@ -39,7 +39,7 @@ static void	horizontal_cast(t_dda *dda, t_player player, char **map, t_core *cor
 	float	tan;
 	float	o_xy[2];
 
-	tan = -1.0 / tanf(dda->current_angle);
+	tan = -1.0f / tanf(dda->current_angle);
 	dda->r_xy[0] = player.playerpos[0];
 	dda->r_xy[1] = player.playerpos[1];
 	if (dda->sin > 0.001) //look down
@@ -110,11 +110,11 @@ void	raycasting(t_core *core)
         dda.hit_hv = 0;
 		dda.current_angle = start_angle + (dda.ray * core->consts.dist_between_ray);
 		if (dda.current_angle < 0)
-			dda.current_angle += 6.28319;
-		if (dda.current_angle > 6.28319)
-			dda.current_angle -= 6.28319;
-		dda.cos = cos(dda.current_angle);
-		dda.sin = sin(dda.current_angle);
+			dda.current_angle += 6.28319f;
+		if (dda.current_angle > 6.28319f)
+			dda.current_angle -= 6.28319f;
+		dda.cos = cosf(dda.current_angle);
+		dda.sin = sinf(dda.current_angle);
 		vertical_cast(&dda, core->player, core->consts.map, core);
 		horizontal_cast(&dda, core->player, core->consts.map, core);
 		if (dda.dist_hv[1] < dda.dist_hv[0])

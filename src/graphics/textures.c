@@ -58,8 +58,8 @@ void	draw_energy_bar(mlx_image_t *img, short energy)
 	uint32_t	empty_color;
 
 	init_tti_struct(&ti, ((energy * 4.3)), 3, 2);
-	full_color = get_rgb_color(192, 19, 186);
-	empty_color = get_rgb_color(100, 80, 190);
+	full_color = get_rgb_color(192, 19, 186, 255);
+	empty_color = get_rgb_color(100, 80, 190, 255);
 	while (ti.c != 10)
 	{
 		if (ti.c == 9 || ti.c == 2)

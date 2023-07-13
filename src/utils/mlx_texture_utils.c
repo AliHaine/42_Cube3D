@@ -32,9 +32,9 @@ void	delete_image_from_struct(mlx_t *mlx, t_imgs *imgs)
 	mlx_delete_image(mlx, imgs->crosshair);
 }
 
-uint32_t	get_rgb_color(unsigned short r, unsigned short g, unsigned short b)
+uint32_t	get_rgb_color(unsigned short r, unsigned short g, unsigned short b, unsigned short a)
 {
-	return ((r << 24) | (g << 16) | (b  << 8) | 255);
+	return ((r << 24) | (g << 16) | (b  << 8) | a);
 }
 
 void	draw_pixel_to_img(mlx_image_t *img, t_t_i ti, uint32_t color)
