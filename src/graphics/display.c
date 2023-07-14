@@ -83,7 +83,7 @@ void	display(void *params)
 	t_core	*core;
 
 	core = (t_core *) params;
-	animation_listener(core);
+	animation_listener(core->items);
 	display_item_in_hand(&core->player);
 	display_icon_in_invbar(get_first_slot(core->player.slot));
 	draw_energy_bar(core->imgs.engbar, core->player.energy);

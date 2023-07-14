@@ -101,12 +101,12 @@ void	raycasting(t_core *core)
 
 	dda.ray = -1;
 	start_angle = core->player.playerangle - (core->consts.fov / 2);
-	while (dda.ray++ < RAY_NUMBER)
+	while (dda.ray++ < (RAY_NUMBER - 1))
 	{
 		dda.hit_direction[0] = -1;
 		dda.hit_direction[1] = -1;
-		dda.dist_hv[0] = 10000;
-		dda.dist_hv[1] = 10000;
+		dda.dist_hv[0] = 100000;
+		dda.dist_hv[1] = 100000;
         dda.hit_hv = 0;
 		dda.current_angle = start_angle + (dda.ray * core->consts.dist_between_ray);
 		if (dda.current_angle < 0)
@@ -117,14 +117,19 @@ void	raycasting(t_core *core)
 		dda.sin = sinf(dda.current_angle);
 		vertical_cast(&dda, core->player, core->consts.map, core);
 		horizontal_cast(&dda, core->player, core->consts.map, core);
+		dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[0];
 		if (dda.dist_hv[1] < dda.dist_hv[0])
 		{
 			dda.r_xy[0] = dda.v_xy[0];
 			dda.r_xy[1] = dda.v_xy[1];
 			dda.dist_hv[0] = dda.dist_hv[1];
 			dda.hit_hv = 1;
+			dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[1];
 		}
 		fisheyes_fixor(&dda, core->player.playerangle);
+		dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[0];
+		if (dda.dist_hv[0] > dda.dist_hv[1])
+			dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[1];
 		columns_drawing(core, &dda);
 	}
 

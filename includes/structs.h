@@ -66,6 +66,7 @@ typedef struct s_dda
 	float current_angle;
 	int hit_hv;
 	int hit_direction[2];
+	float wall_height;
 
 }	t_dda;
 
@@ -83,6 +84,14 @@ typedef struct s_ray
     float			sinus;
     char            obstacle;
 }	t_ray;
+
+typedef struct s_wall_drawing
+{
+	uint32_t color;
+	int lineH;
+	float step;
+	float current_step;
+}	t_wall_drawing;
 
 typedef struct s_three_i
 {

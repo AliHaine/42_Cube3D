@@ -90,7 +90,7 @@ void	play_sound(uint32_t s);
 
 //animations//
 void	attack_animation(t_core *core);
-void    animation_listener(t_core *core);
+void    animation_listener(t_item *items);
 
 	//player interaction//
 void	player_listener(void *params);
@@ -117,7 +117,9 @@ bool	player_have_enough_energy(t_player *player, short value);
 	//struct
 void	struct_setup(t_core *core);
 
-void	setup_slot_struct(t_core *core, t_player *player, t_item *item);
+void	setup_slot_struct(mlx_t *mlx, t_player *player, t_item *item);
 t_slot	*get_first_slot(t_slot *slot);
+
+void setup_wall_struct(t_wall_drawing *twd, float wall_height, float dist);
 
 #endif
