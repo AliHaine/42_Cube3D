@@ -44,37 +44,38 @@ void	draw_energy_bar(mlx_image_t *img, short energy)
     }
 }
 
-static int	wall_drawing(t_imgs *imgs, t_dda *dda, int i)
+static void wall_drawing(t_imgs *imgs, t_dda *dda, t_wall_drawing *twd)
 {
-	t_wall_drawing  twd;
-
-	setup_wall_struct(&twd, dda);
-    while (i < twd.lineH)
-	{
-		if (dda->hit_hv == 1 && dda->hit_direction[0] == 1)
-			get_color_from_wall_texture(imgs->wall_texture[1], (int)dda->r_xy[1], &twd);
-        else if (dda->hit_hv == 1 && dda->hit_direction[0] == 3)
-			get_color_from_wall_texture(imgs->wall_texture[3], (int)dda->r_xy[1], &twd);
-        else if (dda->hit_hv == 0 && dda->hit_direction[1] == 0)
-            get_color_from_wall_texture(imgs->wall_texture[0], (int)dda->r_xy[0], &twd);
-        else
-            get_color_from_wall_texture(imgs->wall_texture[2], (int)dda->r_xy[0], &twd);
-		mlx_put_pixel(imgs->img_3d, dda->ray, i++, twd.color);
-		twd.current_step += twd.step;
-	}
-	return (i);
+    if (dda->hit_hv == 1 && dda->hit_direction[0] == 1)
+        get_color_from_wall_texture(imgs->wall_texture[1], (int)dda->r_xy[1], twd);
+    else if (dda->hit_hv == 1 && dda->hit_direction[0] == 3)
+        get_color_from_wall_texture(imgs->wall_texture[3], (int)dda->r_xy[1], twd);
+    else if (dda->hit_hv == 0 && dda->hit_direction[1] == 0)
+        get_color_from_wall_texture(imgs->wall_texture[0], (int)dda->r_xy[0], twd);
+    else
+        get_color_from_wall_texture(imgs->wall_texture[2], (int)dda->r_xy[0], twd);
+    mlx_put_pixel(imgs->img_3d, dda->ray, twd->iterator++, twd->color);
+    twd->current_step += twd->step;
 }
 
-void	columns_drawing(t_imgs *imgs, t_dda *dda, uint32_t bt_color[2])
+static void floor_drawing(mlx_texture_t *floor_texture, t_wall_drawing *twd, t_dda *dda, float playerpos[2])
 {
-	int i;
+    //todo
+}
 
-	i = 0;
-	while (i < (SCREEN_HEIGHT - dda->wall_height) / 2)
-		mlx_put_pixel(imgs->img_3d, dda->ray, i++, bt_color[1]);
-	while (i < (SCREEN_HEIGHT + dda->wall_height) / 2) {
-		i += wall_drawing(imgs, dda, i);
-	}
-	while (i < SCREEN_HEIGHT)
-		mlx_put_pixel(imgs->img_3d, dda->ray, i++, bt_color[0]);
+void	columns_drawing(t_imgs *imgs, t_dda *dda, uint32_t bt_color[2], float playerpos[2])
+{
+    t_wall_drawing  twd;
+
+    setup_wall_struct(&twd, dda);
+	while (twd.iterator < twd.sky_lineH)
+		mlx_put_pixel(imgs->img_3d, dda->ray, twd.iterator++, bt_color[1]);
+    //printf("i = %d\n", i);
+	while (twd.iterator < twd.wall_lineH)
+		wall_drawing(imgs, dda, &twd);
+    //printf("%d\n", i);
+	while (twd.iterator < SCREEN_HEIGHT)
+        //printf("so\n");
+       floor_drawing(imgs->floor_texture, &twd, dda, playerpos);
+		//mlx_put_pixel(imgs->img_3d, dda->ray, twd.iterator++, bt_color[0]);
 }

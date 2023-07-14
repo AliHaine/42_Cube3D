@@ -130,7 +130,7 @@ void	raycasting(t_player *player, t_const *consts, t_imgs *imgs)
 		dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[0];
 		if (dda.dist_hv[0] > dda.dist_hv[1])
 			dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[1];
-		columns_drawing(imgs, &dda, consts->bt_color);
+		columns_drawing(imgs, &dda, consts->bt_color, player->playerpos);
 	}
 
 }

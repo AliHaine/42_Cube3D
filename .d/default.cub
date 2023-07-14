@@ -1,7 +1,7 @@
-EA assets/blue_wall.png
-SO assets/purple_wall.png
-WE assets/black_wall.png
-NO assets/pink_wall.png
+EA assets/walls/blue_wall.png
+SO assets/walls/purple_wall.png
+WE assets/walls/black_wall.png
+NO assets/walls/pink_wall.png
 
 C 0,191,255
 F 32,139,34

@@ -17,12 +17,14 @@ void setup_wall_struct(t_wall_drawing *twd, t_dda *dda)
 	int convertor ;
 
 	convertor = (64 * SCREEN_HEIGHT) / dda->dist_hv[0];
-	twd->lineH = ((SCREEN_HEIGHT + dda->wall_height) / 2);
+    twd->iterator = 0;
+    twd->sky_lineH = (SCREEN_HEIGHT - dda->wall_height) / 2;
+	twd->wall_lineH = (SCREEN_HEIGHT + dda->wall_height) / 2;
 	twd->step = 64.0f / (float)convertor;
 	twd->current_step = 0.0f;
-	if (twd->lineH > SCREEN_HEIGHT) {
+	if (twd->wall_lineH > SCREEN_HEIGHT) {
 		twd->current_step = (convertor - SCREEN_HEIGHT) / 2.0;
-		twd->lineH = SCREEN_HEIGHT;
+		twd->wall_lineH = SCREEN_HEIGHT;
 	}
 	twd->current_step *= twd->step;
     if (dda->hit_hv == 1 && dda->hit_direction[0] == 3)

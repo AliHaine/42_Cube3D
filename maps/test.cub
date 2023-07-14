@@ -1,7 +1,7 @@
 bjr cava
-EA assets/blue_wall.png
-SO assets/purple_wall.png
-WE assets/black_wall.png
+EA assets/walls/blue_wall.png
+SO assets/walls/purple_wall.png
+WE assets/walls/black_wall.png
 fadf
 adfda
 fdsa

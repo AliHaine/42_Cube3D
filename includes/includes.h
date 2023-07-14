@@ -34,7 +34,7 @@ void		display(void *params);
 void		draw_map(t_core *core);
 
 //drawing.c
-void	columns_drawing(t_imgs *imgs, t_dda *dda, uint32_t bt_color[2]);
+void	columns_drawing(t_imgs *imgs, t_dda *dda, uint32_t bt_color[2], float playerpos[2]);
 void		draw_energy_bar(mlx_image_t *img, short energy);
 
 //loader//

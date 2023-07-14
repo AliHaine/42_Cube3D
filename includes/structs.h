@@ -40,6 +40,7 @@ typedef struct s_imgs
     mlx_texture_t	*enemy;
 	mlx_texture_t	*trans;
 	mlx_texture_t	*wall_texture[4];
+    mlx_texture_t   *floor_texture;
 	mlx_texture_t	*door_texture;
 	mlx_texture_t	*grass_texture;
 	mlx_texture_t	*inventory_gui_texture;
@@ -87,8 +88,10 @@ typedef struct s_ray
 
 typedef struct s_wall_drawing
 {
+    int iterator;
 	uint32_t color;
-	int lineH;
+    int sky_lineH;
+	int wall_lineH;
 	float step;
 	float current_step;
 }	t_wall_drawing;
