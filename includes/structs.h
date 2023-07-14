@@ -111,10 +111,8 @@ typedef struct s_file
 
 typedef struct s_const
 {
-	uint32_t		bot_color;
-	uint32_t		top_color;
+	uint32_t		bt_color[2];
 	uint32_t		minimap_wall_color;
-	uint32_t		minimap_floor_color;
 	uint32_t		ray_color;
 	float			dist_between_ray;
 	char			**map;

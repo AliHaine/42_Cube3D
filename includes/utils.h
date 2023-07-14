@@ -19,8 +19,6 @@ bool	is_wall_empty(const t_imgs *imgs);
 
 //std_func_utils//
 
-void	ft_strcpy(char *s1, const char *s2);
-void	ft_strcat(char *s1, const char *s2);
 int		ft_strlen(const char *s);
 int		ft_atoi_for_texture(const char *s);
 char	*ft_itoa(int n);
@@ -56,5 +54,6 @@ bool	is_player_running(t_player *player);
 //raycastin and drawing
 
 void	fisheyes_fixor(t_dda *dda, float player_angle);
+void	get_color_from_wall_texture(mlx_texture_t *wall_texture, int r, t_wall_drawing *twd);
 
 #endif

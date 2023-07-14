@@ -7,11 +7,6 @@ SRCS		=	src/cub3d.c \
 				src/graphics/digital_differential_analysis.c \
 				src/graphics/drawing.c \
 				src/graphics/display.c \
-				src/graphics/raycast.c \
-				src/graphics/draw.c \
-				src/graphics/textures.c \
-				src/graphics/wall_direction.c \
-				src/graphics/obstacle_direction.c \
 				src/graphics/animations.c \
 				src/loading/texture_loader.c \
 				src/loading/sound_loader.c \
@@ -46,7 +41,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 NAME		=	cub3d
 
-FLAGS		=	-g3 -fsanitize=address
+FLAGS		=	-g3
 LDFLAGS		+=	-L./src/sound/bass
 LDLIBS		+=	-lbass
 
@@ -68,6 +63,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 	gcc $(FLAGS) $(OBJS) $(LIBFT) $(MLX42) $(BASS_LDFLAGS) $(BASS_LDLIBS) -o $(NAME)
 	install_name_tool -change @loader_path/libbass.dylib ./src/sound/bass/libbass.dylib $(NAME)
+
 clean:
 			$(RM) $(OBJS)
 

@@ -102,7 +102,7 @@ void	display(void *params)
 	//Dessiner la minimap
 	draw_map(core);
 	//Dessiner la 3D
-	raycasting(core);
+	raycasting(&core->player, &core->consts, &core->imgs);
 	mlx_resize_image(core->imgs.img_map, 250, 250);
 	//draw_player(core);
 	mlx_image_to_window(core->mlx, core->imgs.img_3d, 0, 0);

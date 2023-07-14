@@ -46,9 +46,9 @@ static void	get_color_from_map(t_file *file, t_const *consts)
 		msg_write_multiple(1, Messages[TRY_LOAD_COLOR], file->line);
 		usleep(300000 * LOAD);
 		if (file->line[0] != 'F')
-			set_color_value(file->line + 2, &consts->top_color);
+			set_color_value(file->line + 2, &consts->bt_color[1]);
 		else
-			set_color_value(file->line + 2, &consts->bot_color);
+			set_color_value(file->line + 2, &consts->bt_color[0]);
 		get_next_line(file);
 	}
 	while (file->line && file->line[0] && file->line[0] == '\n')

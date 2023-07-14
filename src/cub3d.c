@@ -16,9 +16,8 @@ static void	const_init(t_const *consts)
 {
 	consts->ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 150;
 	consts->minimap_wall_color = (109 << 24) + (96 << 16) + (77 << 8) + 255;
-	consts->minimap_floor_color = (128 << 24) + (128 << 16) + (128 << 8) + 255;
-	consts->top_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
-	consts->bot_color = (0 << 24) + (0 << 16) + (0 << 8) + 255;
+	consts->bt_color[1] = (0 << 24) + (0 << 16) + (0 << 8) + 255;
+	consts->bt_color[0] = (0 << 24) + (0 << 16) + (0 << 8) + 255;
 	consts->ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 255;
 	consts->south_east = PI / 4;
 	consts->south_west = (3 * PI) / 4;
