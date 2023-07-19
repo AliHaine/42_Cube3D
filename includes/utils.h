@@ -54,6 +54,6 @@ bool	is_player_running(t_player *player);
 //raycastin and drawing
 
 void	fisheyes_fixor(t_dda *dda, float player_angle);
-void	get_color_from_wall_texture(mlx_texture_t *wall_texture, int r, t_wall_drawing *twd);
+void	get_color_from_wall_texture(mlx_texture_t *wall_texture, int r, t_col_drawing *twd);
 
 #endif

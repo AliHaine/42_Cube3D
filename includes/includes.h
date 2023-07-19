@@ -36,6 +36,7 @@ void		draw_map(t_core *core);
 //drawing.c
 void	columns_drawing(t_imgs *imgs, t_dda *dda, uint32_t bt_color[2], float playerpos[2]);
 void		draw_energy_bar(mlx_image_t *img, short energy);
+void	minimap_drawing(float direction, t_const consts, t_imgs *imgs, const float playerpos[2]);
 
 //loader//
 
@@ -100,6 +101,6 @@ void	struct_setup(t_core *core);
 void	setup_slot_struct(mlx_t *mlx, t_player *player, t_item *item);
 t_slot	*get_first_slot(t_slot *slot);
 
-void setup_wall_struct(t_wall_drawing *twd, t_dda *dda);
+void setup_wall_struct(t_col_drawing *twd, t_dda *dda);
 
 #endif

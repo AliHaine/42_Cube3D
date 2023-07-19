@@ -65,6 +65,7 @@ void	inventory(t_core *core)
 		core->imgs.inventory_gui->enabled = true;
 		core->imgs.inventory_gui->instances->z = 8;
 		core->player.is_in_inventory = true;
+		core->player.canMove = false;
 		mlx_set_cursor(core->mlx, mlx_create_cursor(core->imgs.cursor));
 		open_inv(core);
 	}
@@ -75,6 +76,7 @@ void	inventory(t_core *core)
 			core->screen_size[1] / 2);
 		core->imgs.inventory_gui->enabled = false;
 		core->player.is_in_inventory = false;
+		core->player.canMove = true;
 		mlx_set_cursor(core->mlx, mlx_create_cursor(core->imgs.trans));
 	}
 }

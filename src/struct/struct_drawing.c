@@ -12,7 +12,7 @@
 
 #include "../../includes/includes.h"
 
-void setup_wall_struct(t_wall_drawing *twd, t_dda *dda)
+void setup_wall_struct(t_col_drawing *twd, t_dda *dda)
 {
 	int convertor ;
 

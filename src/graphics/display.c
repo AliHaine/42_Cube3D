@@ -11,35 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
-#include "../../includes/defines.h"
-#include "../../includes/structs.h"
-
-void	draw_map(t_core *core)
-{
-	const int start_y = (core->player.playerpos[1] / 4) - (286 / 2);
-	const int start_x = (core->player.playerpos[0] / 4) - (286 / 2);
-	int                 case_y;
-	int                 case_x;
-	int                 py;
-	int                 px;
-
-	py = -1;
-	while (++py < 286)
-	{
-		px = -1;
-		case_y = (py + start_y) / 16;
-		while (++px < 286)
-		{
-			case_x = (px + start_x) / 16;
-			if (get_pixel(core->imgs.map_texture, px, py) != -692152577)
-				continue ;
-			else if (case_y < 0 || case_x < 0 ||case_y > core->consts.map_height || case_x > core->consts.map_width - 1)
-				mlx_put_pixel(core->imgs.img_map, px, py, core->consts.minimap_wall_color);
-			else if (core->consts.map[case_y][case_x] == '1')
-				mlx_put_pixel(core->imgs.img_map, px, py, core->consts.minimap_wall_color);
-		}
-	}
-}
 
 static void	display_icon_in_invbar(t_slot *slot)
 {
@@ -100,9 +71,10 @@ void	display(void *params)
 	//Image de la minimap
 	core->imgs.img_map = mlx_texture_to_image(core->mlx, core->imgs.map_texture);
 	//Dessiner la minimap
-	draw_map(core);
+	//draw_map(core);
 	//Dessiner la 3D
 	raycasting(&core->player, &core->consts, &core->imgs);
+	minimap_drawing(core->player.playerangle, core->consts, &core->imgs, core->player.playerpos);
 	mlx_resize_image(core->imgs.img_map, 250, 250);
 	//draw_player(core);
 	mlx_image_to_window(core->mlx, core->imgs.img_3d, 0, 0);

@@ -81,6 +81,7 @@ static void	core_init(t_core *core)
     core->player.health = 2;
 	core->player.energy = 100;
 	core->player.is_in_inventory = false;
+	core->player.canMove = true;
 	msg_write(1, -1, SUCCESS);
 }
 

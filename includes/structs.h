@@ -48,13 +48,6 @@ typedef struct s_imgs
 	mlx_texture_t	*img_player_texture;
 }	t_imgs;
 
-typedef struct	s_checkpoint
-{
-	float	checkpoint_x;
-	float	checkpoint_y;
-	char	obstacle;
-}	t_checkpoint;
-
 typedef struct s_dda
 {
 	int	ray;
@@ -64,29 +57,15 @@ typedef struct s_dda
 	float cos;
 	float sin;
     float dist_hv[2];
-	float current_angle;
+	float current_angle; // current angle
+    float current_angle_fix; //fish eye fix
 	int hit_hv;
 	int hit_direction[2];
 	float wall_height;
 
 }	t_dda;
 
-typedef struct s_ray
-{
-    float			start_angle;
-    float			ray_x;
-    float			ray_y;
-    float			ray_angle;
-    float			ray_dist;
-    int				checkpoint_number;
-    t_checkpoint	*checkpoints;
-    int				wall_direction;
-    float			cosinus;
-    float			sinus;
-    char            obstacle;
-}	t_ray;
-
-typedef struct s_wall_drawing
+typedef struct s_col_drawing
 {
     int iterator;
 	uint32_t color;
@@ -94,7 +73,7 @@ typedef struct s_wall_drawing
 	int wall_lineH;
 	float step;
 	float current_step;
-}	t_wall_drawing;
+}	t_col_drawing;
 
 typedef struct s_three_i
 {
@@ -142,6 +121,7 @@ typedef struct s_item
     int				damage;
     int				strength;
     int				range;
+	int				max_stack;
     mlx_image_t		*image;
 	mlx_image_t		*icon;
     int             instance_number;
@@ -172,6 +152,7 @@ typedef struct s_player
 	short			energy;
 	t_slot			*slot;
 	bool			is_in_inventory;
+	bool			canMove;
 }	t_player;
 
 typedef struct s_core

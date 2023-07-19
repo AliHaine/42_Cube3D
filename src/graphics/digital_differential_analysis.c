@@ -126,11 +126,17 @@ void	raycasting(t_player *player, t_const *consts, t_imgs *imgs)
 			dda.hit_hv = 1;
 			dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[1];
 		}
+        //if (dda.ray == 0)
+            //printf("-----------------------------------------------\n"
+				   //"player angle = %f current angle = %f\ndisth = %f distv= %f ", player->playerangle, dda.current_angle, dda.dist_hv[0], dda.dist_hv[1]);
+		//if (dda.ray == RAY_NUMBER)
+			//printf("last ray ")
 		fisheyes_fixor(&dda, player->playerangle);
+        //if (dda.ray == 0)
+            //printf("disth fix = %f\n", dda.dist_hv[0]);
 		dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[0];
 		if (dda.dist_hv[0] > dda.dist_hv[1])
 			dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[1];
 		columns_drawing(imgs, &dda, consts->bt_color, player->playerpos);
 	}
-
 }

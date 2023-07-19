@@ -16,6 +16,8 @@
 
 void	move_right_left(t_player *player, char **map, int direction)
 {
+	if (!player->canMove)
+		return ;
 	if (get_right_char(player, map) != '1' && direction == 1)
 	{
 		player->playerpos[0] -= cosf(player->playerangle - PI / 2) * player->move_speed;
@@ -30,6 +32,8 @@ void	move_right_left(t_player *player, char **map, int direction)
 
 void	move_forward_backward(t_player *player, char **map, int direction)
 {
+	if (!player->canMove)
+		return ;
 	if (get_backward_char(player, map) != '1'&& direction == 1
 		&& map[(int)(player->playerpos[1] / 64)][(int)(player->playerpos[0] / 64)] != 1)
 	{
@@ -45,8 +49,8 @@ void	move_forward_backward(t_player *player, char **map, int direction)
 
 void	move_rotate(t_player *player, int direction, float speed)
 {
-    if (player->is_in_inventory == true)
-        return ;
+	if (!player->canMove)
+		return ;
 	if (direction == 0)
 	{
 		player->playerangle -= speed;
