@@ -31,7 +31,6 @@ void	raycasting(t_player *player, t_const *consts, t_imgs *imgs);
 
 //display.c
 void		display(void *params);
-void		draw_map(t_core *core);
 
 //drawing.c
 void	columns_drawing(t_imgs *imgs, t_dda *dda, uint32_t bt_color[2], float playerpos[2]);

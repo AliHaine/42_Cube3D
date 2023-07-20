@@ -18,7 +18,8 @@
 typedef struct	s_sounds
 {
 	uint32_t	ambiant;
-	uint32_t	hurt;
+	uint32_t	player_hurt;
+	uint32_t	player_walk;
 }				t_sounds;
 
 typedef struct s_imgs
@@ -152,7 +153,9 @@ typedef struct s_player
 	short			energy;
 	t_slot			*slot;
 	bool			is_in_inventory;
-	bool			canMove;
+	bool			can_move;
+	bool			is_moving;
+	bool			is_running;
 }	t_player;
 
 typedef struct s_core

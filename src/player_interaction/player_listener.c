@@ -19,4 +19,8 @@ void	player_listener(void *params)
 	core = (t_core *) params;
 	//check with death_listener if player is death and draw death screen
 	energy_listener(&core->player);
+	if (core->player.is_moving)
+		play_sound_alt(core->sounds.player_walk, true, false);
+	else
+		play_sound_alt(core->sounds.player_walk, false, false);
 }

@@ -22,5 +22,5 @@ void	mouse(enum mouse_key key, enum action action, enum modifier_key mkey, void 
 	if (get_forward_char(&core->player, core->consts.map) == '1') {
 		set_char_at_forward(0, &core->player, core->consts.map);
 	}
-	play_sound(core->sounds.hurt);
+	play_sound(core->sounds.player_hurt);
 }

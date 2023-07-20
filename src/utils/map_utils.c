@@ -108,3 +108,10 @@ bool	is_wall_empty(const t_imgs *imgs)
 	}
 	return (false);
 }
+
+bool    is_color_char(char c)
+{
+    if (c == 'F' || c == 'C')
+        return (true);
+    return (false);
+}

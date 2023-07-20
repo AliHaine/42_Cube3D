@@ -51,8 +51,10 @@ static void	get_color_from_map(t_file *file, t_const *consts)
 			set_color_value(file->line + 2, &consts->bt_color[0]);
 		get_next_line(file);
 	}
+    printf("fin = %s\n", file->line);
 	while (file->line && file->line[0] && file->line[0] == '\n')
 		get_next_line(file);
+    printf("fin = %s\n", file->line);
 }
 
 static void	get_image_from_map(t_file *file, t_imgs *imgs)
@@ -63,7 +65,7 @@ static void	get_image_from_map(t_file *file, t_imgs *imgs)
 	{
 		direction = get_direction_code(file->line);
 		if (direction >= 4) {
-			if (file->line[0] == '\n')
+			if (file->line[0] == '\n' || is_color_char(file->line[0]))
 				break ;
 			get_next_line(file);
 			continue ;

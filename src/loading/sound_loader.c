@@ -9,7 +9,11 @@ void	sound_loader(t_sounds *sounds)
 		msg_write(2, 2, ERROR_FATAL);
 	else
 		msg_write(1, -1, SUCCESS);
-	if (!load_sound(&sounds->hurt, "assets/sounds/hurt.mp3"))
+	if (!load_sound(&sounds->player_hurt, "assets/sounds/hurt.mp3"))
+		msg_write(2, 2, ERROR_FATAL);
+	else
+		msg_write(1, -1, SUCCESS);
+	if (!load_sound(&sounds->player_walk, "assets/sounds/player_walk.mp3"))
 		msg_write(2, 2, ERROR_FATAL);
 	else
 		msg_write(1, -1, SUCCESS);

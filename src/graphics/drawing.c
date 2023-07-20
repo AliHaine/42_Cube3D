@@ -63,6 +63,7 @@ static void floor_drawing(mlx_texture_t *floor_texture, t_col_drawing *tcd, t_dd
     /*float fy;
     float tx;
     float ty;
+	float ray_lengh = dda->dist_hv[0] / cosf(dda->current_angle);
     static bool f = false;
 
     fy = tcd->iterator - (SCREEN_HEIGHT / 2.0);
@@ -70,13 +71,12 @@ static void floor_drawing(mlx_texture_t *floor_texture, t_col_drawing *tcd, t_dd
     ty = playerpos[1] / 2 - sinf(dda->current_angle) * 158 * 64 / fy / cosf(dda->current_angle_fix);
 	if (dda->ray == 0)
 	{
-		if (!f)
-			printf("%d %d\n", ((int)(ty)&63), ((int)(tx)&63));
+		//if (!f)%
+			printf("%f %d %d %f %d %f %f\n", fy, (int)dda->r_xy[1], (int)tx, ty, tcd->sky_lineH, ray_lengh, dda->dist_hv[0]);
 			//printf("%f %f %d %d %f %f\n", tx, ty, (int)dda->r_xy[0], (int)dda->r_xy[1], dda->dist_hv[0], dda->dist_hv[1]);
-		f = true;
+		//f = true;
 	} else
-		f = false;
-*/
+		f = false;*/
     tcd->iterator++;
 }
 
@@ -118,5 +118,6 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, uint32_t bt_color[2], float playe
 	while (tcd.iterator < tcd.wall_lineH)
 		wall_drawing(imgs, dda, &tcd);
 	while (tcd.iterator < SCREEN_HEIGHT)
-       floor_drawing(imgs->floor_texture, &tcd, dda, playerpos, imgs->img_3d);
+		mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++, bt_color[0]);
+       //floor_drawing(imgs->floor_texture, &tcd, dda, playerpos, imgs->img_3d);
 }

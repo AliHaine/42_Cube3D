@@ -16,6 +16,7 @@ bool	is_allowed_char(char c);
 short	get_direction_code(char *s);
 bool	set_default_wall_texture(t_imgs *imgs);
 bool	is_wall_empty(const t_imgs *imgs);
+bool    is_color_char(char c);
 
 //std_func_utils//
 
