@@ -18,14 +18,11 @@
 # define SCREEN_WIDTH 1280
 # define MINIMAP_SIZE 8
 # define RAY_NUMBER 1280
-# define MINIMAP_PLAYER_SIZE (MINIMAP_SIZE/3)
 # define FOV 60
 # define SENSIBILITY 2
-# define FOG_DISTANCE 500
-# define TEXTURE_SIZE 64
-# define RESIZE (64 / (64 / MINIMAP_SIZE))
 # define DEFAULT_WALL ".d/default_wall.png"
 # define LOAD 0
 # define BASS_SAMPLE_LOOP 4
+# define MOVE_SPEED 5
 
 #endif

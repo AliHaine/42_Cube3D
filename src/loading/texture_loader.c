@@ -2,23 +2,23 @@
 
 static void	other_loader(mlx_t *mlx, t_imgs *imgs)
 {
-	if (!set_texture_from_path("assets/trans.png", &imgs->trans))
+	if (!set_texture_from_path("assets/others/trans.png", &imgs->trans))
 		msg_write(2, 2, ERROR_FATAL);
-	if (!set_texture_from_path("assets/e_0.png", &imgs->enemy))
+	/*if (!set_texture_from_path("assets/others/e_0.png", &imgs->enemy))
+		msg_write(2, 2, ERROR_FATAL);*/
+	if (!set_image_from_path(mlx, "assets/guis/invbar.png", &imgs->invbar))
 		msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, "assets/invbar.png", &imgs->invbar))
+	if (!set_image_from_path(mlx, "assets/guis/engbar.png", &imgs->engbar))
 		msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, "assets/engbar.png", &imgs->engbar))
-		msg_write(2, 2, ERROR_FATAL);
-	if (!set_texture_from_path("assets/door.png", &imgs->door_texture))
-		msg_write(2, 2, ERROR_FATAL);
+	/*if (!set_texture_from_path("assets/door.png", &imgs->door_texture))
+		msg_write(2, 2, ERROR_FATAL);*/
 	if (!set_texture_from_path("assets/grass.png", &imgs->grass_texture))
 		msg_write(2, 2, ERROR_FATAL);
-    if (!set_texture_from_path("assets/inventory_gui2.png", &imgs->inventory_gui_texture))
+    if (!set_texture_from_path("assets/guis/inventory_gui2.png", &imgs->inventory_gui_texture))
         msg_write(2, 2, ERROR_FATAL);
 	if (!set_texture_from_path("assets/cursor.png", &imgs->cursor))
 		msg_write(2, 2, ERROR_FATAL);
-	if (!set_texture_from_path("assets/map_background.png", &imgs->map_texture))
+	if (!set_texture_from_path("assets/guis/minimap_background.png", &imgs->map_texture))
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_texture_from_path("assets/player_dot.png", &imgs->img_player_texture))
 		msg_write(2, 2, ERROR_FATAL);

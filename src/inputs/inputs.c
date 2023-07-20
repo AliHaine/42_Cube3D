@@ -15,6 +15,8 @@
 
 static void	rotation_inputs(mlx_t *mlx, t_player *player)
 {
+    if (!player->can_move)
+        return ;
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 		move_rotate(player, 0, (float)SENSIBILITY / 10);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
@@ -63,9 +65,9 @@ void	inputs_hook(struct mlx_key_data key, void *params)
 
 	core = (t_core *)params;
 	if (key.key == 340 && key.action == 1)
-		core->player.move_speed = 25;
+			core->player.move_speed = MOVE_SPEED * 2;
 	else if (key.key == 340 && key.action == 0)
-		core->player.move_speed = 10;
+		core->player.move_speed = MOVE_SPEED;
     if (key.key == 69 && key.action == 0)
         inventory(core);
 }

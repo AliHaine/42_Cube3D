@@ -19,13 +19,8 @@ static void	const_init(t_const *consts)
 	consts->bt_color[1] = (0 << 24) + (0 << 16) + (0 << 8) + 255;
 	consts->bt_color[0] = (0 << 24) + (0 << 16) + (0 << 8) + 255;
 	consts->ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 255;
-	consts->south_east = PI / 4;
-	consts->south_west = (3 * PI) / 4;
-	consts->north_east = (7 * PI) / 4;
-	consts->north_west = (5 * PI) / 4;
 	consts->fov = FOV * (PI / 180);
 	consts->dist_between_ray = consts->fov / RAY_NUMBER;
-	consts->minimap_size = (int)(64 / MINIMAP_SIZE);
 }
 
 static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
@@ -56,7 +51,6 @@ static void	core_init(t_core *core)
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
 	mlx_set_cursor(core->mlx, mlx_create_cursor(core->imgs.trans));
-	//voir pourquoi on est obliger de mettre 2 fois le cursor
 	mlx_image_to_window(core->mlx, core->imgs.crosshair, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	mlx_image_to_window(core->mlx, core->imgs.invbar, SCREEN_WIDTH / 3.43,SCREEN_HEIGHT - 95);
 	mlx_image_to_window(core->mlx, core->imgs.invbar_selector, SCREEN_WIDTH / 3.43,SCREEN_HEIGHT - 95);
@@ -77,11 +71,11 @@ static void	core_init(t_core *core)
 	core->screen_size[0] = SCREEN_WIDTH;
     core->screen_size[1] = SCREEN_HEIGHT;
 	core->player.have_player = false;
-	core->player.move_speed = 10;
+	core->player.move_speed = MOVE_SPEED;
     core->player.health = 2;
 	core->player.energy = 100;
 	core->player.is_in_inventory = false;
-	core->player.canMove = true;
+	core->player.can_move = true;
 	msg_write(1, -1, SUCCESS);
 }
 

@@ -52,7 +52,6 @@ typedef struct s_imgs
 typedef struct s_dda
 {
 	int	ray;
-	int m_xy[2];
     float r_xy[2];
 	float v_xy[2];
 	float cos;
@@ -102,11 +101,6 @@ typedef struct s_const
 	float			fov;
 	int				map_width;
 	int				map_height;
-	int				minimap_size;
-	float			north_east;
-	float			north_west;
-	float			south_east;
-	float			south_west;
 }	t_const;
 
 typedef struct s_animation

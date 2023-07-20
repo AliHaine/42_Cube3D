@@ -34,7 +34,7 @@ char	get_left_char(t_player *player, char **map)
 
 bool	is_player_running(t_player *player)
 {
-	if (player->move_speed > 10)
+	if (player->move_speed > MOVE_SPEED)
 		return (true);
 	return (false);
 }
