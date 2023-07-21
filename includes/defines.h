@@ -23,6 +23,6 @@
 # define DEFAULT_WALL ".d/default_wall.png"
 # define LOAD 0
 # define BASS_SAMPLE_LOOP 4
-# define MOVE_SPEED 5
+# define MOVE_SPEED 7
 
 #endif

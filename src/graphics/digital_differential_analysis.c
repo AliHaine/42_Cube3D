@@ -20,9 +20,8 @@ static void	jump_to_next(t_dda *dda, const float o_xy[2], char **map, const floa
 	{
 		m_xy[0] = (int)dda->r_xy[0] / 64;
 		m_xy[1] = (int)dda->r_xy[1] / 64;
-		if (m_xy[val] > max || dda->r_xy[val] < 0) {
-			break;
-		}
+		if (m_xy[val] >= max || dda->r_xy[val] < 0 || map[m_xy[1]][m_xy[0]] == ' ')
+			break ;
 		if (map[m_xy[1]][m_xy[0]] == '1')
 		{
 			dda->dist_hv[val] = dda->cos * (dda->r_xy[0] - playerpos[0])
@@ -59,7 +58,6 @@ static void	horizontal_cast(t_dda *dda, t_player player, char **map, int m_width
 		o_xy[0] = -o_xy[1] * tan;
 		dda->hit_direction[1] = 0;
 	}
-
 	if (dda->hit_direction[1] >= 0)
 		jump_to_next(dda, o_xy, map, player.playerpos, 0, m_width);
 }
@@ -82,7 +80,7 @@ static void	vertical_cast(t_dda *dda, t_player player, char **map, int m_height)
 	}
 	else if (dda->cos < -0.001) //look left
 	{
-		dda->r_xy[0] = ((int)(player.playerpos[0] / 64) * 64) - 0.0001;
+		dda->r_xy[0] = ((int)(player.playerpos[0] / 64) * 64) - 0.0002;
 		dda->r_xy[1] = (player.playerpos[0] - dda->r_xy[0]) * tan + player.playerpos[1];
 		o_xy[0] = -64;
 		o_xy[1] = -o_xy[0] * tan;
@@ -117,23 +115,14 @@ void	raycasting(t_player *player, t_const *consts, t_imgs *imgs)
 		dda.sin = sinf(dda.current_angle);
 		vertical_cast(&dda, *player, consts->map, consts->map_height);
 		horizontal_cast(&dda, *player, consts->map, consts->map_width);
-		dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[0];
 		if (dda.dist_hv[1] < dda.dist_hv[0])
 		{
 			dda.r_xy[0] = dda.v_xy[0];
 			dda.r_xy[1] = dda.v_xy[1];
 			dda.dist_hv[0] = dda.dist_hv[1];
 			dda.hit_hv = 1;
-			dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[1];
 		}
-        //if (dda.ray == 0)
-            //printf("-----------------------------------------------\n"
-				   //"player angle = %f current angle = %f\ndisth = %f distv= %f ", player->playerangle, dda.current_angle, dda.dist_hv[0], dda.dist_hv[1]);
-		//if (dda.ray == RAY_NUMBER)
-			//printf("last ray ")
 		fisheyes_fixor(&dda, player->playerangle);
-        //if (dda.ray == 0)
-            //printf("disth fix = %f\n", dda.dist_hv[0]);
 		dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[0];
 		if (dda.dist_hv[0] > dda.dist_hv[1])
 			dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[1];

@@ -14,11 +14,11 @@
 
 static void	const_init(t_const *consts)
 {
-	consts->ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 150;
-	consts->minimap_wall_color = (109 << 24) + (96 << 16) + (77 << 8) + 255;
-	consts->bt_color[1] = (0 << 24) + (0 << 16) + (0 << 8) + 255;
-	consts->bt_color[0] = (0 << 24) + (0 << 16) + (0 << 8) + 255;
-	consts->ray_color = (220 << 24) + (20 << 16) + (60 << 8) + 255;
+	consts->ray_color = get_rgb_color(220, 20, 60, 150);
+	consts->minimap_wall_color = get_rgb_color(109, 96, 77, 255);
+	consts->bt_color[1] = get_rgb_color(0, 191, 255, 255);
+	consts->bt_color[0] = get_rgb_color(32, 139, 34, 255);;
+	consts->ray_color = get_rgb_color(220, 20, 60, 255);
 	consts->fov = FOV * (PI / 180);
 	consts->dist_between_ray = consts->fov / RAY_NUMBER;
 }

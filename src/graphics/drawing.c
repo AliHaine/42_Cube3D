@@ -112,7 +112,7 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, uint32_t bt_color[2], float playe
 {
     t_col_drawing  tcd;
 
-    setup_wall_struct(&tcd, dda);
+    setup_wall_struct(&tcd, dda);;
 	while (tcd.iterator < tcd.sky_lineH)
 		mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++, bt_color[1]);
 	while (tcd.iterator < tcd.wall_lineH)
