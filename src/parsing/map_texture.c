@@ -33,7 +33,7 @@ static void	set_color_value(const char *line, uint32_t *target_color)
 	msg_write(1, -1, SUCCESS);
 }
 
-static void	get_color_from_map(t_file *file, t_const *consts)
+static void	get_color_from_map(t_file *file, t_map *map)
 {
 	while (file->line)
 	{
@@ -46,15 +46,13 @@ static void	get_color_from_map(t_file *file, t_const *consts)
 		msg_write_multiple(1, Messages[TRY_LOAD_COLOR], file->line);
 		usleep(300000 * LOAD);
 		if (file->line[0] != 'F')
-			set_color_value(file->line + 2, &consts->bt_color[1]);
+			set_color_value(file->line + 2, &map->bt_color[1]);
 		else
-			set_color_value(file->line + 2, &consts->bt_color[0]);
+			set_color_value(file->line + 2, &map->bt_color[0]);
 		get_next_line(file);
 	}
-    printf("fin = %s\n", file->line);
 	while (file->line && file->line[0] && file->line[0] == '\n')
 		get_next_line(file);
-    printf("fin = %s\n", file->line);
 }
 
 static void	get_image_from_map(t_file *file, t_imgs *imgs)
@@ -83,12 +81,12 @@ static void	get_image_from_map(t_file *file, t_imgs *imgs)
 		get_next_line(file);
 }
 
-void	texture_main(t_file *file, t_core *core)
+void	texture_main(t_file *file, t_imgs *imgs, t_map *map)
 {
 	msg_write(1, -1, GET_MAP_CONTENT);
 	usleep(500000 * LOAD);
 	get_next_line(file);
-	get_image_from_map(file, &core->imgs);
-	get_color_from_map(file, &core->consts);
+	get_image_from_map(file, imgs);
+	get_color_from_map(file, map);
 	msg_write(1, -1, SUCCESS);
 }

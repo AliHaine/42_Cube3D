@@ -80,7 +80,7 @@ static void floor_drawing(mlx_texture_t *floor_texture, t_col_drawing *tcd, t_dd
     tcd->iterator++;
 }
 
-void	minimap_drawing(float direction, t_const consts, t_imgs *imgs, const float playerpos[2])
+void	minimap_drawing(float direction, t_const consts, t_imgs *imgs, const float playerpos[2], t_map *map)
 {
 	const int start_y = (playerpos[1] / 4) - (286 / 2);
 	const int start_x = (playerpos[0] / 4) - (286 / 2);
@@ -99,9 +99,9 @@ void	minimap_drawing(float direction, t_const consts, t_imgs *imgs, const float 
 			case_x = (px + start_x) / 16;
 			if (get_pixel(imgs->map_texture, px, py) != -692152577)
 				continue ;
-			else if (case_y < 0 || case_x < 0 ||case_y > consts.map_height || case_x > consts.map_width - 1)
+			else if (case_y < 0 || case_x < 0 || case_y > map->height - 1 || case_x > map->width - 1)
 				mlx_put_pixel(imgs->img_map, px, py, consts.minimap_wall_color);
-			else if (consts.map[case_y][case_x] == '1')
+			else if (map->map[case_y][case_x] == '1')
 				mlx_put_pixel(imgs->img_map, px, py, consts.minimap_wall_color);
 		}
 	}

@@ -37,6 +37,13 @@ typedef enum {
     WOOD_BOW,
 }   Item;
 
+typedef enum {
+	PEACEFUL,
+	EASY,
+	NORMAL,
+	HARD,
+}	Difficulty;
+
 static const char *ItemName[] = {
 		"hand",
 		"sword_nether",

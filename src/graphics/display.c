@@ -61,22 +61,12 @@ void	display(void *params)
 	mlx_delete_image(core->mlx, core->imgs.img_map);
 	mlx_delete_image(core->mlx, core->imgs.img_3d);
 	mlx_delete_image(core->mlx, core->imgs.img_player);
-	//Image du point du joueur
-	//Playerpos c'est selon la resolution de l'ecran
-	//Sinon c'est que des ptits calculs pour adapter la position du joueur
-	//selon la taille de la map, de l'ecran et du decalage de la minimap de 10 pixels
-	//Image avec toute la 3D
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
-	//Image de la minimap
 	core->imgs.img_map = mlx_texture_to_image(core->mlx, core->imgs.map_texture);
-	//Dessiner la minimap
-	//draw_map(core);
-	//Dessiner la 3D
-	raycasting(&core->player, &core->consts, &core->imgs);
-	minimap_drawing(core->player.playerangle, core->consts, &core->imgs, core->player.playerpos);
+	raycasting(&core->player, &core->consts, &core->imgs, &core->maps[0]);
+	minimap_drawing(core->player.playerangle, core->consts, &core->imgs, core->player.playerpos, &core->maps[0]);
 	mlx_resize_image(core->imgs.img_map, 250, 250);
-	//draw_player(core);
 	mlx_image_to_window(core->mlx, core->imgs.img_3d, 0, 0);
 	mlx_image_to_window(core->mlx, core->imgs.img_map, 20, 445);
 	//Definir l'ordre des images / qui est au dessus de qui

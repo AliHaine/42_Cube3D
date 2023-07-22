@@ -16,8 +16,6 @@ static void	const_init(t_const *consts)
 {
 	consts->ray_color = get_rgb_color(220, 20, 60, 150);
 	consts->minimap_wall_color = get_rgb_color(109, 96, 77, 255);
-	consts->bt_color[1] = get_rgb_color(0, 191, 255, 255);
-	consts->bt_color[0] = get_rgb_color(32, 139, 34, 255);;
 	consts->ray_color = get_rgb_color(220, 20, 60, 255);
 	consts->fov = FOV * (PI / 180);
 	consts->dist_between_ray = consts->fov / RAY_NUMBER;
@@ -76,6 +74,7 @@ static void	core_init(t_core *core)
 	core->player.energy = 100;
 	core->player.is_in_inventory = false;
 	core->player.can_move = true;
+	core->maps = malloc(sizeof(t_map));
 	msg_write(1, -1, SUCCESS);
 }
 
@@ -94,7 +93,7 @@ int	main(int argc, char *argv[])
     give_item(&core, &core.items[SWORD_RUBY], 8, 1);
 	give_item(&core, &core.items[SWORD_DIAMOND], 12, 3);
     usleep(60000);
-	map_manager(argv, &core);
+	map_manager(argv, &core.maps[0], &core.imgs, &core.player);
 	// J'init l'image la psq elle a besoin des variables initialisees par map_manager
 	// C'est censé adapter la minimap a la taille de la carte mais pas a la resolution donc ca segfault tjr
 	msg_write(1, -1, MINIMAP_INIT);

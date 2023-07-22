@@ -23,6 +23,7 @@ bool    is_color_char(char c);
 int		ft_strlen(const char *s);
 int		ft_atoi_for_texture(const char *s);
 char	*ft_itoa(int n);
+bool	is_str_blank(const char *s);
 
 //struct//
 

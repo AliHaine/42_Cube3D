@@ -1,53 +1,50 @@
 #include "../../includes/includes.h"
 #include "../../includes/defines.h"
 
-static bool	set_map_size_value(t_t_i *ti, t_file *file)
+static bool	set_map_size_value(t_file *file, t_map *map)
 {
-	int		size;
+	int		current_line_size;
 
-	while (file->line)
+	while (file->line && !is_str_blank(file->line))
 	{
-		size = ft_strlen(file->line);
-		if (size > ti->b)
-			ti->b = size - 1;
+		current_line_size = ft_strlen(file->line);
+		if (current_line_size > map->width)
+			map->width = current_line_size - 1;
 		get_next_line(file);
-		ti->c++;
+		map->height++;
 	}
-	if (ti->b <= 2 || ti->c <= 1 || ti->b > 84 || ti->c > 30)
+	if (map->width <= 2 || map->height <= 1 || map->width > 84 || map->height > 30)
 		return (false);
 	return (true);
 }
 
-static bool	map_value_init(t_t_i *ti, t_file *file, t_const *consts, int start)
+static bool	map_value_init(t_map *map, t_file *file, int start)
 {
-	if (!set_map_size_value(ti, file))
+	if (!set_map_size_value(file, map))
 	{
 		close(file->fd);
 		msg_write(2, 1, ERROR_MAP_SIZE);
 		return (0);
 	}
 	reopen_file(file, start, O_RDONLY);
-	consts->map = malloc(sizeof(char *) * (ti->c + 2));
-	consts->map[ti->c + 1] = 0;
+	map->map = malloc(sizeof(char *) * (map->height + 1));
+	map->map[map->height] = 0;
 	return (1);
 }
 
-void	map_manager(char *argv[], t_core *core)
+void	map_manager(char *argv[], t_map *map, t_imgs *imgs, t_player *player)
 {
 	t_file	file;
-	t_t_i	ti;
 	int		save;
 
 	msg_write(2, -1, CHECK_MAP);
 	usleep(500000 * LOAD);
 	basical_map_check(argv);
-	init_tti_struct(&ti, 0, 0, -1);
+	map_struct_init(map);
 	open_file(&file, argv[1], O_RDONLY);
 	msg_write(1, -1, NO_ERROR);
-	texture_main(&file, core);
+	texture_main(&file, imgs, map);
 	save = file.line_num;
-	map_value_init(&ti, &file, &core->consts, save);
-	parse_main(ti, &file, core);
-	core->consts.map_width = ti.b;
-	core->consts.map_height = ti.c;
+	map_value_init(map, &file, save);
+	parse_main(&file, player, map);
 }

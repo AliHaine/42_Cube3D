@@ -8,7 +8,7 @@ static bool	set_player(int x, int y, t_player *player)
 	return (true);
 }
 
-static bool	fill_map_tab(char *line, char *tab, t_t_i ti, t_player *player)
+static bool	fill_map_tab(char *line, char *tab, t_player *player, t_map *map, int iterator)
 {
 	int	i;
 
@@ -20,32 +20,35 @@ static bool	fill_map_tab(char *line, char *tab, t_t_i ti, t_player *player)
 		if (is_player_char(line[i]))
 		{
 			player->have_player = true;
-			set_player(ti.a, i, player);
+			set_player(iterator, i, player);
 		}
 		tab[i] = line[i];
 		i++;
 	}
-	while (i < ti.b)
+	while (i < map->width)
 		tab[i++] = ' ';
 	tab[i] = '\0';
 	return (true);
 }
 
-bool	parse_main(t_t_i ti, t_file *file, t_core *core)
+bool	parse_main(t_file *file, t_player *player, t_map *map)
 {
-	while (ti.a <= ti.c)
+	int iterator;
+
+	iterator = 0;
+	while (iterator < map->height)
 	{
-		core->consts.map[ti.a] = malloc(sizeof(char) * (ti.b + 1));
+		map->map[iterator] = malloc(sizeof(char) * (map->width + 1));
 		//free ici si error
-		if (!fill_map_tab(file->line, core->consts.map[ti.a], ti, &core->player))
+		if (!fill_map_tab(file->line, map->map[iterator], player, map, iterator))
 		{
 			msg_write(2, 2, ERROR_MAP_CHAR);
 			return (false);
 		}
-		ti.a++;
+		iterator++;
 		get_next_line(file);
 	}
-	if (!core->player.have_player)
+	if (!player->have_player)
 		msg_write(2, 2, ERROR_PLAYER);
 	return (true);
 }

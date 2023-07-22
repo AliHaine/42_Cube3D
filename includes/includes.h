@@ -27,7 +27,7 @@
 # include <sys/time.h>
 
 //dda//
-void	raycasting(t_player *player, t_const *consts, t_imgs *imgs);
+void	raycasting(t_player *player, t_const *consts, t_imgs *imgs, t_map *map);
 
 //display.c
 void		display(void *params);
@@ -35,7 +35,7 @@ void		display(void *params);
 //drawing.c
 void	columns_drawing(t_imgs *imgs, t_dda *dda, uint32_t bt_color[2], float playerpos[2]);
 void		draw_energy_bar(mlx_image_t *img, short energy);
-void	minimap_drawing(float direction, t_const consts, t_imgs *imgs, const float playerpos[2]);
+void	minimap_drawing(float direction, t_const consts, t_imgs *imgs, const float playerpos[2], t_map *map);
 
 //loader//
 
@@ -58,9 +58,9 @@ void	scroll_hook(double x, double y, void *param);
 
 //parsing//
 
-void	map_manager(char *argv[], t_core *core);
-void	texture_main(t_file *file, t_core *core);
-bool	parse_main(t_t_i ti, t_file *file, t_core *core);
+void	map_manager(char *argv[], t_map *map, t_imgs *imgs, t_player *player);
+void	texture_main(t_file *file, t_imgs *imgs, t_map *map);
+bool	parse_main(t_file *file, t_player *player, t_map *map);
 
 //sound//
 void	init_sound_empty(t_sounds *sounds);
@@ -101,5 +101,7 @@ void	setup_slot_struct(mlx_t *mlx, t_player *player, t_item *item);
 t_slot	*get_first_slot(t_slot *slot);
 
 void setup_wall_struct(t_col_drawing *twd, t_dda *dda);
+
+void	map_struct_init(t_map *map);
 
 #endif

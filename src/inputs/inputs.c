@@ -55,7 +55,7 @@ void	inputs(void *params)
 	if (mlx_is_key_down(core->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(core->mlx);
 	rotation_inputs(core->mlx, &core->player);
-	moving_inputs(core->mlx, &core->player, core->consts.map);
+	moving_inputs(core->mlx, &core->player, core->maps[0].map);
 
 }
 

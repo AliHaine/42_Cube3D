@@ -83,3 +83,14 @@ int	ft_atoi_for_texture(const char *s)
 		return (-1);
 	return (val);
 }
+
+bool	is_str_blank(const char *s)
+{
+	while(*s && *s != '\n')
+	{
+		if (*s != ' ')
+			return (false);
+		s++;
+	}
+	return (true);
+}
