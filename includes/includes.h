@@ -34,7 +34,7 @@ void		display(void *params);
 
 //drawing.c
 void	columns_drawing(t_imgs *imgs, t_dda *dda, uint32_t bt_color[2], float playerpos[2]);
-void		draw_energy_bar(mlx_image_t *img, short energy);
+void	draw_energy_bar(mlx_image_t *img, int energy);
 void	minimap_drawing(float direction, t_const consts, t_imgs *imgs, const float playerpos[2], t_map *map);
 
 //loader//
@@ -89,10 +89,10 @@ bool    hit_player(t_player *player, t_imgs *imgs);
 void	heal_player(t_player *player, t_imgs *imgs);
 
 //energy
-void	take_energy(t_player *player, short value);
-void	add_energy(t_player *player, short value);
-bool	player_have_energy(short value);
-bool	player_have_enough_energy(t_player *player, short value);
+bool	take_energy(t_player *player, int value);
+bool	add_energy(t_player *player, int value);
+bool	player_have_energy(int value);
+bool	player_have_enough_energy(t_player *player, int value);
 
 	//struct
 void	struct_setup(t_core *core);

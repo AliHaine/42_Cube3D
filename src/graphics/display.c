@@ -57,7 +57,6 @@ void	display(void *params)
 	animation_listener(core->items);
 	display_item_in_hand(&core->player);
 	display_icon_in_invbar(get_first_slot(core->player.slot));
-	draw_energy_bar(core->imgs.engbar, core->player.energy);
 	mlx_delete_image(core->mlx, core->imgs.img_map);
 	mlx_delete_image(core->mlx, core->imgs.img_3d);
 	mlx_delete_image(core->mlx, core->imgs.img_player);

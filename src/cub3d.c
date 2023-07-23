@@ -53,6 +53,7 @@ static void	core_init(t_core *core)
 	mlx_image_to_window(core->mlx, core->imgs.invbar, SCREEN_WIDTH / 3.43,SCREEN_HEIGHT - 95);
 	mlx_image_to_window(core->mlx, core->imgs.invbar_selector, SCREEN_WIDTH / 3.43,SCREEN_HEIGHT - 95);
 	mlx_image_to_window(core->mlx, core->imgs.engbar, SCREEN_WIDTH / 3,SCREEN_HEIGHT - 115);
+	draw_energy_bar(core->imgs.engbar, 100);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH / 2.9,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH / 2.69,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[0], SCREEN_WIDTH / 2.51,SCREEN_HEIGHT - 155);

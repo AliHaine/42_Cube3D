@@ -37,12 +37,6 @@ uint32_t	get_rgb_color(unsigned short r, unsigned short g, unsigned short b, uns
 	return ((r << 24) | (g << 16) | (b  << 8) | a);
 }
 
-void	draw_pixel_to_img(mlx_image_t *img, t_t_i ti, uint32_t color)
-{
-	while (ti.a-- >= 0)
-		mlx_put_pixel(img, ti.b++, ti.c, color);
-}
-
 uint32_t	get_pixel(mlx_texture_t *texture, int x, int y)
 {
 	uint32_t					color;

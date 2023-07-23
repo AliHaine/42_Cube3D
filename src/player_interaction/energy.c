@@ -1,29 +1,35 @@
 #include "../../includes/includes.h"
 
-void	take_energy(t_player *player, short value)
+bool	take_energy(t_player *player, int value)
 {
+	if (player->energy <= 0)
+		return (false);
 	if (player->energy - value <= 0)
 		player->energy = 0;
 	else
 		player->energy -= value;
+	return (true);
 }
 
-void	add_energy(t_player *player, short value)
+bool	add_energy(t_player *player, int value)
 {
+	if (player->energy == 100)
+		return (false);
 	if (player->energy + value > 100)
 		player->energy = 100;
 	else
 		player->energy += value;
+	return (true);
 }
 
-bool	player_have_energy(short value)
+bool	player_have_energy(int value)
 {
 	if (value <= 0)
 		return (false);
 	return (true);
 }
 
-bool	player_have_enough_energy(t_player *player, short value)
+bool	player_have_enough_energy(t_player *player, int value)
 {
 	if (player->energy < value)
 		return (false);

@@ -75,13 +75,6 @@ typedef struct s_col_drawing
 	float current_step;
 }	t_col_drawing;
 
-typedef struct s_three_i
-{
-	int	a;
-	int	b;
-	int	c;
-}	t_t_i;
-
 typedef struct s_file
 {
 	int		fd;
@@ -149,7 +142,7 @@ typedef struct s_player
 	int				health;
 	bool			have_player;
 	int				move_speed;
-	short			energy;
+	int				energy;
 	t_slot			*slot;
 	bool			is_in_inventory;
 	bool			can_move;

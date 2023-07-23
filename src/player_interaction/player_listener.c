@@ -1,15 +1,15 @@
 #include "../../includes/includes.h"
 
-static void	energy_listener(t_player *player)
+static bool	energy_listener(t_player *player, Difficulty difficulty)
 {
 	if (is_player_running(player))
 	{
-		take_energy(player, 3);
 		if (!player_have_energy(player->energy))
 			player->move_speed = MOVE_SPEED;
+		return (take_energy(player, 1 + difficulty));
 	}
 	else
-		add_energy(player, 1);
+		return (add_energy(player, 1));
 }
 
 void	player_listener(void *params)
@@ -18,7 +18,8 @@ void	player_listener(void *params)
 
 	core = (t_core *) params;
 	//check with death_listener if player is death and draw death screen
-	energy_listener(&core->player);
+	if  (energy_listener(&core->player, core->maps[0].difficulty))
+		draw_energy_bar(core->imgs.engbar, core->player.energy);
 	if (core->player.is_moving)
 		play_sound_alt(core->sounds.player_walk, true, false);
 	else

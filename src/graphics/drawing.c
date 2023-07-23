@@ -12,35 +12,45 @@
 
 #include "../../includes/includes.h"
 
-void	draw_energy_bar(mlx_image_t *engbar_texture, short energy)
+//todo here
+static void	draw_pixel_to_img2(mlx_image_t *img, int e, int x, int y, uint32_t color)
 {
-    t_t_i		ti;
+	while (e-- >= 0)
+		mlx_put_pixel(img, x++, y, color);
+}
+
+void	draw_energy_bar(mlx_image_t *engbar_texture, int energy)
+{
+	int			energy_conv;
+	int			y;
+	int			x;
     uint32_t	full_color;
     uint32_t	empty_color;
 
-    init_tti_struct(&ti, ((energy * 4.3)), 3, 2);
+	x = 3;
+	y = 1;
+	energy_conv = energy * 4.3;
     full_color = get_rgb_color(192, 19, 186, 255);
     empty_color = get_rgb_color(100, 80, 190, 255);
-    while (ti.c != 10)
+    while (y++ != 10)
     {
-        if (ti.c == 9 || ti.c == 2)
+        if (y == 9 || y == 2)
         {
-            ti.b++;
-            ti.a -= 2;
+            x++;
+			energy_conv -= 2;
         }
-        draw_pixel_to_img(engbar_texture, ti, full_color);
+		draw_pixel_to_img2(engbar_texture, energy_conv, x, y, full_color);
         if (energy < 100)
         {
-            if (ti.c == 9 || ti.c == 2)
-                ti.a += 4;
-            ti.a -= 100 * 4.3;
-            ti.a = abs(ti.a);
-            ti.b += energy * 4.3;
-            draw_pixel_to_img(engbar_texture, ti, empty_color);
+            if (y == 9 || y == 2)
+				energy_conv += 4;
+			energy_conv -= 100 * 4.3;
+			energy_conv = abs(energy_conv);
+            x += energy * 4.3;
+            draw_pixel_to_img2(engbar_texture, energy_conv, x, y, empty_color);
         }
-        ti.b = 3;
-        ti.c++;
-        ti.a = energy * 4.3;
+        x = 3;
+		energy_conv = energy * 4.3;
     }
 }
 
