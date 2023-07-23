@@ -90,7 +90,7 @@ static void floor_drawing(mlx_texture_t *floor_texture, t_col_drawing *tcd, t_dd
     tcd->iterator++;
 }
 
-void	minimap_drawing(float direction, t_const consts, t_imgs *imgs, const float playerpos[2], t_map *map)
+void	minimap_drawing(float direction, t_imgs *imgs, const float playerpos[2], t_map *map)
 {
 	const int start_y = (playerpos[1] / 4) - (286 / 2);
 	const int start_x = (playerpos[0] / 4) - (286 / 2);
@@ -98,8 +98,10 @@ void	minimap_drawing(float direction, t_const consts, t_imgs *imgs, const float 
 	int                 case_x;
 	int                 py;
 	int                 px;
+	uint32_t	wall_color;
 
 	py = -1;
+	wall_color = get_rgb_color(109, 96, 77, 255);
 	while (++py < 286)
 	{
 		px = -1;
@@ -110,9 +112,9 @@ void	minimap_drawing(float direction, t_const consts, t_imgs *imgs, const float 
 			if (get_pixel(imgs->map_texture, px, py) != -692152577)
 				continue ;
 			else if (case_y < 0 || case_x < 0 || case_y > map->height - 1 || case_x > map->width - 1)
-				mlx_put_pixel(imgs->img_map, px, py, consts.minimap_wall_color);
+				mlx_put_pixel(imgs->img_map, px, py, wall_color);
 			else if (map->map[case_y][case_x] == '1')
-				mlx_put_pixel(imgs->img_map, px, py, consts.minimap_wall_color);
+				mlx_put_pixel(imgs->img_map, px, py, wall_color);
 		}
 	}
 	//mlx_put_pixel(imgs->img_map, 90, 90, get_rgb_color(0, 255, 0,255));

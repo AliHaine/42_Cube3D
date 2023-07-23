@@ -12,16 +12,7 @@
 
 #include "../includes/includes.h"
 
-static void	const_init(t_const *consts)
-{
-	consts->ray_color = get_rgb_color(220, 20, 60, 150);
-	consts->minimap_wall_color = get_rgb_color(109, 96, 77, 255);
-	consts->ray_color = get_rgb_color(220, 20, 60, 255);
-	consts->fov = FOV * (PI / 180);
-	consts->dist_between_ray = consts->fov / RAY_NUMBER;
-}
-
-static void	imgs_init(mlx_t *mlx, t_imgs *imgs, uint32_t ray_color)
+static void	imgs_init(mlx_t *mlx, t_imgs *imgs)
 {
 	imgs->wall_texture[0] = 0;
 	imgs->wall_texture[1] = 0;
@@ -39,11 +30,10 @@ static void	core_init(t_core *core)
 	usleep(600000 * LOAD);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	core->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "セグメンテーションフォルトのないプログラムは、鋭い剣のように正確に使える。", true);
-	const_init(&core->consts);
 	texture_loader(core);
 	struct_setup(core);
 	sound_loader(&core->sounds);
-	imgs_init(core->mlx, &core->imgs, core->consts.ray_color);
+	imgs_init(core->mlx, &core->imgs);
 	sound_loader(&core->sounds);
     set_texture_from_path("assets/grass2.png", &core->imgs.floor_texture);
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,

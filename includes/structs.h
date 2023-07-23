@@ -93,14 +93,6 @@ typedef struct s_map
 	Difficulty difficulty;
 }	t_map;
 
-typedef struct s_const
-{
-	uint32_t		minimap_wall_color;
-	uint32_t		ray_color;
-	float			dist_between_ray;
-	float			fov;
-}	t_const;
-
 typedef struct s_animation
 {
 	mlx_image_t		**image;
@@ -153,7 +145,6 @@ typedef struct s_player
 typedef struct s_core
 {
 	mlx_t			*mlx;
-	t_const			consts;
 	t_player		player;
 	t_imgs			imgs;
 	t_sounds		sounds;

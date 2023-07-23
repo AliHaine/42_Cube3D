@@ -27,7 +27,7 @@
 # include <sys/time.h>
 
 //dda//
-void	raycasting(t_player *player, t_const *consts, t_imgs *imgs, t_map *map);
+void	raycasting(t_player *player, t_imgs *imgs, t_map *map);
 
 //display.c
 void		display(void *params);
@@ -35,7 +35,7 @@ void		display(void *params);
 //drawing.c
 void	columns_drawing(t_imgs *imgs, t_dda *dda, uint32_t bt_color[2], float playerpos[2]);
 void	draw_energy_bar(mlx_image_t *img, int energy);
-void	minimap_drawing(float direction, t_const consts, t_imgs *imgs, const float playerpos[2], t_map *map);
+void	minimap_drawing(float direction, t_imgs *imgs, const float playerpos[2], t_map *map);
 
 //loader//
 
