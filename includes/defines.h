@@ -25,5 +25,6 @@
 # define LOAD 0
 # define BASS_SAMPLE_LOOP 4
 # define MOVE_SPEED 7
+# define FOG_DISTANCE 1000
 
 #endif

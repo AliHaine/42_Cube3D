@@ -65,14 +65,17 @@ void	display(void *params)
 	core->imgs.img_map = mlx_texture_to_image(core->mlx, core->imgs.map_texture);
 	raycasting(&core->player, &core->imgs, &core->maps[0]);
 	minimap_drawing(core->player.playerangle, &core->imgs, core->player.playerpos, &core->maps[0]);
+	core->imgs.img_player = rotate_image(core->mlx, core->imgs.img_player_texture, core->player.playerangle + (PI / 2));
 	mlx_resize_image(core->imgs.img_map, 250, 250);
+	mlx_resize_image(core->imgs.img_player, 14, 14);
 	mlx_image_to_window(core->mlx, core->imgs.img_3d, 0, 0);
 	mlx_image_to_window(core->mlx, core->imgs.img_map, 20, 445);
+	mlx_image_to_window(core->mlx, core->imgs.img_player, 137, 561);
 	//Definir l'ordre des images / qui est au dessus de qui
 	core->imgs.img_3d->instances[0].z = 1;
 	//core->imgs.map_background->instances[0].z = 2;
 	core->imgs.img_map->instances[0].z = 3;
-	//core->imgs.img_player->instances[0].z = 4;
+	core->imgs.img_player->instances[0].z = 4;
 	core->imgs.crosshair->instances[0].z = 5;
 	core->imgs.invbar->instances[0].z = 6;
 	core->imgs.invbar_selector->instances[0].z = 7;

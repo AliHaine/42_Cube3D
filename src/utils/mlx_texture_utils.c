@@ -50,41 +50,48 @@ uint32_t	get_pixel(mlx_texture_t *texture, int x, int y)
 	return (color);
 }
 
-mlx_image_t *rotate_image(mlx_t *mlx, mlx_image_t *image, int img_width, int img_height, int angle)
+static void	rotate_util(mlx_image_t *img, mlx_texture_t *txt, int src_xy[2], int xy[2])
 {
-	double angle_rad = angle * 3.14159265358979323846 / 180.0; // Conversion de l'angle en radians
-	double cos_theta = cos(angle_rad);
-	double sin_theta = sin(angle_rad);
+	int	dst_offset;
+	int	src_offset;
 
-	int new_width = fabs(img_width * cos_theta) + fabs(img_height * sin_theta);
-	int new_height = fabs(img_width * sin_theta) + fabs(img_height * cos_theta);
-
-	mlx_image_t *new_image = mlx_new_image(mlx, new_width, new_height);
-	uint8_t *img_data = image->pixels;
-	uint8_t *new_img_data = new_image->pixels;
-
-	int x0 = img_width / 2; // Coordonnées du centre de l'image d'origine
-	int y0 = img_height / 2;
-	int x, y;
-
-	for (y = 0; y < new_height; y++)
+	if (src_xy[0] >= 0 && src_xy[0] < txt->width
+		&& src_xy[1] >= 0 && src_xy[1] < txt->height)
 	{
-		for (x = 0; x < new_width; x++)
+		dst_offset = (src_xy[1] * (int)txt->width + src_xy[0]) * 4;
+		src_offset = (xy[1] * (int)txt->width + xy[0]) * 4;
+		img->pixels[dst_offset] = txt->pixels[src_offset];
+		img->pixels[dst_offset + 1] = txt->pixels[src_offset + 1];
+		img->pixels[dst_offset + 2] = txt->pixels[src_offset + 2];
+		img->pixels[dst_offset + 3] = txt->pixels[src_offset + 3];
+	}
+}
+
+mlx_image_t	*rotate_image(mlx_t *mlx, mlx_texture_t *texture, float angle)
+{
+	const float	cost = cosf(angle);
+	const float	sint = sinf(angle);
+	mlx_image_t	*new_img;
+	int			xy[2];
+	int			src_xy[2];
+
+	new_img = mlx_new_image(mlx, (int)texture->width, (int)texture->height);
+	xy[1] = -1;
+	while (++xy[1] < (int)texture->height)
+	{
+		xy[0] = -1;
+		while (++xy[0] < (int)texture->width)
 		{
-			int src_x = (x - new_width / 2) * cos_theta + (y - new_height / 2) * sin_theta + x0;
-			int src_y = -(x - new_width / 2) * sin_theta + (y - new_height / 2) * cos_theta + y0;
-
-			if (src_x >= 0 && src_x < img_width && src_y >= 0 && src_y < img_height)
-			{
-				int src_offset = (src_y * img_width + src_x) * 4;
-				int dst_offset = (y * new_width + x) * 4;
-
-				new_img_data[dst_offset] = img_data[src_offset];
-				new_img_data[dst_offset + 1] = img_data[src_offset + 1];
-				new_img_data[dst_offset + 2] = img_data[src_offset + 2];
-				new_img_data[dst_offset + 3] = img_data[src_offset + 3];
-			}
+			src_xy[0] = (int)(((float)xy[0] - (float)texture->width / 2)
+					* cost - ((float)xy[1] - (float)texture->height / 2)
+					* sint + ((float)texture->width / 2));
+			src_xy[1] = (int)(((float)xy[0] - (float)texture->width / 2)
+					* sint + ((float)xy[1] - (float)texture->height / 2)
+					* cost + ((float)texture->height / 2));
+			if (src_xy[0] >= 0 && src_xy[0] < texture->width
+				&& src_xy[1] >= 0 && src_xy[1] < texture->height)
+				rotate_util(new_img, texture, src_xy, xy);
 		}
 	}
-	return (new_image);
+	return (new_img);
 }
