@@ -34,6 +34,7 @@ GUI:
     - Inventory GUI
     - Craft GUI
     +- Energy bar
+    +- Dynamic minimap
 Sound:
     +- Abiant sound
     +- Hit sound

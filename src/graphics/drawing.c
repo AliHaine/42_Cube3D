@@ -74,7 +74,7 @@ static void wall_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd)
 {
 	float	fog_strength;
 
-	if (dda->dist_hv[1] < dda->dist_hv[0])
+	if (dda->hit_hv == 1)
 		fog_strength = dda->dist_hv[1] / FOG_DISTANCE;
 	else
 		fog_strength = dda->dist_hv[0] / FOG_DISTANCE;

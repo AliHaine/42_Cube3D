@@ -56,4 +56,8 @@ bool	is_player_running(t_player *player);
 void	fisheyes_fixor(t_dda *dda, float player_angle);
 void	get_color_from_wall_texture(mlx_texture_t *wall_texture, int r, t_col_drawing *twd);
 
+// inventory
+int		detect_pointed_slot(t_core *core, int x, int y);
+void	set_pos_by_id(t_slot *slot, int id);
+
 #endif

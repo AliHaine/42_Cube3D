@@ -5,21 +5,11 @@ void	display_item(t_core *core, t_slot *slot)
 {
 	if (slot && slot->item && slot->item->icon && slot->item->name != HAND)
 	{
-        if (slot->slot_id >= 1 && slot->slot_id <= 9)
-		    slot->item->icon->instances[slot->icon_instance].y = 495;
-        else if (slot->slot_id >= 10 && slot->slot_id <= 18)
-            slot->item->icon->instances[slot->icon_instance].y = 430;
-        else if (slot->slot_id >= 19 && slot->slot_id <= 27)
-            slot->item->icon->instances[slot->icon_instance].y = 375;
-        else if (slot->slot_id >= 28 && slot->slot_id <= 36)
-            slot->item->icon->instances[slot->icon_instance].y = 325;
-		slot->item->icon->instances[slot->icon_instance].x
-				= 405 + (54 * ((slot->slot_id - 1) % 9));
+		set_pos_by_id(slot, slot->slot_id);
 		slot->item->icon->instances[slot->icon_instance].enabled = true;
-		slot->items_number_img->instances[0].x = slot->item->icon->instances[slot->icon_instance].x + 23;
-		slot->items_number_img->instances[0].y = slot->item->icon->instances[slot->icon_instance].y + 25;
 		slot->items_number_img->instances[0].enabled = true;
-		slot->items_number_img->instances[0].z = 9;
+		slot->item->icon->instances[slot->icon_instance].z = 10;
+		slot->items_number_img->instances[0].z = 11;
 	}
 }
 

@@ -79,4 +79,5 @@ void	display(void *params)
 	core->imgs.crosshair->instances[0].z = 5;
 	core->imgs.invbar->instances[0].z = 6;
 	core->imgs.invbar_selector->instances[0].z = 7;
+    core->imgs.engbar->instances[0].z = 9;
 }

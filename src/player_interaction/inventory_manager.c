@@ -1,26 +1,6 @@
 
 #include "../../includes/includes.h"
 
-static int	detect_pointed_slot(t_core *core, int x, int y)
-{
-	float	resizex;
-	float	resizey;
-
-	resizex = (float)core->screen_size[0] / 1280.f;
-	resizey = (float)core->screen_size[1] / 720.f;
-	if (x < (int)(400 * resizex) || x > (int)(875 * resizex))
-		return (-1);
-	else if (y >= (int)(490 * resizey) && y <= (int)(535 * resizey))
-		return ((int)(((float)x - 400 * resizex) / (53.3f * resizex) + 1));
-	else if (y >= (int)(425 * resizey) && y <= (int)(470 * resizey))
-		return ((int)(((float)x - 400 * resizex) / (53.3f * resizex) + 10));
-	else if (y >= (int)(370 * resizey) && y <= (int)(415 * resizey))
-		return ((int)(((float)x - 400 * resizex) / (53.3f * resizex) + 19));
-	else if (y >= (int)(320 * resizey) && y <= (int)(360 * resizey))
-		return ((int)(((float)x - 400 * resizex) / (53.3f * resizex) + 28));
-	return (-1);
-}
-
 t_slot	*get_slot(t_core *core, int s)
 {
 	t_slot	*act;
@@ -58,24 +38,13 @@ static void	reverse_attributes(t_slot *first, t_slot *second)
 
 static void	set_on_void_slot(t_core *core, t_slot *slot, int s)
 {
-	if (s >= 1 && s <= 9)
-		slot->item->icon->instances[slot->icon_instance].y = 495;
-	else if (s >= 10 && s <= 18)
-		slot->item->icon->instances[slot->icon_instance].y = 430;
-	else if (s >= 19 && s <= 27)
-		slot->item->icon->instances[slot->icon_instance].y = 375;
-	else if (s >= 28 && s <= 36)
-		slot->item->icon->instances[slot->icon_instance].y = 325;
-	slot->item->icon->instances[slot->icon_instance].x
-		= 405 + (54 * ((s - 1) % 9));
-	slot->items_number_img->instances[0].x
-		= slot->item->icon->instances[slot->icon_instance].x + 23;
-	slot->items_number_img->instances[0].y
-		= slot->item->icon->instances[slot->icon_instance].y + 25;
+	set_pos_by_id(slot, s);
 	if (slot->item->icon->instances
 		[slot->bar_icon_instance].enabled == true)
 		slot->item->icon->instances
 		[slot->bar_icon_instance].enabled = false;
+	slot->items_number_img->instances[0].z = 11;
+	slot->item->icon->instances[slot->icon_instance].z = 10;
 	reverse_attributes(slot, get_slot(core, s));
 }
 
@@ -108,11 +77,14 @@ void	stack_item(t_core *core, t_slot *src, t_slot *dst, bool *holding)
 		display_item(core, src);
 		*holding = true;
 		src->bar_mutex = true;
+		src->items_number_img->instances[0].z = 13;
+		src->item->icon->instances[src->icon_instance].z = 12;
 		return ;
 	}
 	src->item->icon->instances[src->icon_instance].enabled = false;
 	src->item->icon->instances[src->bar_icon_instance].enabled = false;
 	change_item_number(core, dst, n);
+	dst->items_number_img->instances[0].z = 11;
 	src->item = &core->items[HAND];
 	src->items_number = 1;
 	src->items_number_img->instances[0].enabled = false;
@@ -125,24 +97,28 @@ void	stack_item(t_core *core, t_slot *src, t_slot *dst, bool *holding)
 
 static void	apply_slot(t_core *core, t_slot *slot, bool *holding, int s)
 {
+	if (s == 46)
+		return ;
 	slot->items_number_img->instances[0].z = 9;
 	slot->bar_mutex = false;
 	*holding = false;
 	if (s == -1 || !slot || slot->slot_id == get_slot(core, s)->slot_id)
 		display_item(core, slot);
-	else if (slot->item->name != HAND && get_slot(core, s)->item->name == HAND)
+	else if (slot->item->name != HAND && get_slot(core, s)->item->name == HAND
+		&& slot->slot_id != 46)
 		set_on_void_slot(core, slot, s);
 	else if (slot->item->name == get_slot(core, s)->item->name)
 		stack_item(core, slot, get_slot(core, s), holding);
 	else if (slot->item->name != HAND && get_slot(core, s)->item->name != HAND)
 	{
 		reverse_attributes(slot, get_slot(core, s));
-		slot->items_number_img->instances[0].z = 10;
 		display_item(core, get_slot(core, s));
 		get_slot(core, s)->bar_mutex = false;
 		slot->items_number_img_bar->instances[0].enabled = false;
 		slot->item->icon->instances[slot->bar_icon_instance].enabled = false;
 		slot->bar_mutex = true;
+		slot->items_number_img->instances[0].z = 13;
+		slot->item->icon->instances[slot->icon_instance].z = 12;
 		*holding = true;
 	}
 }
@@ -169,17 +145,16 @@ static void	follow_cursor(t_core *core, t_slot *s)
 
 void	give_one_to(t_core *core, t_slot *src, t_slot *dst)
 {
-	if (dst->slot_id == 37)
-		return ;
 	if (src->item->name == dst->item->name
 		&& src->items_number > 1 && dst->items_number < 64)
 	{
 		change_item_number(core, src, src->items_number - 1);
-		src->items_number_img->instances[0].z = 10;
+		src->items_number_img->instances[0].z = 13;
 		change_item_number(core, dst, dst->items_number + 1);
-		dst->items_number_img->instances[0].z = 8;
+		dst->items_number_img->instances[0].z = 11;
 	}
-	else if (dst->item->name == HAND && src->items_number > 1)
+	else if (dst->item->name == HAND && src->items_number > 1
+		&& dst->slot_id != 46)
 	{
 		change_item_number(core, src, src->items_number - 1);
 		give_item(core, &core->items[src->item->name], dst->slot_id, 1);
@@ -206,7 +181,8 @@ static void	select_action(t_core *core, t_slot **s, bool *holding)
 		*holding = true;
 		s[0]->bar_mutex = true;
 		s[0]->items_number_img_bar->instances[0].enabled = false;
-		s[0]->items_number_img->instances[0].z = 10;
+		s[0]->item->icon->instances[s[0]->icon_instance].z = 12;
+		s[0]->items_number_img->instances[0].z = 13;
 		s[0]->item->icon->instances[s[0]->bar_icon_instance].enabled = false;
 	}
 	else if (*holding == true)

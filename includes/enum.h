@@ -35,6 +35,8 @@ typedef enum {
     SWORD_RUBY,
 	SWORD_IRON,
     WOOD_BOW,
+	STICK,
+	DIAMOND
 }   Item;
 
 typedef enum {
@@ -51,6 +53,8 @@ static const char *ItemName[] = {
         "sword_ruby",
 		"sword_iron",
 		"Wood bow",
+		"stick",
+		"diamond"
 };
 
 static const char *Messages[] = {
