@@ -1,5 +1,17 @@
 #include "../../includes/includes.h"
 
+t_slot	*get_slot(t_core *core, int s)
+{
+	t_slot	*act;
+
+	act = core->player.slot;
+	while (act->prev && act->slot_id != s)
+		act = act->prev;
+	while (act->next && act->slot_id != s)
+		act = act->next;
+	return (act);
+}
+
 static int	detected_pointed_slot_bis(int x, int y,
 										float resizex, float resizey)
 {

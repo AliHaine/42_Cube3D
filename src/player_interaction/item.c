@@ -4,8 +4,6 @@ void	give_item(t_core *core, t_item *item, int slot_id, int number)
 {
 	t_slot	*slot;
 
-	if (slot_id > 46)
-		return ;
 	slot = core->player.slot;
 	while (slot->slot_id != slot_id)
 		slot = slot->next;

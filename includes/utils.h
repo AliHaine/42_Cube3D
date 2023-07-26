@@ -27,8 +27,6 @@ bool	is_str_blank(const char *s);
 
 //struct//
 
-t_slot	*get_slot(t_core *core, int s);
-
 //file//
 
 void	go_to_line(t_file *file, int line);
@@ -56,8 +54,11 @@ bool	is_player_running(t_player *player);
 void	fisheyes_fixor(t_dda *dda, float player_angle);
 void	get_color_from_wall_texture(mlx_texture_t *wall_texture, int r, t_col_drawing *twd);
 
-// inventory
+// inventory / s_slot
+t_slot	*get_slot(t_core *core, int s);
 int		detect_pointed_slot(t_core *core, int x, int y);
 void	set_pos_by_id(t_slot *slot, int id);
+void	reset_slot(t_core *core, t_slot *slot);
+void	change_item_number(t_core *core, t_slot *src, short n);
 
 #endif

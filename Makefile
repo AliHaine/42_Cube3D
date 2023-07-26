@@ -27,6 +27,7 @@ SRCS		=	src/cub3d.c \
 				src/player_interaction/energy.c \
 				src/player_interaction/inventory.c \
 				src/player_interaction/inventory_manager.c \
+				src/player_interaction/crafting.c \
 				src/utils/map_utils.c \
 				src/utils/msg_utils.c \
 				src/utils/std_func_utils.c \
@@ -36,7 +37,8 @@ SRCS		=	src/cub3d.c \
 				src/utils/mlx_texture_utils.c \
 				src/utils/get_next_line/get_next_line.c \
 				src/utils/get_next_line/get_next_line_utils.c \
-				src/utils/inventory_utils.c
+				src/utils/inventory_utils.c \
+				src/utils/inventory_utils_bis.c
 
 OBJS		=	$(SRCS:.c=.o)
 

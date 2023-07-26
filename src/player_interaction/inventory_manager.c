@@ -1,18 +1,6 @@
 
 #include "../../includes/includes.h"
 
-t_slot	*get_slot(t_core *core, int s)
-{
-	t_slot	*act;
-
-	act = core->player.slot;
-	while (act->prev && act->slot_id != s)
-		act = act->prev;
-	while (act->next && act->slot_id != s)
-		act = act->next;
-	return (act);
-}
-
 static void	reverse_attributes(t_slot *first, t_slot *second)
 {
 	t_slot	save;
@@ -48,23 +36,6 @@ static void	set_on_void_slot(t_core *core, t_slot *slot, int s)
 	reverse_attributes(slot, get_slot(core, s));
 }
 
-void	change_item_number(t_core *core, t_slot *src, short n)
-{
-	mlx_delete_image(core->mlx, src->items_number_img);
-	mlx_delete_image(core->mlx, src->items_number_img_bar);
-	src->items_number = n;
-	src->items_number_img = mlx_put_string
-			(core->mlx, ft_itoa(src->items_number),
-			 src->item->icon->instances[src->icon_instance].x + 23,
-			 src->item->icon->instances[src->icon_instance].y + 25);
-	src->items_number_img_bar = mlx_put_string
-			(core->mlx, ft_itoa(src->items_number),
-			 src->item->icon->instances[src->bar_icon_instance].x + 23,
-			 src->item->icon->instances[src->bar_icon_instance].y + 25);
-	if (src->slot_id > 9)
-		src->items_number_img_bar->instances[0].enabled = false;
-}
-
 void	stack_item(t_core *core, t_slot *src, t_slot *dst, bool *holding)
 {
 	const int	n = src->items_number + dst->items_number;
@@ -81,31 +52,21 @@ void	stack_item(t_core *core, t_slot *src, t_slot *dst, bool *holding)
 		src->item->icon->instances[src->icon_instance].z = 12;
 		return ;
 	}
-	src->item->icon->instances[src->icon_instance].enabled = false;
-	src->item->icon->instances[src->bar_icon_instance].enabled = false;
 	change_item_number(core, dst, n);
 	dst->items_number_img->instances[0].z = 11;
-	src->item = &core->items[HAND];
-	src->items_number = 1;
-	src->items_number_img->instances[0].enabled = false;
-	src->items_number_img_bar->instances[0].enabled = false;
-	src->icon_instance = -1;
-	src->bar_icon_instance = -1;
-	src->bar_icon_instance = -1;
+	reset_slot(core, src);
 	display_item(core, src);
 }
 
 static void	apply_slot(t_core *core, t_slot *slot, bool *holding, int s)
 {
-	if (s == 46)
-		return ;
 	slot->items_number_img->instances[0].z = 9;
 	slot->bar_mutex = false;
 	*holding = false;
-	if (s == -1 || !slot || slot->slot_id == get_slot(core, s)->slot_id)
+	if (s == -1 || !slot || slot->slot_id == get_slot(core, s)->slot_id
+		|| get_slot(core, s)->slot_id == 46)
 		display_item(core, slot);
-	else if (slot->item->name != HAND && get_slot(core, s)->item->name == HAND
-		&& slot->slot_id != 46)
+	else if (slot->item->name != HAND && get_slot(core, s)->item->name == HAND)
 		set_on_void_slot(core, slot, s);
 	else if (slot->item->name == get_slot(core, s)->item->name)
 		stack_item(core, slot, get_slot(core, s), holding);
@@ -175,6 +136,8 @@ static void	select_action(t_core *core, t_slot **s, bool *holding)
 	}
 	else if (*holding == false)
 	{
+		if (detect_pointed_slot(core, x, y) == 46)
+			craft(core);
 		*s = get_slot(core, detect_pointed_slot(core, x, y));
 		if (!s[0] || s[0]->item->name == HAND)
 			return ;
@@ -214,4 +177,5 @@ void	inventory_hook(void *params)
 	}
 	if (s != 0 && holding == true && s->item->name != HAND)
 		follow_cursor(core, s);
+	crafting_engine(core);
 }

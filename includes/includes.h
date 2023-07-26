@@ -77,6 +77,8 @@ void	player_listener(void *params);
 void	inventory(t_core *core);
 void	inventory_hook(void *params);
 void	display_item(t_core *core, t_slot *slot);
+void	crafting_engine(t_core *core);
+void	craft(t_core *core);
 
 void	set_char_at_forward(char c, t_player *player, char **map);
 
