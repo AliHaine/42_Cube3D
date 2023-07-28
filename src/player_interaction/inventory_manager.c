@@ -31,8 +31,8 @@ static void	set_on_void_slot(t_core *core, t_slot *slot, int s)
 		[slot->bar_icon_instance].enabled == true)
 		slot->item->icon->instances
 		[slot->bar_icon_instance].enabled = false;
-	slot->items_number_img->instances[0].z = 11;
-	slot->item->icon->instances[slot->icon_instance].z = 10;
+	slot->items_number_img->instances[0].z = 12;
+	slot->item->icon->instances[slot->icon_instance].z = 11;
 	reverse_attributes(slot, get_slot(core, s));
 }
 
@@ -48,19 +48,19 @@ void	stack_item(t_core *core, t_slot *src, t_slot *dst, bool *holding)
 		display_item(core, src);
 		*holding = true;
 		src->bar_mutex = true;
-		src->items_number_img->instances[0].z = 13;
-		src->item->icon->instances[src->icon_instance].z = 12;
+		src->items_number_img->instances[0].z = 14;
+		src->item->icon->instances[src->icon_instance].z = 13;
 		return ;
 	}
 	change_item_number(core, dst, n);
-	dst->items_number_img->instances[0].z = 11;
+	dst->items_number_img->instances[0].z = 12;
 	reset_slot(core, src);
 	display_item(core, src);
 }
 
 static void	apply_slot(t_core *core, t_slot *slot, bool *holding, int s)
 {
-	slot->items_number_img->instances[0].z = 9;
+	slot->items_number_img->instances[0].z = 12;
 	slot->bar_mutex = false;
 	*holding = false;
 	if (s == -1 || !slot || slot->slot_id == get_slot(core, s)->slot_id
@@ -78,8 +78,8 @@ static void	apply_slot(t_core *core, t_slot *slot, bool *holding, int s)
 		slot->items_number_img_bar->instances[0].enabled = false;
 		slot->item->icon->instances[slot->bar_icon_instance].enabled = false;
 		slot->bar_mutex = true;
-		slot->items_number_img->instances[0].z = 13;
-		slot->item->icon->instances[slot->icon_instance].z = 12;
+		slot->items_number_img->instances[0].z = 14;
+		slot->item->icon->instances[slot->icon_instance].z = 13;
 		*holding = true;
 	}
 }
@@ -106,13 +106,15 @@ static void	follow_cursor(t_core *core, t_slot *s)
 
 void	give_one_to(t_core *core, t_slot *src, t_slot *dst)
 {
+	if (dst->slot_id == 47)
+		return ;
 	if (src->item->name == dst->item->name
 		&& src->items_number > 1 && dst->items_number < 64)
 	{
 		change_item_number(core, src, src->items_number - 1);
-		src->items_number_img->instances[0].z = 13;
+		src->items_number_img->instances[0].z = 14;
 		change_item_number(core, dst, dst->items_number + 1);
-		dst->items_number_img->instances[0].z = 11;
+		dst->items_number_img->instances[0].z = 12;
 	}
 	else if (dst->item->name == HAND && src->items_number > 1
 		&& dst->slot_id != 46)
@@ -144,8 +146,8 @@ static void	select_action(t_core *core, t_slot **s, bool *holding)
 		*holding = true;
 		s[0]->bar_mutex = true;
 		s[0]->items_number_img_bar->instances[0].enabled = false;
-		s[0]->item->icon->instances[s[0]->icon_instance].z = 12;
-		s[0]->items_number_img->instances[0].z = 13;
+		s[0]->item->icon->instances[s[0]->icon_instance].z = 13;
+		s[0]->items_number_img->instances[0].z = 14;
 		s[0]->item->icon->instances[s[0]->bar_icon_instance].enabled = false;
 	}
 	else if (*holding == true)
@@ -159,6 +161,7 @@ void	inventory_hook(void *params)
 	static bool		holding = false;
 
 	core = (t_core *)params;
+	core->player.holding_item = &holding;
 	if (!core->player.is_in_inventory)
 	{
 		holding = false;

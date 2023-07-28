@@ -12,8 +12,11 @@ static bool	diamond_sword(t_core *core, t_slot *craft_table[10])
 		|| craft_table[7]->item->name != DIAMOND
 		|| craft_table[8]->item->name != HAND)
 		return (false);
-	give_item(core, &core->items[SWORD_DIAMOND], 46, 1);
-	display_item(core, get_slot(core, 46));
+	if (craft_table[9]->item->name == HAND)
+	{
+		give_item(core, &core->items[SWORD_DIAMOND], 46, 1);
+		display_item(core, get_slot(core, 46));
+	}
 	return (true);
 }
 
@@ -22,8 +25,6 @@ void	crafting_engine(t_core *core)
 	t_slot	*craft_table[10];
 
 	craft_table[9] = get_slot(core, 46);
-	if (craft_table[9]->item->name != HAND)
-		return ;
 	craft_table[0] = get_slot(core, 37);
 	craft_table[1] = get_slot(core, 38);
 	craft_table[2] = get_slot(core, 39);
@@ -35,6 +36,9 @@ void	crafting_engine(t_core *core)
 	craft_table[8] = get_slot(core, 45);
 	if (diamond_sword(core, craft_table) == true)
 		return ;
+	else if (craft_table[9]->item->name != HAND
+		&& *core->player.holding_item == false)
+		reset_slot(core, craft_table[9]);
 }
 
 void	craft(t_core *core)
@@ -43,6 +47,8 @@ void	craft(t_core *core)
 	short	i;
 
 	craft_table[9] = get_slot(core, 46);
+	if (craft_table[9]->item->name == HAND)
+		return ;
 	craft_table[0] = get_slot(core, 37);
 	craft_table[1] = get_slot(core, 38);
 	craft_table[2] = get_slot(core, 39);
@@ -55,7 +61,8 @@ void	craft(t_core *core)
 	i = -1;
 	while (++i < 9)
 	{
-		if (craft_table[i]->items_number <= 1)
+		if (craft_table[i]->item->name != HAND
+			&& craft_table[i]->items_number <= 1)
 			reset_slot(core, craft_table[i]);
 		else
 			change_item_number(core, craft_table[i],

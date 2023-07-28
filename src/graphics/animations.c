@@ -51,5 +51,7 @@ void    animation_listener(t_item *items)
         play_attack_animation(&items[3].animation, items[3].image);
     } else if (items[4].animation.is_playing) {
 		play_attack_animation(&items[4].animation, items[4].image);
+	} else if (items[6].animation.is_playing) {
+		play_attack_animation(&items[6].animation, items[6].image);
 	}
 }

@@ -17,6 +17,8 @@ void	reset_slot(t_core *core, t_slot *slot)
 
 void	change_item_number(t_core *core, t_slot *src, short n)
 {
+	if (src->icon_instance == -1)
+		return ;
 	mlx_delete_image(core->mlx, src->items_number_img);
 	mlx_delete_image(core->mlx, src->items_number_img_bar);
 	src->items_number = n;

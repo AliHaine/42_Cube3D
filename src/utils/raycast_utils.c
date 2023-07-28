@@ -22,5 +22,5 @@ void	fisheyes_fixor(t_dda *dda, float player_angle)
         dda->current_angle_fix += two_pi;
 	if (dda->current_angle_fix > two_pi)
         dda->current_angle_fix -= two_pi;
-	dda->dist_hv[0] = dda->dist_hv[0] * cos(dda->current_angle_fix);
+	dda->dist_hv[0] = dda->dist_hv[0] * cosf(dda->current_angle_fix);
 }

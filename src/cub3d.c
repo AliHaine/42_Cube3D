@@ -51,12 +51,12 @@ static void	core_init(t_core *core)
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.9,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.69,SCREEN_HEIGHT - 155);
 	mlx_image_to_window(core->mlx, core->imgs.hearth[1], SCREEN_WIDTH / 2.51,SCREEN_HEIGHT - 155);
-    core->imgs.hearth[0]->instances[0].z = 9;
-    core->imgs.hearth[0]->instances[1].z = 9;
-    core->imgs.hearth[0]->instances[2].z = 9;
-    core->imgs.hearth[1]->instances[0].z = 10;
-    core->imgs.hearth[1]->instances[1].z = 10;
-    core->imgs.hearth[1]->instances[2].z = 10;
+    core->imgs.hearth[0]->instances[0].z = 11;
+    core->imgs.hearth[0]->instances[1].z = 11;
+    core->imgs.hearth[0]->instances[2].z = 11;
+    core->imgs.hearth[1]->instances[0].z = 12;
+    core->imgs.hearth[1]->instances[1].z = 12;
+    core->imgs.hearth[1]->instances[2].z = 12;
 //	mlx_image_to_window(core->mlx, core->imgs.map_background, 5, SCREEN_HEIGHT - 291);
 	mlx_image_to_window(core->mlx, core->imgs.inventory_gui, 0, 0);
 	core->imgs.inventory_gui->enabled = false;

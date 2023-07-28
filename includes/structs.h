@@ -137,6 +137,7 @@ typedef struct s_player
 	int				energy;
 	t_slot			*slot;
 	bool			is_in_inventory;
+	bool			*holding_item;
 	bool			can_move;
 	bool			is_moving;
 	bool			is_running;

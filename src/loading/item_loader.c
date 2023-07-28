@@ -38,7 +38,7 @@ static void	create_item(t_item *item, mlx_t *mlx, Item item_name, int anim_size)
 	mlx_image_to_window(mlx, item->image, SCREEN_WIDTH / 1.37, SCREEN_HEIGHT - item->image->height);
 	item->instance_number = 0;
 	item->image->instances[0].enabled = false;
-	item->image->instances[0].z = 9;
+	item->image->instances[0].z = 8;
 	item->animation.is_playing = false;
 	item->animation.image = malloc(sizeof(mlx_image_t) * (anim_size + 1));
 	while (i++ < anim_size)
@@ -51,7 +51,7 @@ static void	create_item(t_item *item, mlx_t *mlx, Item item_name, int anim_size)
 		}
 		mlx_image_to_window(mlx, item->animation.image[i - 1], SCREEN_WIDTH / 1.4, SCREEN_HEIGHT - 290);
 		item->animation.image[i - 1]->instances[0].enabled = false;
-		item->animation.image[i - 1]->instances[0].z = 9;
+		item->animation.image[i - 1]->instances[0].z = 8;
 		free(path);
 		path = malloc(sizeof(char) * (ft_strlen(ItemName[item_name]) + 19));
 	}
@@ -79,7 +79,7 @@ void	item_loader(t_core *core)
     create_item_stats(&core->items[SWORD_RUBY], 10, 5, 1, 3);
 	create_item(&core->items[SWORD_IRON], core->mlx, SWORD_IRON, 4);
 	create_item_stats(&core->items[SWORD_IRON], 10, 5, 1, 3);
-	create_item(&core->items[STICK], core->mlx, STICK, 0);
+	create_item(&core->items[STICK], core->mlx, STICK, 6);
 	create_item_stats(&core->items[STICK], -1, 5, 1, 3);
 	create_item(&core->items[DIAMOND], core->mlx, DIAMOND, 0);
 	create_item_stats(&core->items[DIAMOND], -1, 5, 1, 3);

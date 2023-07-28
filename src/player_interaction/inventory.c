@@ -8,8 +8,8 @@ void	display_item(t_core *core, t_slot *slot)
 		set_pos_by_id(slot, slot->slot_id);
 		slot->item->icon->instances[slot->icon_instance].enabled = true;
 		slot->items_number_img->instances[0].enabled = true;
-		slot->item->icon->instances[slot->icon_instance].z = 10;
-		slot->items_number_img->instances[0].z = 11;
+		slot->item->icon->instances[slot->icon_instance].z = 11;
+		slot->items_number_img->instances[0].z = 12;
 	}
 }
 
@@ -53,7 +53,7 @@ void	inventory(t_core *core)
 	if (core->player.is_in_inventory == false)
 	{
 		core->imgs.inventory_gui->enabled = true;
-		core->imgs.inventory_gui->instances->z = 8;
+		core->imgs.inventory_gui->instances->z = 10;
 		core->player.is_in_inventory = true;
 		core->player.can_move = false;
 		mlx_set_cursor(core->mlx, mlx_create_cursor(core->imgs.cursor));
