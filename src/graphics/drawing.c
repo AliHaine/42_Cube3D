@@ -54,31 +54,9 @@ void	draw_energy_bar(mlx_image_t *engbar_texture, int energy)
     }
 }
 
-static uint32_t	apply_fog(uint32_t color, float fog_strength)
-{
-	uint8_t		r;
-	uint8_t		g;
-	uint8_t		b;
-	uint8_t		a;
-
-	if (fog_strength > 1.0)
-		fog_strength = 1.0;
-	r = ((color >> 24) & 0xFF) * (1.0 - fog_strength);
-	g = ((color >> 16) & 0xFF) * (1.0 - fog_strength);
-	b = ((color >> 8) & 0xFF) * (1.0 - fog_strength);
-	a = (color & 0xFF);
-	return ((r << 24) | (g << 16) | (b << 8) | a);
-}
-
 static void wall_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd)
 {
-	float	fog_strength;
-
-	if (dda->hit_hv == 1)
-		fog_strength = dda->dist_hv[1] / FOG_DISTANCE;
-	else
-		fog_strength = dda->dist_hv[0] / FOG_DISTANCE;
-	if (fog_strength > 1)
+	if (tcd->fog_strength > 1)
 		tcd->color = (0 << 24) | (0 << 16) | (0 << 8) | 255;
 	else if (dda->hit_hv == 1 && dda->hit_direction[0] == 1)
 		get_color_from_wall_texture(imgs->wall_texture[1],
@@ -92,34 +70,18 @@ static void wall_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd)
 	else
 		get_color_from_wall_texture(imgs->wall_texture[2],
 			(int)dda->r_xy[0], tcd);
-	tcd->color = apply_fog(tcd->color, fog_strength);
+	tcd->color = apply_fog(tcd->color, tcd->fog_strength);
 	mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, tcd->color);
 	tcd->current_step += tcd->step;
 }
 
 static void floor_drawing(mlx_texture_t *floor_texture, t_col_drawing *tcd, t_dda *dda, float playerpos[2], mlx_image_t *i3)
 {
-    /*float fy;
-    float tx;
-    float ty;
-	float ray_lengh = dda->dist_hv[0] / cosf(dda->current_angle);
-    static bool f = false;
 
-    fy = tcd->iterator - (SCREEN_HEIGHT / 2.0);
-    tx = playerpos[0] / 2 + cosf(dda->current_angle) * 158 * 64 / fy / cosf(dda->current_angle_fix);
-    ty = playerpos[1] / 2 - sinf(dda->current_angle) * 158 * 64 / fy / cosf(dda->current_angle_fix);
-	if (dda->ray == 0)
-	{
-		//if (!f)%
-			printf("%f %d %d %f %d %f %f\n", fy, (int)dda->r_xy[1], (int)tx, ty, tcd->sky_lineH, ray_lengh, dda->dist_hv[0]);
-			//printf("%f %f %d %d %f %f\n", tx, ty, (int)dda->r_xy[0], (int)dda->r_xy[1], dda->dist_hv[0], dda->dist_hv[1]);
-		//f = true;
-	} else
-		f = false;*/
     tcd->iterator++;
 }
 
-void	minimap_drawing(float direction, t_imgs *imgs, const float playerpos[2], t_map *map)
+void	minimap_drawing(float angle, t_imgs *imgs, const float playerpos[2], t_map *map)
 {
 	const int start_y = (playerpos[1] / 4) - (286 / 2);
 	const int start_x = (playerpos[0] / 4) - (286 / 2);
@@ -146,19 +108,17 @@ void	minimap_drawing(float direction, t_imgs *imgs, const float playerpos[2], t_
 				mlx_put_pixel(imgs->img_map, px, py, wall_color);
 		}
 	}
-	//mlx_put_pixel(imgs->img_map, 90, 90, get_rgb_color(0, 255, 0,255));
 }
 
 void	columns_drawing(t_imgs *imgs, t_dda *dda, uint32_t bt_color[2], float playerpos[2])
 {
     t_col_drawing  tcd;
 
-    setup_wall_struct(&tcd, dda);;
+	setup_col_struct(&tcd, dda);;
 	while (tcd.iterator < tcd.sky_lineH)
 		mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++, bt_color[1]);
 	while (tcd.iterator < tcd.wall_lineH)
 		wall_drawing(imgs, dda, &tcd);
 	while (tcd.iterator < SCREEN_HEIGHT)
 		mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++, bt_color[0]);
-       //floor_drawing(imgs->floor_texture, &tcd, dda, playerpos, imgs->img_3d);
 }

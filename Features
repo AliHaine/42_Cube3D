@@ -1,5 +1,5 @@
 +- DDA raycasting
-- Craft
++- Craft
 - NPC
 - Multi-world (normal, and nether)
 - Nether portal
@@ -11,6 +11,8 @@
 +- Animation concept
 +- GUI concept
 +- Sound
+- Fog Distance
+- Un chat
 
 Parsing:
     +- Work even no args

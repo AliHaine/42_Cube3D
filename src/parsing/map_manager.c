@@ -22,7 +22,7 @@ static bool	map_value_init(t_map *map, t_file *file, int start)
 {
 	if (!set_map_size_value(file, map))
 	{
-		close(file->fd);
+		close_file(file);
 		msg_write(2, 1, ERROR_MAP_SIZE);
 		return (0);
 	}

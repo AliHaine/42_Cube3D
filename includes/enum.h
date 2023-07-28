@@ -27,6 +27,10 @@ typedef enum {
     DEATH_PLAYER,
 } MsgType;
 
+typedef enum {
+	DIAMOND_ORE,
+
+}	Block;
 
 typedef enum {
     HAND,

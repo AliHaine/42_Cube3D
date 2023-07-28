@@ -12,7 +12,7 @@
 
 #include "../../includes/includes.h"
 
-void setup_wall_struct(t_col_drawing *twd, t_dda *dda)
+void setup_col_struct(t_col_drawing *twd, t_dda *dda)
 {
 	int convertor ;
 
@@ -22,6 +22,7 @@ void setup_wall_struct(t_col_drawing *twd, t_dda *dda)
 	twd->wall_lineH = (SCREEN_HEIGHT + dda->wall_height) / 2;
 	twd->step = 64.0f / (float)convertor;
 	twd->current_step = 0.0f;
+	twd->fog_strength = dda->dist_hv[0] / FOG_DISTANCE;
 	if (twd->wall_lineH > SCREEN_HEIGHT) {
 		twd->current_step = (convertor - SCREEN_HEIGHT) / 2.0;
 		twd->wall_lineH = SCREEN_HEIGHT;

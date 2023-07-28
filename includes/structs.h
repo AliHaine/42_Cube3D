@@ -67,26 +67,28 @@ typedef struct s_dda
 
 typedef struct s_col_drawing
 {
-    int iterator;
-	uint32_t color;
-    int sky_lineH;
-	int wall_lineH;
-	float step;
-	float current_step;
+    int			iterator;
+	uint32_t	color;
+    int			sky_lineH;
+	int			wall_lineH;
+	float		step;
+	float		current_step;
+	float		fog_strength;
 }	t_col_drawing;
 
 typedef struct s_file
 {
 	int		fd;
-	int		file_size;
 	int		line_num;
 	char	*line;
 	char	*file_path;
+	char 	*storage;
 }	t_file;
 
 typedef struct s_map
 {
 	char **map;
+	uint32_t abiant_sound;
 	int height;
 	int width;
 	uint32_t	bt_color[2];
@@ -112,6 +114,15 @@ typedef struct s_item
     int             instance_number;
 	t_animation 	animation;
 }	t_item;
+
+typedef struct s_block
+{
+	Block			block;
+	struct s_item	*item_loot;
+	int				strength;
+	mlx_image_t		*image;
+
+}	t_block;
 
 typedef struct s_slot
 {

@@ -102,7 +102,7 @@ void	struct_setup(t_core *core);
 void	setup_slot_struct(mlx_t *mlx, t_player *player, t_item *item);
 t_slot	*get_first_slot(t_slot *slot);
 
-void setup_wall_struct(t_col_drawing *twd, t_dda *dda);
+void setup_col_struct(t_col_drawing *twd, t_dda *dda);
 
 void	map_struct_init(t_map *map);
 

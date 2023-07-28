@@ -99,19 +99,17 @@ static char	*get_rest_add_storage(char *storage)
 
 bool	get_next_line(t_file *file)
 {
-	static char	*storage = NULL;
 	char		*line;
 
 	if (file->fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	storage = str_without_newline(file->fd, storage);
-	if (!storage) {
+	file->storage = str_without_newline(file->fd, file->storage);
+	if (!file->storage)
 		return (file->line = 0);
-	}
-	line = str_with_newline(storage);
-	storage = get_rest_add_storage(storage);
-	if (!storage)
-		free(storage);
+	line = str_with_newline(file->storage);
+	file->storage = get_rest_add_storage(file->storage);
+	if (!file->storage)
+		free(file->storage);
 	file->line_num++;
 	file->line = line;
 	if (!file->line)

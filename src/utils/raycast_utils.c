@@ -1,6 +1,22 @@
 
 #include "../../includes/includes.h"
 
+uint32_t	apply_fog(uint32_t color, float fog_strength)
+{
+	uint8_t		r;
+	uint8_t		g;
+	uint8_t		b;
+	uint8_t		a;
+
+	if (fog_strength > 1.0)
+		fog_strength = 1.0;
+	r = ((color >> 24) & 0xFF) * (1.0 - fog_strength);
+	g = ((color >> 16) & 0xFF) * (1.0 - fog_strength);
+	b = ((color >> 8) & 0xFF) * (1.0 - fog_strength);
+	a = (color & 0xFF);
+	return ((r << 24) | (g << 16) | (b << 8) | a);
+}
+
 void	get_color_from_wall_texture(mlx_texture_t *wall_texture, int r, t_col_drawing *twd)
 {
     int			value;

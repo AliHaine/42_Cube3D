@@ -32,6 +32,7 @@ bool	is_str_blank(const char *s);
 void	go_to_line(t_file *file, int line);
 void	reopen_file(t_file *file, int line, int flags);
 bool	open_file(t_file *file, char *file_path, int flags);
+void	close_file(t_file *file);
 
 //mlx image utiles//
 
@@ -53,6 +54,7 @@ bool	is_player_running(t_player *player);
 
 void	fisheyes_fixor(t_dda *dda, float player_angle);
 void	get_color_from_wall_texture(mlx_texture_t *wall_texture, int r, t_col_drawing *twd);
+uint32_t	apply_fog(uint32_t color, float fog_strength);
 
 // inventory / s_slot
 t_slot	*get_slot(t_core *core, int s);
