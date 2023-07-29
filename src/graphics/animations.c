@@ -18,10 +18,13 @@ static void	play_attack_animation(t_animation *animation, mlx_image_t *def)
 {
 	static int		i = 0;
 
+	if (!animation->image)
+		return ;
 	def->enabled = false;
 	if (!animation->image[i + 1])
 	{
-		animation->image[i - 1]->instances->x += 150;
+		animation->image[i - 1]->instances->x += animation->depth_xy[0];
+		animation->image[i - 1]->instances->y += animation->depth_xy[1];
 		animation->image[i - 1]->instances[0].enabled = false;
 		def->enabled = true;
 		animation->is_playing = false;
@@ -30,10 +33,12 @@ static void	play_attack_animation(t_animation *animation, mlx_image_t *def)
 	}
 	if (i > 0)
 	{
-		animation->image[i - 1]->instances->x += 150;
+		animation->image[i - 1]->instances->x += animation->depth_xy[0];
+		animation->image[i - 1]->instances->y += animation->depth_xy[1];
 		animation->image[i - 1]->instances[0].enabled = 0;
 	}
-	animation->image[i]->instances[0].x -= 150;
+	animation->image[i]->instances[0].x -= animation->depth_xy[0];
+	animation->image[i]->instances[0].y -= animation->depth_xy[1];
 	animation->image[i++]->instances[0].enabled = 1;
 }
 

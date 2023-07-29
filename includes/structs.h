@@ -99,12 +99,13 @@ typedef struct s_animation
 {
 	mlx_image_t		**image;
 	bool			is_playing;
+	int				depth_xy[2];
 }	t_animation;
 
 typedef struct s_item
 {
     Item			name;
-    int				durability;
+	int				durability;
     int				damage;
     int				strength;
     int				range;
