@@ -28,8 +28,8 @@ typedef enum {
 } MsgType;
 
 typedef enum {
+	PORTAL,
 	DIAMOND_ORE,
-
 }	Block;
 
 typedef enum {
@@ -59,6 +59,11 @@ static const char *ItemName[] = {
 		"Wood bow",
 		"stick",
 		"diamond"
+};
+
+static const char *BlockName[] = {
+		"netherportal",
+		"diamond_ore"
 };
 
 static const char *Messages[] = {

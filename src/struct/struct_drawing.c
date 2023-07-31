@@ -12,22 +12,24 @@
 
 #include "../../includes/includes.h"
 
-void setup_col_struct(t_col_drawing *twd, t_dda *dda)
+void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_map *map, t_block *blocks)
 {
 	int convertor ;
 
 	convertor = (64 * SCREEN_HEIGHT) / dda->dist_hv[0];
-    twd->iterator = 0;
-    twd->sky_lineH = (SCREEN_HEIGHT - dda->wall_height) / 2;
-	twd->wall_lineH = (SCREEN_HEIGHT + dda->wall_height) / 2;
-	twd->step = 64.0f / (float)convertor;
-	twd->current_step = 0.0f;
-	twd->fog_strength = dda->dist_hv[0] / FOG_DISTANCE;
-	if (twd->wall_lineH > SCREEN_HEIGHT) {
-		twd->current_step = (convertor - SCREEN_HEIGHT) / 2.0;
-		twd->wall_lineH = SCREEN_HEIGHT;
+	tcd->iterator = 0;
+	tcd->ceil_floor_lineH = (SCREEN_HEIGHT - dda->wall_height) / 2;
+	tcd->wall_lineH = (SCREEN_HEIGHT + dda->wall_height) / 2;
+	tcd->step = 64.0f / (float)convertor;
+	tcd->current_step = 0.0f;
+	tcd->fog_strength = dda->dist_hv[0] / FOG_DISTANCE;
+	tcd->hit_block = map->map[(int)dda->r_xy[1] / 64][(int)dda->r_xy[0] / 64];
+	tcd->block = &blocks[0];
+	if (tcd->wall_lineH > SCREEN_HEIGHT) {
+		tcd->current_step = (convertor - SCREEN_HEIGHT) / 2.0;
+		tcd->wall_lineH = SCREEN_HEIGHT;
 	}
-	twd->current_step *= twd->step;
+	tcd->current_step *= tcd->step;
     if (dda->hit_hv == 1 && dda->hit_direction[0] == 3)
         dda->r_xy[1] = 63 - ((int)dda->r_xy[1] % 64);
     else if (dda->hit_hv == 0 && dda->hit_direction[1] == 2)

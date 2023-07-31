@@ -1,5 +1,22 @@
 #include "../../includes/includes.h"
 
+void	put_two_string(char *dst, const char *s1, const char *s2, char *num)
+{
+	int	i;
+
+	i = 0;
+	while (*s1)
+		dst[i++] = *s1++;
+	while (*s2)
+		dst[i++] = *s2++;
+	while (num && *num)
+		dst[i++] = *num++;
+	dst[i++] = '.';
+	dst[i++] = 'p';
+	dst[i++] = 'n';
+	dst[i++] = 'g';
+	dst[i] = '\0';
+}
 
 static size_t	nbrcount(long int n)
 {

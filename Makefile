@@ -11,6 +11,7 @@ SRCS		=	src/cub3d.c \
 				src/loading/texture_loader.c \
 				src/loading/sound_loader.c \
 				src/loading/item_loader.c \
+				src/loading/block_loader.c \
 				src/loading/other_loader.c \
 				src/parsing/map_manager.c \
 				src/parsing/map_parse.c \

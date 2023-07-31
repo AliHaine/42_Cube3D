@@ -54,7 +54,7 @@ void	draw_energy_bar(mlx_image_t *engbar_texture, int energy)
     }
 }
 
-static void	get_nether_portal(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd)
+/*static void	get_nether_portal(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd)
 {
 	static double	previous_time = 0.f;
 	static int		act = -1;
@@ -80,38 +80,32 @@ static void	get_nether_portal(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd)
 	else
 		return (get_color_from_wall_texture(
 				imgs->nether_portal[act], (int)dda->r_xy[0], tcd));
-}
+}*/
 
-static void wall_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd)
+static void wall_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_block *block)
 {
 	if (tcd->fog_strength > 1)
 		tcd->color = (0 << 24) | (0 << 16) | (0 << 8) | 255;
-	else if (dda->hit_block == 'D')
-		get_nether_portal(imgs, dda, tcd);
+	else if (tcd->hit_block != '1')
+		get_color_block_texture(block->image, dda, tcd);
 	else if (dda->hit_hv == 1 && dda->hit_direction[0] == 1)
-		get_color_from_wall_texture(imgs->wall_texture[1],
-			(int)dda->r_xy[1], tcd);
+		get_color_wall_texture(imgs->wall_texture[1],
+							   (int) dda->r_xy[1], tcd);
 	else if (dda->hit_hv == 1 && dda->hit_direction[0] == 3)
-		get_color_from_wall_texture(imgs->wall_texture[3],
-			(int)dda->r_xy[1], tcd);
+		get_color_wall_texture(imgs->wall_texture[3],
+							   (int) dda->r_xy[1], tcd);
 	else if (dda->hit_hv == 0 && dda->hit_direction[1] == 0)
-		get_color_from_wall_texture(imgs->wall_texture[0],
-			(int)dda->r_xy[0], tcd);
+		get_color_wall_texture(imgs->wall_texture[0],
+							   (int) dda->r_xy[0], tcd);
 	else
-		get_color_from_wall_texture(imgs->wall_texture[2],
-			(int)dda->r_xy[0], tcd);
+		get_color_wall_texture(imgs->wall_texture[2],
+							   (int) dda->r_xy[0], tcd);
 	tcd->color = apply_fog(tcd->color, tcd->fog_strength);
 	mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, tcd->color);
 	tcd->current_step += tcd->step;
 }
 
-static void floor_drawing(mlx_texture_t *floor_texture, t_col_drawing *tcd, t_dda *dda, float playerpos[2], mlx_image_t *i3)
-{
-
-    tcd->iterator++;
-}
-
-void	minimap_drawing(float angle, t_imgs *imgs, const float playerpos[2], t_map *map)
+void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_map *map)
 {
 	const int start_y = (playerpos[1] / 4) - (286 / 2);
 	const int start_x = (playerpos[0] / 4) - (286 / 2);
@@ -140,15 +134,46 @@ void	minimap_drawing(float angle, t_imgs *imgs, const float playerpos[2], t_map 
 	}
 }
 
-void	columns_drawing(t_imgs *imgs, t_dda *dda, uint32_t bt_color[2], float playerpos[2])
+void	get_color_from_floor_texture(mlx_texture_t *wall_texture, int r, t_col_drawing *tcd)
+{
+	int			value;
+
+	value = ((r % 64) + ((int)tcd->current_step * (int)wall_texture->width)) * 4;
+	if (value >= 16384)
+		return ;
+	tcd->color = get_rgb_color(wall_texture->pixels[value],wall_texture->pixels[value + 1]
+			,wall_texture->pixels[value + 2],wall_texture->pixels[value + 3]);
+}
+
+static void floor_drawing(mlx_texture_t *floor_texture, t_col_drawing *tcd, t_dda *dda, float playerpos[2], mlx_image_t *i3)
+{
+	static bool y = true;
+
+	if (dda->ray == 0) {
+		if (y)
+			printf("--------------\nrx: %f ry: %f\n hit_dir0: %d hit_dir1: %d\n hit_hv: %d, dist_hv: %f\n cstep %f step %f\n",
+			   dda->r_xy[0], dda->r_xy[1], dda->hit_direction[0], dda->hit_direction[1],
+			   dda->hit_hv, dda->dist_hv[0], tcd->current_step, tcd->step);
+		y = false;
+	} else {
+		y = true;
+	}
+	get_color_from_floor_texture(floor_texture, dda->r_xy[0], tcd);
+	mlx_put_pixel(i3, dda->ray, tcd->iterator, tcd->color);
+	tcd->current_step += tcd->step;
+	tcd->iterator++;
+}
+
+void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block *blocks)
 {
     t_col_drawing  tcd;
 
-	setup_col_struct(&tcd, dda);;
-	while (tcd.iterator < tcd.sky_lineH)
-		mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++, bt_color[1]);
+	setup_col_struct(&tcd, dda, map, blocks);
+	while (tcd.iterator < tcd.ceil_floor_lineH)
+		mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++, map->bt_color[1]);
 	while (tcd.iterator < tcd.wall_lineH)
-		wall_drawing(imgs, dda, &tcd);
+		wall_drawing(imgs, dda, &tcd, &blocks[0]);
 	while (tcd.iterator < SCREEN_HEIGHT)
-		mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++, bt_color[0]);
+		//floor_drawing(imgs->floor_texture, &tcd, dda, playerpos, imgs->img_3d);
+		mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++, map->bt_color[0]);
 }

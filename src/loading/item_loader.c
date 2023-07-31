@@ -1,22 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   item_loader.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/31 17:17:13 by ayagmur           #+#    #+#             */
+/*   Updated: 2023/07/31 17:17:14 by ayagmur          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/includes.h"
-
-static void	put_two_string(char *dst, const char *s1, const char *s2, int num)
-{
-	int	i;
-
-	i = 0;
-	while (*s1)
-		dst[i++] = *s1++;
-	while (*s2)
-		dst[i++] = *s2++;
-	if (num > 0)
-		dst[i++] = num + '0';
-	dst[i++] = '.';
-	dst[i++] = 'p';
-	dst[i++] = 'n';
-	dst[i++] = 'g';
-	dst[i] = '\0';
-}
 
 static void	create_item(t_item *item, mlx_t *mlx, Item item_name)
 {
@@ -25,13 +19,16 @@ static void	create_item(t_item *item, mlx_t *mlx, Item item_name)
 	item->name = item_name;
 	item->animation.image = 0;
 	path = malloc(sizeof(char) * (ft_strlen(ItemName[item_name]) + 18));
+	printf("ici\n");
 	put_two_string(path, "assets/items/", ItemName[item_name], 0);
+	printf("ici\n");
 	if (!set_image_from_path(mlx, path, &item->image))
 		msg_write(2, 2, ERROR_FATAL);
 	put_two_string(path, "assets/icons/", ItemName[item_name], 0);
 	if (!set_image_from_path(mlx, path, &item->icon))
 		msg_write(2, 2, ERROR_FATAL);
-	free(path);mlx_resize_image(item->icon, 40, 40);
+	free(path);
+	mlx_resize_image(item->icon, 40, 40);
 	mlx_image_to_window(mlx, item->image, SCREEN_WIDTH / 1.37, SCREEN_HEIGHT - item->image->height);
 	item->instance_number = 0;
 	item->image->instances[0].enabled = false;
@@ -59,7 +56,7 @@ static void create_item_animation(t_item *item, int anim_size, int x_depth, int 
 	path = malloc(sizeof(char) * (ft_strlen(ItemName[item->name]) + 19));
 	while (i++ < anim_size)
 	{
-		put_two_string(path, "assets/items/", ItemName[item->name], i);
+		put_two_string(path, "assets/items/", ItemName[item->name], ft_itoa(i));
 		if (!set_image_from_path(mlx, path, &item->animation.image[i - 1]))
 		{
 			free(path);

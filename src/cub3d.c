@@ -82,6 +82,7 @@ int	main(int argc, char *argv[])
 	msg_write(1, -1, STARTING);
 	core_init(&core);
 	item_loader(&core);
+	block_loader(&core);
     give_item(&core, &core.items[SWORD_NETHER], 2, 32);
 	give_item(&core, &core.items[SWORD_NETHER], 32, 52);
     give_item(&core, &core.items[SWORD_DIAMOND], 5, 1);
