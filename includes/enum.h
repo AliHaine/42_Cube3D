@@ -29,7 +29,7 @@ typedef enum {
 
 typedef enum {
 	PORTAL,
-	DIAMOND_ORE,
+	NETHERRACK,
 }	Block;
 
 typedef enum {
@@ -63,7 +63,7 @@ static const char *ItemName[] = {
 
 static const char *BlockName[] = {
 		"netherportal",
-		"diamond_ore"
+		"netherrack"
 };
 
 static const char *Messages[] = {

@@ -32,16 +32,16 @@ static bool	map_value_init(t_map *map, t_file *file, int start)
 	return (1);
 }
 
-void	map_manager(char *argv[], t_map *map, t_imgs *imgs, t_player *player)
+void	map_manager(char *map_name, t_map *map, t_imgs *imgs, t_player *player)
 {
 	t_file	file;
 	int		save;
 
 	msg_write(2, -1, CHECK_MAP);
 	usleep(500000 * LOAD);
-	basical_map_check(argv);
+	basical_map_check(&map_name);
 	map_struct_init(map);
-	open_file(&file, argv[1], O_RDONLY);
+	open_file(&file, map_name, O_RDONLY);
 	msg_write(1, -1, NO_ERROR);
 	texture_main(&file, imgs, map);
 	save = file.line_num;

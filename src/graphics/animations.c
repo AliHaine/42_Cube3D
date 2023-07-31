@@ -42,25 +42,22 @@ static void	play_attack_animation(t_animation *animation, mlx_image_t *def)
 	animation->image[i++]->instances[0].enabled = 1;
 }
 
-static void	play_block_animation(t_animation *animation, mlx_image_t *def)
+static void	play_block_animation(t_animation *animation, t_block *block)
 {
 	static int		i = 0;
+	static double	old_time = 0;
 
 	if (!animation->image)
 		return ;
-	def->enabled = false;
+	if (mlx_get_time() < old_time + 0.1)
+		return ;
+	old_time = mlx_get_time();
 	if (!animation->image[i + 1])
 	{
-		animation->image[i - 1]->instances[0].enabled = false;
-		def->enabled = true;
 		i = 0;
 		return ;
 	}
-	if (i > 0)
-	{
-		animation->image[i - 1]->instances[0].enabled = 0;
-	}
-	animation->image[i++]->instances[0].enabled = 1;
+	block->image = animation->image[i++];
 }
 
 void    animation_listener(t_item *items, t_block *blocks)
@@ -80,6 +77,5 @@ void    animation_listener(t_item *items, t_block *blocks)
 	} else if (items[6].animation.is_playing) {
 		play_attack_animation(&items[6].animation, items[6].image);
 	}
-
-	play_block_animation(&blocks[0].animation, blocks->image);
+	play_block_animation(&blocks[0].animation, &blocks[0]);
 }

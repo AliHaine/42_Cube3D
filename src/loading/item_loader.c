@@ -19,9 +19,7 @@ static void	create_item(t_item *item, mlx_t *mlx, Item item_name)
 	item->name = item_name;
 	item->animation.image = 0;
 	path = malloc(sizeof(char) * (ft_strlen(ItemName[item_name]) + 18));
-	printf("ici\n");
 	put_two_string(path, "assets/items/", ItemName[item_name], 0);
-	printf("ici\n");
 	if (!set_image_from_path(mlx, path, &item->image))
 		msg_write(2, 2, ERROR_FATAL);
 	put_two_string(path, "assets/icons/", ItemName[item_name], 0);

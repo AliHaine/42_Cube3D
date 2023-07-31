@@ -59,7 +59,7 @@ void	scroll_hook(double x, double y, void *param);
 
 //parsing//
 
-void	map_manager(char *argv[], t_map *map, t_imgs *imgs, t_player *player);
+void	map_manager(char *argv, t_map *map, t_imgs *imgs, t_player *player);
 void	texture_main(t_file *file, t_imgs *imgs, t_map *map);
 bool	parse_main(t_file *file, t_player *player, t_map *map);
 

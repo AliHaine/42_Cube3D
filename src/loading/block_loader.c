@@ -62,4 +62,6 @@ void	block_loader(t_core *core)
 {
 	create_block(&core->blocks[0], PORTAL, 0, 1, core->mlx);
 	create_block_animation(&core->blocks[0], 14, core->mlx);
+
+	create_block(&core->blocks[1], NETHERRACK, 0, 1, core->mlx);
 }
