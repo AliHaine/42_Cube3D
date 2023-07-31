@@ -22,7 +22,7 @@ static void	jump_to_next(t_dda *dda, const float o_xy[2], char **map, const floa
 		m_xy[1] = (int)dda->r_xy[1] / 64;
 		if (m_xy[val] >= max || dda->r_xy[val] < 0 || map[m_xy[1]][m_xy[0]] == ' ')
 			break ;
-		if (map[m_xy[1]][m_xy[0]] == '1')
+		if (map[m_xy[1]][m_xy[0]] == '1' || map[m_xy[1]][m_xy[0]] == 'D')
 		{
 			dda->dist_hv[val] = dda->cos * (dda->r_xy[0] - playerpos[0])
 					- -dda->sin * (dda->r_xy[1] - playerpos[1]);
@@ -126,6 +126,7 @@ void	raycasting(t_player *player, t_imgs *imgs, t_map *map)
 		dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[0];
 		if (dda.dist_hv[0] > dda.dist_hv[1])
 			dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[1];
+		dda.hit_block = map->map[(int)dda.r_xy[1] / 64][(int)dda.r_xy[0] / 64];
 		columns_drawing(imgs, &dda, map->bt_color, player->playerpos);
 	}
 }

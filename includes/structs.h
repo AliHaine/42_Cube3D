@@ -41,6 +41,7 @@ typedef struct s_imgs
     mlx_texture_t	*enemy;
 	mlx_texture_t	*trans;
 	mlx_texture_t	*wall_texture[4];
+	mlx_texture_t	*nether_portal[15];
     mlx_texture_t   *floor_texture;
 	mlx_texture_t	*door_texture;
 	mlx_texture_t	*grass_texture;
@@ -62,6 +63,7 @@ typedef struct s_dda
 	int hit_hv;
 	int hit_direction[2];
 	float wall_height;
+	char hit_block;
 
 }	t_dda;
 
@@ -74,6 +76,7 @@ typedef struct s_col_drawing
 	float		step;
 	float		current_step;
 	float		fog_strength;
+	char		block;
 }	t_col_drawing;
 
 typedef struct s_file

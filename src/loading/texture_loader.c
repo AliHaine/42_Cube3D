@@ -22,6 +22,36 @@ static void	other_loader(mlx_t *mlx, t_imgs *imgs)
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_texture_from_path("assets/player_dot.png", &imgs->img_player_texture))
 		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/walls/netherportal/netherportal.png", &imgs->nether_portal[0]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/walls/netherportal/netherportal1.png", &imgs->nether_portal[1]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/walls/netherportal/netherportal2.png", &imgs->nether_portal[2]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/walls/netherportal/netherportal3.png", &imgs->nether_portal[3]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/walls/netherportal/netherportal4.png", &imgs->nether_portal[4]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/walls/netherportal/netherportal5.png", &imgs->nether_portal[5]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/walls/netherportal/netherportal6.png", &imgs->nether_portal[6]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/walls/netherportal/netherportal7.png", &imgs->nether_portal[7]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/walls/netherportal/netherportal8.png", &imgs->nether_portal[8]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/walls/netherportal/netherportal9.png", &imgs->nether_portal[9]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/walls/netherportal/netherportal10.png", &imgs->nether_portal[10]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/walls/netherportal/netherportal11.png", &imgs->nether_portal[11]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/walls/netherportal/netherportal12.png", &imgs->nether_portal[12]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/walls/netherportal/netherportal13.png", &imgs->nether_portal[13]))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/walls/netherportal/netherportal14.png", &imgs->nether_portal[14]))
+		msg_write(2, 2, ERROR_FATAL);
 }
 
 static void	icon_loader(mlx_t *mlx, t_imgs *imgs)

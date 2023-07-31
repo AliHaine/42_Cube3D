@@ -54,10 +54,40 @@ void	draw_energy_bar(mlx_image_t *engbar_texture, int energy)
     }
 }
 
+static void	get_nether_portal(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd)
+{
+	static double	previous_time = 0.f;
+	static int		act = -1;
+	double			actual_time;
+
+	if (act == -1)
+	{
+		previous_time = mlx_get_time();
+		act = 0;
+	}
+	actual_time = mlx_get_time();
+	if (actual_time >= previous_time + 0.2f)
+	{
+		previous_time = actual_time;
+		if (act + 1 >= 15)
+			act = 0;
+		else
+			act++;
+	}
+	if (dda->hit_hv == 1)
+		return (get_color_from_wall_texture(
+				imgs->nether_portal[act], (int)dda->r_xy[1], tcd));
+	else
+		return (get_color_from_wall_texture(
+				imgs->nether_portal[act], (int)dda->r_xy[0], tcd));
+}
+
 static void wall_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd)
 {
 	if (tcd->fog_strength > 1)
 		tcd->color = (0 << 24) | (0 << 16) | (0 << 8) | 255;
+	else if (dda->hit_block == 'D')
+		get_nether_portal(imgs, dda, tcd);
 	else if (dda->hit_hv == 1 && dda->hit_direction[0] == 1)
 		get_color_from_wall_texture(imgs->wall_texture[1],
 			(int)dda->r_xy[1], tcd);
