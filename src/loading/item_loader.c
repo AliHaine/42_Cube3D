@@ -84,7 +84,6 @@ void	item_loader(t_core *core)
     create_item_stats(&core->items[SWORD_DIAMOND], 10, 5, 1, 3);
 	create_item_animation(&core->items[SWORD_DIAMOND], 5, 150, 0, core->mlx);
 
-
 	create_item(&core->items[SWORD_RUBY], core->mlx, SWORD_RUBY);
     create_item_stats(&core->items[SWORD_RUBY], 10, 5, 1, 3);
 	create_item_animation(&core->items[SWORD_RUBY], 5, 150, 0, core->mlx);
@@ -94,9 +93,26 @@ void	item_loader(t_core *core)
 	create_item_animation(&core->items[SWORD_IRON], 4, 150, 0, core->mlx);
 
 	create_item(&core->items[STICK], core->mlx, STICK);
-	create_item_stats(&core->items[STICK], -1, 5, 1, 3);
+	create_item_stats(&core->items[STICK], -1, 2, 1, 3);
 	create_item_animation(&core->items[STICK], 6, 0, -50, core->mlx);
 
 	create_item(&core->items[DIAMOND], core->mlx, DIAMOND);
-	create_item_stats(&core->items[DIAMOND], -1, 5, 1, 3);
+	create_item_stats(&core->items[DIAMOND], -1, 2, 1, 3);
+
+	create_item(&core->items[IRON], core->mlx, IRON);
+	create_item_stats(&core->items[IRON], -1, 2, 1, 3);
+	create_item_animation(&core->items[IRON], 4, 0, -50, core->mlx);
+
+	create_item(&core->items[FLINT], core->mlx, FLINT);
+	create_item_stats(&core->items[FLINT], -1, 2, 1, 3);
+	create_item_animation(&core->items[FLINT], 4, 0, -50, core->mlx);
+
+	create_item(&core->items[LIGHTER], core->mlx, LIGHTER);
+	create_item_stats(&core->items[LIGHTER], 10, 2, 1, 3);
+	create_item_animation(&core->items[LIGHTER], 3, 0, 150, core->mlx);
+
+	create_item(&core->items[DIAMOND_PICKAXE], core->mlx, DIAMOND_PICKAXE);
+	create_item_stats(&core->items[DIAMOND_PICKAXE], 10, 2, 1, 3);
+	create_item_animation(&core->items[DIAMOND_PICKAXE], 4, 0, 150, core->mlx);
 }
+

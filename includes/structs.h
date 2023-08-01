@@ -164,9 +164,9 @@ typedef struct s_core
 	t_player		player;
 	t_imgs			imgs;
 	t_sounds		sounds;
-	t_item			items[7];
-	t_animation 	animations[7];
-	t_block			blocks[2];
+	t_item			items[11];
+	t_animation 	animations[11];
+	t_block			blocks[3];
 	t_map 			*maps;
     int             screen_size[2];
 }	t_core;

@@ -30,6 +30,7 @@ typedef enum {
 typedef enum {
 	PORTAL,
 	NETHERRACK,
+	OBSIDIAN
 }	Block;
 
 typedef enum {
@@ -40,7 +41,11 @@ typedef enum {
 	SWORD_IRON,
     WOOD_BOW,
 	STICK,
-	DIAMOND
+	DIAMOND,
+	IRON,
+	FLINT,
+	LIGHTER,
+	DIAMOND_PICKAXE
 }   Item;
 
 typedef enum {
@@ -58,12 +63,17 @@ static const char *ItemName[] = {
 		"sword_iron",
 		"Wood bow",
 		"stick",
-		"diamond"
+		"diamond",
+		"iron",
+		"flint",
+		"lighter",
+		"diamond_pickaxe"
 };
 
 static const char *BlockName[] = {
 		"netherportal",
-		"netherrack"
+		"netherrack",
+		"obsidian"
 };
 
 static const char *Messages[] = {

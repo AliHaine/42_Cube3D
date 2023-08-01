@@ -88,9 +88,12 @@ int	main(int argc, char *argv[])
     give_item(&core, &core.items[SWORD_DIAMOND], 5, 1);
     give_item(&core, &core.items[SWORD_IRON], 1, 1);
     give_item(&core, &core.items[SWORD_RUBY], 8, 1);
-	give_item(&core, &core.items[SWORD_DIAMOND], 12, 3);
 	give_item(&core, &core.items[STICK], 14, 3);
 	give_item(&core, &core.items[DIAMOND], 16, 2);
+	give_item(&core, &core.items[IRON], 22, 1);
+	give_item(&core, &core.items[FLINT], 36, 1);
+	give_item(&core, &core.items[LIGHTER], 24, 1);
+	give_item(&core, &core.items[DIAMOND_PICKAXE], 12, 1);
     usleep(60000);
 	map_manager(argv[1], &core.maps[0], &core.imgs, &core.player);
 	// J'init l'image la psq elle a besoin des variables initialisees par map_manager

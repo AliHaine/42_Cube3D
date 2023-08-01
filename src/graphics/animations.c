@@ -76,6 +76,14 @@ void    animation_listener(t_item *items, t_block *blocks)
 		play_attack_animation(&items[4].animation, items[4].image);
 	} else if (items[6].animation.is_playing) {
 		play_attack_animation(&items[6].animation, items[6].image);
+	} else if (items[8].animation.is_playing) {
+		play_attack_animation(&items[8].animation, items[8].image);
+	} else if (items[9].animation.is_playing) {
+		play_attack_animation(&items[9].animation, items[9].image);
+	} else if (items[10].animation.is_playing) {
+		play_attack_animation(&items[10].animation, items[10].image);
+	} else if (items[11].animation.is_playing) {
+		play_attack_animation(&items[11].animation, items[11].image);
 	}
 	play_block_animation(&blocks[0].animation, &blocks[0]);
 }
