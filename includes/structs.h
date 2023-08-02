@@ -55,15 +55,15 @@ typedef struct s_dda
 	int	ray; // iterator qui va de 0 a 1279
     float r_xy[2]; // position x et y du mur toucher sur le rayon actuel
 	float v_xy[2]; // valeur permettant de "jump" d'une case a l'autre pour trouver un mur
-	float cos;
-	float sin;
+	float o_xy[2];
+	float cos; //cos de l'ange actuel
+	float sin; //sin de l'ange actuel
     float dist_hv[2]; // distance entre le mur et le joueur
 	float current_angle; // angle actuel du joueur
     float current_angle_fix; //fish eye fix
 	int hit_hv; // determine si c'est un mur horizontal ou vertical toucher
 	int hit_direction[2]; // determine la direction du mur toucher (ouest est etc)
 	float wall_height;
-
 }	t_dda;
 
 typedef struct s_file
@@ -77,7 +77,8 @@ typedef struct s_file
 
 typedef struct s_map
 {
-	char **map;
+	char **world;
+	char **chunk;
 	uint32_t abiant_sound;
 	int height;
 	int width;
@@ -167,7 +168,7 @@ typedef struct s_core
 	t_item			items[7];
 	t_animation 	animations[7];
 	t_block			blocks[2];
-	t_map 			*maps;
+	t_map 			maps[2];
     int             screen_size[2];
 }	t_core;
 

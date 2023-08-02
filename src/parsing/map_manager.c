@@ -27,8 +27,8 @@ static bool	map_value_init(t_map *map, t_file *file, int start)
 		return (0);
 	}
 	reopen_file(file, start, O_RDONLY);
-	map->map = malloc(sizeof(char *) * (map->height + 1));
-	map->map[map->height] = 0;
+	map->world = malloc(sizeof(char *) * (map->height + 1));
+	map->world[map->height] = 0;
 	return (1);
 }
 

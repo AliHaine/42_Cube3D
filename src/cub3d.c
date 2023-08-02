@@ -70,7 +70,6 @@ static void	core_init(t_core *core)
 	core->player.energy = 100;
 	core->player.is_in_inventory = false;
 	core->player.can_move = true;
-	core->maps = malloc(sizeof(t_map));
 	msg_write(1, -1, SUCCESS);
 }
 

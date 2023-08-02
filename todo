@@ -4,9 +4,9 @@ N,S,W,E = player, 1 = mur, 0 = vide, V = creeper, Z = zombie, D = porte
 
 Commencer a ajouter des ennemis
 quand on met un truc qui existe pas segfault
-tres grande map
+tres grande world
 si le png nest pas un png
-et si la map n'est pas un fichier
+et si la world n'est pas un fichier
 et si ya pas d'argument ?
 
 corriger ces putins de textures :c

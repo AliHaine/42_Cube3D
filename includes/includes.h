@@ -33,7 +33,7 @@ void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block *blocks);
 void		display(void *params);
 
 //drawing.c
-void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block *blocks);
+void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block *blocks, t_player *player);
 void	draw_energy_bar(mlx_image_t *img, int energy);
 void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_map *map);
 

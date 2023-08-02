@@ -38,9 +38,9 @@ bool	parse_main(t_file *file, t_player *player, t_map *map)
 	iterator = 0;
 	while (iterator < map->height)
 	{
-		map->map[iterator] = malloc(sizeof(char) * (map->width + 1));
+		map->world[iterator] = malloc(sizeof(char) * (map->width + 1));
 		//free ici si error
-		if (!fill_map_tab(file->line, map->map[iterator], player, map, iterator))
+		if (!fill_map_tab(file->line, map->world[iterator], player, map, iterator))
 		{
 			msg_write(2, 2, ERROR_MAP_CHAR);
 			return (false);

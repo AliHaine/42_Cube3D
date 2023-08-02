@@ -17,8 +17,8 @@
 Parsing:
     +- Work even no args
     +- Work even error in colors or textures
-    - Work even no texture or colors define in map
-    +- Work event if map file doesn't not existe or if any problem is occured
+    - Work even no texture or colors define in world
+    +- Work event if world file doesn't not existe or if any problem is occured
     +- Basicaly, the program are trying to work in any case and self fix with using default value or other
 Animation:
     +- Weapon attack animation

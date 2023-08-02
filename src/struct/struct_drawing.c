@@ -14,7 +14,7 @@
 
 void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_map *map, t_block *blocks)
 {
-	int convertor ;
+	int convertor;
 
 	convertor = (64 * SCREEN_HEIGHT) / dda->dist_hv[0];
 	tcd->iterator = 0;
@@ -23,7 +23,7 @@ void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_map *map, t_block *block
 	tcd->step = 64.0f / (float)convertor;
 	tcd->current_step = 0.0f;
 	tcd->fog_strength = dda->dist_hv[0] / FOG_DISTANCE;
-	tcd->hit_block = map->map[(int)dda->r_xy[1] / 64][(int)dda->r_xy[0] / 64];
+	tcd->hit_block = map->world[(int)dda->r_xy[1] / 64][(int)dda->r_xy[0] / 64];
 	tcd->block = &blocks[0];
 	if (tcd->wall_lineH > SCREEN_HEIGHT) {
 		tcd->current_step = (convertor - SCREEN_HEIGHT) / 2.0;

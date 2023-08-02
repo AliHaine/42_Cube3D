@@ -128,7 +128,7 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_map *map)
 				continue ;
 			else if (case_y < 0 || case_x < 0 || case_y > map->height - 1 || case_x > map->width - 1)
 				mlx_put_pixel(imgs->img_map, px, py, wall_color);
-			else if (map->map[case_y][case_x] == '1')
+			else if (map->world[case_y][case_x] == '1')
 				mlx_put_pixel(imgs->img_map, px, py, wall_color);
 		}
 	}
@@ -138,33 +138,133 @@ void	get_color_from_floor_texture(mlx_texture_t *wall_texture, int r, t_col_draw
 {
 	int			value;
 
-	value = ((r % 64) + ((int)tcd->current_step * (int)wall_texture->width)) * 4;
+	//value = ((r % 64) + ((int)tcd->cstep * (int)wall_texture->height)) * 4;
 	if (value >= 16384)
 		return ;
 	tcd->color = get_rgb_color(wall_texture->pixels[value],wall_texture->pixels[value + 1]
 			,wall_texture->pixels[value + 2],wall_texture->pixels[value + 3]);
 }
 
+uint32_t	get_color(mlx_texture_t *texture, const int xy[2])
+{
+    int		total_step;
+    uint8_t	r;
+    uint8_t	g;
+    uint8_t	b;
+
+
+    total_step = (xy[0] + xy[1]) * 4;
+    r = texture->pixels[total_step];
+    g = texture->pixels[total_step + 1];
+    b = texture->pixels[total_step + 2];
+    return ((r << 24) | (g << 16) | (b << 8) | 255);
+}
+
 static void floor_drawing(mlx_texture_t *floor_texture, t_col_drawing *tcd, t_dda *dda, float playerpos[2], mlx_image_t *i3)
 {
-	static bool y = true;
+	double dirX = dda->cos,
+	dirY = dda->sin,
+	planeX = dda->o_xy[0],
+	planeY = dda->o_xy[1]; //the 2d raycaster version of camera plane
 
-	if (dda->ray == 0) {
-		if (y)
-			printf("--------------\nrx: %f ry: %f\n hit_dir0: %d hit_dir1: %d\n hit_hv: %d, dist_hv: %f\n cstep %f step %f\n",
-			   dda->r_xy[0], dda->r_xy[1], dda->hit_direction[0], dda->hit_direction[1],
-			   dda->hit_hv, dda->dist_hv[0], tcd->current_step, tcd->step);
-		y = false;
-	} else {
-		y = true;
+// rayDir for leftmost ray (x = 0) and rightmost ray (x = w)
+	float rayDirX0 = dirX - planeX;
+	float rayDirY0 = dirY - planeY;
+	float rayDirX1 = dirX + planeX;
+	float rayDirY1 = dirY + planeY;
+
+	// Current y position compared to the center of the screen (the horizon)
+	int p = tcd->iterator - SCREEN_HEIGHT / 2;
+
+	// Vertical position of the camera.
+	float posZ = 0.5 * SCREEN_HEIGHT;
+
+	// Horizontal distance from the camera to the floor for the current row.
+	// 0.5 is the z position exactly in the middle between floor and ceiling.
+	float rowDistance = posZ / p;
+
+	// calculate the real world step vector we have to add for each x (parallel to camera plane)
+	// adding step by step avoids multiplications with a weight in the inner loop
+	float floorStepX = rowDistance * (rayDirX1 - rayDirX0) / SCREEN_WIDTH;
+	float floorStepY = rowDistance * (rayDirY1 - rayDirY0) / SCREEN_WIDTH;
+
+	// real world coordinates of the leftmost column. This will be updated as we step to the right.
+	float floorX = playerpos[0] + rowDistance * rayDirX0;
+	float floorY = playerpos[1] + rowDistance * rayDirY0;
+
+	static bool f = true;
+
+	for(int x = 0; x < SCREEN_WIDTH; ++x)
+	{
+		// the cell coord is simply got from the integer parts of floorX and floorY
+		int cellX = (int)(floorX);
+		int cellY = (int)(floorY);
+
+		// get the texture coordinate from the fractional part
+		int tx = (int)(64 * (floorX - cellX)) & (64 - 1);
+		int ty = (int)(64 * (floorY - cellY)) & (64 - 1);
+
+		floorX += floorStepX;
+		floorY += floorStepY;
+		if (dda->ray == 1) {
+			if (f)
+				printf("fx %d, fy %d %d %d \n", tx, ty, cellX, cellY);
+			f = false;
+		} else
+			f = true;
+
+		// choose texture and draw the pixel
+		int floorTexture = 3;
+		int ceilingTexture = 6;
+		uint32_t color;
+
+		// floor
+		/*color = texture[floorTexture][64 * ty + tx];
+		color = (color >> 1) & 8355711; // make a bit darker
+		buffer[y][x] = color;
+
+		//ceiling (symmetrical, at screenHeight - y - 1 instead of y)
+		color = texture[ceilingTexture][64 * ty + tx];
+		color = (color >> 1) & 8355711; // make a bit darker
+		buffer[SCREEN_HEIGHT - y - 1][x] = color;*/
 	}
-	get_color_from_floor_texture(floor_texture, dda->r_xy[0], tcd);
-	mlx_put_pixel(i3, dda->ray, tcd->iterator, tcd->color);
-	tcd->current_step += tcd->step;
+
+
+
+    /*double distPlayer = 0.0;
+    int texture_xy[2];
+
+    // Calcule la distance actuelle par rapport à la caméra
+    float currentDist = SCREEN_HEIGHT / (2.0 * tcd->iterator - SCREEN_HEIGHT);
+
+    // Calcule le poids pour interpoler entre la position actuelle du rayon et la position du joueur
+    float weight = (currentDist - distPlayer) / (dda->dist_hv[0] - distPlayer);
+
+    // Calcule les coordonnées actuelles sur le sol en fonction du poids
+    float currentFloorX = weight * dda->r_xy[0] + (1.0 - weight) * playerpos[0];
+    float currentFloorY = weight * dda->r_xy[1] + (1.0 - weight) * playerpos[1];
+
+    // Obtient les coordonnées de la texture pour le sol
+    texture_xy[0] = (int)(currentFloorX * 64) % 64;
+    texture_xy[1] = (int)(currentFloorY * 64) % 64;
+    static bool y = true;
+    if (dda->ray == 0)
+    {
+        if (y == true)
+            //printf("%d %d\n", texture_xy[0], texture_xy[1]);
+        y = false;
+    } else
+        y = true;
+    // Obtient la couleur à partir de la texture et de la distance pour le dessin du sol
+    //color = get_color(floor_texture, currentDist / FOG_DISTANCE, texture_xy);
+    tcd->color = get_color(floor_texture ,texture_xy);
+
+    // Dessine le pixel du sol
+    mlx_put_pixel(i3, dda->ray, tcd->iterator, tcd->color);*/
 	tcd->iterator++;
 }
 
-void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block *blocks)
+void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block *blocks, t_player *player)
 {
     t_col_drawing  tcd;
 
@@ -174,6 +274,6 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block *blocks)
 	while (tcd.iterator < tcd.wall_lineH)
 		wall_drawing(imgs, dda, &tcd, &blocks[0]);
 	while (tcd.iterator < SCREEN_HEIGHT)
-		//floor_drawing(imgs->floor_texture, &tcd, dda, playerpos, imgs->img_3d);
+		//floor_drawing(imgs->floor_texture, &tcd, dda, player->playerpos, imgs->img_3d);
 		mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++, map->bt_color[0]);
 }

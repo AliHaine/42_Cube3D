@@ -48,7 +48,6 @@ static void	horizontal_cast(t_dda *dda, float playerpos[2], char **map, int m_wi
 		o_xy[1] = 64;
 		o_xy[0] = -o_xy[1] * tan;
 		dda->hit_direction[1] = 2;
-
 	}
 	else if (dda->sin < -0.001) //look up
 	{
@@ -58,6 +57,8 @@ static void	horizontal_cast(t_dda *dda, float playerpos[2], char **map, int m_wi
 		o_xy[0] = -o_xy[1] * tan;
 		dda->hit_direction[1] = 0;
 	}
+	dda->o_xy[0] = o_xy[0];
+	dda->o_xy[1] = o_xy[1];
 	if (dda->hit_direction[1] >= 0)
 		jump_to_next(dda, o_xy, map, playerpos, 0, m_width);
 }
@@ -86,6 +87,8 @@ static void	vertical_cast(t_dda *dda, float playerpos[2], char **map, int m_heig
 		o_xy[1] = -o_xy[0] * tan;
 		dda->hit_direction[0] = 3;
 	}
+	dda->o_xy[0] = o_xy[0];
+	dda->o_xy[1] = o_xy[1];
 	if (dda->hit_direction[0] > 0)
 		jump_to_next(dda, o_xy, map, playerpos, 1, m_height);
 	dda->v_xy[0] = dda->r_xy[0];
@@ -113,8 +116,8 @@ void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block *blocks)
 			dda.current_angle -= 6.28319f;
 		dda.cos = cosf(dda.current_angle);
 		dda.sin = sinf(dda.current_angle);
-		vertical_cast(&dda, player->playerpos, map->map, map->height);
-		horizontal_cast(&dda, player->playerpos, map->map, map->width);
+		vertical_cast(&dda, player->playerpos, map->world, map->height);
+		horizontal_cast(&dda, player->playerpos, map->world, map->width);
 		if (dda.dist_hv[1] < dda.dist_hv[0])
 		{
 			dda.r_xy[0] = dda.v_xy[0];
@@ -126,6 +129,6 @@ void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block *blocks)
 		dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[0];
 		if (dda.dist_hv[0] > dda.dist_hv[1])
 			dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[1];
-		columns_drawing(imgs, &dda, map, blocks);
+		columns_drawing(imgs, &dda, map, blocks, player);
 	}
 }
