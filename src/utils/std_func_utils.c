@@ -1,5 +1,15 @@
 #include "../../includes/includes.h"
 
+int     get_rand_num(int max_val)
+{
+	struct timeval tv;
+	gettimeofday(&tv,NULL);
+
+	usleep(100);
+    srand(tv.tv_usec);
+    return (rand() % max_val);
+}
+
 void	put_two_string(char *dst, const char *s1, const char *s2, char *num)
 {
 	int	i;

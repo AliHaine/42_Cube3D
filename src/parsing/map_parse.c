@@ -8,6 +8,7 @@ static bool	set_player(int x, int y, t_player *player)
 	return (true);
 }
 
+//todo
 static bool	fill_map_tab(char *line, char *tab, t_player *player, t_map *map, int iterator)
 {
 	int	i;
@@ -21,8 +22,10 @@ static bool	fill_map_tab(char *line, char *tab, t_player *player, t_map *map, in
 		{
 			player->have_player = true;
 			set_player(iterator, i, player);
+			tab[i] = '0';
 		}
-		tab[i] = line[i];
+		else
+			tab[i] = line[i];
 		i++;
 	}
 	while (i < map->width)

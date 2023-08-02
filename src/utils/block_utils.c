@@ -12,4 +12,13 @@
 
 #include "../../includes/includes.h"
 
-
+t_block *get_block_from_char(t_block **block, char block_char)
+{
+	while (*block)
+	{
+		if ((*block)->block_char == block_char)
+			return (*block);
+		block++;
+	}
+	return (0);
+}

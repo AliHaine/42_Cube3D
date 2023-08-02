@@ -12,6 +12,7 @@ SRCS		=	src/cub3d.c \
 				src/loading/sound_loader.c \
 				src/loading/item_loader.c \
 				src/loading/block_loader.c \
+				src/loading/world_loader.c \
 				src/loading/other_loader.c \
 				src/parsing/map_manager.c \
 				src/parsing/map_parse.c \
@@ -36,10 +37,12 @@ SRCS		=	src/cub3d.c \
 				src/utils/raycast_utils.c \
 				src/utils/move_utils.c \
 				src/utils/mlx_texture_utils.c \
+				src/utils/block_utils.c \
 				src/utils/get_next_line/get_next_line.c \
 				src/utils/get_next_line/get_next_line_utils.c \
 				src/utils/inventory_utils.c \
 				src/utils/inventory_utils_bis.c
+
 
 OBJS		=	$(SRCS:.c=.o)
 

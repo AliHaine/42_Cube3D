@@ -22,7 +22,7 @@ static void	jump_to_next(t_dda *dda, const float o_xy[2], char **map, const floa
 		m_xy[1] = (int)dda->r_xy[1] / 64;
 		if (m_xy[val] >= max || dda->r_xy[val] < 0 || map[m_xy[1]][m_xy[0]] == ' ')
 			break ;
-		if (map[m_xy[1]][m_xy[0]] == '1' || map[m_xy[1]][m_xy[0]] == 'D')
+		if (map[m_xy[1]][m_xy[0]] != '0')
 		{
 			dda->dist_hv[val] = dda->cos * (dda->r_xy[0] - playerpos[0])
 					- -dda->sin * (dda->r_xy[1] - playerpos[1]);
@@ -95,7 +95,7 @@ static void	vertical_cast(t_dda *dda, float playerpos[2], char **map, int m_heig
 	dda->v_xy[1] = dda->r_xy[1];
 }
 
-void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block *blocks)
+void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block **blocks)
 {
 	float start_angle;
 	t_dda dda;

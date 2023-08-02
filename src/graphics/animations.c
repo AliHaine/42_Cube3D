@@ -60,8 +60,12 @@ static void	play_block_animation(t_animation *animation, t_block *block)
 	block->image = animation->image[i++];
 }
 
-void    animation_listener(t_item *items, t_block *blocks)
+void    animation_listener(t_item *items, t_block **blocks)
 {
+
+	int i;
+
+	i = 0;
 	//changer pour une quantite indefini d'anim
 	if (items[0].animation.is_playing)
 	{
@@ -85,5 +89,11 @@ void    animation_listener(t_item *items, t_block *blocks)
 	} else if (items[11].animation.is_playing) {
 		play_attack_animation(&items[11].animation, items[11].image);
 	}
-	play_block_animation(&blocks[0].animation, &blocks[0]);
+
+	while (*blocks)
+	{
+		if ((*blocks)->animation.is_playing)
+			play_block_animation(&(*blocks)->animation, *blocks);
+		blocks++;
+	}
 }

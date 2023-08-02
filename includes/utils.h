@@ -20,6 +20,7 @@ bool    is_color_char(char c);
 
 //std_func_utils//
 
+int     get_rand_num(int max_val);
 void	put_two_string(char *dst, const char *s1, const char *s2, char *num);
 int		ft_strlen(const char *s);
 int		ft_atoi_for_texture(const char *s);
@@ -55,7 +56,7 @@ bool	is_player_running(t_player *player);
 
 void	fisheyes_fixor(t_dda *dda, float player_angle);
 void	get_color_wall_texture(mlx_texture_t *wall_texture, int r, t_col_drawing *tcd);
-void	get_color_block_texture(mlx_image_t *wall_texture, t_dda *dda, t_col_drawing *tcd);
+void	get_color_block_texture(mlx_image_t *block_texture, t_dda *dda, t_col_drawing *tcd);
 uint32_t	apply_fog(uint32_t color, float fog_strength);
 
 // inventory / s_slot
@@ -64,5 +65,9 @@ int		detect_pointed_slot(t_core *core, int x, int y);
 void	set_pos_by_id(t_slot *slot, int id);
 void	reset_slot(t_core *core, t_slot *slot);
 void	change_item_number(t_core *core, t_slot *src, short n);
+
+//block_utils
+
+t_block *get_block_from_char(t_block **block, char block_char);
 
 #endif

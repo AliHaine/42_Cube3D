@@ -12,7 +12,7 @@
 
 #include "../../includes/includes.h"
 
-void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_map *map, t_block *blocks)
+void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_map *map, t_block **blocks)
 {
 	int convertor;
 
@@ -24,7 +24,8 @@ void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_map *map, t_block *block
 	tcd->current_step = 0.0f;
 	tcd->fog_strength = dda->dist_hv[0] / FOG_DISTANCE;
 	tcd->hit_block = map->world[(int)dda->r_xy[1] / 64][(int)dda->r_xy[0] / 64];
-	tcd->block = &blocks[0];
+	if (tcd->hit_block != '1')
+		tcd->block = get_block_from_char(blocks, tcd->hit_block);
 	if (tcd->wall_lineH > SCREEN_HEIGHT) {
 		tcd->current_step = (convertor - SCREEN_HEIGHT) / 2.0;
 		tcd->wall_lineH = SCREEN_HEIGHT;

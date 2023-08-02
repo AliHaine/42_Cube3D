@@ -28,7 +28,7 @@ void	get_color_wall_texture(mlx_texture_t *wall_texture, int r, t_col_drawing *t
             ,wall_texture->pixels[value + 2],wall_texture->pixels[value + 3]);
 }
 
-void	get_color_block_texture(mlx_image_t *wall_texture, t_dda *dda, t_col_drawing *tcd)
+void	get_color_block_texture(mlx_image_t *block_texture, t_dda *dda, t_col_drawing *tcd)
 {
 	int			value;
 	int			r;
@@ -37,11 +37,11 @@ void	get_color_block_texture(mlx_image_t *wall_texture, t_dda *dda, t_col_drawin
 		r = (int)dda->r_xy[1];
 	else
 		r = (int)dda->r_xy[0];
-	value = ((r % 64) + ((int)tcd->current_step * (int)wall_texture->width)) * 4;
+	value = ((r % 64) + ((int)tcd->current_step * (int)block_texture->width)) * 4;
 	if (value >= 16384)
 		return ;
-	tcd->color = get_rgb_color(wall_texture->pixels[value],wall_texture->pixels[value + 1]
-			,wall_texture->pixels[value + 2],wall_texture->pixels[value + 3]);
+	tcd->color = get_rgb_color(block_texture->pixels[value], block_texture->pixels[value + 1]
+			, block_texture->pixels[value + 2], block_texture->pixels[value + 3]);
 }
 
 void	fisheyes_fixor(t_dda *dda, float player_angle)

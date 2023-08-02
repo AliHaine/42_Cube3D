@@ -76,17 +76,6 @@ typedef struct s_file
 	char 	*storage;
 }	t_file;
 
-typedef struct s_map
-{
-	char **world;
-	char **chunk;
-	uint32_t abiant_sound;
-	int height;
-	int width;
-	uint32_t	bt_color[2];
-	Difficulty difficulty;
-}	t_map;
-
 typedef struct s_animation
 {
 	mlx_image_t		**image;
@@ -111,11 +100,28 @@ typedef struct s_item
 typedef struct s_block
 {
 	Block			name;
+	char			block_char;
 	t_item			*item;
 	int				strength;
 	t_animation 	animation;
 	mlx_image_t		*image;
 }	t_block;
+
+typedef struct s_map
+{
+	char **world;
+	char **chunk;
+	uint32_t abiant_sound;
+	int height;
+	int width;
+	uint32_t	bt_color[2];
+	Difficulty difficulty;
+}	t_map;
+
+typedef struct s_chunk
+{
+	t_block	*block;
+}	t_chunk;
 
 typedef struct s_slot
 {
@@ -156,7 +162,7 @@ typedef struct s_col_drawing
 	float		step;
 	float		current_step;
 	float		fog_strength;
-	int			hit_block;
+	char		hit_block;
 	t_block 	*block;
 }	t_col_drawing;
 
@@ -168,7 +174,7 @@ typedef struct s_core
 	t_sounds		sounds;
 	t_item			items[11];
 	t_animation 	animations[11];
-	t_block			blocks[3];
+	t_block			*blocks[4];
 	t_map 			maps[2];
     int             screen_size[2];
 }	t_core;
