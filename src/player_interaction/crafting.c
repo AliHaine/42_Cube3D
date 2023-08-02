@@ -20,6 +20,26 @@ static bool	diamond_sword(t_core *core, t_slot *craft_table[10])
 	return (true);
 }
 
+static bool	lighter(t_core *core, t_slot *craft_table[10])
+{
+	if (craft_table[0]->item->name != HAND
+		|| craft_table[1]->item->name != HAND
+		|| craft_table[2]->item->name != FLINT
+		|| craft_table[3]->item->name != HAND
+		|| craft_table[4]->item->name != IRON
+		|| craft_table[5]->item->name != HAND
+		|| craft_table[6]->item->name != HAND
+		|| craft_table[7]->item->name != HAND
+		|| craft_table[8]->item->name != HAND)
+		return (false);
+	if (craft_table[9]->item->name == HAND)
+	{
+		give_item(core, &core->items[LIGHTER], 46, 1);
+		display_item(core, get_slot(core, 46));
+	}
+	return (true);
+}
+
 void	crafting_engine(t_core *core)
 {
 	t_slot	*craft_table[10];
@@ -35,6 +55,8 @@ void	crafting_engine(t_core *core)
 	craft_table[7] = get_slot(core, 44);
 	craft_table[8] = get_slot(core, 45);
 	if (diamond_sword(core, craft_table) == true)
+		return ;
+	if (lighter(core, craft_table) == true)
 		return ;
 	else if (craft_table[9]->item->name != HAND
 		&& *core->player.holding_item == false)

@@ -64,6 +64,7 @@ typedef struct s_dda
 	int hit_hv; // determine si c'est un mur horizontal ou vertical toucher
 	int hit_direction[2]; // determine la direction du mur toucher (ouest est etc)
 	float wall_height;
+
 }	t_dda;
 
 typedef struct s_file
@@ -165,9 +166,9 @@ typedef struct s_core
 	t_player		player;
 	t_imgs			imgs;
 	t_sounds		sounds;
-	t_item			items[7];
-	t_animation 	animations[7];
-	t_block			blocks[2];
+	t_item			items[11];
+	t_animation 	animations[11];
+	t_block			blocks[3];
 	t_map 			maps[2];
     int             screen_size[2];
 }	t_core;

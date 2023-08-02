@@ -52,7 +52,7 @@ static void create_block_animation(t_block *block, int anim_size, mlx_t *mlx)
 		if (i >= 10)
 			path = malloc(sizeof(char) * (ft_strlen(BlockName[block->name]) + 21));
 		else
-			path = malloc(sizeof(char) * (ft_strlen(BlockName[block->name]) + 20));
+			path = malloc(sizeof(char) * (ft_strlen(BlockName[block->name]) + 21)); // Avant c'etait +20 mais ca faisait segfault
 	}
 	free(path);
 	block->animation.image[i - 1] = 0;
@@ -64,4 +64,6 @@ void	block_loader(t_core *core)
 	create_block_animation(&core->blocks[0], 14, core->mlx);
 
 	create_block(&core->blocks[1], NETHERRACK, 0, 1, core->mlx);
+
+	create_block(&core->blocks[2], OBSIDIAN, 0, 2, core->mlx);
 }
