@@ -44,6 +44,7 @@ static void moving_inputs(mlx_t *mlx, t_player *player, char **map)
 		move_forward_backward(player, map, 0);
 	else
 		player->is_moving = false;
+	printf("%f %f\n", player->playerpos[0],  player->playerpos[1]);
 }
 
 void	inputs(void *params)

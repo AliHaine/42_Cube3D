@@ -82,6 +82,7 @@ int	main(int argc, char *argv[])
 	core_init(&core);
 	item_loader(&core);
 	block_loader(&core);
+    map_manager(argv[1], &core.maps[0], &core.imgs, &core.player);
     world_loader(&core);
     give_item(&core, &core.items[SWORD_NETHER], 2, 32);
 	give_item(&core, &core.items[SWORD_NETHER], 32, 52);
@@ -95,7 +96,6 @@ int	main(int argc, char *argv[])
 	give_item(&core, &core.items[LIGHTER], 24, 1);
 	give_item(&core, &core.items[DIAMOND_PICKAXE], 12, 1);
     usleep(60000);
-	map_manager(argv[1], &core.maps[0], &core.imgs, &core.player);
 	// J'init l'image la psq elle a besoin des variables initialisees par map_manager
 	// C'est censé adapter la minimap a la taille de la carte mais pas a la resolution donc ca segfault tjr
 	msg_write(1, -1, MINIMAP_INIT);

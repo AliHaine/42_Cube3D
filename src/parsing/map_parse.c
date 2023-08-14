@@ -21,7 +21,7 @@ static bool	fill_map_tab(char *line, char *tab, t_player *player, t_map *map, in
 		if (is_player_char(line[i]))
 		{
 			player->have_player = true;
-			set_player(iterator, i, player);
+			set_player(iterator + map->width, i + map->height, player);
 			tab[i] = '0';
 		}
 		else
@@ -41,9 +41,9 @@ bool	parse_main(t_file *file, t_player *player, t_map *map)
 	iterator = 0;
 	while (iterator < map->height)
 	{
-		map->world[iterator] = malloc(sizeof(char) * (map->width + 1));
-		//free ici si error
-		if (!fill_map_tab(file->line, map->world[iterator], player, map, iterator))
+		//map->chunk[iterator] = malloc(sizeof(char) * (map->width + 1));
+
+		if (!fill_map_tab(file->line, map->chunk[iterator], player, map, iterator))
 		{
 			msg_write(2, 2, ERROR_MAP_CHAR);
 			return (false);

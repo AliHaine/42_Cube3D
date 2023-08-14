@@ -98,7 +98,7 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_map *map)
 			case_x = (px + start_x) / 16;
 			if (get_pixel(imgs->map_texture, px, py) != -692152577)
 				continue ;
-			else if (case_y < 0 || case_x < 0 || case_y > map->height - 1 || case_x > map->width - 1)
+			else if (case_y < 0 || case_x < 0 || case_y > (map->height * 3) - 1 || case_x > (map->width * 3) - 1)
 				mlx_put_pixel(imgs->img_map, px, py, wall_color);
 			else if (map->world[case_y][case_x] == '1')
 				mlx_put_pixel(imgs->img_map, px, py, wall_color);

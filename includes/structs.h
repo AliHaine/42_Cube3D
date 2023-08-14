@@ -118,11 +118,6 @@ typedef struct s_map
 	Difficulty difficulty;
 }	t_map;
 
-typedef struct s_chunk
-{
-	t_block	*block;
-}	t_chunk;
-
 typedef struct s_slot
 {
 	short			slot_id;
