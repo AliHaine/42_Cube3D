@@ -134,7 +134,8 @@ typedef struct s_slot
 
 typedef struct s_player
 {
-	float			playerpos[2];
+	float			player_pos_yx[2];
+	float			player_coords_xy[2];
 	float			playerangle;
 	int				health;
 	bool			have_player;

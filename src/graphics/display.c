@@ -64,7 +64,7 @@ void	display(void *params)
 			SCREEN_HEIGHT);
 	core->imgs.img_map = mlx_texture_to_image(core->mlx, core->imgs.map_texture);
 	raycasting(&core->player, &core->imgs, &core->maps[0], core->blocks);
-	minimap_drawing(&core->imgs, core->player.playerpos, &core->maps[0]);
+	minimap_drawing(&core->imgs, core->player.player_pos_yx, &core->maps[0]);
 	core->imgs.img_player = rotate_image(core->mlx, core->imgs.img_player_texture, core->player.playerangle + (PI / 2));
 	mlx_resize_image(core->imgs.img_map, 250, 250);
 	mlx_resize_image(core->imgs.img_player, 14, 14);

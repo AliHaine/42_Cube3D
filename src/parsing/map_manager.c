@@ -47,6 +47,5 @@ void	map_manager(char *map_name, t_map *map, t_imgs *imgs, t_player *player)
 	save = file.line_num;
 	map_value_init(map, &file, save);
     world_creator(map, 0, map->height, map->width, EASY, 0);
-    printf("%d %d\n", map->height - 1, map->width);
 	parse_main(&file, player, map);
 }

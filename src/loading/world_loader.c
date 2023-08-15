@@ -99,9 +99,7 @@ static void world_copy_from_chunk(t_map *world)
                 //exit(1);
             }
         }
-		printf("end\n");
     }
-    printf("value = %c\n", world->world[0][0]);
     int y = 0;
     int x = 0;
     while (y < (world->height * 3)) {
@@ -116,10 +114,9 @@ static void world_copy_from_chunk(t_map *world)
 
 void	world_loader(t_core *core)
 {
+	world_copy_from_chunk(&core->maps[0]);
+
 	world_creator(&core->maps[1], core->sounds.ambiant, 32, 32, HARD, 0);
     world_generator(&core->maps[1]);
     world_copy_from_chunk(&core->maps[1]);
-
-    world_copy_from_chunk(&core->maps[0]);
-
 }

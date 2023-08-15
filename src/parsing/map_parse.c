@@ -1,11 +1,12 @@
 #include "../../includes/includes.h"
 
-static bool	set_player(int x, int y, t_player *player)
+static void	set_player(int x, int y, t_player *player, t_map *map)
 {
-	player->playerpos[0] = (y * 64) + 32;
-	player->playerpos[1] = (x * 64) + 32;
+	player->player_pos_yx[0] = ((y + map->width) * 64) + 32;
+	player->player_pos_yx[1] = ((x + map->height)  * 64) + 32;
+	player->player_coords_xy[0] = (y  * 64) + 32;
+	player->player_coords_xy[1] = (x  * 64) + 32;
 	player->playerangle = 0;
-	return (true);
 }
 
 //todo
@@ -21,7 +22,7 @@ static bool	fill_map_tab(char *line, char *tab, t_player *player, t_map *map, in
 		if (is_player_char(line[i]))
 		{
 			player->have_player = true;
-			set_player(iterator + map->width, i + map->height, player);
+			set_player(iterator, i, player, map);
 			tab[i] = '0';
 		}
 		else

@@ -79,8 +79,8 @@ static void wall_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd)
 
 void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_map *map)
 {
-	const int start_y = (playerpos[1] / 4) - (286 / 2);
-	const int start_x = (playerpos[0] / 4) - (286 / 2);
+	const int start_y = ((playerpos[1] + map->height) / 4) - (286 / 2);
+	const int start_x = ((playerpos[0] + map->width) / 4) - (286 / 2);
 	int                 case_y;
 	int                 case_x;
 	int                 py;
@@ -116,6 +116,6 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block **blocks, t_p
 	while (tcd.iterator < tcd.wall_lineH)
 		wall_drawing(imgs, dda, &tcd);
 	while (tcd.iterator < SCREEN_HEIGHT)
-		//floor_drawing(imgs->floor_texture, &tcd, dda, player->playerpos, imgs->img_3d);
+		//floor_drawing(imgs->floor_texture, &tcd, dda, player->player_pos_yx, imgs->img_3d);
 		mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++, map->bt_color[0]);
 }

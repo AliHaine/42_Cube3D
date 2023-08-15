@@ -116,8 +116,8 @@ void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block **blocks)
 			dda.current_angle -= 6.28319f;
 		dda.cos = cosf(dda.current_angle);
 		dda.sin = sinf(dda.current_angle);
-		vertical_cast(&dda, player->playerpos, map->world, map->height * 3);
-		horizontal_cast(&dda, player->playerpos, map->world, map->width * 3);
+		vertical_cast(&dda, player->player_pos_yx, map->world, map->height * 3);
+		horizontal_cast(&dda, player->player_pos_yx, map->world, map->width * 3);
 		if (dda.dist_hv[1] < dda.dist_hv[0])
 		{
 			dda.r_xy[0] = dda.v_xy[0];
