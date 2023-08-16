@@ -20,7 +20,7 @@ static bool world_malloc(int height, int width, char ***map)
     (*map) = malloc(sizeof(char *) * height + 1);
 	if (!*map)
 		return (false);
-    (*map)[height] = 0;
+    (*map)[height] = '\0';
 	while (i < height)
 	{
         (*map)[i] = malloc(sizeof(char) * width + 1);
@@ -44,9 +44,12 @@ bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, Di
 	map->bt_color[1] = 0;
 	map->difficulty = difficulty;
     map->world = malloc(sizeof(char **) * 9);
+    printf("ici1\n");
 	world_malloc(height, width, &map->chunk);
+    printf("ici1\n");
     while (i < 9)
 	    world_malloc(height * 3, width * 3, &map->world[i++]);
+    printf("ici1\n");
     return (true);
 }
 

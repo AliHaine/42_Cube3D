@@ -109,16 +109,57 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_map *map)
 	}
 }
 
+void ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_player *player)
+{
+    float azimuth_angle = fmodf(dda->current_angle + 2 * M_PI, 2 * M_PI);
+    int skyboxTexX = (int)(azimuth_angle / (2 * M_PI) * (float)imgs->skybox->width) % (int)imgs->skybox->width;
+    int skyboxTexY = (int)(((float)tcd->iterator / SCREEN_HEIGHT) * imgs->skybox->height);
+    int value = (skyboxTexX + skyboxTexY * (int)imgs->skybox->width) * 4; // Modified this line
+    uint32_t color = get_rgb_color(imgs->skybox->pixels[value],
+                                   imgs->skybox->pixels[value + 1],
+                                   imgs->skybox->pixels[value + 2],
+                                   imgs->skybox->pixels[value + 3]);
+    mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, color);
+}
+
+
+void	floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player)
+{
+	float beta = fabsf(dda->current_angle - player->playerangle);
+    int r = tcd->iterator - (SCREEN_HEIGHT / 2);
+    float s = ((SCREEN_HEIGHT / 2) * 64) / (float) r;
+    float d = s / cosf(beta);
+    float fog_strength = d / FOG_DISTANCE;
+    if (fog_strength > 1)
+    	mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++,(0 << 24) | (0 << 16) | (0 << 8) | 255);
+    else
+    {
+		float floorPointX = player->player_pos_yx[0] + cosf(dda->current_angle) * d;
+        float floorPointY = player->player_pos_yx[1] + sinf(dda->current_angle) * d;
+        int floorTexX = (int) (floorPointX) % 64;
+        int floorTexY = (int) (floorPointY) % 64;
+        int value = (floorTexX + floorTexY * 64) * 4;
+        uint32_t color = get_rgb_color(imgs->floor_texture->pixels[value],
+        		imgs->floor_texture->pixels[value + 1],
+                imgs->floor_texture->pixels[value + 2],
+                imgs->floor_texture->pixels[value + 3]);
+        color = apply_fog(color, fog_strength);
+        mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++,color);
+	}
+}
+
 void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block **blocks, t_player *player)
 {
     t_col_drawing  tcd;
 
 	setup_col_struct(&tcd, dda, map, blocks);
 	while (tcd.iterator < tcd.ceil_floor_lineH)
-		mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++, map->bt_color[1]);
+    {
+        ceil_drawing(imgs, dda, &tcd, player);
+    }
+
 	while (tcd.iterator < tcd.wall_lineH)
 		wall_drawing(imgs, dda, &tcd);
 	while (tcd.iterator < SCREEN_HEIGHT)
-		//floor_drawing(imgs->floor_texture, &tcd, dda, player->player_pos_yx, imgs->img_3d);
-		mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++, map->bt_color[0]);
+		floor_drawing(imgs, dda, &tcd, player);
 }

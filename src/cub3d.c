@@ -6,7 +6,7 @@
 /*   By: ngalzand <ngalzand@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:47:42 by ngalzand          #+#    #+#             */
-/*   Updated: 2023/05/11 16:47:45 by ngalzand         ###   ########.fr       */
+/*   Updated: 2023/08/16 11:17:34 by ngalzand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static void	core_init(t_core *core)
 	sound_loader(&core->sounds);
 	imgs_init(core->mlx, &core->imgs);
 	sound_loader(&core->sounds);
-    set_texture_from_path("assets/grass2.png", &core->imgs.floor_texture);
+    set_texture_from_path("assets/grass.png", &core->imgs.floor_texture);
+    set_texture_from_path("assets/skybox.png", &core->imgs.skybox);
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
 	mlx_set_cursor(core->mlx, mlx_create_cursor(core->imgs.trans));
