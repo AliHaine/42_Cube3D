@@ -24,7 +24,7 @@ static void	rotation_inputs(mlx_t *mlx, t_player *player)
 }
 
 
-static void moving_inputs(mlx_t *mlx, t_player *player, char **map)
+static void moving_inputs(mlx_t *mlx, t_player *player, t_map *map)
 {
 	if (!player->can_move)
 	{
@@ -33,15 +33,25 @@ static void moving_inputs(mlx_t *mlx, t_player *player, char **map)
 	}
 	player->is_moving = true;
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
-		move_right_left(player, map, 1);
+    {
+        if (get_right_char(player, map) == '0')
+            move_right(player);
+    }
 	else if (mlx_is_key_down(mlx, MLX_KEY_A))
-		move_right_left(player, map, 0);
-	else if (mlx_is_key_down(mlx, MLX_KEY_S)
-			 || mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		move_forward_backward(player, map, 1);
-	else if (mlx_is_key_down(mlx, MLX_KEY_W)
-			 || mlx_is_key_down(mlx, MLX_KEY_UP))
-		move_forward_backward(player, map, 0);
+    {
+        if (get_left_char(player, map) == '0')
+            move_left(player);
+    }
+	else if (mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_DOWN))
+    {
+        if (get_backward_char(player, map) == '0')
+            move_backward(player);
+    }
+	else if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_UP))
+    {
+        if (get_forward_char(player, map) == '0')
+            move_forward(player);
+    }
 	else
 		player->is_moving = false;
 }
@@ -55,8 +65,12 @@ void	inputs(void *params)
 	if (mlx_is_key_down(core->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(core->mlx);
 	rotation_inputs(core->mlx, &core->player);
-	//printf("%f %f\n", core->player.player_pos_yx[0] / 64 , core->player.player_pos_yx[1] / 64);
-	moving_inputs(core->mlx, &core->player, core->maps[0].world[4]);
+	moving_inputs(core->mlx, &core->player, &core->maps[get_active_world(core->maps)]);
+    int c = is_player_chunk_change(&core->player, &core->maps[get_active_world(core->maps)]);
+    if (c)
+        printf("oui\n");
+	else
+		printf("non\n");
 }
 
 void	inputs_hook(struct mlx_key_data key, void *params)

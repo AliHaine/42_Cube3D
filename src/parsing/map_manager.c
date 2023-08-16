@@ -27,8 +27,6 @@ static bool	map_value_init(t_map *map, t_file *file, int start)
 		return (0);
 	}
 	reopen_file(file, start, O_RDONLY);
-	//map->chunk = malloc(sizeof(char *) * (map->height + 1));
-	//map->chunk[map->height] = 0;
 	return (1);
 }
 
@@ -46,6 +44,6 @@ void	map_manager(char *map_name, t_map *map, t_imgs *imgs, t_player *player)
 	texture_main(&file, imgs, map);
 	save = file.line_num;
 	map_value_init(map, &file, save);
-    world_creator(map, 0, map->height, map->width, EASY, 0);
+    world_creator(map, 0, map->height, map->width, EASY, 0, true);
 	parse_main(&file, player, map);
 }

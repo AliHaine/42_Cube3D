@@ -134,8 +134,8 @@ void	floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player
     	mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++,(0 << 24) | (0 << 16) | (0 << 8) | 255);
     else
     {
-		float floorPointX = player->player_pos_yx[0] + cosf(dda->current_angle) * d;
-        float floorPointY = player->player_pos_yx[1] + sinf(dda->current_angle) * d;
+		float floorPointX = player->player_pos_xy[0] + cosf(dda->current_angle) * d;
+        float floorPointY = player->player_pos_xy[1] + sinf(dda->current_angle) * d;
         int floorTexX = (int) (floorPointX) % 64;
         int floorTexY = (int) (floorPointY) % 64;
         int value = (floorTexX + floorTexY * 64) * 4;
