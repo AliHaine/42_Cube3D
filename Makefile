@@ -38,6 +38,7 @@ SRCS		=	src/cub3d.c \
 				src/utils/move_utils.c \
 				src/utils/mlx_texture_utils.c \
 				src/utils/block_utils.c \
+				src/utils/world_utils.c \
 				src/utils/get_next_line/get_next_line.c \
 				src/utils/get_next_line/get_next_line_utils.c \
 				src/utils/inventory_utils.c \

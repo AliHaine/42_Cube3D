@@ -23,7 +23,7 @@ void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_map *map, t_block **bloc
 	tcd->step = 64.0f / (float)convertor;
 	tcd->current_step = 0.0f;
 	tcd->fog_strength = dda->dist_hv[0] / FOG_DISTANCE;
-	tcd->hit_block = map->world[(int)dda->r_xy[1] / 64][(int)dda->r_xy[0] / 64];
+	tcd->hit_block = map->world[dda->chunk][((int)dda->r_xy[1] / 64) % map->height][((int)dda->r_xy[0] / 64) % map->width];
 	if (tcd->hit_block != '1')
 		tcd->block = get_block_from_char(blocks, tcd->hit_block);
 	if (tcd->wall_lineH > SCREEN_HEIGHT) {

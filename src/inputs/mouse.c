@@ -19,8 +19,8 @@ void	mouse(enum mouse_key key, enum action action, enum modifier_key mkey, void 
 		return ;
 	time = mlx_get_time();
 	core->player.slot->item->animation.is_playing = true;
-	if (get_forward_char(&core->player, core->maps[0].world) == '1') {
-		set_char_at_forward('0', &core->player, core->maps[0].world);
+	if (get_forward_char(&core->player, core->maps[0].world[4]) == '1') {
+		set_char_at_forward('0', &core->player, core->maps[0].world[4]);
 	}
 	play_sound(core->sounds.player_hurt);
 }

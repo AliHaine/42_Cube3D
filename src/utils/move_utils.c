@@ -11,8 +11,8 @@ char	get_backward_char(t_player *player, char **map)
 char	get_forward_char(t_player *player, char **map)
 {
 	return (map[(int)((player->player_pos_yx[1] + (sinf(player->playerangle)
-												   * player->move_speed)) / 64)][(int)((player->player_pos_yx[0] +
-																						(cosf(player->playerangle) * player->move_speed)) / 64)]);
+												   * player->move_speed)) / 64) % 24][(int)((player->player_pos_yx[0] +
+																						(cosf(player->playerangle) * player->move_speed)) / 64) % 25]);
 }
 
 char	get_right_char(t_player *player, char **map)

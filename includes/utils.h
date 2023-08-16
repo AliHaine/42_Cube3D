@@ -70,4 +70,7 @@ void	change_item_number(t_core *core, t_slot *src, short n);
 
 t_block *get_block_from_char(t_block **block, char block_char);
 
+//world_utils
+int	get_chunk_from_pos(int x, int y, int m_height, int m_width);
+
 #endif

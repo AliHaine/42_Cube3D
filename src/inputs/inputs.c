@@ -44,9 +44,6 @@ static void moving_inputs(mlx_t *mlx, t_player *player, char **map)
 		move_forward_backward(player, map, 0);
 	else
 		player->is_moving = false;
-	printf("%f %f\n", player->player_pos_yx[0], player->player_pos_yx[1]);
-	printf("%f %f\n", player->player_coords_xy[0], player->player_coords_xy[1]);
-
 }
 
 void	inputs(void *params)
@@ -58,7 +55,8 @@ void	inputs(void *params)
 	if (mlx_is_key_down(core->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(core->mlx);
 	rotation_inputs(core->mlx, &core->player);
-	moving_inputs(core->mlx, &core->player, core->maps[0].world);
+	//printf("%f %f\n", core->player.player_pos_yx[0] / 64 , core->player.player_pos_yx[1] / 64);
+	moving_inputs(core->mlx, &core->player, core->maps[0].world[4]);
 }
 
 void	inputs_hook(struct mlx_key_data key, void *params)

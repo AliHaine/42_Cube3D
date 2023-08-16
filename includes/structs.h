@@ -63,6 +63,7 @@ typedef struct s_dda
     float current_angle_fix; //fish eye fix
 	int hit_hv; // determine si c'est un mur horizontal ou vertical toucher
 	int hit_direction[2]; // determine la direction du mur toucher (ouest est etc)
+	int chunk;
 	float wall_height;
 
 }	t_dda;
@@ -109,7 +110,7 @@ typedef struct s_block
 
 typedef struct s_map
 {
-	char **world;
+	char ***world;
 	char **chunk;
 	uint32_t abiant_sound;
 	int height;

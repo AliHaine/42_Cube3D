@@ -58,11 +58,14 @@ static void wall_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd)
 {
 	if (tcd->fog_strength > 1)
 		tcd->color = (0 << 24) | (0 << 16) | (0 << 8) | 255;
-	else if (tcd->hit_block != '1')
-		get_color_block_texture(tcd->block->image, dda, tcd);
+	else if (tcd->hit_block != '1') {
+		//printf("here1\n");
+        get_color_block_texture(tcd->block->image, dda, tcd);
+		//printf("here2\n");
+    }
 	else if (dda->hit_hv == 1 && dda->hit_direction[0] == 1)
-		get_color_wall_texture(imgs->wall_texture[1],
-							   (int) dda->r_xy[1], tcd);
+        get_color_wall_texture(imgs->wall_texture[1],
+                               (int) dda->r_xy[1], tcd);
 	else if (dda->hit_hv == 1 && dda->hit_direction[0] == 3)
 		get_color_wall_texture(imgs->wall_texture[3],
 							   (int) dda->r_xy[1], tcd);
@@ -100,7 +103,7 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_map *map)
 				continue ;
 			else if (case_y < 0 || case_x < 0 || case_y > (map->height * 3) - 1 || case_x > (map->width * 3) - 1)
 				mlx_put_pixel(imgs->img_map, px, py, wall_color);
-			else if (map->world[case_y][case_x] == '1')
+			else if (map->world[4][case_y][case_x] == '1')
 				mlx_put_pixel(imgs->img_map, px, py, wall_color);
 		}
 	}
