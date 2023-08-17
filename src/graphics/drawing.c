@@ -113,7 +113,19 @@ void ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_player *player
 {
     float azimuth_angle = fmodf(dda->current_angle + 2 * M_PI, 2 * M_PI);
     int skyboxTexX = (int)(azimuth_angle / (2 * M_PI) * (float)imgs->skybox->width) % (int)imgs->skybox->width;
-    int skyboxTexY = (int)(((float)tcd->iterator / SCREEN_HEIGHT) * imgs->skybox->height);
+
+    // Calculate the vertical offset based on the player's pitch angle and the height of the screen
+    float vertical_offset = (1.0f - 90.f) * SCREEN_HEIGHT;
+
+    // Calculate the vertical scaling factor based on the aspect ratio of the skybox texture
+    float vertical_scale = (float)imgs->skybox->height / (float)imgs->skybox->width;
+
+    // Calculate the texture Y coordinate with perspective correction
+    int skyboxTexY = (int)((tcd->iterator - vertical_offset) * vertical_scale);
+
+    // Ensure the texture Y coordinate is within bounds
+    skyboxTexY = skyboxTexY >= 0 ? skyboxTexY % imgs->skybox->height : 0;
+
     int value = (skyboxTexX + skyboxTexY * (int)imgs->skybox->width) * 4; // Modified this line
     uint32_t color = get_rgb_color(imgs->skybox->pixels[value],
                                    imgs->skybox->pixels[value + 1],
@@ -121,6 +133,7 @@ void ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_player *player
                                    imgs->skybox->pixels[value + 3]);
     mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, color);
 }
+
 
 
 void	floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player)
