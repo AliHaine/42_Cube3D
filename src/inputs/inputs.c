@@ -54,6 +54,45 @@ static void moving_inputs(mlx_t *mlx, t_player *player, t_map *map)
     }
 	else
 		player->is_moving = false;
+	player->player_cell_xy[0] = (int)(player->player_pos_xy[0] / 64);
+	player->player_cell_xy[1] = (int)(player->player_pos_xy[1] / 64);
+}
+
+int	get_chunk_from_pos2(int x, int y, int m_height, int m_width)
+{
+	int i;
+
+	i = 0;
+	printf("start %d %d %d\n--------------------\n", y, x, m_height);
+	if (y < (m_height - 1))
+	{
+		printf("11\n");
+		while (i++ < 4)
+		{
+			if (x < (m_width - 1) * i)
+				return (i - 1);
+		}
+	}
+	else if (y < m_height * 2)
+	{
+		printf("22\n");
+		while (i++ < 4)
+		{
+			if (x < m_width * i)
+				return ((i - 1) + 3);
+		}
+	}
+	else
+	{
+		printf("33\n");
+		while (i++ < 4)
+		{
+			if (x < m_width * i)
+				return ((i - 1) + 6);
+		}
+	}
+	//printf("rien %d %d\n-------------------------\n", x, y);
+	return (0);
 }
 
 void	inputs(void *params)
@@ -66,6 +105,11 @@ void	inputs(void *params)
 		mlx_close_window(core->mlx);
 	rotation_inputs(core->mlx, &core->player);
 	moving_inputs(core->mlx, &core->player, &core->maps[get_active_world(core->maps)]);
+    int c = is_player_chunk_change(&core->player, &core->maps[get_active_world(core->maps)]);
+    if (c)
+        printf("oui\n");
+	else
+		printf("non\n");
 }
 
 void	inputs_hook(struct mlx_key_data key, void *params)
