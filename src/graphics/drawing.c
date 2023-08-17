@@ -95,16 +95,17 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_map *map)
 	while (++py < 286)
 	{
 		px = -1;
-		case_y = (py + start_y) / 16;
-		while (++px < 286)
-		{
-			case_x = (px + start_x) / 16;
+        case_y = ((py + start_y) / 16);
+        while (++px < 286)
+        {
+            case_x = ((px + start_x) / 16);
 			if (get_pixel(imgs->map_texture, px, py) != -692152577)
 				continue ;
-			else if (case_y < 0 || case_x < 0 || case_y > (map->height * 3) - 1 || case_x > (map->width * 3) - 1)
+			else if (map->world[get_chunk_from_pos(case_x, case_y, map->height, map->width)][case_y % map->height][case_x % map->width] == '1')
 				mlx_put_pixel(imgs->img_map, px, py, wall_color);
-			else if (map->world[4][case_y][case_x] == '1')
-				mlx_put_pixel(imgs->img_map, px, py, wall_color);
+            //printf("%d %d\n", case_x, case_y);
+            if (case_x % map->width == (int)(playerpos[0] / 64) % map->width && case_y % map->height == (int)(playerpos[1] / 64) % map->height)
+                printf("%d\n", get_chunk_from_pos(case_x, case_y, map->height, map->width));
 		}
 	}
 }
