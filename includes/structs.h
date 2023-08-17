@@ -118,6 +118,7 @@ typedef struct s_map
 	int width;
 	uint32_t	bt_color[2];
 	Difficulty difficulty;
+	bool		is_active;
 }	t_map;
 
 typedef struct s_slot
@@ -136,7 +137,7 @@ typedef struct s_slot
 
 typedef struct s_player
 {
-	float			player_pos_yx[2];
+	float			player_pos_xy[2];
 	float			player_coords_xy[2];
 	float			playerangle;
 	int				health;

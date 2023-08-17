@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mouse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/16 14:18:53 by ayagmur           #+#    #+#             */
+/*   Updated: 2023/08/16 14:18:59 by ayagmur          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/includes.h"
 
 void	mouse(enum mouse_key key, enum action action, enum modifier_key mkey, void *param)
@@ -19,7 +31,7 @@ void	mouse(enum mouse_key key, enum action action, enum modifier_key mkey, void 
 		return ;
 	time = mlx_get_time();
 	core->player.slot->item->animation.is_playing = true;
-	if (get_forward_char(&core->player, core->maps[0].world[4]) == '1') {
+	if (get_forward_char(&core->player, core->maps) == '1') {
 		set_char_at_forward('0', &core->player, core->maps[0].world[4]);
 	}
 	play_sound(core->sounds.player_hurt);

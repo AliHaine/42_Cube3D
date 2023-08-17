@@ -17,10 +17,10 @@ static bool world_malloc(int height, int width, char ***map)
 	int	i;
 
 	i = 0;
-    (*map) = malloc(sizeof(char *) * height + 1);
+    (*map) = malloc(sizeof(char *) * (height + 1));
 	if (!*map)
 		return (false);
-    (*map)[height] = '\0';
+    (*map)[height] = 0;
 	while (i < height)
 	{
         (*map)[i] = malloc(sizeof(char) * width + 1);
@@ -32,7 +32,7 @@ static bool world_malloc(int height, int width, char ***map)
 	return (true);
 }
 
-bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, Difficulty difficulty, const uint32_t bt_color[2])
+bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, Difficulty difficulty, const uint32_t bt_color[2], bool is_active)
 {
     int i;
 
@@ -44,12 +44,10 @@ bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, Di
 	map->bt_color[1] = 0;
 	map->difficulty = difficulty;
     map->world = malloc(sizeof(char **) * 9);
-    printf("ici1\n");
+	map->is_active = is_active;
 	world_malloc(height, width, &map->chunk);
-    printf("ici1\n");
     while (i < 9)
 	    world_malloc(height * 3, width * 3, &map->world[i++]);
-    printf("ici1\n");
     return (true);
 }
 
@@ -80,52 +78,22 @@ static void world_generator(t_map *map) {
 
 static void world_copy_from_chunk(t_map *world)
 {
-    int world_yx[2];
     int chunk_yx[2];
     int world_iterator;
-    int chunk_iterator;
 
-    world_yx[0] = 0;
-    world_yx[1] = 0;
     chunk_yx[0] = -1;
     chunk_yx[1] = -1;
     world_iterator = -1;
-    chunk_iterator = 0;
-    //while (world_yx[0] < (world->height * 3))
     while (world_iterator++ < 8)
     {
-        //printf("enter\n");
         while (chunk_yx[0]++ < world->height - 1)
         {
-            //printf("enter1\n");
             while (chunk_yx[1]++ < world->width - 1) {
-                //printf("enter2 %d %d %d\n", chunk_yx[1], chunk_yx[0], world_iterator);
                 world->world[world_iterator][chunk_yx[0]][chunk_yx[1]] = world->chunk[chunk_yx[0]][chunk_yx[1]];
-                //printf("enter2end\n");
             }
             chunk_yx[1] = -1;
-            //printf("enter1end\n");
         }
         chunk_yx[0] = -1;
-
-        /*world->world[4][world_yx[0]][world_yx[1]++] = world->chunk[chunk_yx[0]][chunk_yx[1]++];
-        if (chunk_yx[1] >= world->width) {
-            printf("enter first if, %d %d\n", chunk_yx[0], world_yx[0]);
-            chunk_yx[1] = 0;
-
-
-            if (world_yx[1] >= (world->width * 3)) {
-                printf("enter if\n");
-				chunk_yx[0]++;
-				if (chunk_yx[0] >= world->height) {
-					printf("enter second if\n");
-					chunk_yx[0] = 0;
-				}
-                world_yx[0]++;
-                world_yx[1] = 0;
-                //exit(1);
-            }
-        }*/
     }
     int wi = 0;
     int y = -1;
@@ -134,7 +102,6 @@ static void world_copy_from_chunk(t_map *world)
 
     while (wi < 8) {
         while (y++ < world->height - 1) {
-            //printf("enter 2 %d %d %d\n", wi, x, y);
             while (x++ < world->width - 1)
                 printf("%c", world->world[wi][y][x]);
             if (tabnum++ < 2) {
@@ -151,21 +118,13 @@ static void world_copy_from_chunk(t_map *world)
         y = -1;
     }
     printf("close2\n");
-   /* while (y < (world->height * 3)) {
-        printf("%c", world->world[y][x++]);
-        if (x > ((world->width * 3) - 1)) {
-            x = 0;
-            y++;
-            printf("\n");
-        }
-    }*/
 }
 
 void	world_loader(t_core *core)
 {
 	world_copy_from_chunk(&core->maps[0]);
 
-	world_creator(&core->maps[1], core->sounds.ambiant, 32, 32, HARD, 0);
+	world_creator(&core->maps[1], core->sounds.ambiant, 32, 32, HARD, 0, false);
     world_generator(&core->maps[1]);
     world_copy_from_chunk(&core->maps[1]);
 }

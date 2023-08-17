@@ -12,6 +12,40 @@
 
 #include "../../includes/includes.h"
 
+/*static int	get_chunk_from_pos2(int x, int y, int m_height, int m_width, int val, t_dda *dda)
+{
+    int i;
+
+    i = 0;
+    //printf("start %d %d %d %d\n-------------------------\n", x, y, val, dda->ray);
+    if (y < m_height)
+    {
+        while (i++ < 4)
+        {
+            if (x < m_width * i)
+                return (i - 1);
+        }
+    }
+    else if (y < m_height * 2)
+    {
+        while (i++ < 4)
+        {
+            if (x < m_width * i)
+                return ((i - 1) + 3);
+        }
+    }
+    else
+    {
+        while (i++ < 4)
+        {
+            if (x < m_width * i)
+                return ((i - 1) + 6);
+        }
+    }
+    //printf("rien %d %d %d %d\n-------------------------\n", x, y, val, dda->ray);
+    return (4);
+}*/
+
 static void	jump_to_next(t_dda *dda, t_map *map, const float playerpos[2], bool val, int max)
 {
 	int	m_xy[2];
@@ -111,8 +145,8 @@ void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block **blocks)
 			dda.current_angle -= 6.28319f;
 		dda.cos = cosf(dda.current_angle);
 		dda.sin = sinf(dda.current_angle);
-		vertical_cast(&dda, player->player_pos_yx, map);
-		horizontal_cast(&dda, player->player_pos_yx, map);
+		vertical_cast(&dda, player->player_pos_xy, map);
+		horizontal_cast(&dda, player->player_pos_xy, map);
 		if (dda.dist_hv[1] < dda.dist_hv[0])
 		{
 			dda.r_xy[0] = dda.v_xy[0];

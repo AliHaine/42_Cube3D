@@ -50,8 +50,10 @@ void	world_loader(t_core *core);
 
 void	inputs(void *params);
 void	inputs_hook(struct mlx_key_data key, void *params);
-void	move_right_left(t_player *player, char **map, int direction);
-void	move_forward_backward(t_player *player, char **map, int direction);
+void	move_left(t_player *player);
+void	move_right(t_player *player);
+void	move_backward(t_player *player);
+void	move_forward(t_player *player);
 void	move_rotate(t_player *player, int direction, float speed);
 void	mouse_cursor(mlx_t *mlx, t_player *player, const int screen_size[2]);
 void	mouse(enum mouse_key, enum action, enum modifier_key, void *param);
@@ -109,6 +111,6 @@ void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_map *map, t_block **bloc
 void	map_struct_init(t_map *map);
 
 //world
-bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, Difficulty difficulty, const uint32_t bt_color[2]);
+bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, Difficulty difficulty, const uint32_t bt_color[2], bool is_active);
 
 #endif
