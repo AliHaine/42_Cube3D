@@ -84,7 +84,7 @@ void	display_item(t_core *core, t_slot *slot);
 void	crafting_engine(t_core *core);
 void	craft(t_core *core);
 
-void	set_char_at_forward(char c, t_player *player, char **map);
+void	set_char_at_forward(char c, t_player *player, t_map *map);
 
 //item//
 void    give_item(t_core *core, t_item *item, int slot_id, int number);

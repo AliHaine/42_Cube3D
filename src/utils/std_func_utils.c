@@ -121,3 +121,10 @@ bool	is_str_blank(const char *s)
 	}
 	return (true);
 }
+
+void	free_tab(char **tab, int size)
+{
+	while (size-- >= 0)
+		free(tab[size]);
+	free(tab);
+}
