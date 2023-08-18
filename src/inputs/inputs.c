@@ -51,10 +51,10 @@ static void moving_inputs(mlx_t *mlx, t_player *player, t_map *map)
     {
         if (get_forward_char(player, map) == '0')
             move_forward(player);
-		printf("coords x: %f, coords y:%f\n", player->player_coords_xy[0], player->player_coords_xy[1]);
-		printf("coords posx: %f, coords posy:%f\n", player->player_pos_xy[0], player->player_pos_xy[1]);
-		printf("cell x:%d, cell y: %d\n", player->player_cell_xy[0], player->player_cell_xy[1]);
-		printf("\n");
+//		printf("coords x: %f, coords y:%f\n", player->player_coords_xy[0], player->player_coords_xy[1]);
+//		printf("coords posx: %f, coords posy:%f\n", player->player_pos_xy[0], player->player_pos_xy[1]);
+//		printf("cell x:%d, cell y: %d\n", player->player_cell_xy[0], player->player_cell_xy[1]);
+//		printf("\n");
     }
 	else
 		player->is_moving = false;
