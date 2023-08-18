@@ -103,9 +103,6 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_map *map)
 				continue ;
 			else if (map->world[get_chunk_from_pos(case_x, case_y, map->height, map->width)][case_y % map->height][case_x % map->width] == '1')
 				mlx_put_pixel(imgs->img_map, px, py, wall_color);
-            //printf("%d %d\n", case_x, case_y);
-            if (case_x % map->width == (int)(playerpos[0] / 64) % map->width && case_y % map->height == (int)(playerpos[1] / 64) % map->height)
-                printf("%d\n", get_chunk_from_pos(case_x, case_y, map->height, map->width));
 		}
 	}
 }

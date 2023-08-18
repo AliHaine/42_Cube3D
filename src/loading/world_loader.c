@@ -95,29 +95,7 @@ static void world_copy_from_chunk(t_map *world)
         }
         chunk_yx[0] = -1;
     }
-    int wi = 0;
-    int y = -1;
-    int x = -1;
-    int tabnum = 0;
-
-    while (wi < 8) {
-        while (y++ < world->height - 1) {
-            while (x++ < world->width - 1)
-                printf("%c", world->world[wi][y][x]);
-            if (tabnum++ < 2) {
-                y -= 1;
-                wi++;
-            } else {
-                wi -= 2;
-                tabnum = 0;
-                printf("\n");
-            }
-            x = -1;
-        }
-        wi += 3;
-        y = -1;
-    }
-    printf("close2\n");
+	print_entire_world(world);
 }
 
 void	world_loader(t_core *core)
@@ -125,6 +103,6 @@ void	world_loader(t_core *core)
 	world_copy_from_chunk(&core->maps[0]);
 
 	world_creator(&core->maps[1], core->sounds.ambiant, 32, 32, HARD, 0, false);
-    world_generator(&core->maps[1]);
+	world_generator(&core->maps[1]);
     world_copy_from_chunk(&core->maps[1]);
 }

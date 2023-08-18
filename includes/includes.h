@@ -112,5 +112,6 @@ void	map_struct_init(t_map *map);
 
 //world
 bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, Difficulty difficulty, const uint32_t bt_color[2], bool is_active);
+void	chunk_generator(t_map *map, int chunk);
 
 #endif

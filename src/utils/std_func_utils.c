@@ -128,3 +128,16 @@ void	free_tab(char **tab, int size)
 		free(tab[size]);
 	free(tab);
 }
+
+void	copy_tab(char **tab_src, char **tab_dst, int height, int width)
+{
+	int	i;
+
+	i = width;
+	while (height-- > 0)
+	{
+		while (i-- > 0)
+			tab_dst[height][i] = tab_src[height][i];
+		i = width;
+	}
+}
