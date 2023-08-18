@@ -103,75 +103,69 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_map *map)
 				continue ;
 			else if (map->world[get_chunk_from_pos(case_x, case_y, map->height, map->width)][case_y % map->height][case_x % map->width] == '1')
 				mlx_put_pixel(imgs->img_map, px, py, wall_color);
-            //printf("%d %d\n", case_x, case_y);
-            if (case_x % map->width == (int)(playerpos[0] / 64) % map->width && case_y % map->height == (int)(playerpos[1] / 64) % map->height)
-                printf("%d\n", get_chunk_from_pos(case_x, case_y, map->height, map->width));
 		}
 	}
 }
 
-void ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_player *player)
+void	ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_player *player)
 {
-    float azimuth_angle = fmodf(dda->current_angle + 2 * M_PI, 2 * M_PI);
-    int skyboxTexX = (int)(azimuth_angle / (2 * M_PI) * (float)imgs->skybox->width) % (int)imgs->skybox->width;
+	int					skyboxTexX;
+	int					skyboxTexY;
+	int					value;
+	uint32_t			color;
+	static const float	vertical_offset = -89.f * SCREEN_HEIGHT;
 
-    // Calculate the vertical offset based on the player's pitch angle and the height of the screen
-    float vertical_offset = (1.0f - 90.f) * SCREEN_HEIGHT;
-
-    // Calculate the vertical scaling factor based on the aspect ratio of the skybox texture
-    float vertical_scale = (float)imgs->skybox->height / (float)imgs->skybox->width;
-
-    // Calculate the texture Y coordinate with perspective correction
-    int skyboxTexY = (int)((tcd->iterator - vertical_offset) * vertical_scale);
-
-    // Ensure the texture Y coordinate is within bounds
-    skyboxTexY = skyboxTexY >= 0 ? skyboxTexY % imgs->skybox->height : 0;
-
-    int value = (skyboxTexX + skyboxTexY * (int)imgs->skybox->width) * 4; // Modified this line
-    uint32_t color = get_rgb_color(imgs->skybox->pixels[value],
-                                   imgs->skybox->pixels[value + 1],
-                                   imgs->skybox->pixels[value + 2],
-                                   imgs->skybox->pixels[value + 3]);
-    mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, color);
+	skyboxTexX = (int)((fmodf(dda->current_angle + PI_2, PI_2))
+			/ PI_2 * (float)imgs->skybox->width) % (int)imgs->skybox->width;
+	skyboxTexY = (int)((tcd->iterator - vertical_offset)
+			* ((float)imgs->skybox->height / (float)imgs->skybox->width));
+	if (skyboxTexY <= 0)
+		skyboxTexY = 0;
+	else
+		skyboxTexY %= (int)imgs->skybox->height;
+	value = (skyboxTexX + skyboxTexY * (int)imgs->skybox->width) * 4;
+	color = get_rgb_color(imgs->skybox->pixels[value],
+			imgs->skybox->pixels[value + 1],
+			imgs->skybox->pixels[value + 2],
+			imgs->skybox->pixels[value + 3]);
+	mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, color);
 }
 
 
 
 void	floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player)
 {
-	float beta = fabsf(dda->current_angle - player->playerangle);
-    int r = tcd->iterator - (SCREEN_HEIGHT / 2);
-    float s = ((SCREEN_HEIGHT / 2) * 64) / (float) r;
-    float d = s / cosf(beta);
-    float fog_strength = d / FOG_DISTANCE;
-    if (fog_strength > 1)
-    	mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++,(0 << 24) | (0 << 16) | (0 << 8) | 255);
-    else
-    {
-		float floorPointX = player->player_pos_xy[0] + cosf(dda->current_angle) * d;
-        float floorPointY = player->player_pos_xy[1] + sinf(dda->current_angle) * d;
-        int floorTexX = (int) (floorPointX) % 64;
-        int floorTexY = (int) (floorPointY) % 64;
-        int value = (floorTexX + floorTexY * 64) * 4;
-        uint32_t color = get_rgb_color(imgs->floor_texture->pixels[value],
-        		imgs->floor_texture->pixels[value + 1],
-                imgs->floor_texture->pixels[value + 2],
-                imgs->floor_texture->pixels[value + 3]);
-        color = apply_fog(color, fog_strength);
-        mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++,color);
+	const float	s = (MID_HEIGHT * 64) / (tcd->iterator - MID_HEIGHT);
+	const float	d = (s / cosf(dda->current_angle - player->playerangle));
+	const float	fog_strength = d / FOG_DISTANCE;
+	int			value;
+	uint32_t	color;
+
+	if (fog_strength > 1)
+	{
+		mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++,
+			(0 << 24) | (0 << 16) | (0 << 8) | 255);
+		return ;
 	}
+	value = (((int)(player->player_pos_xy[0] + cosf(dda->current_angle)
+					* d) % 64)
+			+ ((int)(player->player_pos_xy[1] + sinf(dda->current_angle)
+					* d) % 64) * 64) * 4;
+	color = get_rgb_color(imgs->floor_texture->pixels[value],
+			imgs->floor_texture->pixels[value + 1],
+			imgs->floor_texture->pixels[value + 2],
+			imgs->floor_texture->pixels[value + 3]);
+	color = apply_fog(color, fog_strength);
+	mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, color);
 }
 
 void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block **blocks, t_player *player)
 {
-    t_col_drawing  tcd;
+	t_col_drawing	tcd;
 
 	setup_col_struct(&tcd, dda, map, blocks);
 	while (tcd.iterator < tcd.ceil_floor_lineH)
-    {
-        ceil_drawing(imgs, dda, &tcd, player);
-    }
-
+		ceil_drawing(imgs, dda, &tcd, player);
 	while (tcd.iterator < tcd.wall_lineH)
 		wall_drawing(imgs, dda, &tcd);
 	while (tcd.iterator < SCREEN_HEIGHT)
