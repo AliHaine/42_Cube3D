@@ -27,6 +27,7 @@ int		ft_atoi_for_texture(const char *s);
 char	*ft_itoa(int n);
 bool	is_str_blank(const char *s);
 void	free_tab(char **tab, int size);
+void	copy_tab(char **tab_src, char **tab_dst, int height, int width);
 
 //struct//
 
@@ -75,6 +76,10 @@ t_block *get_block_from_char(t_block **block, char block_char);
 bool    is_player_chunk_change(t_player *player, t_map *map);
 int	get_chunk_from_pos(int x, int y, int m_height, int m_width);
 int	get_active_world(t_map maps[2]);
-bool    world_dynamic_generator(t_map *map, int side);
+bool    world_dynamic_generator(t_map *map, t_player *player);
+
+//tester
+void print_entire_world(t_map *map);
+
 
 #endif

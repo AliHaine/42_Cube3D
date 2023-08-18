@@ -12,40 +12,6 @@
 
 #include "../../includes/includes.h"
 
-/*static int	get_chunk_from_pos2(int x, int y, int m_height, int m_width, int val, t_dda *dda)
-{
-    int i;
-
-    i = 0;
-    //printf("start %d %d %d %d\n-------------------------\n", x, y, val, dda->ray);
-    if (y < m_height)
-    {
-        while (i++ < 4)
-        {
-            if (x < m_width * i)
-                return (i - 1);
-        }
-    }
-    else if (y < m_height * 2)
-    {
-        while (i++ < 4)
-        {
-            if (x < m_width * i)
-                return ((i - 1) + 3);
-        }
-    }
-    else
-    {
-        while (i++ < 4)
-        {
-            if (x < m_width * i)
-                return ((i - 1) + 6);
-        }
-    }
-    //printf("rien %d %d %d %d\n-------------------------\n", x, y, val, dda->ray);
-    return (4);
-}*/
-
 static void	jump_to_next(t_dda *dda, t_map *map, const float playerpos[2], bool val, int max)
 {
 	int	m_xy[2];
@@ -55,6 +21,7 @@ static void	jump_to_next(t_dda *dda, t_map *map, const float playerpos[2], bool 
 		m_xy[0] = (int)dda->r_xy[0] / 64;
 		m_xy[1] = (int)dda->r_xy[1] / 64;
 		dda->chunk = get_chunk_from_pos(m_xy[0], m_xy[1], map->height, map->width);
+		//printf("%d %d %d\n", dda->chunk, m_xy[0], m_xy[1]);
 		if (m_xy[val] >= max || dda->r_xy[val] < 0 || map->world[dda->chunk][m_xy[1] % map->height][m_xy[0] % map->width] == ' ')
 			break ;
 		if (map->world[dda->chunk][m_xy[1] % map->height][m_xy[0] % map->width] != '0')

@@ -51,6 +51,10 @@ static void moving_inputs(mlx_t *mlx, t_player *player, t_map *map)
     {
         if (get_forward_char(player, map) == '0')
             move_forward(player);
+		printf("coords x: %f, coords y:%f\n", player->player_coords_xy[0], player->player_coords_xy[1]);
+		printf("coords posx: %f, coords posy:%f\n", player->player_pos_xy[0], player->player_pos_xy[1]);
+		printf("cell x:%d, cell y: %d\n", player->player_cell_xy[0], player->player_cell_xy[1]);
+		printf("\n");
     }
 	else
 		player->is_moving = false;
@@ -63,7 +67,7 @@ int	get_chunk_from_pos2(int x, int y, int m_height, int m_width)
 	int i;
 
 	i = 0;
-	//printf("start %d %d %d\n--------------------\n", y, x, m_height);
+	printf("start %d %d %d\n--------------------\n", y, x, m_height);
 	if (y < (m_height - 1))
 	{
 		printf("11\n");
@@ -75,7 +79,7 @@ int	get_chunk_from_pos2(int x, int y, int m_height, int m_width)
 	}
 	else if (y < m_height * 2)
 	{
-		//printf("22\n");
+		printf("22\n");
 		while (i++ < 4)
 		{
 			if (x < m_width * i)
@@ -84,7 +88,7 @@ int	get_chunk_from_pos2(int x, int y, int m_height, int m_width)
 	}
 	else
 	{
-		//printf("33\n");
+		printf("33\n");
 		while (i++ < 4)
 		{
 			if (x < m_width * i)
@@ -105,6 +109,8 @@ void	inputs(void *params)
 		mlx_close_window(core->mlx);
 	rotation_inputs(core->mlx, &core->player);
 	moving_inputs(core->mlx, &core->player, &core->maps[get_active_world(core->maps)]);
+    if (is_player_chunk_change(&core->player, &core->maps[get_active_world(core->maps)]))
+		world_dynamic_generator(&core->maps[0], &core->player);
 }
 
 void	inputs_hook(struct mlx_key_data key, void *params)
