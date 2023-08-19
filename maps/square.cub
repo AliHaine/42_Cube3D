@@ -1,6 +1,13 @@
-a
+EA assets/walls/blackstone.png
+SO assets/walls/budding_amethyst.png
+WE assets/walls/carved_pumpkin.png
+NO assets/walls/tlassere.png
 
-111111111111
-100000000001
-1000000W0001
-111111111111
+C 0,191,255
+F 32,139,34
+
+11011
+10W01
+1Z001
+10001
+11011

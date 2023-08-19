@@ -24,8 +24,14 @@ int	get_chunk_from_pos(int x, int y, int m_height, int m_width)
 		if (y < (m_height * (line + 1)))
 		{
 			while (cell++ < 3)
-				if (x < (m_width * (cell + 1)))
-						return (cell + (line * 3));
+				if (x < (m_width * (cell + 1))) {
+					if (cell + (line * 3) == 9) {
+						printf("error %d %d\n", cell, line);
+						return (cell + line);
+					}
+					//printf("cell %d line %d\n", cell, line);
+					return (cell + (line * 3));
+				}
 		}
 	}
 	return (0);
@@ -66,8 +72,8 @@ void	chunk_generator(t_map *map, int chunk)
 	y = 0;
 	x = 0;
 	while (y < map->height) {
-		while (x++ < map->width) {
-			//map->world[chunk][y][x++] = get_rand_num(2) + '0';
+		while (x < map->width) {
+			map->world[chunk][y][x++] = (char)get_rand_num(2) + '0';
 		}
 		x = 0;
 		y++;

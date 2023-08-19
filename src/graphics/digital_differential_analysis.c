@@ -16,23 +16,33 @@ static void	jump_to_next(t_dda *dda, t_map *map, const float playerpos[2], bool 
 {
 	int	m_xy[2];
 
+	//printf("enter\n");
 	while (1)
 	{
 		m_xy[0] = (int)dda->r_xy[0] / 64;
 		m_xy[1] = (int)dda->r_xy[1] / 64;
-		dda->chunk = get_chunk_from_pos(m_xy[0], m_xy[1], map->height, map->width);
-		//printf("%d %d %d\n", dda->chunk, m_xy[0], m_xy[1]);
-		if (m_xy[val] >= max || dda->r_xy[val] < 0 || map->world[dda->chunk][m_xy[1] % map->height][m_xy[0] % map->width] == ' ')
-			break ;
-		if (map->world[dda->chunk][m_xy[1] % map->height][m_xy[0] % map->width] != '0')
+        dda->chunk_hv[val] = get_chunk_from_pos(m_xy[0], m_xy[1], map->height, map->width);
+		//if (dda->ray == 0)
+			//printf("chunk %d x %d y %d val %d %f %f %f %f\n", dda->chunk_hv[val], m_xy[0], m_xy[1], val, dda->o_xy[0], dda->o_xy[1], playerpos[0], playerpos[1]);
+		if (dda->chunk_hv[val] == 9) {
+            dda->chunk_hv[val] = 0;
+		}
+		if (m_xy[val] >= max || dda->r_xy[0] < 0 || dda->r_xy[1] < 0 || map->world[dda->chunk_hv[val]][m_xy[1] % map->height][m_xy[0] % map->width] == ' ') {
+			//printf("break\n");
+			break;
+		}
+		if (map->world[dda->chunk_hv[val]][m_xy[1] % map->height][m_xy[0] % map->width] != '0')
 		{
 			dda->dist_hv[val] = dda->cos * (dda->r_xy[0] - playerpos[0])
 					- -dda->sin * (dda->r_xy[1] - playerpos[1]);
+			//if (dda->ray == 0)
+				//printf("chunk %d x %d y %d val %d %f %f %f %f %d %f %d\n", dda->chunk_hv[val], m_xy[0], m_xy[1], val, dda->o_xy[0], dda->o_xy[1], playerpos[0]/64, playerpos[1]/64, dda->hit_direction[0], dda->current_angle, dda->ray);
 			break ;
 		}
 		dda->r_xy[0] += dda->o_xy[0];
 		dda->r_xy[1] += dda->o_xy[1];
 	}
+    //printf("end\n");
 }
 
 static void	horizontal_cast(t_dda *dda, float playerpos[2],t_map *map)
@@ -105,6 +115,7 @@ void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block **blocks)
 		dda.dist_hv[0] = 100000;
 		dda.dist_hv[1] = 100000;
         dda.hit_hv = 0;
+		dda.wall_height = 0;
 		dda.current_angle = start_angle + (dda.ray * DIST_BETWEEN_RAY);
 		if (dda.current_angle < 0)
 			dda.current_angle += 6.28319f;
@@ -120,11 +131,15 @@ void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block **blocks)
 			dda.r_xy[1] = dda.v_xy[1];
 			dda.dist_hv[0] = dda.dist_hv[1];
 			dda.hit_hv = 1;
-		}
+            dda.chunk_hv[0] = dda.chunk_hv[1];
+        }
 		fisheyes_fixor(&dda, player->playerangle);
-		dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[0];
-		if (dda.dist_hv[0] > dda.dist_hv[1])
-			dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[1];
+		if (dda.dist_hv[0] < 10000)
+		{
+			if (dda.dist_hv[0] > dda.dist_hv[1])
+				dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[1];
+			dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[0];
+		}
 		columns_drawing(imgs, &dda, map, blocks, player);
 	}
 }
