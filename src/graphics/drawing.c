@@ -77,6 +77,7 @@ static void wall_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd)
 	tcd->current_step += tcd->step;
 }
 
+//todo bug with size width
 void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_map *map)
 {
 	const int start_y = ((playerpos[1] + map->height) / 4) - (286 / 2);
@@ -167,8 +168,11 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block **blocks, t_p
 	t_col_drawing	tcd;
 
 	setup_col_struct(&tcd, dda, map, blocks);
-	while (tcd.iterator < tcd.ceil_floor_lineH)
+	while (tcd.iterator < SCREEN_HEIGHT)
 		ceil_drawing(imgs, dda, &tcd, player);
+	tcd.iterator = 0;
+	if (tcd.ceil_floor_lineH > 0)
+		tcd.iterator = tcd.ceil_floor_lineH;
 	while (tcd.iterator < tcd.wall_lineH)
 		wall_drawing(imgs, dda, &tcd);
 	while (tcd.iterator < SCREEN_HEIGHT)

@@ -13,7 +13,7 @@ static bool	set_map_size_value(t_file *file, t_map *map)
 		get_next_line(file);
 		map->height++;
 	}
-	if (map->width <= 2 || map->height <= 1 || map->width > 84 || map->height > 30)
+	if (map->width <= 2 || map->height <= 1 || map->width > 60 || map->height > 30)
 		return (false);
 	return (true);
 }

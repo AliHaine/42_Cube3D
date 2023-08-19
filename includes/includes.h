@@ -83,6 +83,7 @@ void	inventory_hook(void *params);
 void	display_item(t_core *core, t_slot *slot);
 void	crafting_engine(t_core *core);
 void	craft(t_core *core);
+void	set_player(int x, int y, t_player *player, t_map *map, float angle);
 
 void	set_char_at_forward(char c, t_player *player, t_map *map);
 
@@ -113,5 +114,8 @@ void	map_struct_init(t_map *map);
 //world
 bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, Difficulty difficulty, const uint32_t bt_color[2], bool is_active);
 void	chunk_generator(t_map *map, int chunk);
+
+//portal
+void	portal_listener(t_player *player, t_map maps[2], t_sounds *sounds);
 
 #endif

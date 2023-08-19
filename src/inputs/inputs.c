@@ -61,7 +61,7 @@ static void moving_inputs(mlx_t *mlx, t_player *player, t_map *map)
     }
 	else if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_UP))
     {
-        if (get_forward_char(player, map) == '0')
+        if (get_forward_char(player, map) == '0' || get_forward_char(player, map) == 'Z')
             move_forward(player);
 		printf("coords x: %f, coords y:%f\n", player->player_coords_xy[0], player->player_coords_xy[1]);
 		printf("coords posx: %f, coords posy:%f\n", player->player_pos_xy[0], player->player_pos_xy[1]);
@@ -85,18 +85,23 @@ void	inputs(void *params)
 	rotation_inputs(core->mlx, &core->player);
 	moving_inputs(core->mlx, &core->player, &core->maps[get_active_world(core->maps)]);
     if (is_player_chunk_change(&core->player, &core->maps[get_active_world(core->maps)]))
-		world_dynamic_generator(&core->maps[0], &core->player);
+		world_dynamic_generator(&core->maps[get_active_world(core->maps)], &core->player);
 }
 
+//todo
 void	inputs_hook(struct mlx_key_data key, void *params)
 {
 	t_core	*core;
 
 	core = (t_core *)params;
-	if (key.key == 340 && key.action == 1)
-			core->player.move_speed = MOVE_SPEED * 2;
-	else if (key.key == 340 && key.action == 0)
+	if (key.key == 340 && key.action == 1) {
+		core->player.is_running = true;
+		core->player.move_speed = MOVE_SPEED * 2;
+	}
+	else if (key.key == 340 && key.action == 0) {
+		core->player.is_running = false;
 		core->player.move_speed = MOVE_SPEED;
+	}
     if (key.key == 69 && key.action == 0)
         inventory(core);
 }

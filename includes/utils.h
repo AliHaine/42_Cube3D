@@ -28,6 +28,7 @@ char	*ft_itoa(int n);
 bool	is_str_blank(const char *s);
 void	free_tab(char **tab, int size);
 void	copy_tab(char **tab_src, char **tab_dst, int height, int width);
+bool	is_value_beetween(int value, int beet, int target);
 
 //struct//
 

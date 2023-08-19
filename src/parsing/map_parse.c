@@ -1,16 +1,5 @@
 #include "../../includes/includes.h"
 
-static void	set_player(int x, int y, t_player *player, t_map *map)
-{
-	player->player_pos_xy[0] = ((x + map->width) * 64) + 32;
-	player->player_pos_xy[1] = ((y + map->height) * 64) + 32;
-	player->player_cell_xy[0] = x;
-	player->player_cell_xy[0] = y;
-	player->player_coords_xy[0] = (y  * 64) + 32;
-	player->player_coords_xy[1] = (x  * 64) + 32;
-	player->playerangle = 0;
-}
-
 //todo
 static bool	fill_map_tab(char *line, char *tab, t_player *player, t_map *map, int iterator)
 {
@@ -24,7 +13,7 @@ static bool	fill_map_tab(char *line, char *tab, t_player *player, t_map *map, in
 		if (is_player_char(line[i]))
 		{
 			player->have_player = true;
-			set_player(i, iterator, player, map);
+			set_player(i, iterator, player, map, 0);
 			tab[i] = '0';
 		}
 		else
@@ -44,8 +33,6 @@ bool	parse_main(t_file *file, t_player *player, t_map *map)
 	iterator = 0;
 	while (iterator < map->height)
 	{
-		//map->chunk[iterator] = malloc(sizeof(char) * (map->width + 1));
-
 		if (!fill_map_tab(file->line, map->chunk[iterator], player, map, iterator))
 		{
 			msg_write(2, 2, ERROR_MAP_CHAR);

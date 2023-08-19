@@ -16,7 +16,6 @@ static void	jump_to_next(t_dda *dda, t_map *map, const float playerpos[2], bool 
 {
 	int	m_xy[2];
 
-	//printf("enter\n");
 	while (1)
 	{
 		m_xy[0] = (int)dda->r_xy[0] / 64;
@@ -27,22 +26,17 @@ static void	jump_to_next(t_dda *dda, t_map *map, const float playerpos[2], bool 
 		if (dda->chunk_hv[val] == 9) {
             dda->chunk_hv[val] = 0;
 		}
-		if (m_xy[val] >= max || dda->r_xy[0] < 0 || dda->r_xy[1] < 0 || map->world[dda->chunk_hv[val]][m_xy[1] % map->height][m_xy[0] % map->width] == ' ') {
-			//printf("break\n");
+		if (m_xy[val] >= max || dda->r_xy[0] < 0 || dda->r_xy[1] < 0 || map->world[dda->chunk_hv[val]][m_xy[1] % map->height][m_xy[0] % map->width] == ' ')
 			break;
-		}
 		if (map->world[dda->chunk_hv[val]][m_xy[1] % map->height][m_xy[0] % map->width] != '0')
 		{
 			dda->dist_hv[val] = dda->cos * (dda->r_xy[0] - playerpos[0])
 					- -dda->sin * (dda->r_xy[1] - playerpos[1]);
-			//if (dda->ray == 0)
-				//printf("chunk %d x %d y %d val %d %f %f %f %f %d %f %d\n", dda->chunk_hv[val], m_xy[0], m_xy[1], val, dda->o_xy[0], dda->o_xy[1], playerpos[0]/64, playerpos[1]/64, dda->hit_direction[0], dda->current_angle, dda->ray);
 			break ;
 		}
 		dda->r_xy[0] += dda->o_xy[0];
 		dda->r_xy[1] += dda->o_xy[1];
 	}
-    //printf("end\n");
 }
 
 static void	horizontal_cast(t_dda *dda, float playerpos[2],t_map *map)
@@ -133,6 +127,9 @@ void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block **blocks)
 			dda.hit_hv = 1;
             dda.chunk_hv[0] = dda.chunk_hv[1];
         }
+		//if (!is_value_beetween(player->player_cell_xy[0] % map->width, 16, (int)dda.r_xy[0] / 64 % map->width)
+		//	|| !is_value_beetween(player->player_cell_xy[1] % map->height, 16, (int)dda.r_xy[1] / 64 % map->height))
+		//	dda.dist_hv[0] = 10000;
 		fisheyes_fixor(&dda, player->playerangle);
 		if (dda.dist_hv[0] < 10000)
 		{
