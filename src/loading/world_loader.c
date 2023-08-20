@@ -37,6 +37,7 @@ bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, co
     int i;
 
     i = 0;
+    map->biome = 0;
 	map->abiant_sound = anbiant_sound;
 	map->height = height;
 	map->width = width;
@@ -100,20 +101,41 @@ static void world_copy_from_chunk(t_map *world)
 	print_entire_world(world);
 }
 
-static void	biome_creator(int block_number, ...)
+static t_biome **world_get_biomes(int biome_number, ...)
 {
+    t_biome **biomes;
+    va_list va_biomes;
 
+    va_start(va_biomes, biome_number);
+    biomes = malloc(sizeof(t_biome *) * (biome_number + 1));
+    biomes[biome_number] = 0;
+    while (biome_number-- > 0)
+        biomes[biome_number] = va_arg(va_biomes, t_biome *);
+    va_end(va_biomes);
+    return (biomes);
+}
 
+static t_biome biome_creator(int block_number, ...)
+{
+    t_biome biome;
+    va_list va_biome;
+
+    va_start(va_biome, block_number);
+    biome.block = malloc(sizeof(t_block) * block_number + 1);
+    biome.block_number = block_number;
+    while (block_number-- > 0)
+        biome.block[block_number] = va_arg(va_biome, t_block);
+    va_end(va_biome);
+    return (biome);
 }
 
 
 void	world_loader(t_core *core)
 {
-	biome_creator(5, 1, 1, 1);
-
+	core->biome[1] = biome_creator(6, *core->blocks[NETHERRACK], *core->blocks[NETHER_WART_BLOCK], *core->blocks[OBSIDIAN], *core->blocks[CRYING_OBSIDIAN], *core->blocks[CRACKED_DEEPSLAT_TILES], *core->blocks[DEEPSLATE_COAL_ORE]);
 	world_copy_from_chunk(&core->maps[0]);
-
-	world_creator(&core->maps[1], core->sounds.ambiant, 32, 32, 0, core->imgs.skybox, core->blocks[NETHERRACK]->image, HARD, false);
-	world_generator(&core->maps[1]);
+	world_creator(&core->maps[1], core->sounds.ambiant, 32, 32, 0, core->imgs.skybox_nether, core->blocks[NETHERRACK]->image, HARD, false);
+    core->maps[1].biome = world_get_biomes(1, &core->biome[1]);
+    world_generator(&core->maps[1]);
     world_copy_from_chunk(&core->maps[1]);
 }

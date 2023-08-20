@@ -65,10 +65,11 @@ void	block_loader(t_core *core)
 {
 	create_block(&core->blocks[0], PORTAL, 0, 1, core->mlx, 'Z', false);
 	create_block_animation(core->blocks[0], 14, core->mlx);
-
 	create_block(&core->blocks[1], NETHERRACK, 0, 1, core->mlx, 'R', true);
-
 	create_block(&core->blocks[2], OBSIDIAN, 0, 2, core->mlx, 'O', true);
-
-	core->blocks[3] = 0;
+    create_block(&core->blocks[3], CRYING_OBSIDIAN, 0, 2, core->mlx, 'L', true);
+    create_block(&core->blocks[4], CRACKED_DEEPSLAT_TILES, 0, 2, core->mlx, 'P', true);
+    create_block(&core->blocks[5], DEEPSLATE_COAL_ORE, 0, 2, core->mlx, 'I', true);
+    create_block(&core->blocks[6], NETHER_WART_BLOCK, 0, 2, core->mlx, 'Y', true);
+	core->blocks[7] = 0;
 }

@@ -101,7 +101,7 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_map *map)
 				continue ;
             else if (case_y < 0 || case_x < 0 || case_y > (map->height * 3) - 1 || case_x > (map->width * 3) - 1)
                 mlx_put_pixel(imgs->img_map, px, py, wall_color);
-			else if (map->world[get_chunk_from_pos(case_x, case_y, map->height, map->width)][case_y % map->height][case_x % map->width] == '1')
+			else if (map->world[get_chunk_from_pos(case_x, case_y, map->height, map->width)][case_y % map->height][case_x % map->width] != '0')
 				mlx_put_pixel(imgs->img_map, px, py, wall_color);
 		}
 	}
@@ -115,7 +115,6 @@ void	ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_map *map)
 	uint32_t			color;
 	static const float	vertical_offset = -89.f * SCREEN_HEIGHT;
 
-	//printf("%d\n", map->bt_color[1]);
 	if (map->bt_color[1] > 0)
 	{
 		mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, map->bt_color[1]);
@@ -186,6 +185,6 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block **blocks, t_p
 		tcd.iterator = tcd.ceil_floor_lineH;
 	while (tcd.iterator < tcd.wall_lineH)
 		wall_drawing(imgs, dda, &tcd);
-	while (tcd.iterator < SCREEN_HEIGHT)
+    while (tcd.iterator < SCREEN_HEIGHT)
 		floor_drawing(imgs, dda, &tcd, player, map);
 }

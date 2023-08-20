@@ -21,8 +21,8 @@ static void	jump_to_next(t_dda *dda, t_map *map, const float playerpos[2], bool 
 		m_xy[0] = (int)dda->r_xy[0] / 64;
 		m_xy[1] = (int)dda->r_xy[1] / 64;
         dda->chunk_hv[val] = get_chunk_from_pos(m_xy[0], m_xy[1], map->height, map->width);
-		if (m_xy[val] >= max || dda->r_xy[0] < 0 || dda->r_xy[1] < 0 || map->world[dda->chunk_hv[val]][m_xy[1] % map->height][m_xy[0] % map->width] == ' ')
-			break;
+        if (m_xy[0] >= (map->width * 3) || m_xy[1] >= (map->height * 3) || dda->r_xy[0] < 0 || dda->r_xy[1] < 0 || map->world[dda->chunk_hv[val]][m_xy[1] % map->height][m_xy[0] % map->width] == ' ')
+            break;
 		if (map->world[dda->chunk_hv[val]][m_xy[1] % map->height][m_xy[0] % map->width] != '0')
 		{
 			dda->dist_hv[val] = dda->cos * (dda->r_xy[0] - playerpos[0])
@@ -113,8 +113,8 @@ void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block **blocks)
 		dda.cos = cosf(dda.current_angle);
 		dda.sin = sinf(dda.current_angle);
 		vertical_cast(&dda, player->player_pos_xy, map);
-		horizontal_cast(&dda, player->player_pos_xy, map);
-		if (dda.dist_hv[1] < dda.dist_hv[0])
+        horizontal_cast(&dda, player->player_pos_xy, map);
+        if (dda.dist_hv[1] < dda.dist_hv[0])
 		{
 			dda.r_xy[0] = dda.v_xy[0];
 			dda.r_xy[1] = dda.v_xy[1];

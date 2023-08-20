@@ -20,9 +20,8 @@ int	get_chunk_from_pos(int x, int y, int m_height, int m_width)
 	cell = -1;
 	line = -1;
 
-	if (y > (m_height * 3) || x > (m_width * 3)) {
-		//return (-1);
-	}
+	if (y > (m_height * 3) || x > (m_width * 3))
+		return (-1);
 	while (line++ < 2)
 	{
 		if (y < (m_height * (line + 1)))
@@ -33,7 +32,6 @@ int	get_chunk_from_pos(int x, int y, int m_height, int m_width)
 						printf("error %d %d %d %d\n", x, y, cell, line);
 						return (cell + line);
 					}
-					//printf("cell %d line %d\n", cell, line);
 					return (cell + (line * 3));
 				}
 		}
@@ -72,12 +70,22 @@ void	chunk_generator(t_map *map, int chunk)
 {
 	int y;
 	int x;
+    t_biome *biome;
 
 	y = 0;
 	x = 0;
+    biome = get_random_biome(map->biome);
 	while (y < map->height) {
 		while (x < map->width) {
-			map->world[chunk][y][x++] = (char)get_rand_num(2) + '0';
+            map->world[chunk][y][x] = '0';
+            if (get_rand_num(4) ==0)
+            {
+                if (biome != NULL)
+                    map->world[chunk][y][x] = get_random_block_from_biome(biome).block_char;
+                else
+                    map->world[chunk][y][x] = '1';
+            }
+			x++;
 		}
 		x = 0;
 		y++;

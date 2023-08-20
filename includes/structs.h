@@ -33,18 +33,14 @@ typedef struct s_imgs
 	mlx_image_t 	*invbar_selector;
 	mlx_image_t 	*engbar;
     mlx_image_t 	*hearth[2];
-	mlx_image_t 	*sword_nether[5];
-	mlx_image_t 	*hand[9];
 	mlx_image_t		*map_background;
-	mlx_image_t		*icon_sword_nether;
 	mlx_image_t		*inventory_gui;
 	mlx_image_t   *floor_texture;
 	mlx_image_t   *skybox;
+    mlx_image_t   *skybox_nether;
 	mlx_texture_t	*map_texture;
-    mlx_texture_t	*enemy;
 	mlx_texture_t	*trans;
 	mlx_texture_t	*wall_texture[4];
-	mlx_texture_t	*nether_portal[15];
 	mlx_texture_t	*inventory_gui_texture;
 	mlx_texture_t	*cursor;
 	mlx_texture_t	*img_player_texture;
@@ -121,7 +117,7 @@ typedef struct s_map
 {
 	char ***world;
 	char **chunk;
-	t_biome	*biome;
+	t_biome	**biome;
 	uint32_t abiant_sound;
 	int height;
 	int width;
@@ -185,7 +181,8 @@ typedef struct s_core
 	t_sounds		sounds;
 	t_item			items[11];
 	t_animation 	animations[11];
-	t_block			*blocks[4];
+	t_block			*blocks[8];
+    t_biome         biome[2];
 	t_map 			maps[2];
     int             screen_size[2];
 }	t_core;
