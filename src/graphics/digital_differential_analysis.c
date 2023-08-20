@@ -122,9 +122,6 @@ void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block **blocks)
 			dda.hit_hv = 1;
             dda.chunk_hv[0] = dda.chunk_hv[1];
         }
-		//if (!is_value_beetween(player->player_cell_xy[0] % map->width, 16, (int)dda.r_xy[0] / 64 % map->width)
-		//	|| !is_value_beetween(player->player_cell_xy[1] % map->height, 16, (int)dda.r_xy[1] / 64 % map->height))
-		//	dda.dist_hv[0] = 10000;
 		fisheyes_fixor(&dda, player->playerangle);
 		if (dda.dist_hv[0] < 10000)
 		{

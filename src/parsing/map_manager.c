@@ -5,6 +5,8 @@ static bool	set_map_size_value(t_file *file, t_map *map)
 {
 	int		current_line_size;
 
+	map->width = 0;
+	map->height = 0;
 	while (file->line && !is_str_blank(file->line))
 	{
 		current_line_size = ft_strlen(file->line);
@@ -38,12 +40,11 @@ void	map_manager(char *map_name, t_map *map, t_imgs *imgs, t_player *player)
 	msg_write(2, -1, CHECK_MAP);
 	usleep(500000 * LOAD);
 	basical_map_check(&map_name);
-	map_struct_init(map);
 	open_file(&file, map_name, O_RDONLY);
 	msg_write(1, -1, NO_ERROR);
 	texture_main(&file, imgs, map);
 	save = file.line_num;
 	map_value_init(map, &file, save);
-    world_creator(map, 0, map->height, map->width, EASY, 0, true);
+    world_creator(map, 0, map->height, map->width, 0, imgs->skybox, imgs->floor_texture, EASY, true);
 	parse_main(&file, player, map);
 }

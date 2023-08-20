@@ -108,10 +108,8 @@ t_slot	*get_first_slot(t_slot *slot);
 
 void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_map *map, t_block **blocks);
 
-void	map_struct_init(t_map *map);
-
 //world
-bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, Difficulty difficulty, const uint32_t bt_color[2], bool is_active);
+bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active);
 void	chunk_generator(t_map *map, int chunk);
 
 //portal

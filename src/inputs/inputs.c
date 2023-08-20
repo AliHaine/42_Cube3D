@@ -61,7 +61,7 @@ static void moving_inputs(mlx_t *mlx, t_player *player, t_map *map)
     }
 	else if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_UP))
     {
-        if (get_forward_char(player, map) == '0' || get_forward_char(player, map) == 'Z')
+       // if (get_forward_char(player, map) == '0' || get_forward_char(player, map) == 'Z')
             move_forward(player);
 		printf("coords x: %f, coords y:%f\n", player->player_coords_xy[0], player->player_coords_xy[1]);
 		printf("coords posx: %f, coords posy:%f\n", player->player_pos_xy[0], player->player_pos_xy[1]);

@@ -36,8 +36,6 @@ static void	core_init(t_core *core)
 	sound_loader(&core->sounds);
 	imgs_init(core->mlx, &core->imgs);
 	sound_loader(&core->sounds);
-    set_texture_from_path("assets/grass.png", &core->imgs.floor_texture);
-    set_texture_from_path("assets/skybox.png", &core->imgs.skybox);
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
 	mlx_set_cursor(core->mlx, mlx_create_cursor(core->imgs.trans));

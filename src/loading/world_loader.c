@@ -32,16 +32,18 @@ static bool world_malloc(int height, int width, char ***map)
 	return (true);
 }
 
-bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, Difficulty difficulty, const uint32_t bt_color[2], bool is_active)
+bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active)
 {
     int i;
 
     i = 0;
+	map->abiant_sound = anbiant_sound;
 	map->height = height;
 	map->width = width;
-	map->abiant_sound = anbiant_sound;
     map->bt_color[0] = 0;
 	map->bt_color[1] = 0;
+	map->ceil = ceil;
+	map->floor = floor;
 	map->difficulty = difficulty;
     map->world = malloc(sizeof(char **) * 9);
 	map->is_active = is_active;
@@ -98,11 +100,20 @@ static void world_copy_from_chunk(t_map *world)
 	print_entire_world(world);
 }
 
+static void	biome_creator(int block_number, ...)
+{
+
+
+}
+
+
 void	world_loader(t_core *core)
 {
+	biome_creator(5, 1, 1, 1);
+
 	world_copy_from_chunk(&core->maps[0]);
 
-	world_creator(&core->maps[1], core->sounds.ambiant, 32, 32, HARD, 0, false);
+	world_creator(&core->maps[1], core->sounds.ambiant, 32, 32, 0, core->imgs.skybox, core->blocks[NETHERRACK]->image, HARD, false);
 	world_generator(&core->maps[1]);
     world_copy_from_chunk(&core->maps[1]);
 }

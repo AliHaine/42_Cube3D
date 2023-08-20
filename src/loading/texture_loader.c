@@ -22,9 +22,10 @@ static void	other_loader(mlx_t *mlx, t_imgs *imgs)
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/guis/engbar.png", &imgs->engbar))
 		msg_write(2, 2, ERROR_FATAL);
-	/*if (!set_texture_from_path("assets/door.png", &imgs->door_texture))
-		msg_write(2, 2, ERROR_FATAL);*/
-	if (!set_texture_from_path("assets/grass.png", &imgs->grass_texture))
+
+	if (!set_image_from_path(mlx, "assets/grass.png", &imgs->floor_texture))
+		msg_write(2, 2, ERROR_FATAL);
+	if (!set_image_from_path(mlx, "assets/skybox.png", &imgs->skybox))
 		msg_write(2, 2, ERROR_FATAL);
     if (!set_texture_from_path("assets/guis/inventory_gui2.png", &imgs->inventory_gui_texture))
         msg_write(2, 2, ERROR_FATAL);

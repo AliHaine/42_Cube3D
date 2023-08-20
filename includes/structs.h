@@ -38,15 +38,13 @@ typedef struct s_imgs
 	mlx_image_t		*map_background;
 	mlx_image_t		*icon_sword_nether;
 	mlx_image_t		*inventory_gui;
+	mlx_image_t   *floor_texture;
+	mlx_image_t   *skybox;
 	mlx_texture_t	*map_texture;
     mlx_texture_t	*enemy;
 	mlx_texture_t	*trans;
 	mlx_texture_t	*wall_texture[4];
 	mlx_texture_t	*nether_portal[15];
-    mlx_texture_t   *floor_texture;
-	mlx_texture_t	*door_texture;
-    mlx_texture_t   *skybox;
-	mlx_texture_t	*grass_texture;
 	mlx_texture_t	*inventory_gui_texture;
 	mlx_texture_t	*cursor;
 	mlx_texture_t	*img_player_texture;
@@ -111,14 +109,25 @@ typedef struct s_block
 	bool			is_rigid;
 }	t_block;
 
+typedef struct s_biome
+{
+	Biome name;
+	t_block *block;
+	int	block_number;
+}	t_biome;
+
+
 typedef struct s_map
 {
 	char ***world;
 	char **chunk;
+	t_biome	*biome;
 	uint32_t abiant_sound;
 	int height;
 	int width;
 	uint32_t	bt_color[2];
+	mlx_image_t 	*ceil;
+	mlx_image_t 	*floor;
 	Difficulty difficulty;
 	bool		is_active;
 }	t_map;
