@@ -12,7 +12,7 @@
 
 #include "../../includes/includes.h"
 
-static void create_block(t_block **block, Block block_name, t_item *item, int strength, mlx_t *mlx, char block_char)
+static void create_block(t_block **block, Block block_name, t_item *item, int strength, mlx_t *mlx, char block_char, bool is_rigid)
 {
 	char *path;
 
@@ -21,6 +21,7 @@ static void create_block(t_block **block, Block block_name, t_item *item, int st
 	(*block)->item = item;
 	(*block)->strength = strength;
 	(*block)->block_char = block_char;
+	(*block)->is_rigid = is_rigid;
 	path = malloc(sizeof(char) * (ft_strlen(BlockName[block_name]) + 19));
 	put_two_string(path, "assets/blocks/", BlockName[block_name], 0);
 	if (!set_image_from_path(mlx, path, &(*block)->image))
@@ -62,12 +63,12 @@ static void create_block_animation(t_block *block, int anim_size, mlx_t *mlx)
 
 void	block_loader(t_core *core)
 {
-	create_block(&core->blocks[0], PORTAL, 0, 1, core->mlx, 'Z');
+	create_block(&core->blocks[0], PORTAL, 0, 1, core->mlx, 'Z', false);
 	create_block_animation(core->blocks[0], 14, core->mlx);
 
-	create_block(&core->blocks[1], NETHERRACK, 0, 1, core->mlx, 'R');
+	create_block(&core->blocks[1], NETHERRACK, 0, 1, core->mlx, 'R', true);
 
-	create_block(&core->blocks[2], OBSIDIAN, 0, 2, core->mlx, 'O');
+	create_block(&core->blocks[2], OBSIDIAN, 0, 2, core->mlx, 'O', true);
 
 	core->blocks[3] = 0;
 }

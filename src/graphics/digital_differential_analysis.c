@@ -21,11 +21,6 @@ static void	jump_to_next(t_dda *dda, t_map *map, const float playerpos[2], bool 
 		m_xy[0] = (int)dda->r_xy[0] / 64;
 		m_xy[1] = (int)dda->r_xy[1] / 64;
         dda->chunk_hv[val] = get_chunk_from_pos(m_xy[0], m_xy[1], map->height, map->width);
-		//if (dda->ray == 0)
-			//printf("chunk %d x %d y %d val %d %f %f %f %f\n", dda->chunk_hv[val], m_xy[0], m_xy[1], val, dda->o_xy[0], dda->o_xy[1], playerpos[0], playerpos[1]);
-		if (dda->chunk_hv[val] == 9) {
-            dda->chunk_hv[val] = 0;
-		}
 		if (m_xy[val] >= max || dda->r_xy[0] < 0 || dda->r_xy[1] < 0 || map->world[dda->chunk_hv[val]][m_xy[1] % map->height][m_xy[0] % map->width] == ' ')
 			break;
 		if (map->world[dda->chunk_hv[val]][m_xy[1] % map->height][m_xy[0] % map->width] != '0')

@@ -83,7 +83,6 @@ void	inventory_hook(void *params);
 void	display_item(t_core *core, t_slot *slot);
 void	crafting_engine(t_core *core);
 void	craft(t_core *core);
-void	set_player(int x, int y, t_player *player, t_map *map, float angle);
 
 void	set_char_at_forward(char c, t_player *player, t_map *map);
 

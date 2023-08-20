@@ -1,10 +1,10 @@
 +- DDA raycasting
 +- Craft
 - NPC
-- Multi-world (normal, and nether)
++- Multi-world (normal, and nether)
 - Nether portal
 - enemy
-- sky and floor texture
++- sky and floor texture
 +- Multiple Difficulty
 +- Sprint (Shift)
 +- Item concept
@@ -13,6 +13,7 @@
 +- Sound
 +- Fog Distance
 - Un chat
++- Infinite world
 
 Parsing:
     +- Work even no args

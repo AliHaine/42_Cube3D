@@ -79,6 +79,9 @@ int	get_chunk_from_pos(int x, int y, int m_height, int m_width);
 int	get_active_world(t_map maps[2]);
 bool    world_dynamic_generator(t_map *map, t_player *player);
 
+//player_utils
+void	set_player(int x, int y, t_player *player, t_map *map, float angle);
+
 //tester
 void print_entire_world(t_map *map);
 

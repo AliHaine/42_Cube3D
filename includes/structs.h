@@ -108,6 +108,7 @@ typedef struct s_block
 	int				strength;
 	t_animation 	animation;
 	mlx_image_t		*image;
+	bool			is_rigid;
 }	t_block;
 
 typedef struct s_map
