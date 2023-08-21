@@ -150,7 +150,7 @@ void	floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player
 		return;
 	}
 	const float	s = (MID_HEIGHT * 64) / (tcd->iterator - MID_HEIGHT);
-	const float	d = (s / cosf(dda->current_angle - player->playerangle));
+	const float	d = (s / tcd->floor_d);
 	const float	fog_strength = d / FOG_DISTANCE;
 	int			value;
 	uint32_t	color;
@@ -161,9 +161,9 @@ void	floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player
 			(0 << 24) | (0 << 16) | (0 << 8) | 255);
 		return ;
 	}
-	value = (((int)(player->player_pos_xy[0] + cosf(dda->current_angle)
+	value = (((int)(player->player_pos_xy[0] + dda->cos
 					* d) % 64)
-			+ ((int)(player->player_pos_xy[1] + sinf(dda->current_angle)
+			+ ((int)(player->player_pos_xy[1] + dda->sin
 					* d) % 64) * 64) * 4;
 	color = get_rgb_color(map->floor->pixels[value],
 			map->floor->pixels[value + 1],
@@ -178,6 +178,7 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block **blocks, t_p
 	t_col_drawing	tcd;
 
 	setup_col_struct(&tcd, dda, map, blocks);
+    tcd.floor_d = cosf(dda->current_angle - player->playerangle);
 	while (tcd.iterator < SCREEN_HEIGHT)
 		ceil_drawing(imgs, dda, &tcd, map);
 	tcd.iterator = 0;

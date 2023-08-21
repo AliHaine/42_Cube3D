@@ -170,6 +170,7 @@ typedef struct s_col_drawing
 	float		current_step;
 	float		fog_strength;
 	char		hit_block;
+    float       floor_d;
 	t_block 	*block;
 }	t_col_drawing;
 
