@@ -12,7 +12,7 @@
 
 #include "../../includes/includes.h"
 
-void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_map *map, t_block **blocks)
+void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world, t_block **blocks)
 {
 	int convertor;
 
@@ -27,11 +27,11 @@ void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_map *map, t_block **bloc
 	tcd->fog_strength = dda->dist_hv[0] / FOG_DISTANCE;
     if (dda->chunk_hv[0] < 0) //todo probleme n'est pas cense arrive (si aucun bloc)
         dda->chunk_hv[0] = 0;
-	tcd->hit_block = map->world[dda->chunk_hv[0]][((int)dda->r_xy[1] / 64) % map->height][((int)dda->r_xy[0] / 64) % map->width];
+	tcd->hit_block = world->world[dda->chunk_hv[0]][((int)dda->r_xy[1] / 64) % world->height][((int)dda->r_xy[0] / 64) % world->width];
     if (tcd->hit_block != '1') {
 		tcd->block = get_block_from_char(blocks, tcd->hit_block);
 		if (!tcd->block) {
-			//printf("chunk: %d disth: %f distv: %f ry: %d rx: %d vx: %d vy: %d\n", dda->chunk_hv[0], dda->dist_hv[0], dda->dist_hv[1], ((int)dda->r_xy[1] / 64) % map->height, ((int)dda->r_xy[0] / 64) % map->width, (int)dda->v_xy[0] / 64 % map->width, (int)dda->v_xy[1] / 64 % map->width);
+			//printf("chunk: %d disth: %f distv: %f ry: %d rx: %d vx: %d vy: %d\n", dda->chunk_hv[0], dda->dist_hv[0], dda->dist_hv[1], ((int)dda->r_xy[1] / 64) % world->height, ((int)dda->r_xy[0] / 64) % world->width, (int)dda->v_xy[0] / 64 % world->width, (int)dda->v_xy[1] / 64 % world->width);
 			tcd->hit_block = '1';
 		}
 	}

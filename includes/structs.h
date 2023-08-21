@@ -113,7 +113,7 @@ typedef struct s_biome
 }	t_biome;
 
 
-typedef struct s_map
+/*typedef struct s_world
 {
 	char ***world;
 	char **chunk;
@@ -126,7 +126,7 @@ typedef struct s_map
 	mlx_image_t 	*floor;
 	Difficulty difficulty;
 	bool		is_active;
-}	t_map;
+}	t_map;*/
 
 typedef struct s_slot
 {
@@ -184,7 +184,7 @@ typedef struct s_core
 	t_animation 	animations[11];
 	t_block			*blocks[8];
     t_biome         biome[2];
-	t_map 			maps[2];
+	//t_map 			maps[2];
     int             screen_size[2];
 }	t_core;
 

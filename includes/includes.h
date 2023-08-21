@@ -13,6 +13,7 @@
 #ifndef INCLUDES_H
 # define INCLUDES_H
 
+
 # include "../../MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
 # include <stdlib.h>
@@ -27,16 +28,19 @@
 # include "defines.h"
 # include <sys/time.h>
 
+# include "concepts/world.h"
+
+typedef struct s_world t_world;
 //dda//
-void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block **blocks);
+void	raycasting(t_player *player, t_imgs *imgs, t_world *world, t_block **blocks);
 
 //display.c
 void		display(void *params);
 
 //drawing.c
-void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block **blocks, t_player *player);
+void	columns_drawing(t_imgs *imgs, t_dda *dda, t_world *map, t_block **blocks, t_player *player);
 void	draw_energy_bar(mlx_image_t *img, int energy);
-void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_map *map);
+void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *map);
 
 //loader//
 
@@ -45,7 +49,7 @@ void	texture_loader(t_core *core);
 void	mlx_hook_loader(t_core *core);
 void	item_loader(t_core *core);
 void	block_loader(t_core *core);
-void	world_loader(t_core *core);
+//void	world_loader(t_core *core);
 
 //??
 
@@ -63,9 +67,9 @@ void	scroll_hook(double x, double y, void *param);
 
 //parsing//
 
-void	map_manager(char *argv, t_map *map, t_imgs *imgs, t_player *player);
-void	texture_main(t_file *file, t_imgs *imgs, t_map *map);
-bool	parse_main(t_file *file, t_player *player, t_map *map);
+void	map_manager(char *argv, t_world *map, t_imgs *imgs, t_player *player);
+void	texture_main(t_file *file, t_imgs *imgs, t_world *map);
+bool	parse_main(t_file *file, t_player *player, t_world *map);
 
 //sound//
 void	init_sound_empty(t_sounds *sounds);
@@ -85,7 +89,7 @@ void	display_item(t_core *core, t_slot *slot);
 void	crafting_engine(t_core *core);
 void	craft(t_core *core);
 
-void	set_char_at_forward(char c, t_player *player, t_map *map);
+void	set_char_at_forward(char c, t_player *player, t_world *world);
 
 //item//
 void    give_item(t_core *core, t_item *item, int slot_id, int number);
@@ -107,13 +111,14 @@ void	struct_setup(t_core *core);
 void	setup_slot_struct(mlx_t *mlx, t_player *player, t_item *item);
 t_slot	*get_first_slot(t_slot *slot);
 
-void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_map *map, t_block **blocks);
+void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world, t_block **blocks);
 
 //world
-bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active);
-void	chunk_generator(t_map *map, int chunk);
+/*bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active);
+void	chunk_generator(t_map *map, int chunk);*/
 
 //portal
-void	portal_listener(t_player *player, t_map maps[2], t_sounds *sounds);
+void	portal_listener(t_player *player, t_world *world, t_sounds *sounds);
+//void	portal_listener(t_player *player, t_map maps[2], t_sounds *sounds);
 
 #endif

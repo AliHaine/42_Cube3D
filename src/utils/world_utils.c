@@ -12,22 +12,23 @@
 
 #include "../../includes/includes.h"
 
-int	get_chunk_from_pos(int x, int y, int m_height, int m_width)
+int	get_chunk_from_pos(int x, int y)
 {
 	int cell;
 	int	line;
+	t_world	*world;
 
 	cell = -1;
 	line = -1;
-
-	if (y > (m_height * 3) || x > (m_width * 3))
+	world = get_active_world();
+	if (y > (world->height * 3) || x > (world->width * 3))
 		return (-1);
 	while (line++ < 2)
 	{
-		if (y < (m_height * (line + 1)))
+		if (y < (world->height * (line + 1)))
 		{
 			while (cell++ < 2)
-				if (x < (m_width * (cell + 1))) {
+				if (x < (world->width * (cell + 1))) {
 					if (cell + (line * 3) == 9) {
 						printf("error %d %d %d %d\n", x, y, cell, line);
 						return (cell + line);
@@ -39,10 +40,10 @@ int	get_chunk_from_pos(int x, int y, int m_height, int m_width)
 	return (0);
 }
 
-bool    is_player_chunk_change(t_player *player, t_map *map)
+bool    is_player_chunk_change(t_player *player, t_world *world)
 {
-	if (player->player_cell_xy[0] >= map->width && player->player_cell_xy[0] <= ((map->width * 2) - 1)
-		&& player->player_cell_xy[1] >= map->height && player->player_cell_xy[1] <= ((map->height * 2) - 1))
+	if (player->player_cell_xy[0] >= world->width && player->player_cell_xy[0] <= ((world->width * 2) - 1)
+		&& player->player_cell_xy[1] >= world->height && player->player_cell_xy[1] <= ((world->height * 2) - 1))
         return (false);
     return (true);
 }
@@ -66,7 +67,7 @@ void	set_side_from_int(int chunk_incrementation[2], int chunk_num)
 	}
 }
 
-void	chunk_generator(t_map *map, int chunk)
+void	chunk_generator(t_world *map, int chunk)
 {
 	int y;
 	int x;
@@ -92,7 +93,7 @@ void	chunk_generator(t_map *map, int chunk)
 	}
 }
 
-void	world_place_map(t_map *map, int num)
+void	world_place_map(t_world *world, int num)
 {
 	int i;
 	int	incrementation;
@@ -124,14 +125,14 @@ void	world_place_map(t_map *map, int num)
 		incrementation = 1;
 	}
 	while (i++ < 2)
-		copy_tab(map->world[(chunk + i * mul) + incrementation], map->world[chunk + i * mul], map->height, map->width);
+		copy_tab(world->world[(chunk + i * mul) + incrementation], world->world[chunk + i * mul], world->height, world->width);
 	i = -1;
 	chunk += incrementation;
 	while (i++ < 2)
-		copy_tab(map->world[(chunk + i * mul) + incrementation], map->world[chunk + i * mul], map->height, map->width);
+		copy_tab(world->world[(chunk + i * mul) + incrementation], world->world[chunk + i * mul], world->height, world->width);
 }
 
-static void	side_generator(t_map *map, int chunk_incrementation[2])
+static void	side_generator(t_world *world, int chunk_incrementation[2])
 {
 	int i;
 	int	chunk;
@@ -151,7 +152,7 @@ static void	side_generator(t_map *map, int chunk_incrementation[2])
 	}
 	while (i++ < 2)
 	{
-		chunk_generator(map, chunk + (chunk_incrementation[1] * i));
+		chunk_generator(world, chunk + (chunk_incrementation[1] * i));
 	}
 
 }
@@ -168,27 +169,29 @@ static void	player_place_map(t_player *player, int num)
 		player->player_pos_xy[1] -= (player->player_pos_xy[1] / 2);
 }
 
-bool    world_dynamic_generator(t_map *map, t_player *player)
+bool    world_dynamic_generator(t_player *player)
 {
 	int	chunk;
 	int chunk_incrementation[2];
+	t_world	*world;
 
-	chunk = get_chunk_from_pos(player->player_cell_xy[0], player->player_cell_xy[1], map->height, map->width);
+	world = get_active_world();
+	chunk = get_chunk_from_pos(player->player_cell_xy[0], player->player_cell_xy[1]);
 	set_side_from_int(chunk_incrementation, chunk);
-	world_place_map(map, chunk);
-	side_generator(map, chunk_incrementation);
-	print_entire_world(map);
+	world_place_map(world, chunk);
+	side_generator(world, chunk_incrementation);
+	print_entire_world();
 	player_place_map(player, chunk);
 	return (0);
 }
 
-int	get_active_world(t_map maps[2])
+t_world	*get_active_world()
 {
 	int	i;
 
 	i = 2;
 	while (i-- >= 0)
-		if (maps[i].is_active)
-			return (i);
+		if (get_world(i)->is_active)
+			return (get_world(i));
 	return (0);
 }

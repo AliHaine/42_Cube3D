@@ -32,37 +32,37 @@ static bool world_malloc(int height, int width, char ***map)
 	return (true);
 }
 
-bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active)
+bool world_creator(t_world *world, uint32_t anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active)
 {
     int i;
 
     i = 0;
-    map->biome = 0;
-	map->abiant_sound = anbiant_sound;
-	map->height = height;
-	map->width = width;
-    map->bt_color[0] = 0;
-	map->bt_color[1] = 0;
-	map->ceil = ceil;
-	map->floor = floor;
-	map->difficulty = difficulty;
-    map->world = malloc(sizeof(char **) * 9);
-	map->is_active = is_active;
-	world_malloc(height, width, &map->chunk);
+	world->biome = 0;
+	world->abiant_sound = anbiant_sound;
+	world->height = height;
+	world->width = width;
+	world->bt_color[0] = 0;
+	world->bt_color[1] = 0;
+	world->ceil = ceil;
+	world->floor = floor;
+	world->difficulty = difficulty;
+	world->world = malloc(sizeof(char **) * 9);
+	world->is_active = is_active;
+	world_malloc(height, width, &world->chunk);
     while (i < 9)
-	    world_malloc(height * 3, width * 3, &map->world[i++]);
+	    world_malloc(height * 3, width * 3, &world->world[i++]);
     return (true);
 }
 
-static void world_generator(t_map *map) {
+static void world_generator(t_world *world) {
     int y;
 	int x;
 
     y = 0;
 	x = 0;
-    while (y < map->height) {
-		while (x < map->width) {
-			map->chunk[y][x++] = get_rand_num(2) + '0';
+    while (y < world->height) {
+		while (x < world->width) {
+			world->chunk[y][x++] = get_rand_num(2) + '0';
 		}
 		x = 0;
 		y++;
@@ -70,16 +70,16 @@ static void world_generator(t_map *map) {
 
 	y = 0;
 	x = 0;
-	while (y < map->height) {
-		while (x < map->width)
-			printf("%c", map->chunk[y][x++]);
+	while (y < world->height) {
+		while (x < world->width)
+			printf("%c", world->chunk[y][x++]);
 		printf("\n");
 		x = 0;
 		y++;
 	}
 }
 
-static void world_copy_from_chunk(t_map *world)
+static void world_copy_from_chunk(t_world *world)
 {
     int chunk_yx[2];
     int world_iterator;
@@ -98,7 +98,7 @@ static void world_copy_from_chunk(t_map *world)
         }
         chunk_yx[0] = -1;
     }
-	print_entire_world(world);
+	print_entire_world();
 }
 
 static t_biome **world_get_biomes(int biome_number, ...)
@@ -133,9 +133,9 @@ static t_biome biome_creator(int block_number, ...)
 void	world_loader(t_core *core)
 {
 	core->biome[1] = biome_creator(6, *core->blocks[NETHERRACK], *core->blocks[NETHER_WART_BLOCK], *core->blocks[OBSIDIAN], *core->blocks[CRYING_OBSIDIAN], *core->blocks[CRACKED_DEEPSLAT_TILES], *core->blocks[DEEPSLATE_COAL_ORE]);
-	world_copy_from_chunk(&core->maps[0]);
-	world_creator(&core->maps[1], core->sounds.ambiant, 32, 32, 0, core->imgs.skybox_nether, core->blocks[NETHERRACK]->image, HARD, false);
-    core->maps[1].biome = world_get_biomes(1, &core->biome[1]);
-    world_generator(&core->maps[1]);
-    world_copy_from_chunk(&core->maps[1]);
+	world_copy_from_chunk(get_world(0));
+	world_creator(get_world(1), core->sounds.ambiant, 32, 32, 0, core->imgs.skybox_nether, core->blocks[NETHERRACK]->image, HARD, false);
+	get_world(1)->biome = world_get_biomes(1, &core->biome[1]);
+    world_generator(get_world(1));
+    world_copy_from_chunk(get_world(1));
 }

@@ -69,6 +69,7 @@ static void	core_init(t_core *core)
 	core->player.energy = 100;
 	core->player.is_in_inventory = false;
 	core->player.can_move = true;
+	core->player.is_running = false;
 	msg_write(1, -1, SUCCESS);
 }
 
@@ -81,7 +82,7 @@ int	main(int argc, char *argv[])
 	core_init(&core);
 	item_loader(&core);
 	block_loader(&core);
-    map_manager(argv[1], &core.maps[0], &core.imgs, &core.player);
+    map_manager(argv[1], get_world(0), &core.imgs, &core.player);
     world_loader(&core);
     give_item(&core, &core.items[SWORD_NETHER], 2, 32);
 	give_item(&core, &core.items[SWORD_NETHER], 32, 52);

@@ -12,7 +12,7 @@
 
 #include "../../includes/includes.h"
 
-static void	jump_to_next(t_dda *dda, t_map *map, const float playerpos[2], bool val, int max)
+static void	jump_to_next(t_dda *dda, t_world *world, const float playerpos[2], bool val, int max)
 {
 	int	m_xy[2];
 
@@ -20,10 +20,10 @@ static void	jump_to_next(t_dda *dda, t_map *map, const float playerpos[2], bool 
 	{
 		m_xy[0] = (int)dda->r_xy[0] / 64;
 		m_xy[1] = (int)dda->r_xy[1] / 64;
-        dda->chunk_hv[val] = get_chunk_from_pos(m_xy[0], m_xy[1], map->height, map->width);
-        if (m_xy[0] >= (map->width * 3) || m_xy[1] >= (map->height * 3) || dda->r_xy[0] < 0 || dda->r_xy[1] < 0 || map->world[dda->chunk_hv[val]][m_xy[1] % map->height][m_xy[0] % map->width] == ' ')
+        dda->chunk_hv[val] = get_chunk_from_pos(m_xy[0], m_xy[1]);
+        if (m_xy[0] >= (world->width * 3) || m_xy[1] >= (world->height * 3) || dda->r_xy[0] < 0 || dda->r_xy[1] < 0 || world->world[dda->chunk_hv[val]][m_xy[1] % world->height][m_xy[0] % world->width] == ' ')
             break;
-		if (map->world[dda->chunk_hv[val]][m_xy[1] % map->height][m_xy[0] % map->width] != '0')
+		if (world->world[dda->chunk_hv[val]][m_xy[1] % world->height][m_xy[0] % world->width] != '0')
 		{
 			dda->dist_hv[val] = dda->cos * (dda->r_xy[0] - playerpos[0])
 					- -dda->sin * (dda->r_xy[1] - playerpos[1]);
@@ -34,7 +34,7 @@ static void	jump_to_next(t_dda *dda, t_map *map, const float playerpos[2], bool 
 	}
 }
 
-static void	horizontal_cast(t_dda *dda, float playerpos[2],t_map *map)
+static void	horizontal_cast(t_dda *dda, float playerpos[2],t_world *world)
 {
 	float	tan;
 
@@ -58,10 +58,10 @@ static void	horizontal_cast(t_dda *dda, float playerpos[2],t_map *map)
 		dda->hit_direction[1] = 0;
 	}
 	if (dda->hit_direction[1] >= 0)
-		jump_to_next(dda, map, playerpos, 0, map->width * 3);
+		jump_to_next(dda, world, playerpos, 0, world->width * 3);
 }
 
-static void	vertical_cast(t_dda *dda, float playerpos[2], t_map *map)
+static void	vertical_cast(t_dda *dda, float playerpos[2], t_world *world)
 {
 	float	tan;
 
@@ -85,12 +85,12 @@ static void	vertical_cast(t_dda *dda, float playerpos[2], t_map *map)
 		dda->hit_direction[0] = 3;
 	}
 	if (dda->hit_direction[0] > 0)
-		jump_to_next(dda, map, playerpos, 1, map->height * 3);
+		jump_to_next(dda, world, playerpos, 1, world->height * 3);
 	dda->v_xy[0] = dda->r_xy[0];
 	dda->v_xy[1] = dda->r_xy[1];
 }
 
-void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block **blocks)
+void	raycasting(t_player *player, t_imgs *imgs, t_world *world, t_block **blocks)
 {
 	float start_angle;
 	t_dda dda;
@@ -112,8 +112,8 @@ void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block **blocks)
 			dda.current_angle -= 6.28319f;
 		dda.cos = cosf(dda.current_angle);
 		dda.sin = sinf(dda.current_angle);
-		vertical_cast(&dda, player->player_pos_xy, map);
-        horizontal_cast(&dda, player->player_pos_xy, map);
+		vertical_cast(&dda, player->player_pos_xy, world);
+        horizontal_cast(&dda, player->player_pos_xy, world);
         if (dda.dist_hv[1] < dda.dist_hv[0])
 		{
 			dda.r_xy[0] = dda.v_xy[0];
@@ -129,6 +129,6 @@ void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block **blocks)
 				dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[1];
 			dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[0];
 		}
-		columns_drawing(imgs, &dda, map, blocks, player);
+		columns_drawing(imgs, &dda, world, blocks, player);
 	}
 }
