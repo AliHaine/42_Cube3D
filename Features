@@ -1,7 +1,7 @@
 +- DDA raycasting
 +- Craft
 - NPC
-+- Multi-world (normal, and nether)
++- Multi-world (normal, nether..)
 - Nether portal
 - enemy
 +- sky and floor texture
@@ -12,8 +12,9 @@
 +- GUI concept
 +- Sound
 +- Fog Distance
-- Un chat
+- Chat
 +- Infinite world
++- Biome + chunk
 
 Parsing:
     +- Work even no args

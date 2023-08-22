@@ -30,7 +30,7 @@ void	player_listener(void *params)
 	t_world *world;
 
 	core = (t_core *) params;
-	world = get_active_world();
+	world = get_world_active();
 	//check with death_listener if player is death and draw death screen
 	if  (energy_listener(&core->player, world->difficulty))
 		draw_energy_bar(core->imgs.engbar, core->player.energy);

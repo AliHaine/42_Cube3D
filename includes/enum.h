@@ -65,11 +65,6 @@ typedef enum {
 	HARD,
 }	Difficulty;
 
-typedef enum {
-	DEFAULT,
-	NETHER,
-}	Biome;
-
 static const char *ItemName[] = {
 		"hand",
 		"sword_nether",

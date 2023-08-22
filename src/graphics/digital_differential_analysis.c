@@ -12,10 +12,12 @@
 
 #include "../../includes/includes.h"
 
-static void	jump_to_next(t_dda *dda, t_world *world, const float playerpos[2], bool val, int max)
+static void	jump_to_next(t_dda *dda, const float playerpos[2], bool val)
 {
 	int	m_xy[2];
+	t_world	*world;
 
+	world = get_world_active();
 	while (1)
 	{
 		m_xy[0] = (int)dda->r_xy[0] / 64;
@@ -34,7 +36,7 @@ static void	jump_to_next(t_dda *dda, t_world *world, const float playerpos[2], b
 	}
 }
 
-static void	horizontal_cast(t_dda *dda, float playerpos[2],t_world *world)
+static void	horizontal_cast(t_dda *dda, float playerpos[2])
 {
 	float	tan;
 
@@ -58,10 +60,10 @@ static void	horizontal_cast(t_dda *dda, float playerpos[2],t_world *world)
 		dda->hit_direction[1] = 0;
 	}
 	if (dda->hit_direction[1] >= 0)
-		jump_to_next(dda, world, playerpos, 0, world->width * 3);
+		jump_to_next(dda, playerpos, 0);
 }
 
-static void	vertical_cast(t_dda *dda, float playerpos[2], t_world *world)
+static void	vertical_cast(t_dda *dda, float playerpos[2])
 {
 	float	tan;
 
@@ -85,12 +87,12 @@ static void	vertical_cast(t_dda *dda, float playerpos[2], t_world *world)
 		dda->hit_direction[0] = 3;
 	}
 	if (dda->hit_direction[0] > 0)
-		jump_to_next(dda, world, playerpos, 1, world->height * 3);
+		jump_to_next(dda, playerpos, 1);
 	dda->v_xy[0] = dda->r_xy[0];
 	dda->v_xy[1] = dda->r_xy[1];
 }
 
-void	raycasting(t_player *player, t_imgs *imgs, t_world *world, t_block **blocks, t_options *options)
+void	raycasting(t_player *player, t_imgs *imgs, t_block **blocks, t_options *options)
 {
 	float start_angle;
 	t_dda dda;
@@ -112,15 +114,16 @@ void	raycasting(t_player *player, t_imgs *imgs, t_world *world, t_block **blocks
 			dda.current_angle -= 6.28319f;
 		dda.cos = cosf(dda.current_angle);
 		dda.sin = sinf(dda.current_angle);
-		vertical_cast(&dda, player->player_pos_xy, world);
-        horizontal_cast(&dda, player->player_pos_xy, world);
+		vertical_cast(&dda, player->player_pos_xy);
+        horizontal_cast(&dda, player->player_pos_xy);
         if (dda.dist_hv[1] < dda.dist_hv[0])
 		{
 			dda.r_xy[0] = dda.v_xy[0];
 			dda.r_xy[1] = dda.v_xy[1];
 			dda.dist_hv[0] = dda.dist_hv[1];
 			dda.hit_hv = 1;
-		}
+            dda.chunk_hv[0] = dda.chunk_hv[1];
+        }
 		fisheyes_fixor(&dda, player->playerangle);
 		if (dda.dist_hv[0] < 10000)
 		{
@@ -128,6 +131,6 @@ void	raycasting(t_player *player, t_imgs *imgs, t_world *world, t_block **blocks
 				dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[1];
 			dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[0];
 		}
-		columns_drawing(imgs, &dda, world, blocks, player, options);
+		columns_drawing(imgs, &dda, blocks, player, options);
 	}
 }

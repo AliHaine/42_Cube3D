@@ -169,10 +169,12 @@ void	floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player
 	mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, color);
 }
 
-void	columns_drawing(t_imgs *imgs, t_dda *dda, t_world *world, t_block **blocks, t_player *player, t_options *options)
+void	columns_drawing(t_imgs *imgs, t_dda *dda, t_block **blocks, t_player *player, t_options *options)
 {
 	t_col_drawing	tcd;
+	t_world			*world;
 
+	world = get_world_active();
 	setup_col_struct(&tcd, dda, world, blocks);
 	tcd.floor_d = cosf(dda->current_angle - player->playerangle);
 	while (tcd.iterator < tcd.ceil_floor_lineH)

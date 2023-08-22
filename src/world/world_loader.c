@@ -38,7 +38,7 @@ bool world_creator(t_world *world, uint32_t anbiant_sound, int height, int width
 
     i = 0;
 	world->biome = 0;
-	world->abiant_sound = anbiant_sound;
+	world->ambiant_sound = anbiant_sound;
 	world->height = height;
 	world->width = width;
 	world->bt_color[0] = 0;
@@ -55,28 +55,11 @@ bool world_creator(t_world *world, uint32_t anbiant_sound, int height, int width
 }
 
 static void world_generator(t_world *world) {
-    int y;
-	int x;
+	int	i;
 
-    y = 0;
-	x = 0;
-    while (y < world->height) {
-		while (x < world->width) {
-			world->chunk[y][x++] = get_rand_num(2) + '0';
-		}
-		x = 0;
-		y++;
-    }
-
-	y = 0;
-	x = 0;
-	while (y < world->height) {
-		while (x < world->width)
-			printf("%c", world->chunk[y][x++]);
-		printf("\n");
-		x = 0;
-		y++;
-	}
+	i = -1;
+	while (i++ < 8)
+		chunk_generator(world, i);
 }
 
 static void world_copy_from_chunk(t_world *world)
@@ -98,7 +81,6 @@ static void world_copy_from_chunk(t_world *world)
         }
         chunk_yx[0] = -1;
     }
-	print_entire_world();
 }
 
 static t_biome **world_get_biomes(int biome_number, ...)
@@ -132,10 +114,9 @@ static t_biome biome_creator(int block_number, ...)
 
 void	world_loader(t_core *core)
 {
-	core->biome[1] = biome_creator(6, *core->blocks[NETHERRACK], *core->blocks[NETHER_WART_BLOCK], *core->blocks[OBSIDIAN], *core->blocks[CRYING_OBSIDIAN], *core->blocks[CRACKED_DEEPSLAT_TILES], *core->blocks[DEEPSLATE_COAL_ORE]);
-	world_copy_from_chunk(get_world(0));
-	world_creator(get_world(1), core->sounds.ambiant, 32, 32, 0, core->imgs.skybox_nether, core->blocks[NETHERRACK]->image, HARD, false);
-	get_world(1)->biome = world_get_biomes(1, &core->biome[1]);
-    world_generator(get_world(1));
-    world_copy_from_chunk(get_world(1));
+	set_biome(biome_creator(6, *core->blocks[NETHERRACK], *core->blocks[NETHER_WART_BLOCK], *core->blocks[OBSIDIAN], *core->blocks[CRYING_OBSIDIAN], *core->blocks[CRACKED_DEEPSLAT_TILES], *core->blocks[DEEPSLATE_COAL_ORE]), DARK);
+	world_copy_from_chunk(get_world(DEFAULT));
+	world_creator(get_world(NETHER), core->sounds.ambiant, 32, 32, 0, core->imgs.skybox_nether, core->blocks[NETHERRACK]->image, HARD, false);
+	get_world(NETHER)->biome = world_get_biomes(1, get_biome(DARK));
+    world_generator(get_world(NETHER));
 }

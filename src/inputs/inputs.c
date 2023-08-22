@@ -51,10 +51,6 @@ static void moving_inputs(mlx_t *mlx, t_player *player)
     {
        if (get_forward_char(player) == '0' || get_forward_char(player) == 'Z')
             move_forward(player);
-		/*printf("coords x: %f, coords y:%f\n", player->player_coords_xy[0], player->player_coords_xy[1]);
-		printf("coords posx: %f, coords posy:%f\n", player->player_pos_xy[0], player->player_pos_xy[1]);
-		printf("cell x:%d, cell y: %d\n", player->player_cell_xy[0], player->player_cell_xy[1]);
-		printf("\n");*/
     }
 	else
 		player->is_moving = false;
@@ -72,7 +68,7 @@ void	inputs(void *params)
 		mlx_close_window(core->mlx);
 	rotation_inputs(core->mlx, &core->player);
 	moving_inputs(core->mlx, &core->player);
-    if (is_player_chunk_change(&core->player, get_active_world()))
+    if (is_player_chunk_change(&core->player, get_world_active()))
 		world_dynamic_generator(&core->player);
 }
 

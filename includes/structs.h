@@ -105,20 +105,13 @@ typedef struct s_block
 	bool			is_rigid;
 }	t_block;
 
-typedef struct s_biome
-{
-	Biome name;
-	t_block *block;
-	int	block_number;
-}	t_biome;
-
 
 /*typedef struct s_world
 {
 	char ***world;
 	char **chunk;
 	t_biome	**biome;
-	uint32_t abiant_sound;
+	uint32_t ambiant_sound;
 	int height;
 	int width;
 	uint32_t	bt_color[2];
@@ -191,7 +184,7 @@ typedef struct s_core
 	t_item			items[11];
 	t_animation 	animations[11];
 	t_block			*blocks[8];
-    t_biome         biome[2];
+    //t_biome         biome[2];
 	//t_map 			maps[2];
     int             screen_size[2];
 }	t_core;

@@ -80,13 +80,8 @@ t_block *get_block_from_char(t_block **block, char block_char);
 //world_utils
 /*bool    is_player_chunk_change(t_player *player, t_map *map);
 int	get_chunk_from_pos(int x, int y, int m_height, int m_width);
-int	get_active_world(t_map maps[2]);
+int	get_world_active(t_map maps[2]);
 bool    world_dynamic_generator(t_map *map, t_player *player);*/
-
-//biome_utils
-t_biome *get_random_biome(t_biome **biome);
-int get_biomes_size(t_biome **biome);
-t_block get_random_block_from_biome(t_biome *biome);
 
 //player_utils
 void	set_player(int x, int y, t_player *player, float angle);

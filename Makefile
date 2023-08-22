@@ -12,7 +12,6 @@ SRCS		=	src/cub3d.c \
 				src/loading/sound_loader.c \
 				src/loading/item_loader.c \
 				src/loading/block_loader.c \
-				src/loading/world_loader.c \
 				src/loading/other_loader.c \
 				src/parsing/map_manager.c \
 				src/parsing/map_parse.c \
@@ -31,7 +30,14 @@ SRCS		=	src/cub3d.c \
 				src/player_interaction/inventory_manager.c \
 				src/player_interaction/crafting.c \
 				src/player_interaction/portal.c \
+				src/player_interaction/teleportation.c \
+				src/biome/biome_accessor.c \
+				src/biome/biome_utils.c \
 				src/world/world_accessor.c \
+				src/world/world_loader.c \
+				src/world/world_utils.c \
+				src/world/chunk_utils.c \
+				src/world/world_dynamic_generator.c \
 				src/utils/map_utils.c \
 				src/utils/msg_utils.c \
 				src/utils/std_func_utils.c \
@@ -40,10 +46,7 @@ SRCS		=	src/cub3d.c \
 				src/utils/move_utils.c \
 				src/utils/mlx_texture_utils.c \
 				src/utils/block_utils.c \
-				src/utils/world_utils.c \
-				src/utils/biome_utils.c \
 				src/utils/player_utils.c \
-				src/utils/tester.c \
 				src/utils/get_next_line/get_next_line.c \
 				src/utils/get_next_line/get_next_line_utils.c \
 				src/utils/inventory_utils.c \

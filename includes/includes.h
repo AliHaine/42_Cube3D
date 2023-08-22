@@ -31,14 +31,15 @@
 # include "concepts/world.h"
 
 typedef struct s_world t_world;
+
 //dda//
-void	raycasting(t_player *player, t_imgs *imgs, t_world *world, t_block **blocks, t_options *options);
+void	raycasting(t_player *player, t_imgs *imgs, t_block **blocks, t_options *options);
 
 //display.c
 void		display(void *params);
 
 //drawing.c
-void	columns_drawing(t_imgs *imgs, t_dda *dda, t_world *map, t_block **blocks, t_player *player, t_options *options);
+void	columns_drawing(t_imgs *imgs, t_dda *dda, t_block **blocks, t_player *player, t_options *options);
 void	draw_energy_bar(mlx_image_t *img, int energy);
 void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *map);
 
@@ -89,6 +90,7 @@ void	inventory_hook(void *params);
 void	display_item(t_core *core, t_slot *slot);
 void	crafting_engine(t_core *core);
 void	craft(t_core *core);
+void	teleport_player(t_player *player);
 
 void	set_char_at_forward(char c, t_player *player, t_world *world);
 
@@ -114,9 +116,6 @@ t_slot	*get_first_slot(t_slot *slot);
 
 void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world, t_block **blocks);
 
-//world
-/*bool world_creator(t_map *map, uint32_t anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active);
-void	chunk_generator(t_map *map, int chunk);*/
 
 //portal
 void	portal_listener(t_player *player, t_world *world, t_sounds *sounds);
