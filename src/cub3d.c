@@ -36,8 +36,6 @@ static void	core_init(t_core *core)
 	sound_loader(&core->sounds);
 	imgs_init(core->mlx, &core->imgs);
 	sound_loader(&core->sounds);
-    set_texture_from_path("assets/grass.png", &core->imgs.floor_texture);
-    set_texture_from_path("assets/skybox.png", &core->imgs.skybox);
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
 	mlx_set_cursor(core->mlx, mlx_create_cursor(core->imgs.trans));
@@ -71,6 +69,7 @@ static void	core_init(t_core *core)
 	core->player.energy = 100;
 	core->player.is_in_inventory = false;
 	core->player.can_move = true;
+	core->player.is_running = false;
 	msg_write(1, -1, SUCCESS);
 }
 
@@ -84,7 +83,7 @@ int	main(int argc, char *argv[])
 	initialize_options(&core);
 	item_loader(&core);
 	block_loader(&core);
-    map_manager(argv[1], &core.maps[0], &core.imgs, &core.player);
+    map_manager(argv[1], get_world(0), &core.imgs, &core.player);
     world_loader(&core);
     give_item(&core, &core.items[SWORD_NETHER], 2, 32);
 	give_item(&core, &core.items[SWORD_NETHER], 32, 52);

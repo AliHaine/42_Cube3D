@@ -1,35 +1,47 @@
 #include "../../includes/includes.h"
 
-char	get_backward_char(t_player *player, t_map *map)
+char	get_backward_char(t_player *player)
 {
-	return (map->world[4][(int)((player->player_pos_xy[1]
-	    - (sinf(player->playerangle) * player->move_speed)) / 64) % map->height]
+	t_world	*world;
+
+	world = get_active_world();
+	return (world->world[4][(int)((player->player_pos_xy[1]
+	    - (sinf(player->playerangle) * player->move_speed)) / 64) % world->height]
 	    [(int)((player->player_pos_xy[0] - (cosf(player->playerangle)
-											* player->move_speed)) / 64) % map->width]);
+											* player->move_speed)) / 64) % world->width]);
 }
 
-char	get_forward_char(t_player *player, t_map *map)
+char	get_forward_char(t_player *player)
 {
-	return (map->world[4][(int)((player->player_pos_xy[1] + (sinf(player->playerangle)
-															 * player->move_speed)) / 64) % map->height][(int)((player->player_pos_xy[0] +
-																												(cosf(player->playerangle) * player->move_speed)) / 64) % map->width]);
+	t_world	*world;
+
+	world = get_active_world();
+	return (world->world[4][(int)((player->player_pos_xy[1] + (sinf(player->playerangle)
+															 * player->move_speed)) / 64) % world->height][(int)((player->player_pos_xy[0] +
+																												(cosf(player->playerangle) * player->move_speed)) / 64) % world->width]);
 }
 
-char	get_right_char(t_player *player, t_map *map)
+char	get_right_char(t_player *player)
 {
-	return (map->world[4][(int)((player->player_pos_xy[1]
-	    - (sinf(player->playerangle - PI / 2)
-	    * player->move_speed)) / 64) % map->height]
+	t_world	*world;
+
+	world = get_active_world();
+	return (world->world[4][(int)((player->player_pos_xy[1]
+								   - (sinf(player->playerangle - PI / 2)
+	    * player->move_speed)) / 64) % world->height]
 	    [(int)((player->player_pos_xy[0] - (cosf(player->playerangle
-												 - PI / 2) * player->move_speed)) / 64) % map->width]);
+												 - PI / 2) * player->move_speed)) / 64) % world->width]);
 }
 
-char	get_left_char(t_player *player, t_map *map)
+char	get_left_char(t_player *player)
 {
-	return (map->world[4][(int)(player->player_pos_xy[1]
-	    + (sinf(player->playerangle - PI / 2) * player->move_speed)) / 64 % map->height]
+	t_world	*world;
+
+	world = get_active_world();
+	return (world->world[4][(int)(player->player_pos_xy[1]
+								  + (sinf(player->playerangle - PI / 2) * player->move_speed)) / 64 % world->height]
 	    [(int)((player->player_pos_xy[0] + (cosf(player->playerangle - PI / 2)
-											* player->move_speed)) / 64) % map->width]);
+											* player->move_speed)) / 64) % world->width]);
 }
 
 bool	is_player_running(t_player *player)

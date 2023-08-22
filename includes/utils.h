@@ -32,6 +32,7 @@ void	free_tab(char **tab, int size);
 void	copy_tab(char **tab_src, char **tab_dst, int height, int width);
 void	ft_putstr_fd(char *s, int fd);
 int	ft_strcmp(const char *s1, const char *s2);
+bool	is_value_beetween(int value, int beet, int target);
 
 //struct//
 
@@ -52,10 +53,10 @@ uint32_t	get_pixel(mlx_texture_t *texture, int x, int y);
 mlx_image_t *rotate_image(mlx_t *mlx, mlx_texture_t *image, float angle);
 
 //move_utils//
-char	get_backward_char(t_player *player, t_map *map);
-char	get_forward_char(t_player *player, t_map *map);
-char	get_right_char(t_player *player, t_map *map);
-char	get_left_char(t_player *player, t_map *map);
+char	get_backward_char(t_player *player);
+char	get_forward_char(t_player *player);
+char	get_right_char(t_player *player);
+char	get_left_char(t_player *player);
 bool	is_player_running(t_player *player);
 
 //raycastin and drawing
@@ -77,13 +78,21 @@ void	change_item_number(t_core *core, t_slot *src, short n);
 t_block *get_block_from_char(t_block **block, char block_char);
 
 //world_utils
-bool    is_player_chunk_change(t_player *player, t_map *map);
+/*bool    is_player_chunk_change(t_player *player, t_map *map);
 int	get_chunk_from_pos(int x, int y, int m_height, int m_width);
 int	get_active_world(t_map maps[2]);
-bool    world_dynamic_generator(t_map *map, t_player *player);
+bool    world_dynamic_generator(t_map *map, t_player *player);*/
+
+//biome_utils
+t_biome *get_random_biome(t_biome **biome);
+int get_biomes_size(t_biome **biome);
+t_block get_random_block_from_biome(t_biome *biome);
+
+//player_utils
+void	set_player(int x, int y, t_player *player, float angle);
 
 //tester
-void print_entire_world(t_map *map);
+//void print_entire_world(t_map *world);
 
 
 #endif

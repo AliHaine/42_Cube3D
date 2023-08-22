@@ -35,7 +35,12 @@ typedef enum {
 typedef enum {
 	PORTAL,
 	NETHERRACK,
-	OBSIDIAN
+	OBSIDIAN,
+    CRYING_OBSIDIAN,
+    CRACKED_DEEPSLAT_TILES,
+    DEEPSLATE_COAL_ORE,
+    NETHER_WART_BLOCK,
+
 }	Block;
 
 typedef enum {
@@ -60,6 +65,11 @@ typedef enum {
 	HARD,
 }	Difficulty;
 
+typedef enum {
+	DEFAULT,
+	NETHER,
+}	Biome;
+
 static const char *ItemName[] = {
 		"hand",
 		"sword_nether",
@@ -78,7 +88,11 @@ static const char *ItemName[] = {
 static const char *BlockName[] = {
 		"netherportal",
 		"netherrack",
-		"obsidian"
+		"obsidian",
+        "crying_obsidian",
+        "cracked_deepslate_tiles",
+        "deepslate_coal_ore",
+        "nether_wart_block"
 };
 
 static const char *Messages[] = {

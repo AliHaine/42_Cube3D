@@ -20,6 +20,7 @@ typedef struct	s_sounds
 	uint32_t	ambiant;
 	uint32_t	player_hurt;
 	uint32_t	player_walk;
+	uint32_t	player_run;
 }				t_sounds;
 
 typedef struct s_imgs
@@ -32,20 +33,14 @@ typedef struct s_imgs
 	mlx_image_t 	*invbar_selector;
 	mlx_image_t 	*engbar;
     mlx_image_t 	*hearth[2];
-	mlx_image_t 	*sword_nether[5];
-	mlx_image_t 	*hand[9];
 	mlx_image_t		*map_background;
-	mlx_image_t		*icon_sword_nether;
 	mlx_image_t		*inventory_gui;
+	mlx_image_t   *floor_texture;
+	mlx_image_t   *skybox;
+    mlx_image_t   *skybox_nether;
 	mlx_texture_t	*map_texture;
-    mlx_texture_t	*enemy;
 	mlx_texture_t	*trans;
 	mlx_texture_t	*wall_texture[4];
-	mlx_texture_t	*nether_portal[15];
-    mlx_texture_t   *floor_texture;
-	mlx_texture_t	*door_texture;
-    mlx_texture_t   *skybox;
-	mlx_texture_t	*grass_texture;
 	mlx_texture_t	*inventory_gui_texture;
 	mlx_texture_t	*cursor;
 	mlx_texture_t	*img_player_texture;
@@ -64,7 +59,7 @@ typedef struct s_dda
     float current_angle_fix; //fish eye fix
 	int hit_hv; // determine si c'est un mur horizontal ou vertical toucher
 	int hit_direction[2]; // determine la direction du mur toucher (ouest est etc)
-	int chunk;
+	int chunk_hv[2];
 	float wall_height;
 
 }	t_dda;
@@ -107,19 +102,31 @@ typedef struct s_block
 	int				strength;
 	t_animation 	animation;
 	mlx_image_t		*image;
+	bool			is_rigid;
 }	t_block;
 
-typedef struct s_map
+typedef struct s_biome
+{
+	Biome name;
+	t_block *block;
+	int	block_number;
+}	t_biome;
+
+
+/*typedef struct s_world
 {
 	char ***world;
 	char **chunk;
+	t_biome	**biome;
 	uint32_t abiant_sound;
 	int height;
 	int width;
 	uint32_t	bt_color[2];
+	mlx_image_t 	*ceil;
+	mlx_image_t 	*floor;
 	Difficulty difficulty;
 	bool		is_active;
-}	t_map;
+}	t_map;*/
 
 typedef struct s_slot
 {
@@ -183,8 +190,9 @@ typedef struct s_core
 	t_sounds		sounds;
 	t_item			items[11];
 	t_animation 	animations[11];
-	t_block			*blocks[4];
-	t_map 			maps[2];
+	t_block			*blocks[8];
+    t_biome         biome[2];
+	//t_map 			maps[2];
     int             screen_size[2];
 }	t_core;
 

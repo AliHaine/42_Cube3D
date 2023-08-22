@@ -31,6 +31,8 @@ SRCS		=	src/cub3d.c \
 				src/player_interaction/inventory.c \
 				src/player_interaction/inventory_manager.c \
 				src/player_interaction/crafting.c \
+				src/player_interaction/portal.c \
+				src/world/world_accessor.c \
 				src/utils/map_utils.c \
 				src/utils/msg_utils.c \
 				src/utils/std_func_utils.c \
@@ -40,19 +42,20 @@ SRCS		=	src/cub3d.c \
 				src/utils/mlx_texture_utils.c \
 				src/utils/block_utils.c \
 				src/utils/world_utils.c \
+				src/utils/biome_utils.c \
+				src/utils/player_utils.c \
 				src/utils/tester.c \
 				src/utils/get_next_line/get_next_line.c \
 				src/utils/get_next_line/get_next_line_utils.c \
 				src/utils/inventory_utils.c \
-				src/utils/inventory_utils_bis.c \
-				src/utils/ft_split.c
+				src/utils/inventory_utils_bis.c
 
 
 OBJS		=	$(SRCS:.c=.o)
 
 NAME		=	cub3d
 
-FLAGS		=   -Ofast -g3 #-fsanitize=address
+FLAGS		=	-g3 #-fsanitize=address
 LDFLAGS		+=	-L./src/sound/bass
 LDLIBS		+=	-lbass
 

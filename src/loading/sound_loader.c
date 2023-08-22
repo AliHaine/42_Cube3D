@@ -17,6 +17,10 @@ void	sound_loader(t_sounds *sounds)
 		msg_write(2, 2, ERROR_FATAL);
 	else
 		msg_write(1, -1, SUCCESS);
+	if (!load_sound(&sounds->player_run, "assets/sounds/player_run.mp3"))
+		msg_write(2, 2, ERROR_FATAL);
+	else
+		msg_write(1, -1, SUCCESS);
 	play_sound(sounds->ambiant);
 	msg_write(1, -1, SUCCESS);
 }

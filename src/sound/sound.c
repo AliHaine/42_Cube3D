@@ -24,6 +24,7 @@ void	init_sound_empty(t_sounds *sounds)
 	sounds->ambiant = 0;
 	sounds->player_hurt = 0;
 	sounds->player_walk = 0;
+	sounds->player_run = 0;
 }
 
 void	clear_sounds(t_sounds *sounds)
@@ -32,6 +33,8 @@ void	clear_sounds(t_sounds *sounds)
 		BASS_StreamFree(sounds->player_hurt);
 	if (sounds->player_walk)
 		BASS_StreamFree(sounds->player_walk);
+	if (sounds->player_run)
+		BASS_StreamFree(sounds->player_run);
 	BASS_Free();
 }
 
