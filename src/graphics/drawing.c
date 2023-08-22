@@ -178,7 +178,7 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, t_world *world, t_block **blocks,
 	while (tcd.iterator < tcd.ceil_floor_lineH)
 	{
 		if (options->skybox == true)
-			ceil_drawing(imgs, dda, &tcd, player);
+			ceil_drawing(imgs, dda, &tcd, world);
 		else
 			mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++,
 				world->bt_color[0]);
@@ -188,7 +188,7 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, t_world *world, t_block **blocks,
 	while (tcd.iterator < SCREEN_HEIGHT)
 	{
 		if (options->floor_texture == true)
-			floor_drawing(imgs, dda, &tcd, player);
+			floor_drawing(imgs, dda, &tcd, player, world);
 		else
 			mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++,
 				world->bt_color[1]);

@@ -22,7 +22,6 @@ SRCS		=	src/cub3d.c \
 				src/struct/struct_manager.c \
 				src/struct/struct_slot.c \
 				src/struct/struct_drawing.c \
-				src/struct/structs_inits.c \
 				src/player_interaction/player_listener.c \
 				src/player_interaction/item.c \
 				src/player_interaction/heal.c \
@@ -48,14 +47,15 @@ SRCS		=	src/cub3d.c \
 				src/utils/get_next_line/get_next_line.c \
 				src/utils/get_next_line/get_next_line_utils.c \
 				src/utils/inventory_utils.c \
-				src/utils/inventory_utils_bis.c
+				src/utils/inventory_utils_bis.c \
+				src/utils/ft_split.c
 
 
 OBJS		=	$(SRCS:.c=.o)
 
 NAME		=	cub3d
 
-FLAGS		=	-g3 #-fsanitize=address
+FLAGS		=	-Ofast -g3 #-fsanitize=address
 LDFLAGS		+=	-L./src/sound/bass
 LDLIBS		+=	-lbass
 
