@@ -17,6 +17,7 @@ SRCS		=	src/cub3d.c \
 				src/parsing/map_manager.c \
 				src/parsing/map_parse.c \
 				src/parsing/map_texture.c \
+				src/parsing/options_initializer.c \
 				src/sound/sound.c \
 				src/struct/struct_manager.c \
 				src/struct/struct_slot.c \
@@ -43,14 +44,15 @@ SRCS		=	src/cub3d.c \
 				src/utils/get_next_line/get_next_line.c \
 				src/utils/get_next_line/get_next_line_utils.c \
 				src/utils/inventory_utils.c \
-				src/utils/inventory_utils_bis.c
+				src/utils/inventory_utils_bis.c \
+				src/utils/ft_split.c
 
 
 OBJS		=	$(SRCS:.c=.o)
 
 NAME		=	cub3d
 
-FLAGS		=	-g3 #-fsanitize=address
+FLAGS		=   -Ofast -g3 #-fsanitize=address
 LDFLAGS		+=	-L./src/sound/bass
 LDLIBS		+=	-lbass
 

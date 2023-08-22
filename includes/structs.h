@@ -163,12 +163,21 @@ typedef struct s_col_drawing
 	float		current_step;
 	float		fog_strength;
 	char		hit_block;
+    float       floor_d;
 	t_block 	*block;
 }	t_col_drawing;
+
+typedef struct s_options
+{
+	bool	floor_texture;
+	bool	skybox;
+	bool	sound;
+}	t_options;
 
 typedef struct s_core
 {
 	mlx_t			*mlx;
+	t_options		options;
 	t_player		player;
 	t_imgs			imgs;
 	t_sounds		sounds;

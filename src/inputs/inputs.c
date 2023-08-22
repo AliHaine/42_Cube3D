@@ -122,6 +122,6 @@ void	inputs_hook(struct mlx_key_data key, void *params)
 			core->player.move_speed = MOVE_SPEED * 2;
 	else if (key.key == 340 && key.action == 0)
 		core->player.move_speed = MOVE_SPEED;
-    if (key.key == 69 && key.action == 0)
-        inventory(core);
+	if (key.key == 69 && key.action == 0)
+		inventory(core);
 }

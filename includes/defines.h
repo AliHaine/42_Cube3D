@@ -17,7 +17,8 @@
 # define PI_2 (PI * 2)
 # define SCREEN_HEIGHT 720
 # define SCREEN_WIDTH 1280
-# define MID_HEIGHT (SCREEN_HEIGHT / 2)
+# define MID_HEIGHT (SCREEN_HEIGHT / 2.0)
+# define MID_HEIGHT_64 (MID_HEIGHT * 64)
 # define MINIMAP_SIZE 8
 # define RAY_NUMBER 1280
 # define DIST_BETWEEN_RAY 0.000818

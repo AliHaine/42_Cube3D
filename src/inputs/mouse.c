@@ -23,7 +23,7 @@ void	mouse(enum mouse_key key, enum action action, enum modifier_key mkey, void 
 		return ;
 	if (key == 0 && action == 0)
     	hit_player(&core->player, &core->imgs);
-	else if (key == 1 && action == 0)
+	else if (key == 1 && action == 0 )
 		heal_player(&core->player, &core->imgs);
 	if (key != 0 || action == 1)
 		return ;

@@ -135,8 +135,8 @@ void	ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_player *player
 
 void	floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player)
 {
-	const float	s = (MID_HEIGHT * 64) / (tcd->iterator - MID_HEIGHT);
-	const float	d = (s / cosf(dda->current_angle - player->playerangle));
+	const float	s = MID_HEIGHT_64 / (tcd->iterator - MID_HEIGHT);
+	const float	d = (s / tcd->floor_d);
 	const float	fog_strength = d / FOG_DISTANCE;
 	int			value;
 	uint32_t	color;
@@ -147,9 +147,9 @@ void	floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player
 			(0 << 24) | (0 << 16) | (0 << 8) | 255);
 		return ;
 	}
-	value = (((int)(player->player_pos_xy[0] + cosf(dda->current_angle)
+	value = (((int)(player->player_pos_xy[0] + dda->cos
 					* d) % 64)
-			+ ((int)(player->player_pos_xy[1] + sinf(dda->current_angle)
+			+ ((int)(player->player_pos_xy[1] + dda->sin
 					* d) % 64) * 64) * 4;
 	color = get_rgb_color(imgs->floor_texture->pixels[value],
 			imgs->floor_texture->pixels[value + 1],
@@ -159,15 +159,28 @@ void	floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player
 	mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, color);
 }
 
-void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block **blocks, t_player *player)
+void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block **blocks, t_player *player, t_options *options)
 {
 	t_col_drawing	tcd;
 
 	setup_col_struct(&tcd, dda, map, blocks);
+	tcd.floor_d = cosf(dda->current_angle - player->playerangle);
 	while (tcd.iterator < tcd.ceil_floor_lineH)
-		ceil_drawing(imgs, dda, &tcd, player);
+	{
+		if (options->skybox == true)
+			ceil_drawing(imgs, dda, &tcd, player);
+		else
+			mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++,
+				map->bt_color[0]);
+	}
 	while (tcd.iterator < tcd.wall_lineH)
 		wall_drawing(imgs, dda, &tcd);
 	while (tcd.iterator < SCREEN_HEIGHT)
-		floor_drawing(imgs, dda, &tcd, player);
+	{
+		if (options->floor_texture == true)
+			floor_drawing(imgs, dda, &tcd, player);
+		else
+			mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++,
+				map->bt_color[1]);
+	}
 }

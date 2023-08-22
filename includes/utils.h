@@ -9,6 +9,8 @@ void	basical_map_check(char **map_name);
 void	msg_write_multiple(int fd, const char *str1, const char *str2);
 void	msg_write(int fd, int exitVal, MsgType msg);
 
+char	**ft_split(char const *s, char c);
+
 //map_utils//
 
 bool	is_player_char(char c);
@@ -28,6 +30,8 @@ char	*ft_itoa(int n);
 bool	is_str_blank(const char *s);
 void	free_tab(char **tab, int size);
 void	copy_tab(char **tab_src, char **tab_dst, int height, int width);
+void	ft_putstr_fd(char *s, int fd);
+int	ft_strcmp(const char *s1, const char *s2);
 
 //struct//
 

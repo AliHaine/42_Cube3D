@@ -81,6 +81,7 @@ int	main(int argc, char *argv[])
 
 	msg_write(1, -1, STARTING);
 	core_init(&core);
+	initialize_options(&core);
 	item_loader(&core);
 	block_loader(&core);
     map_manager(argv[1], &core.maps[0], &core.imgs, &core.player);

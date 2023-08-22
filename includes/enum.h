@@ -25,6 +25,11 @@ typedef enum {
     TRY_LOAD_COLOR,
     MINIMAP_INIT,
     DEATH_PLAYER,
+	OPTIONS_CREATE_FAILURE,
+	BAD_OPTION_PATERN,
+	OPTIONS_LOAD,
+	UNKNOWN_OPTION,
+	OPTION_WRONG_VALUE,
 } MsgType;
 
 typedef enum {
@@ -100,6 +105,11 @@ static const char *Messages[] = {
 		"\e[40;33mTrying to load color: ",
 		"\n\e[40;33mInitialization of Minimap.. ",
 		"\e[40;31mYou died.",
+		"\e[40;31mFailed to create options file",
+		"\e[40;31mError: Option must be \"VAR=VALUE\\n\" | Ignoring this line",
+		"\e[40;33mTrying to load options: ",
+		"\e[40;31mError: Unknown option",
+		"\e[40;31mError: Value must be \"TRUE\" or \"FALSE\"",
 };
 
 #endif

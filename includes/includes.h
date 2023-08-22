@@ -27,13 +27,13 @@
 # include <sys/time.h>
 
 //dda//
-void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block **blocks);
+void	raycasting(t_player *player, t_imgs *imgs, t_map *map, t_block **blocks, t_options *options);
 
 //display.c
 void		display(void *params);
 
 //drawing.c
-void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block **blocks, t_player *player);
+void	columns_drawing(t_imgs *imgs, t_dda *dda, t_map *map, t_block **blocks, t_player *player, t_options *options);
 void	draw_energy_bar(mlx_image_t *img, int energy);
 void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_map *map);
 
@@ -65,6 +65,7 @@ void	scroll_hook(double x, double y, void *param);
 void	map_manager(char *argv, t_map *map, t_imgs *imgs, t_player *player);
 void	texture_main(t_file *file, t_imgs *imgs, t_map *map);
 bool	parse_main(t_file *file, t_player *player, t_map *map);
+void	initialize_options(t_core *core);
 
 //sound//
 void	init_sound_empty(t_sounds *sounds);
