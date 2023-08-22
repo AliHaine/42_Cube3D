@@ -12,7 +12,7 @@
 
 #include "../../includes/includes.h"
 
-static void	jump_to_next(t_dda *dda, t_world *world, const float playerpos[2], bool val, int max)
+static void	jump_to_next(t_dda *dda, const float playerpos[2], bool val)
 {
 	int	m_xy[2];
 	t_world	*world;
@@ -87,12 +87,12 @@ static void	vertical_cast(t_dda *dda, float playerpos[2])
 		dda->hit_direction[0] = 3;
 	}
 	if (dda->hit_direction[0] > 0)
-		jump_to_next(dda, world, playerpos, 1, world->height * 3);
+		jump_to_next(dda, playerpos, 1);
 	dda->v_xy[0] = dda->r_xy[0];
 	dda->v_xy[1] = dda->r_xy[1];
 }
 
-void	raycasting(t_player *player, t_imgs *imgs, t_world *world, t_block **blocks, t_options *options)
+void	raycasting(t_player *player, t_imgs *imgs, t_block **blocks, t_options *options)
 {
 	float start_angle;
 	t_dda dda;
