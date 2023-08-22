@@ -6,7 +6,7 @@
 /*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 00:14:36 by ayagmur           #+#    #+#             */
-/*   Updated: 2023/06/30 00:14:38 by ayagmur          ###   ########.fr       */
+/*   Updated: 2023/08/22 16:45:42 by ngalzand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void	raycasting(t_player *player, t_imgs *imgs, t_world *world, t_block **blocks
 			dda.r_xy[1] = dda.v_xy[1];
 			dda.dist_hv[0] = dda.dist_hv[1];
 			dda.hit_hv = 1;
+      dda.chunk_hv[0] = dda.chunk_hv[1];
 		}
 		fisheyes_fixor(&dda, player->playerangle);
 		if (dda.dist_hv[0] < 10000)
