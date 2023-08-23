@@ -6,7 +6,7 @@ void	reset_slot(t_core *core, t_slot *slot)
 		slot->item->icon->instances[slot->icon_instance].enabled = false;
 	if (slot->bar_icon_instance != -1)
 		slot->item->icon->instances[slot->bar_icon_instance].enabled = false;
-	slot->item = &core->items[HAND];
+	slot->item = get_item(HAND);
 	slot->items_number = 1;
 	slot->items_number_img->instances[0].enabled = false;
 	slot->items_number_img_bar->instances[0].enabled = false;

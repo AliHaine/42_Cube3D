@@ -13,7 +13,8 @@
 #ifndef BIOME_H
 #define BIOME_H
 
-# include "../includes.h"
+#include "block.h"
+typedef struct s_block t_block;
 
 typedef enum {
 	BIOME_NATURE,

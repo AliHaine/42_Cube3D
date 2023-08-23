@@ -28,11 +28,13 @@ void	get_color_wall_texture(mlx_texture_t *wall_texture, int r, t_col_drawing *t
             ,wall_texture->pixels[value + 2],wall_texture->pixels[value + 3]);
 }
 
-void	get_color_block_texture(mlx_image_t *block_texture, t_dda *dda, t_col_drawing *tcd)
+void	get_color_block_texture(t_dda *dda, t_col_drawing *tcd)
 {
 	int			value;
 	int			r;
+	mlx_image_t *block_texture;
 
+	block_texture = get_block_image(get_block_name_from_char(tcd->hit_block));
 	if (dda->hit_hv == 1)
         r = (int) dda->r_xy[1];
 	else

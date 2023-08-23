@@ -60,40 +60,26 @@ static void	play_block_animation(t_animation *animation, t_block *block)
 	block->image = animation->image[i++];
 }
 
-void	animation_listener(t_item *items, t_block **blocks)
+void	animation_listener()
 {
-
+	t_block *block;
+	t_item	*item;
 	int i;
 
 	i = 0;
-	//changer pour une quantite indefini d'anim
-	if (items[0].animation.is_playing)
+	item = get_item(i);
+	while (item)
 	{
-		play_attack_animation(&items[0].animation, items[0].image);
-	} else if (items[1].animation.is_playing) {
-		play_attack_animation(&items[1].animation, items[1].image);
-	} else if (items[2].animation.is_playing) {
-        play_attack_animation(&items[2].animation, items[2].image);
-    } else if (items[3].animation.is_playing) {
-        play_attack_animation(&items[3].animation, items[3].image);
-    } else if (items[4].animation.is_playing) {
-		play_attack_animation(&items[4].animation, items[4].image);
-	} else if (items[6].animation.is_playing) {
-		play_attack_animation(&items[6].animation, items[6].image);
-	} else if (items[8].animation.is_playing) {
-		play_attack_animation(&items[8].animation, items[8].image);
-	} else if (items[9].animation.is_playing) {
-		play_attack_animation(&items[9].animation, items[9].image);
-	} else if (items[10].animation.is_playing) {
-		play_attack_animation(&items[10].animation, items[10].image);
-	} else if (items[11].animation.is_playing) {
-		play_attack_animation(&items[11].animation, items[11].image);
+		if (item->animation.is_playing)
+			play_attack_animation(&item->animation, item->image);
+		item = get_item(i++);
 	}
-
-	while (*blocks)
+	i = 0;
+	block = get_block(i);
+	while (block)
 	{
-		if ((*blocks)->animation.is_playing)
-			play_block_animation(&(*blocks)->animation, *blocks);
-		blocks++;
+		if (block->animation.is_playing)
+			play_block_animation(&block->animation, block);
+		block = get_block(i++);
 	}
 }

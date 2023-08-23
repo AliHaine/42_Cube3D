@@ -92,7 +92,7 @@ static void	vertical_cast(t_dda *dda, float playerpos[2])
 	dda->v_xy[1] = dda->r_xy[1];
 }
 
-void	raycasting(t_player *player, t_imgs *imgs, t_block **blocks, t_options *options)
+void	raycasting(t_player *player, t_imgs *imgs, t_options *options)
 {
 	float start_angle;
 	t_dda dda;
@@ -131,6 +131,6 @@ void	raycasting(t_player *player, t_imgs *imgs, t_block **blocks, t_options *opt
 				dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[1];
 			dda.wall_height = (SCREEN_HEIGHT * 64) / dda.dist_hv[0];
 		}
-		columns_drawing(imgs, &dda, blocks, player, options);
+		columns_drawing(imgs, &dda, player, options);
 	}
 }

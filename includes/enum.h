@@ -32,7 +32,7 @@ typedef enum {
 	OPTION_WRONG_VALUE,
 } MsgType;
 
-typedef enum {
+/*typedef enum {
 	PORTAL,
 	NETHERRACK,
 	OBSIDIAN,
@@ -44,9 +44,9 @@ typedef enum {
 	BACKROOM_YELLOW,
 	BACKROOM_FLOOR,
 	BUG,
-}	Block;
+}	Block;*/
 
-typedef enum {
+/*typedef enum {
     HAND,
     SWORD_NETHER,
     SWORD_DIAMOND,
@@ -59,7 +59,7 @@ typedef enum {
 	FLINT,
 	LIGHTER,
 	DIAMOND_PICKAXE
-}   Item;
+}   Item;*/
 
 typedef enum {
 	PEACEFUL,
@@ -68,7 +68,7 @@ typedef enum {
 	HARD,
 }	Difficulty;
 
-static const char *ItemName[] = {
+/*static const char *ItemName[] = {
 		"hand",
 		"sword_nether",
 		"sword_diamond",
@@ -81,9 +81,9 @@ static const char *ItemName[] = {
 		"flint",
 		"lighter",
 		"diamond_pickaxe"
-};
+};*/
 
-static const char *BlockName[] = {
+/*static const char *BlockName[] = {
 		"netherportal",
 		"netherrack",
 		"obsidian",
@@ -95,7 +95,7 @@ static const char *BlockName[] = {
 		"backroom_yellow",
 		"backroom_floor",
 		"bug",
-};
+};*/
 
 static const char *Messages[] = {
 		"\e[40;31mError \nThere is an unknow char in the world",

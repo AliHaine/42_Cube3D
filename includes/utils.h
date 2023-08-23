@@ -63,7 +63,7 @@ bool	is_player_running(t_player *player);
 
 void	fisheyes_fixor(t_dda *dda, float player_angle);
 void	get_color_wall_texture(mlx_texture_t *wall_texture, int r, t_col_drawing *tcd);
-void	get_color_block_texture(mlx_image_t *block_texture, t_dda *dda, t_col_drawing *tcd);
+void	get_color_block_texture(t_dda *dda, t_col_drawing *tcd);
 uint32_t	apply_fog(uint32_t color, float fog_strength);
 
 // inventory / s_slot
@@ -75,7 +75,7 @@ void	change_item_number(t_core *core, t_slot *src, short n);
 
 //block_utils
 
-t_block *get_block_from_char(t_block **block, char block_char);
+//t_block *get_block_from_char(t_block **block, char block_char);
 
 //world_utils
 /*bool    is_player_chunk_change(t_player *player, t_map *map);

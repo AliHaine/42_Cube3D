@@ -12,21 +12,23 @@
 
 #include "../../includes/includes.h"
 
-static void create_block(t_block **block, Block block_name, t_item *item, int strength, mlx_t *mlx, char block_char, bool is_rigid)
+static void create_block(Block block_name, t_item *item, int strength, mlx_t *mlx, char block_char, bool is_rigid)
 {
-	char *path;
+	char	*path;
+	t_block	*block;
 
-	*block = malloc(sizeof(t_block));
-	(*block)->name = block_name;
-	(*block)->item = item;
-	(*block)->strength = strength;
-	(*block)->block_char = block_char;
-	(*block)->is_rigid = is_rigid;
+	block = malloc(sizeof(t_block));
+	block->name = block_name;
+	block->item = item;
+	block->strength = strength;
+	block->block_char = block_char;
+	block->is_rigid = is_rigid;
 	path = malloc(sizeof(char) * (ft_strlen(BlockName[block_name]) + 19));
 	put_two_string(path, "assets/blocks/", BlockName[block_name], 0);
-	if (!set_image_from_path(mlx, path, &(*block)->image))
+	if (!set_image_from_path(mlx, path, &block->image))
 		msg_write(2, 2, ERROR_FATAL);
 	free(path);
+	set_block(block);
 }
 
 static void create_block_animation(t_block *block, int anim_size, mlx_t *mlx)
@@ -63,19 +65,16 @@ static void create_block_animation(t_block *block, int anim_size, mlx_t *mlx)
 
 void	block_loader(t_core *core)
 {
-	create_block(&core->blocks[0], PORTAL, 0, 1, core->mlx, 'Z', false);
-	create_block_animation(core->blocks[0], 14, core->mlx);
-	create_block(&core->blocks[1], NETHERRACK, 0, 1, core->mlx, 'R', true);
-	create_block(&core->blocks[2], OBSIDIAN, 0, 2, core->mlx, 'O', true);
-    create_block(&core->blocks[3], CRYING_OBSIDIAN, 0, 2, core->mlx, 'L', true);
-    create_block(&core->blocks[4], CRACKED_DEEPSLAT_TILES, 0, 2, core->mlx, 'P', true);
-    create_block(&core->blocks[5], DEEPSLATE_COAL_ORE, 0, 2, core->mlx, 'I', true);
-	create_block(&core->blocks[6], NETHER_WART_BLOCK, 0, 2, core->mlx, 'Y', true);
-	create_block(&core->blocks[7], GRASS, 0, 2, core->mlx, '@', true);
-	create_block(&core->blocks[8], BACKROOM_YELLOW, 0, 0, core->mlx, '[', true);
-	create_block(&core->blocks[9], BACKROOM_FLOOR, 0, 0, core->mlx, ']', true);
-	create_block(&core->blocks[10], BUG, 0, 0, core->mlx, '(', false);
-
-
-	core->blocks[11] = 0;
+	create_block(PORTAL, 0, 1, core->mlx, 'Z', false);
+	create_block_animation(get_block(PORTAL), 14, core->mlx);
+	create_block(NETHERRACK, 0, 1, core->mlx, 'R', true);
+	create_block(OBSIDIAN, 0, 2, core->mlx, 'O', true);
+    create_block(CRYING_OBSIDIAN, 0, 2, core->mlx, 'L', true);
+    create_block(CRACKED_DEEPSLAT_TILES, 0, 2, core->mlx, 'P', true);
+    create_block(DEEPSLATE_COAL_ORE, 0, 2, core->mlx, 'I', true);
+	create_block(NETHER_WART_BLOCK, 0, 2, core->mlx, 'Y', true);
+	create_block(GRASS, 0, 2, core->mlx, '@', true);
+	create_block(BACKROOM_YELLOW, 0, 0, core->mlx, '[', true);
+	create_block(BACKROOM_FLOOR, 0, 0, core->mlx, ']', true);
+	create_block(BUG, 0, 0, core->mlx, '(', false);
 }

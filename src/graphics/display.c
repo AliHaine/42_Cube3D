@@ -56,7 +56,7 @@ void	display(void *params)
 
 	core = (t_core *) params;
 	world = get_world_active();
-	animation_listener(core->items, core->blocks);
+	animation_listener();
 	display_item_in_hand(&core->player);
 	display_icon_in_invbar(get_first_slot(core->player.slot));
 	mlx_delete_image(core->mlx, core->imgs.img_map);
@@ -65,7 +65,7 @@ void	display(void *params)
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
 	core->imgs.img_map = mlx_texture_to_image(core->mlx, core->imgs.map_texture);
-	raycasting(&core->player, &core->imgs, core->blocks, &core->options);
+	raycasting(&core->player, &core->imgs, &core->options);
 	minimap_drawing(&core->imgs, core->player.player_pos_xy, world);
 	core->imgs.img_player = rotate_image(core->mlx, core->imgs.img_player_texture, core->player.playerangle + (PI / 2));
 	mlx_resize_image(core->imgs.img_map, 250, 250);

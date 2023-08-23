@@ -27,19 +27,22 @@
 # include "utils.h"
 # include "defines.h"
 # include <sys/time.h>
+# include "enum.h"
 
 # include "concepts/world.h"
+# include "concepts/block.h"
+# include "concepts/item.h"
 
 typedef struct s_world t_world;
 
 //dda//
-void	raycasting(t_player *player, t_imgs *imgs, t_block **blocks, t_options *options);
+void	raycasting(t_player *player, t_imgs *imgs, t_options *options);
 
 //display.c
 void		display(void *params);
 
 //drawing.c
-void	columns_drawing(t_imgs *imgs, t_dda *dda, t_block **blocks, t_player *player, t_options *options);
+void	columns_drawing(t_imgs *imgs, t_dda *dda, t_player *player, t_options *options);
 void	draw_energy_bar(mlx_image_t *img, int energy);
 void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *map);
 
@@ -48,8 +51,8 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *map);
 void	sound_loader(t_sounds *sounds);
 void	texture_loader(t_core *core);
 void	mlx_hook_loader(t_core *core);
-void	item_loader(t_core *core);
-void	block_loader(t_core *core);
+//void	item_loader(t_core *core);
+//void	block_loader(t_core *core);
 //void	world_loader(t_core *core);
 
 //??
@@ -81,7 +84,7 @@ void	play_sound_alt(uint32_t s, bool play, bool loop);
 void	play_sound(uint32_t s);
 
 //animations//
-void    animation_listener(t_item *items, t_block **block);
+void    animation_listener();
 
 	//player interaction//
 void	player_listener(void *params);
@@ -95,7 +98,7 @@ void	teleport_player(t_player *player);
 void	set_char_at_forward(char c, t_player *player, t_world *world);
 
 //item//
-void    give_item(t_core *core, t_item *item, int slot_id, int number);
+//void    give_item(t_core *core, t_item *item, int slot_id, int number);
 
 //heal//
 bool	is_player_death(int player_health);
@@ -111,10 +114,10 @@ bool	player_have_enough_energy(t_player *player, int value);
 	//struct
 void	struct_setup(t_core *core);
 
-void	setup_slot_struct(mlx_t *mlx, t_player *player, t_item *item);
+void	setup_slot_struct(mlx_t *mlx, t_player *player);
 t_slot	*get_first_slot(t_slot *slot);
 
-void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world, t_block **blocks);
+void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world);
 
 
 //portal

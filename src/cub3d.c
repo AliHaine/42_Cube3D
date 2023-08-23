@@ -32,7 +32,7 @@ static void	core_init(t_core *core)
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	core->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "セグメンテーションフォルトのないプログラムは、鋭い剣のように正確に使える。", true);
 	texture_loader(core);
-	struct_setup(core);
+	//struct_setup(core);
 	sound_loader(&core->sounds);
 	imgs_init(core->mlx, &core->imgs);
 	sound_loader(&core->sounds);
@@ -83,19 +83,20 @@ int	main(int argc, char *argv[])
 	initialize_options(&core);
 	item_loader(&core);
 	block_loader(&core);
+	struct_setup(&core);
     map_manager(argv[1], get_world(0), &core.imgs, &core.player);
     world_loader(&core);
-    give_item(&core, &core.items[SWORD_NETHER], 2, 32);
-	give_item(&core, &core.items[SWORD_NETHER], 32, 52);
-    give_item(&core, &core.items[SWORD_DIAMOND], 5, 1);
-    give_item(&core, &core.items[SWORD_IRON], 1, 1);
-    give_item(&core, &core.items[SWORD_RUBY], 8, 1);
-	give_item(&core, &core.items[STICK], 14, 3);
-	give_item(&core, &core.items[DIAMOND], 16, 2);
-	give_item(&core, &core.items[IRON], 22, 1);
-	give_item(&core, &core.items[FLINT], 36, 1);
-	give_item(&core, &core.items[LIGHTER], 24, 1);
-	give_item(&core, &core.items[DIAMOND_PICKAXE], 12, 1);
+    give_item(&core, get_item(SWORD_NETHER), 2, 32);
+	give_item(&core, get_item(SWORD_NETHER), 32, 52);
+    give_item(&core, get_item(SWORD_DIAMOND), 5, 1);
+    give_item(&core, get_item(SWORD_IRON), 1, 1);
+    give_item(&core, get_item(SWORD_RUBY), 8, 1);
+	give_item(&core, get_item(STICK), 14, 3);
+	give_item(&core, get_item(DIAMOND), 16, 2);
+	give_item(&core, get_item(IRON), 22, 1);
+	give_item(&core, get_item(FLINT), 36, 1);
+	give_item(&core, get_item(LIGHTER), 24, 1);
+	give_item(&core, get_item(DIAMOND_PICKAXE), 12, 1);
     usleep(60000);
 	// J'init l'image la psq elle a besoin des variables initialisees par map_manager
 	// C'est censé adapter la minimap a la taille de la carte mais pas a la resolution donc ca segfault tjr

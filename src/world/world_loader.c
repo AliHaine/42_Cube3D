@@ -106,7 +106,7 @@ static t_biome biome_creator(int block_number, ...)
     biome.block = malloc(sizeof(t_block) * block_number);
     biome.block_number = block_number;
     while (block_number-- > 0)
-		biome.block[block_number] = va_arg(va_biome, t_block);
+		biome.block[block_number] = *get_block(va_arg(va_biome, Block));
     va_end(va_biome);
     return (biome);
 }
@@ -114,17 +114,17 @@ static t_biome biome_creator(int block_number, ...)
 
 void	world_loader(t_core *core)
 {
-	set_biome(biome_creator(6, *core->blocks[NETHERRACK], *core->blocks[NETHER_WART_BLOCK], *core->blocks[OBSIDIAN], *core->blocks[CRYING_OBSIDIAN], *core->blocks[CRACKED_DEEPSLAT_TILES], *core->blocks[DEEPSLATE_COAL_ORE]), BIOME_DARK);
-	set_biome(biome_creator(1, *core->blocks[BACKROOM_YELLOW]), BIOME_BACKROOM);
+	set_biome(biome_creator(6, NETHERRACK, NETHER_WART_BLOCK, OBSIDIAN, CRYING_OBSIDIAN, CRACKED_DEEPSLAT_TILES, DEEPSLATE_COAL_ORE), BIOME_DARK);
+	set_biome(biome_creator(1, BACKROOM_YELLOW), BIOME_BACKROOM);
 
 
 	world_copy_from_chunk(get_world(WORLD_DEFAULT));
 
-	world_creator(get_world(WORLD_NETHER), core->sounds.ambiant, 32, 32, 0, core->imgs.skybox_nether, core->blocks[NETHERRACK]->image, HARD, false);
+	world_creator(get_world(WORLD_NETHER), core->sounds.ambiant, 32, 32, 0, core->imgs.skybox_nether, get_block_image(NETHERRACK), HARD, false);
 	get_world(WORLD_NETHER)->biome = world_get_biomes(1, get_biome(BIOME_DARK));
     world_generator(get_world(WORLD_NETHER));
 
-	world_creator(get_world(WORLD_BACKROOM), core->sounds.ambiant, 32, 32, 0, core->imgs.skybox_nether, core->blocks[BACKROOM_FLOOR]->image, HARD, false);
+	world_creator(get_world(WORLD_BACKROOM), core->sounds.ambiant, 32, 32, 0, core->imgs.skybox_nether, get_block_image(BACKROOM_FLOOR), HARD, false);
 	get_world(WORLD_BACKROOM)->biome = world_get_biomes(1, get_biome(BIOME_BACKROOM));
 	world_generator(get_world(WORLD_BACKROOM));
 }

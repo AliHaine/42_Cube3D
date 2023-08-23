@@ -2,5 +2,5 @@
 
 void	struct_setup(t_core *core)
 {
-	setup_slot_struct(core->mlx, &core->player, &core->items[HAND]);
+	setup_slot_struct(core->mlx, &core->player);
 }

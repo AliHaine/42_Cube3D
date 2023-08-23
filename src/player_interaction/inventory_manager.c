@@ -120,7 +120,7 @@ void	give_one_to(t_core *core, t_slot *src, t_slot *dst)
 		&& dst->slot_id != 46)
 	{
 		change_item_number(core, src, src->items_number - 1);
-		give_item(core, &core->items[src->item->name], dst->slot_id, 1);
+			give_item(core, get_item(src->item->name), dst->slot_id, 1);
 		display_item(core, dst);
 	}
 }

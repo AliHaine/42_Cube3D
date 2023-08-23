@@ -40,14 +40,14 @@ static t_slot	*add_first_noed(mlx_t *mlx, t_item *hand_item)
 	return (first);
 }
 
-void	setup_slot_struct(mlx_t *mlx, t_player *player, t_item *hand_item)
+void	setup_slot_struct(mlx_t *mlx, t_player *player)
 {
 	int	i;
 
 	i = 47;
-	player->slot = add_first_noed(mlx, hand_item);
+	player->slot = add_first_noed(mlx, get_item(HAND));
 	while (i-- > 0)
-		player->slot = add_new_noed(mlx, i, player->slot, hand_item);
+		player->slot = add_new_noed(mlx, i, player->slot, get_item(HAND));
 	player->slot = player->slot->next;
     player->slot->prev = 0;
 }

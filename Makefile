@@ -10,8 +10,6 @@ SRCS		=	src/cub3d.c \
 				src/graphics/animations.c \
 				src/loading/texture_loader.c \
 				src/loading/sound_loader.c \
-				src/loading/item_loader.c \
-				src/loading/block_loader.c \
 				src/loading/other_loader.c \
 				src/parsing/map_manager.c \
 				src/parsing/map_parse.c \
@@ -22,7 +20,6 @@ SRCS		=	src/cub3d.c \
 				src/struct/struct_slot.c \
 				src/struct/struct_drawing.c \
 				src/player_interaction/player_listener.c \
-				src/player_interaction/item.c \
 				src/player_interaction/heal.c \
 				src/player_interaction/build.c \
 				src/player_interaction/energy.c \
@@ -38,6 +35,11 @@ SRCS		=	src/cub3d.c \
 				src/world/world_utils.c \
 				src/world/chunk_utils.c \
 				src/world/world_dynamic_generator.c \
+				src/block/block_accessor.c \
+				src/block/block_loader.c \
+				src/item/item_accessor.c \
+				src/item/item_loader.c \
+				src/item/item.c \
 				src/utils/map_utils.c \
 				src/utils/msg_utils.c \
 				src/utils/std_func_utils.c \
@@ -45,7 +47,6 @@ SRCS		=	src/cub3d.c \
 				src/utils/raycast_utils.c \
 				src/utils/move_utils.c \
 				src/utils/mlx_texture_utils.c \
-				src/utils/block_utils.c \
 				src/utils/player_utils.c \
 				src/utils/get_next_line/get_next_line.c \
 				src/utils/get_next_line/get_next_line_utils.c \

@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   blocks_utils.c                                     :+:      :+:    :+:   */
+/*   item_accessor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 17:05:11 by ayagmur           #+#    #+#             */
-/*   Updated: 2023/07/31 17:05:13 by ayagmur          ###   ########.fr       */
+/*   Created: 2023/08/23 23:27:24 by ayagmur           #+#    #+#             */
+/*   Updated: 2023/08/23 23:27:25 by ayagmur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/includes.h"
+#include "../../includes/concepts/item.h"
 
-t_block *get_block_from_char(t_block **block, char block_char)
+static t_item			*g_items[12];
+
+t_item	*get_item(Item item)
 {
-	while (*block)
-	{
-		if ((*block)->block_char == block_char)
-			return (*block);
-		block++;
-	}
-	return (0);
+	return (g_items[item]);
+}
+
+void	set_item(t_item *item)
+{
+	g_items[item->name] = item;
+	g_items[11] = 0;
 }

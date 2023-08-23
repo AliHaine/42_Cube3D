@@ -12,10 +12,12 @@
 
 #include "../../includes/includes.h"
 
-static void	create_item(t_item *item, mlx_t *mlx, Item item_name)
+static void	create_item(Item item_name, mlx_t *mlx)
 {
 	char	*path;
+	t_item	*item;
 
+	item = malloc(sizeof(t_item));
 	item->name = item_name;
 	item->animation.image = 0;
 	path = malloc(sizeof(char) * (ft_strlen(ItemName[item_name]) + 18));
@@ -31,6 +33,7 @@ static void	create_item(t_item *item, mlx_t *mlx, Item item_name)
 	item->instance_number = 0;
 	item->image->instances[0].enabled = false;
 	item->image->instances[0].z = 8;
+	set_item(item);
 }
 
 static void	create_item_stats(t_item *item, int dura, int damage, int strength, int range)
@@ -72,47 +75,53 @@ static void create_item_animation(t_item *item, int anim_size, int x_depth, int 
 
 void	item_loader(t_core *core)
 {
-	create_item(&core->items[HAND], core->mlx, HAND);
-	create_item_stats(&core->items[HAND], -1, 2, 10, 3);
-	create_item_animation(&core->items[HAND], 4, 150, 0, core->mlx);
+	create_item(HAND, core->mlx);
+	create_item_stats(get_item(HAND), -1, 2, 10, 3);
+	create_item_animation(get_item(HAND), 4, 150, 0, core->mlx);
 
-	create_item(&core->items[SWORD_NETHER], core->mlx, SWORD_NETHER);
-	create_item_stats(&core->items[SWORD_NETHER], 10, 5, 1, 3);
-	create_item_animation(&core->items[SWORD_NETHER], 3, 150, 0, core->mlx);
+	create_item(SWORD_NETHER, core->mlx);
+	create_item_stats(get_item(SWORD_NETHER), 10, 5, 1, 3);
+	create_item_animation(get_item(SWORD_NETHER), 3, 150, 0, core->mlx);
 
-	create_item(&core->items[SWORD_DIAMOND], core->mlx, SWORD_DIAMOND);
-    create_item_stats(&core->items[SWORD_DIAMOND], 10, 5, 1, 3);
-	create_item_animation(&core->items[SWORD_DIAMOND], 5, 150, 0, core->mlx);
+	create_item(SWORD_DIAMOND, core->mlx);
+    create_item_stats(get_item(SWORD_DIAMOND), 10, 5, 1, 3);
+	create_item_animation(get_item(SWORD_DIAMOND), 5, 150, 0, core->mlx);
 
-	create_item(&core->items[SWORD_RUBY], core->mlx, SWORD_RUBY);
-    create_item_stats(&core->items[SWORD_RUBY], 10, 5, 1, 3);
-	create_item_animation(&core->items[SWORD_RUBY], 5, 150, 0, core->mlx);
+	create_item(SWORD_RUBY, core->mlx);
+    create_item_stats(get_item(SWORD_RUBY), 10, 5, 1, 3);
+	create_item_animation(get_item(SWORD_RUBY), 5, 150, 0, core->mlx);
 
-	create_item(&core->items[SWORD_IRON], core->mlx, SWORD_IRON);
-	create_item_stats(&core->items[SWORD_IRON], 10, 5, 1, 3);
-	create_item_animation(&core->items[SWORD_IRON], 4, 150, 0, core->mlx);
+	create_item(SWORD_IRON, core->mlx);
+	create_item_stats(get_item(SWORD_IRON), 10, 5, 1, 3);
+	create_item_animation(get_item(SWORD_IRON), 4, 150, 0, core->mlx);
 
-	create_item(&core->items[STICK], core->mlx, STICK);
-	create_item_stats(&core->items[STICK], -1, 2, 1, 3);
-	create_item_animation(&core->items[STICK], 6, 0, -50, core->mlx);
+	create_item(STICK, core->mlx);
+	create_item_stats(get_item(STICK), -1, 2, 1, 3);
+	create_item_animation(get_item(STICK), 6, 0, -50, core->mlx);
 
-	create_item(&core->items[DIAMOND], core->mlx, DIAMOND);
-	create_item_stats(&core->items[DIAMOND], -1, 2, 1, 3);
+	create_item(DIAMOND, core->mlx);
+	create_item_stats(get_item(DIAMOND), -1, 2, 1, 3);
 
-	create_item(&core->items[IRON], core->mlx, IRON);
-	create_item_stats(&core->items[IRON], -1, 2, 1, 3);
-	create_item_animation(&core->items[IRON], 4, 0, -50, core->mlx);
+	create_item(IRON, core->mlx);
+	create_item_stats(get_item(IRON), -1, 2, 1, 3);
+	create_item_animation(get_item(IRON), 4, 0, -50, core->mlx);
 
-	create_item(&core->items[FLINT], core->mlx, FLINT);
-	create_item_stats(&core->items[FLINT], -1, 2, 1, 3);
-	create_item_animation(&core->items[FLINT], 4, 0, -50, core->mlx);
+	create_item(FLINT, core->mlx);
+	create_item_stats(get_item(FLINT), -1, 2, 1, 3);
+	create_item_animation(get_item(FLINT), 4, 0, -50, core->mlx);
 
-	create_item(&core->items[LIGHTER], core->mlx, LIGHTER);
-	create_item_stats(&core->items[LIGHTER], 10, 2, 1, 3);
-	create_item_animation(&core->items[LIGHTER], 3, 0, 150, core->mlx);
+	create_item(LIGHTER, core->mlx);
+	create_item_stats(get_item(LIGHTER), 10, 2, 1, 3);
+	create_item_animation(get_item(LIGHTER), 3, 0, 150, core->mlx);
 
-	create_item(&core->items[DIAMOND_PICKAXE], core->mlx, DIAMOND_PICKAXE);
-	create_item_stats(&core->items[DIAMOND_PICKAXE], 10, 2, 1, 3);
-	create_item_animation(&core->items[DIAMOND_PICKAXE], 4, 0, 150, core->mlx);
+	create_item(DIAMOND_PICKAXE, core->mlx);
+	create_item_stats(get_item(DIAMOND_PICKAXE), 10, 2, 1, 3);
+	create_item_animation(get_item(DIAMOND_PICKAXE), 4, 0, 150, core->mlx);
+
+	for (int i = 0; get_item(i); i++)
+	{
+		printf("%d %s\n", i, ItemName[get_item(i)->name]);
+	}
+
 }
 
