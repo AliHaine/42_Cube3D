@@ -19,17 +19,11 @@ static bool	is_player_under_portal(const int player_cell_xy[2], const t_world *w
 	return (false);
 }
 
-static void	change_player_world(t_world	*new_world)
-{
-	get_world_active()->is_active = false;
-	new_world->is_active = true;
-}
-
+//todo
 void	portal_listener(t_player *player, t_world *world,t_sounds *sounds)
 {
 	if (!is_player_under_portal(player->player_cell_xy, world))
 		return ;
-	change_player_world(get_world(NETHER));
+	change_active_world(get_world_from_portal(world->world[4][player->player_cell_xy[1] % world->height][player->player_cell_xy[0] % world->width]));
 	teleport_player(player);
-
 }

@@ -12,16 +12,10 @@
 
 #include "../../includes/includes.h"
 
-static void	player_place_map(t_player *player, int num)
+void	change_active_world(t_world	*new_world)
 {
-	if (num == 1)
-		player->player_pos_xy[1] += player->player_pos_xy[1];
-	else if (num == 3)
-		player->player_pos_xy[0] += player->player_pos_xy[0];
-	else if (num == 5)
-		player->player_pos_xy[0] -= (player->player_pos_xy[0] / 2);
-	else if (num == 7)
-		player->player_pos_xy[1] -= (player->player_pos_xy[1] / 2);
+	new_world->is_active = true;
+	get_world_active()->is_active = false;
 }
 
 void print_entire_world(t_world *world)

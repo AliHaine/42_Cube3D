@@ -40,7 +40,10 @@ typedef enum {
     CRACKED_DEEPSLAT_TILES,
     DEEPSLATE_COAL_ORE,
     NETHER_WART_BLOCK,
-
+	GRASS,
+	BACKROOM_YELLOW,
+	BACKROOM_FLOOR,
+	BUG,
 }	Block;
 
 typedef enum {
@@ -87,7 +90,11 @@ static const char *BlockName[] = {
         "crying_obsidian",
         "cracked_deepslate_tiles",
         "deepslate_coal_ore",
-        "nether_wart_block"
+        "nether_wart_block",
+		"grass",
+		"backroom_yellow",
+		"backroom_floor",
+		"bug",
 };
 
 static const char *Messages[] = {

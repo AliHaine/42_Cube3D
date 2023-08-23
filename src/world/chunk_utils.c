@@ -60,10 +60,16 @@ void	chunk_generator(t_world *world, int chunk)
 	while (y < world->height) {
 		while (x < world->width) {
 			world->world[chunk][y][x] = '0';
-			if (get_rand_num(4) ==0)
+			if (get_rand_num(4) == 0)
 			{
-				if (biome != NULL)
-					get_world(NETHER)->world[chunk][y][x] = get_random_block_from_biome(biome).block_char;
+				if (get_rand_num(10000) == 0)
+				{
+					printf("b portal generated at %d %d %d\n", chunk, x, y);
+					world->world[chunk][y][x] = '(';
+				}
+				else if (biome != NULL) {
+					world->world[chunk][y][x] = get_random_block_from_biome(biome).block_char;
+				}
 				else
 					world->world[chunk][y][x] = '1';
 			}

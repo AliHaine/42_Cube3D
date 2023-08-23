@@ -16,8 +16,9 @@
 # include "../includes.h"
 
 typedef enum {
-	NATURE,
-	DARK,
+	BIOME_NATURE,
+	BIOME_DARK,
+	BIOME_BACKROOM,
 }	Biome;
 
 typedef struct s_biome

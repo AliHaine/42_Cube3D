@@ -17,10 +17,10 @@
 #include "biome.h"
 
 typedef enum {
-	DEFAULT,
-	NETHER,
-	END,
-	BACKROOM,
+	WORLD_DEFAULT,
+	WORLD_NETHER,
+	WORLD_END,
+	WORLD_BACKROOM,
 }	World;
 
 typedef struct s_world
@@ -45,14 +45,16 @@ void	chunk_generator(t_world *world, int chunk);
 
 //accessor
 t_world	*get_world(int num);
+t_world	*get_world_active(void);
+t_world *get_world_from_portal(char c);
 void	set_world(t_world map, int num);
 
 //utils
-t_world	*get_world_active(void);
 bool    is_player_chunk_change(t_player *player, t_world *world);
 int		get_chunk_from_pos(int x, int y);
 bool	is_chunk_on_corner(int chunk_num);
 bool    world_dynamic_generator(t_player *player);
+void	change_active_world(t_world	*new_world);
 void	print_entire_world(t_world *world);
 
 #endif

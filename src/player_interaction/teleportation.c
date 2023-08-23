@@ -11,8 +11,9 @@ void	teleport_player(t_player *player)
 	{
 		x = get_rand_num(world->width - 1);
 		y = get_rand_num(world->height - 1);
-		if (world->world[4][y][x] == '0')
+		if (world->world[4][y][x] == '0') {
 			break;
+		}
 	}
 	set_player(x, y, player, 0);
 }

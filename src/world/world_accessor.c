@@ -12,7 +12,7 @@
 
 #include "../../includes/concepts/world.h"
 
-static t_world			g_worlds[2];
+static t_world			g_worlds[4];
 
 t_world	*get_world(int num)
 {
@@ -23,10 +23,18 @@ t_world	*get_world_active()
 {
 	int	i;
 
-	i = 2;
-	while (i-- >= 0)
-		if (get_world(i)->is_active)
-			return (get_world(i));
+	i = -1;
+	while (1)
+		if (get_world(i++)->is_active)
+			return (get_world(i - 1));
+}
+
+t_world *get_world_from_portal(char c)
+{
+	if (c == 'Z')
+		return (get_world(WORLD_NETHER));
+	else if (c == '(')
+		return (get_world(WORLD_BACKROOM));
 	return (0);
 }
 

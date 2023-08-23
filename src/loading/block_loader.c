@@ -70,6 +70,12 @@ void	block_loader(t_core *core)
     create_block(&core->blocks[3], CRYING_OBSIDIAN, 0, 2, core->mlx, 'L', true);
     create_block(&core->blocks[4], CRACKED_DEEPSLAT_TILES, 0, 2, core->mlx, 'P', true);
     create_block(&core->blocks[5], DEEPSLATE_COAL_ORE, 0, 2, core->mlx, 'I', true);
-    create_block(&core->blocks[6], NETHER_WART_BLOCK, 0, 2, core->mlx, 'Y', true);
-	core->blocks[7] = 0;
+	create_block(&core->blocks[6], NETHER_WART_BLOCK, 0, 2, core->mlx, 'Y', true);
+	create_block(&core->blocks[7], GRASS, 0, 2, core->mlx, '@', true);
+	create_block(&core->blocks[8], BACKROOM_YELLOW, 0, 0, core->mlx, '[', true);
+	create_block(&core->blocks[9], BACKROOM_FLOOR, 0, 0, core->mlx, ']', true);
+	create_block(&core->blocks[10], BUG, 0, 0, core->mlx, '(', false);
+
+
+	core->blocks[11] = 0;
 }

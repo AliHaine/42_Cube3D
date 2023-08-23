@@ -105,22 +105,6 @@ typedef struct s_block
 	bool			is_rigid;
 }	t_block;
 
-
-/*typedef struct s_world
-{
-	char ***world;
-	char **chunk;
-	t_biome	**biome;
-	uint32_t ambiant_sound;
-	int height;
-	int width;
-	uint32_t	bt_color[2];
-	mlx_image_t 	*ceil;
-	mlx_image_t 	*floor;
-	Difficulty difficulty;
-	bool		is_active;
-}	t_map;*/
-
 typedef struct s_slot
 {
 	short			slot_id;
@@ -183,7 +167,7 @@ typedef struct s_core
 	t_sounds		sounds;
 	t_item			items[11];
 	t_animation 	animations[11];
-	t_block			*blocks[8];
+	t_block			*blocks[12];
     //t_biome         biome[2];
 	//t_map 			maps[2];
     int             screen_size[2];

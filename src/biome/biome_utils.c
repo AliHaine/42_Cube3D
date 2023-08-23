@@ -36,5 +36,5 @@ t_biome *get_random_biome(t_biome **biomes)
 
 t_block get_random_block_from_biome(t_biome *biome)
 {
-    return (biome->block[get_rand_num(biome->block_number - 1)]);
+    return (biome->block[get_rand_num(biome->block_number)]);
 }
