@@ -48,6 +48,7 @@ t_world	*get_world(int num);
 t_world	*get_world_active(void);
 t_world *get_world_from_portal(char c);
 void	set_world(t_world map, int num);
+void set_world_biomes(World world, t_biome **biomes);
 
 //utils
 bool    is_player_chunk_change(t_player *player, t_world *world);

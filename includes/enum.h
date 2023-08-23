@@ -32,70 +32,12 @@ typedef enum {
 	OPTION_WRONG_VALUE,
 } MsgType;
 
-/*typedef enum {
-	PORTAL,
-	NETHERRACK,
-	OBSIDIAN,
-    CRYING_OBSIDIAN,
-    CRACKED_DEEPSLAT_TILES,
-    DEEPSLATE_COAL_ORE,
-    NETHER_WART_BLOCK,
-	GRASS,
-	BACKROOM_YELLOW,
-	BACKROOM_FLOOR,
-	BUG,
-}	Block;*/
-
-/*typedef enum {
-    HAND,
-    SWORD_NETHER,
-    SWORD_DIAMOND,
-    SWORD_RUBY,
-	SWORD_IRON,
-    WOOD_BOW,
-	STICK,
-	DIAMOND,
-	IRON,
-	FLINT,
-	LIGHTER,
-	DIAMOND_PICKAXE
-}   Item;*/
-
 typedef enum {
 	PEACEFUL,
 	EASY,
 	NORMAL,
 	HARD,
 }	Difficulty;
-
-/*static const char *ItemName[] = {
-		"hand",
-		"sword_nether",
-		"sword_diamond",
-        "sword_ruby",
-		"sword_iron",
-		"Wood bow",
-		"stick",
-		"diamond",
-		"iron",
-		"flint",
-		"lighter",
-		"diamond_pickaxe"
-};*/
-
-/*static const char *BlockName[] = {
-		"netherportal",
-		"netherrack",
-		"obsidian",
-        "crying_obsidian",
-        "cracked_deepslate_tiles",
-        "deepslate_coal_ore",
-        "nether_wart_block",
-		"grass",
-		"backroom_yellow",
-		"backroom_floor",
-		"bug",
-};*/
 
 static const char *Messages[] = {
 		"\e[40;31mError \nThere is an unknow char in the world",

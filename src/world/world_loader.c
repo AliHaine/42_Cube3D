@@ -117,14 +117,13 @@ void	world_loader(t_core *core)
 	set_biome(biome_creator(6, NETHERRACK, NETHER_WART_BLOCK, OBSIDIAN, CRYING_OBSIDIAN, CRACKED_DEEPSLAT_TILES, DEEPSLATE_COAL_ORE), BIOME_DARK);
 	set_biome(biome_creator(1, BACKROOM_YELLOW), BIOME_BACKROOM);
 
-
 	world_copy_from_chunk(get_world(WORLD_DEFAULT));
 
 	world_creator(get_world(WORLD_NETHER), core->sounds.ambiant, 32, 32, 0, core->imgs.skybox_nether, get_block_image(NETHERRACK), HARD, false);
-	get_world(WORLD_NETHER)->biome = world_get_biomes(1, get_biome(BIOME_DARK));
+	set_world_biomes(WORLD_NETHER, world_get_biomes(1, get_biome(BIOME_DARK)));
     world_generator(get_world(WORLD_NETHER));
 
 	world_creator(get_world(WORLD_BACKROOM), core->sounds.ambiant, 32, 32, 0, core->imgs.skybox_nether, get_block_image(BACKROOM_FLOOR), HARD, false);
-	get_world(WORLD_BACKROOM)->biome = world_get_biomes(1, get_biome(BIOME_BACKROOM));
+	set_world_biomes(WORLD_BACKROOM, world_get_biomes(1, get_biome(BIOME_BACKROOM)));
 	world_generator(get_world(WORLD_BACKROOM));
 }

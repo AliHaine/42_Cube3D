@@ -82,31 +82,6 @@ typedef struct s_animation
 	int				depth_xy[2];
 }	t_animation;
 
-/*typedef struct s_item
-{
-    Item			name;
-	int				durability;
-    int				damage;
-    int				strength;
-    int				range;
-	int				max_stack;
-    mlx_image_t		*image;
-	mlx_image_t		*icon;
-    int             instance_number;
-	t_animation 	animation;
-}	t_item;*/
-
-/*typedef struct s_block
-{
-	Block			name;
-	char			block_char;
-	t_item			*item;
-	int				strength;
-	t_animation 	animation;
-	mlx_image_t		*image;
-	bool			is_rigid;
-}	t_block;*/
-
 typedef struct s_slot
 {
 	short			slot_id;
@@ -150,7 +125,6 @@ typedef struct s_col_drawing
 	float		fog_strength;
 	char		hit_block;
     float       floor_d;
-	//t_block 	*block;
 }	t_col_drawing;
 
 typedef struct s_options
@@ -167,11 +141,7 @@ typedef struct s_core
 	t_player		player;
 	t_imgs			imgs;
 	t_sounds		sounds;
-	//t_item			items[11];
 	t_animation 	animations[11];
-	//t_block			*blocks[12];
-    //t_biome         biome[2];
-	//t_map 			maps[2];
     int             screen_size[2];
 }	t_core;
 

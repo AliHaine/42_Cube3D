@@ -42,3 +42,8 @@ void set_world(t_world world, int num)
 {
 	g_worlds[num] = world;
 }
+
+void set_world_biomes(World world, t_biome **biomes)
+{
+	g_worlds[world].biome = biomes;
+}

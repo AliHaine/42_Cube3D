@@ -51,9 +51,6 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *map);
 void	sound_loader(t_sounds *sounds);
 void	texture_loader(t_core *core);
 void	mlx_hook_loader(t_core *core);
-//void	item_loader(t_core *core);
-//void	block_loader(t_core *core);
-//void	world_loader(t_core *core);
 
 //??
 
@@ -97,9 +94,6 @@ void	teleport_player(t_player *player);
 
 void	set_char_at_forward(char c, t_player *player, t_world *world);
 
-//item//
-//void    give_item(t_core *core, t_item *item, int slot_id, int number);
-
 //heal//
 bool	is_player_death(int player_health);
 bool    hit_player(t_player *player, t_imgs *imgs);
@@ -122,6 +116,5 @@ void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world);
 
 //portal
 void	portal_listener(t_player *player, t_world *world, t_sounds *sounds);
-//void	portal_listener(t_player *player, t_map maps[2], t_sounds *sounds);
 
 #endif

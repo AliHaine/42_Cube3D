@@ -117,11 +117,5 @@ void	item_loader(t_core *core)
 	create_item(DIAMOND_PICKAXE, core->mlx);
 	create_item_stats(get_item(DIAMOND_PICKAXE), 10, 2, 1, 3);
 	create_item_animation(get_item(DIAMOND_PICKAXE), 4, 0, 150, core->mlx);
-
-	for (int i = 0; get_item(i); i++)
-	{
-		printf("%d %s\n", i, ItemName[get_item(i)->name]);
-	}
-
 }
 
