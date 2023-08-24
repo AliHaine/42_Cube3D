@@ -48,7 +48,7 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *map);
 
 //loader//
 
-void	sound_loader(t_sounds *sounds);
+void	sound_loader(t_sounds *sounds, t_options *options);
 void	texture_loader(t_core *core);
 void	mlx_hook_loader(t_core *core);
 
@@ -77,8 +77,8 @@ void	initialize_options(t_core *core);
 void	init_sound_empty(t_sounds *sounds);
 void	clear_sounds(t_sounds *sounds);
 bool	load_sound(uint32_t *s, char *path);
-void	play_sound_alt(uint32_t s, bool play, bool loop);
-void	play_sound(uint32_t s);
+void	play_sound_alt(uint32_t s, bool play, bool loop, t_options *options);
+void	play_sound(uint32_t s, t_options *options);
 
 //animations//
 void    animation_listener();

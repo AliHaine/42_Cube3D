@@ -50,9 +50,9 @@ bool	load_sound(uint32_t *s, char *path)
 	return (true);
 }
 
-void	play_sound_alt(uint32_t s, bool play, bool loop)
+void	play_sound_alt(uint32_t s, bool play, bool loop, t_options *options)
 {
-	if (!s)
+	if (!s || options->sound == false)
 		return ;
 	if (loop)
 		BASS_ChannelFlags(s,
@@ -63,9 +63,9 @@ void	play_sound_alt(uint32_t s, bool play, bool loop)
 		BASS_ChannelPause(s);
 }
 
-void	play_sound(uint32_t s)
+void	play_sound(uint32_t s, t_options *options)
 {
-	if (!s)
+	if (!s || options->sound == false)
 		return ;
 	BASS_ChannelStop(s);
 	BASS_ChannelSetPosition(s, 0, 0);

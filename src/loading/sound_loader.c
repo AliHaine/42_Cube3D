@@ -1,6 +1,6 @@
 #include "../../includes/includes.h"
 
-void	sound_loader(t_sounds *sounds)
+void	sound_loader(t_sounds *sounds, t_options *options)
 {
 	msg_write(1, -1, SOUND_INIT);
 	usleep(450000 * LOAD);
@@ -21,6 +21,6 @@ void	sound_loader(t_sounds *sounds)
 		msg_write(2, 2, ERROR_FATAL);
 	else
 		msg_write(1, -1, SUCCESS);
-	play_sound(sounds->ambiant);
+	play_sound(sounds->ambiant, options);
 	msg_write(1, -1, SUCCESS);
 }

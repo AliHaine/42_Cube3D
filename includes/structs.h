@@ -132,6 +132,7 @@ typedef struct s_options
 	bool	floor_texture;
 	bool	skybox;
 	bool	sound;
+	bool	break_blocks;
 }	t_options;
 
 typedef struct s_core

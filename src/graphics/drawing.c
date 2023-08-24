@@ -115,11 +115,6 @@ void	ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_world *world)
 	uint32_t			color;
 	static const float	vertical_offset = -89.f * SCREEN_HEIGHT;
 
-	if (world->bt_color[1] > 0)
-	{
-		mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, world->bt_color[1]);
-		return ;
-	}
 	skyboxTexX = (int)((fmodf(dda->current_angle + PI_2, PI_2))
 			/ PI_2 * (float)world->ceil->width) % (int)world->ceil->width;
 	skyboxTexY = (int)((tcd->iterator - vertical_offset)
@@ -161,6 +156,8 @@ void	floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player
 					* d) % 64)
 			+ ((int)(player->player_pos_xy[1] + dda->sin
 					* d) % 64) * 64) * 4;
+	if (value < 0)
+		value = -value;
 	color = get_rgb_color(world->floor->pixels[value],
 			world->floor->pixels[value + 1],
 						  world->floor->pixels[value + 2],
@@ -183,7 +180,7 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, t_player *player, t_options *opti
 			ceil_drawing(imgs, dda, &tcd, world);
 		else
 			mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++,
-				world->bt_color[0]);
+				world->bt_color[1]);
 	}
 	while (tcd.iterator < tcd.wall_lineH)
 		wall_drawing(imgs, dda, &tcd);
@@ -193,6 +190,6 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, t_player *player, t_options *opti
 			floor_drawing(imgs, dda, &tcd, player, world);
 		else
 			mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++,
-				world->bt_color[1]);
+				world->bt_color[0]);
 	}
 }

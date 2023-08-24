@@ -18,6 +18,7 @@ static void	init_vars(t_options *options)
 	options->floor_texture = false;
 	options->skybox = false;
 	options->sound = false;
+	options->break_blocks = false;
 }
 
 static bool	create_options_file(t_file *file)
@@ -34,6 +35,7 @@ static bool	create_options_file(t_file *file)
 	ft_putstr_fd("FLOOR_TEXTURE=TRUE\n", file->fd);
 	ft_putstr_fd("SKYBOX=TRUE\n", file->fd);
 	ft_putstr_fd("SOUND=TRUE\n", file->fd);
+	ft_putstr_fd("BREAK_BLOCKS=TRUE\n", file->fd);
 	close_file(file);
 	if (!open_file(file, "./includes/options", O_RDONLY))
 		return (false);
@@ -44,22 +46,28 @@ static void	set_option(t_options *options, char **var)
 {
 	if (ft_strcmp(var[0], "FLOOR_TEXTURE") == 0)
 	{
-		if (ft_strcmp(var[1], "TRUE\n") == 0)
+		if (ft_strcmp(var[1], "TRUE\n") == 0 || ft_strcmp(var[1], "TRUE") == 0)
 			options->floor_texture = true;
 	}
 	else if (ft_strcmp(var[0], "SKYBOX") == 0)
 	{
-		if (ft_strcmp(var[1], "TRUE\n") == 0)
+		if (ft_strcmp(var[1], "TRUE\n") == 0 || ft_strcmp(var[1], "TRUE") == 0)
 			options->skybox = true;
 	}
 	else if (ft_strcmp(var[0], "SOUND") == 0)
 	{
-		if (ft_strcmp(var[1], "TRUE\n") == 0)
+		if (ft_strcmp(var[1], "TRUE\n") == 0 || ft_strcmp(var[1], "TRUE") == 0)
 			options->sound = true;
+	}
+	else if (ft_strcmp(var[0], "BREAK_BLOCKS") == 0)
+	{
+		if (ft_strcmp(var[1], "TRUE\n") == 0 || ft_strcmp(var[1], "TRUE") == 0)
+			options->break_blocks = true;
 	}
 	else
 		msg_write(2, -1, UNKNOWN_OPTION);
-	if (ft_strcmp(var[1], "TRUE\n") != 0 && ft_strcmp(var[1], "FALSE\n") != 0)
+	if (ft_strcmp(var[1], "TRUE\n") != 0 && ft_strcmp(var[1], "FALSE\n") != 0
+		&& ft_strcmp(var[1], "TRUE") != 0 && ft_strcmp(var[1], "FALSE") != 0)
 		msg_write(2, -1, OPTION_WRONG_VALUE);
 }
 
@@ -89,4 +97,5 @@ void	initialize_options(t_core *core)
 			free_splited(var);
 		}
 	}
+	msg_write(1, -1, SUCCESS);
 }

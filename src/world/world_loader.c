@@ -41,8 +41,8 @@ bool world_creator(t_world *world, uint32_t anbiant_sound, int height, int width
 	world->ambiant_sound = anbiant_sound;
 	world->height = height;
 	world->width = width;
-	world->bt_color[0] = 0;
-	world->bt_color[1] = 0;
+//	world->bt_color[0] = 0;
+//	world->bt_color[1] = 0;
 	world->ceil = ceil;
 	world->floor = floor;
 	world->difficulty = difficulty;
