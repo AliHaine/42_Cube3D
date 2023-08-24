@@ -48,6 +48,7 @@ bool    is_player_chunk_change(t_player *player, t_world *world)
 	return (true);
 }
 
+//todo si tes deja dans les back
 void	chunk_generator(t_world *world, int chunk)
 {
 	int y;
@@ -60,16 +61,15 @@ void	chunk_generator(t_world *world, int chunk)
 	while (y < world->height) {
 		while (x < world->width) {
 			world->world[chunk][y][x] = '0';
-			if (get_rand_num(4) == 0)
+			if (!get_rand_num(4, 1))
 			{
-				if (get_rand_num(10000) == 0)
+				if (!get_rand_num(10000, 1))
 				{
-					printf("b portal generated at %d %d %d\n", chunk, x, y);
+					printf("b portal generated at chunk %d x %d y %d\n", chunk, x, y);
 					world->world[chunk][y][x] = '(';
 				}
-				else if (biome != NULL) {
+				else if (biome != NULL)
 					world->world[chunk][y][x] = get_random_block_from_biome(biome).block_char;
-				}
 				else
 					world->world[chunk][y][x] = '1';
 			}

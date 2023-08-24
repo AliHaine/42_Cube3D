@@ -39,7 +39,10 @@ void	get_color_block_texture(t_dda *dda, t_col_drawing *tcd)
         r = (int) dda->r_xy[1];
 	else
         r = (int) dda->r_xy[0];
-	value = ((r % 64) + ((int)tcd->current_step * (int)block_texture->width)) * 4;
+	if (tcd->hit_block == '(' && (int)mlx_get_time() % 2 == 0)
+		value = ((r % 64) + ((int)tcd->current_step * (int)block_texture->width) + get_rand_num(3, 0)) * 4;
+	else
+		value = ((r % 64) + ((int)tcd->current_step * (int)block_texture->width)) * 4;
     if (value >= 16384)
 		return ;
 	tcd->color = get_rgb_color(block_texture->pixels[value], block_texture->pixels[value + 1]

@@ -66,4 +66,8 @@ Block			get_block_name_from_char(char block_char);
 int				get_block_number();
 void			set_block(t_block *block);
 
+//utils
+bool	is_rigid_block(Block block);
+bool	is_char_block(char c);
+
 #endif

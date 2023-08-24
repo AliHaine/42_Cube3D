@@ -25,6 +25,7 @@ typedef enum {
 
 typedef struct s_world
 {
+	World			world_name;
 	char			***world;
 	char			**chunk;
 	t_biome			**biome;

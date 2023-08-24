@@ -12,9 +12,11 @@
 
 #include "../../includes/includes.h"
 
+//todo better write
 static bool	is_player_under_portal(const int player_cell_xy[2], const t_world *world)
 {
-	if (world->world[4][player_cell_xy[1] % world->height][player_cell_xy[0] % world->width] == 'Z')
+	if (world->world[4][player_cell_xy[1] % world->height][player_cell_xy[0] % world->width] == 'Z'
+		|| world->world[4][player_cell_xy[1] % world->height][player_cell_xy[0] % world->width] == '(')
 		return (true);
 	return (false);
 }

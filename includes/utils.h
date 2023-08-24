@@ -22,7 +22,7 @@ bool    is_color_char(char c);
 
 //std_func_utils//
 
-int     get_rand_num(int max_val);
+int     get_rand_num(int max_val, int sleeper);
 void	put_two_string(char *dst, const char *s1, const char *s2, char *num);
 int		ft_strlen(const char *s);
 int		ft_atoi_for_texture(const char *s);

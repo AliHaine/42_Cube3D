@@ -61,7 +61,6 @@ int	get_block_number()
 	return (i);
 }
 
-
 void	set_block(t_block *block)
 {
 	g_blocks[block->name] = block;

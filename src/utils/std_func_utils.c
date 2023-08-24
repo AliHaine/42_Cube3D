@@ -8,12 +8,12 @@ bool	is_value_beetween(int value, int beet, int target)
 }
 
 
-int     get_rand_num(int max_val)
+int     get_rand_num(int max_val, int sleeper)
 {
 	struct timeval tv;
 	gettimeofday(&tv,NULL);
 
-	usleep(1);
+	usleep(sleeper);
     srand(tv.tv_usec);
     return (rand() % max_val);
 }

@@ -34,7 +34,6 @@ static void	core_init(t_core *core)
 	core->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "セグメンテーションフォルトのないプログラムは、鋭い剣のように正確に使える。", true);
 	texture_loader(core);
 	//struct_setup(core);
-	sound_loader(&core->sounds, &core->options);
 	imgs_init(core->mlx, &core->imgs);
 	sound_loader(&core->sounds, &core->options);
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
@@ -81,6 +80,7 @@ int	main(int argc, char *argv[])
 
 	msg_write(1, -1, STARTING);
 	core_init(&core);
+	initialize_options(&core);
 	item_loader(&core);
 	block_loader(&core);
 	struct_setup(&core);

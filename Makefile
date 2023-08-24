@@ -37,6 +37,7 @@ SRCS		=	src/cub3d.c \
 				src/world/world_dynamic_generator.c \
 				src/block/block_accessor.c \
 				src/block/block_loader.c \
+				src/block/block_utils.c \
 				src/item/item_accessor.c \
 				src/item/item_loader.c \
 				src/item/item.c \

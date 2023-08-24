@@ -8,11 +8,10 @@ bool	is_player_char(char c)
 	return (false);
 }
 
-//todo
+//todo c'est quoi
 bool	is_allowed_char(char c)
 {
-	if (c == '0' || c == '1' || is_player_char(c)
-		||  c == 'Z' || c == 'V' || c == 'D' || c == ' ')
+	if (c == '0' || c == '1' || is_player_char(c) || is_char_block(c) || c == ' ')
 		return (true);
 	return (false);
 }

@@ -31,10 +31,10 @@ t_biome *get_random_biome(t_biome **biomes)
     biomes_size = get_biomes_size(biomes);
     if (biomes_size == 0)
         return (0);
-    return (biomes[get_rand_num(biomes_size)]);
+    return (biomes[get_rand_num(biomes_size, 1)]);
 }
 
 t_block get_random_block_from_biome(t_biome *biome)
 {
-    return (biome->block[get_rand_num(biome->block_number)]);
+    return (biome->block[get_rand_num(biome->block_number, 1)]);
 }

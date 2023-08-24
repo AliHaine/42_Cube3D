@@ -24,9 +24,10 @@ t_world	*get_world_active()
 	int	i;
 
 	i = -1;
-	while (1)
-		if (get_world(i++)->is_active)
-			return (get_world(i - 1));
+	while (i++ < 3)
+		if (get_world(i)->is_active)
+			return (get_world(i));
+	return (0);
 }
 
 t_world *get_world_from_portal(char c)

@@ -26,6 +26,8 @@ static void	rotation_inputs(mlx_t *mlx, t_player *player)
 
 static void moving_inputs(mlx_t *mlx, t_player *player)
 {
+	char c;
+
 	if (!player->can_move)
 	{
 		player->is_moving = false;
@@ -49,7 +51,8 @@ static void moving_inputs(mlx_t *mlx, t_player *player)
     }
 	else if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_UP))
     {
-       if (get_forward_char(player) == '0' || get_forward_char(player) == 'Z')
+		c = get_forward_char(player);
+		if (c == '0' || c != '1' && !is_rigid_block(get_block_name_from_char(c)))
             move_forward(player);
     }
 	else
