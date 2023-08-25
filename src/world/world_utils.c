@@ -15,6 +15,7 @@
 void	change_active_world(t_world	*new_world)
 {
 	new_world->is_active = true;
+	play_sound(new_world->);
 	get_world_active()->is_active = false;
 }
 

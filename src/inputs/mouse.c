@@ -34,5 +34,5 @@ void	mouse(enum mouse_key key, enum action action, enum modifier_key mkey, void 
 	if (get_forward_char(&core->player) == '1'
 		&& core->options.break_blocks == true)
 		set_char_at_forward('0', &core->player, get_world_active());
-	play_sound(core->sounds.player_hurt, &core->options);
+	play_sound(PLAYER_HURT_SOUND);
 }

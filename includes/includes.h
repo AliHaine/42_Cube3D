@@ -29,6 +29,8 @@
 # include <sys/time.h>
 # include "enum.h"
 
+# include "sound.h"
+
 # include "concepts/world.h"
 # include "concepts/block.h"
 # include "concepts/item.h"
@@ -48,7 +50,7 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *map);
 
 //loader//
 
-void	sound_loader(t_sounds *sounds, t_options *options);
+//void	sound_loader(t_sounds *sounds, t_options *options);
 void	texture_loader(t_core *core);
 void	mlx_hook_loader(t_core *core);
 
@@ -74,11 +76,11 @@ bool	parse_main(t_file *file, t_player *player, t_world *map);
 void	initialize_options(t_core *core);
 
 //sound//
-void	init_sound_empty(t_sounds *sounds);
+/*void	init_sound_empty(t_sounds *sounds);
 void	clear_sounds(t_sounds *sounds);
 bool	load_sound(uint32_t *s, char *path);
-void	play_sound_alt(uint32_t s, bool play, bool loop, t_options *options);
-void	play_sound(uint32_t s, t_options *options);
+void	play_sound_alt(uint32_t s, bool play, bool loops);
+void	play_sound(uint32_t s);*/
 
 //animations//
 void    animation_listener();
@@ -115,6 +117,6 @@ void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world);
 
 
 //portal
-void	portal_listener(t_player *player, t_world *world, t_sounds *sounds);
+void	portal_listener(t_player *player, t_world *world);
 
 #endif

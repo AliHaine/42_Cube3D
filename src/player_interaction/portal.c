@@ -22,7 +22,7 @@ static bool	is_player_under_portal(const int player_cell_xy[2], const t_world *w
 }
 
 //todo
-void	portal_listener(t_player *player, t_world *world,t_sounds *sounds)
+void	portal_listener(t_player *player, t_world *world)
 {
 	if (!is_player_under_portal(player->player_cell_xy, world))
 		return ;

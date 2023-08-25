@@ -36,15 +36,15 @@ void	player_listener(void *params)
 		draw_energy_bar(core->imgs.engbar, core->player.energy);
 	if (core->player.is_moving) {
 		if (core->player.is_running) {
-			play_sound_alt(core->sounds.player_walk, false, false, &core->options);
-			play_sound_alt(core->sounds.player_run, true, false, &core->options);
+			play_sound_alt(PLAYER_WALK_SOUND, false, false);
+			play_sound_alt(PLAYER_RUN_SOUND, true, false);
 		}
 		else
-			play_sound_alt(core->sounds.player_walk, true, false, &core->options);
+			play_sound_alt(PLAYER_WALK_SOUND, true, false);
 	}
 	else {
-		play_sound_alt(core->sounds.player_run, false, false, &core->options);
-		play_sound_alt(core->sounds.player_walk, false, false, &core->options);
+		play_sound_alt(PLAYER_RUN_SOUND, false, false);
+		play_sound_alt(PLAYER_WALK_SOUND, false, false);
 	}
-	portal_listener(&core->player, world, &core->sounds);
+	portal_listener(&core->player, world);
 }

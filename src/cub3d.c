@@ -35,7 +35,7 @@ static void	core_init(t_core *core)
 	texture_loader(core);
 	//struct_setup(core);
 	imgs_init(core->mlx, &core->imgs);
-	sound_loader(&core->sounds, &core->options);
+	sound_loader(&core->options);
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
 	mlx_set_cursor(core->mlx, mlx_create_cursor(core->imgs.trans));
