@@ -45,6 +45,6 @@ void	map_manager(char *map_name, t_world *map, t_imgs *imgs, t_player *player)
 	texture_main(&file, imgs, map);
 	save = file.line_num;
 	map_value_init(map, &file, save);
-    world_creator(map, 0, map->height, map->width, 0, imgs->skybox, imgs->floor_texture, EASY, true);
+    world_creator(map, 0, map->height, map->width, 0, imgs->skybox, imgs->floor_texture, EASY, true, true);
 	parse_main(&file, player, map);
 }

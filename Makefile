@@ -59,6 +59,8 @@ SRCS		=	src/cub3d.c \
 OBJS		=	$(SRCS:.c=.o)
 
 NAME		=	cub3d
+TOTAL_FILES =	$(words $(SRCS))
+COUNT		=	1
 
 FLAGS		=	-Ofast -g3 #-fsanitize=address
 LDFLAGS		+=	-L./src/sound/bass
@@ -74,8 +76,10 @@ CFLAGS		+=	-I include -I ../MLX42/include $(BASS_CFLAGS)
 
 RM			=	rm -rf
 
-.c.o:
-			gcc $(FLAGS) $(CFLAGS) -Ibass -c $< -o $(<:.c=.o)
+%.o: %.c
+	@echo "\033[0;33mCompiling [$<]... ($(COUNT)/$(TOTAL_FILES) files, $(shell echo $$(($(COUNT)*100/$(TOTAL_FILES))))%)\033[0m"
+	@gcc $(FLAGS) $(CFLAGS) -Ibass -c $< -o $@
+	$(eval COUNT=$(shell echo $$(($(COUNT)+1))))
 
 all:		$(NAME)
 

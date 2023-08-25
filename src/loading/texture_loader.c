@@ -34,6 +34,8 @@ static void	other_loader(mlx_t *mlx, t_imgs *imgs)
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_texture_from_path("assets/player_dot.png", &imgs->img_player_texture))
 		msg_write(2, 2, ERROR_FATAL);
+	if (!set_image_from_path(mlx, "assets/blocks/backrooms_ceil.png", &imgs->backrooms_ceil))
+		msg_write(2, 2, ERROR_FATAL);
 }
 
 static void	icon_loader(mlx_t *mlx, t_imgs *imgs)

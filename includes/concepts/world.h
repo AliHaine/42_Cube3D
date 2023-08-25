@@ -36,12 +36,13 @@ typedef struct s_world
 	mlx_image_t		*ceil;
 	mlx_image_t		*floor;
 	Difficulty		difficulty;
+	bool			skybox;
 	bool			is_active;
 }	t_world;
 
 //loader
 void	world_loader(t_core *core);
-bool	world_creator(t_world *world, uint32_t anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active);
+bool	world_creator(t_world *world, uint32_t anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active, bool skybox);
 void	chunk_generator(t_world *world, int chunk);
 
 //accessor
