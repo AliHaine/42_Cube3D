@@ -1,10 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sound.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/26 13:42:54 by ayagmur           #+#    #+#             */
+/*   Updated: 2023/08/26 13:42:55 by ayagmur          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SOUND_H
 #define SOUND_H
 
 # include "includes.h"
 
-typedef enum {
-	MINECRAFT_AMBIANT_SOUND,
+typedef struct s_world t_world;
+
+typedef enum e_sound {
+	NORMAL_AMBIANT_SOUND,
+	NETHER_AMBIANT_SOUND,
+	BACKROOM_AMBIANT_SOUND,
 	PLAYER_HURT_SOUND,
 	PLAYER_WALK_SOUND,
 	PLAYER_RUN_SOUND,
@@ -17,7 +33,7 @@ typedef struct	s_sounds
 }				t_sounds;
 
 //loader
-void	sound_loader(t_options *options);
+void	sound_loader();
 void	init_sound_empty(void);
 bool	load_sound(Sound sound, char *path);
 
@@ -28,8 +44,9 @@ void	set_sound(t_sounds sound);
 
 //sound
 void	clear_sounds(t_sounds *sounds);
-void	play_sound_alt(Sound sound, bool play, bool loops);
-void	play_sound(Sound sound);
+void	play_sound_alt(t_sounds *sound, bool play, bool loops);
+void	play_sound(t_sounds *sound);
+void	stop_sound(t_sounds *sound);
 
 
 /*

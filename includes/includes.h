@@ -13,7 +13,6 @@
 #ifndef INCLUDES_H
 # define INCLUDES_H
 
-
 # include "../../MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
 # include <stdlib.h>
@@ -35,7 +34,7 @@
 # include "concepts/block.h"
 # include "concepts/item.h"
 
-typedef struct s_world t_world;
+
 
 //dda//
 void	raycasting(t_player *player, t_imgs *imgs, t_options *options);

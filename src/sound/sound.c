@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sound.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/26 18:51:21 by ayagmur           #+#    #+#             */
+/*   Updated: 2023/08/26 18:51:22 by ayagmur          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 # include "../../includes/sound.h"
 
 void	init_sound_empty(void)
@@ -5,7 +17,11 @@ void	init_sound_empty(void)
 	t_sounds sound;
 
 	sound.sound = 0;
-	sound.sound_name = MINECRAFT_AMBIANT_SOUND;
+	sound.sound_name = NORMAL_AMBIANT_SOUND;
+	set_sound(sound);
+	sound.sound_name = NETHER_AMBIANT_SOUND;
+	set_sound(sound);
+	sound.sound_name = BACKROOM_AMBIANT_SOUND;
 	set_sound(sound);
 	sound.sound_name = PLAYER_HURT_SOUND;
 	set_sound(sound);
@@ -41,30 +57,32 @@ bool	load_sound(Sound sound, char *path)
 	return (true);
 }
 
-void	play_sound_alt(Sound sound, bool play, bool loop)
+void	play_sound_alt(t_sounds *sound, bool play, bool loop)
 {
-	t_sounds *play_sound;
-
-	play_sound = get_sound(sound);
-	if (!play_sound->sound)
+	if (!sound->sound)
 		return ;
 	if (loop)
-		BASS_ChannelFlags(play_sound->sound,
+		BASS_ChannelFlags(sound->sound,
 			BASS_SAMPLE_LOOP, BASS_SAMPLE_LOOP);
 	if (play)
-		BASS_ChannelPlay(play_sound->sound, 0);
+		BASS_ChannelPlay(sound->sound, 0);
 	else
-		BASS_ChannelPause(play_sound->sound);
+		BASS_ChannelPause(sound->sound);
 }
 
-void	play_sound(Sound sound)
+void	play_sound(t_sounds *sound)
 {
-	t_sounds *play_sound;
-
-	play_sound = get_sound(sound);
-	if (!play_sound->sound)
+	if (!sound->sound)
 		return ;
-	BASS_ChannelStop(play_sound->sound);
-	BASS_ChannelSetPosition(play_sound->sound, 0, 0);
-	BASS_ChannelPlay(play_sound->sound, 0);
+	BASS_ChannelStop(sound->sound);
+	BASS_ChannelSetPosition(sound->sound, 0, 0);
+	BASS_ChannelPlay(sound->sound, 0);
+}
+
+void	stop_sound(t_sounds *sound)
+{
+	if (!sound->sound)
+		return ;
+	BASS_ChannelStop(sound->sound);
+	BASS_ChannelSetPosition(sound->sound, 0, 0);
 }

@@ -14,9 +14,14 @@
 
 void	change_active_world(t_world	*new_world)
 {
+	t_world *old_world;
+
+	old_world = get_world_active();
+
+	stop_sound(old_world->ambiant_sound);
+	old_world->is_active = false;
 	new_world->is_active = true;
-	play_sound(new_world->);
-	get_world_active()->is_active = false;
+	play_sound(new_world->ambiant_sound);
 }
 
 void print_entire_world(t_world *world)

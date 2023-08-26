@@ -18,32 +18,24 @@ void	move_left(t_player *player)
 {
 		player->player_pos_xy[0] += cosf(player->playerangle - PI / 2) * player->move_speed;
 		player->player_pos_xy[1] += sinf(player->playerangle - PI / 2) * player->move_speed;
-		player->player_coords_xy[0] += cosf(player->playerangle - PI / 2) * player->move_speed;
-		player->player_coords_xy[1] += sinf(player->playerangle - PI / 2) * player->move_speed;
 }
 
 void	move_right(t_player *player)
 {
 		player->player_pos_xy[0] -= cosf(player->playerangle - PI / 2) * player->move_speed;
 		player->player_pos_xy[1] -= sinf(player->playerangle - PI / 2) * player->move_speed;
-		player->player_coords_xy[0] -= cosf(player->playerangle - PI / 2) * player->move_speed;
-		player->player_coords_xy[1] -= sinf(player->playerangle - PI / 2) * player->move_speed;
 }
 
 void	move_backward(t_player *player)
 {
 		player->player_pos_xy[0] -= cosf(player->playerangle) * player->move_speed;
 		player->player_pos_xy[1] -= sinf(player->playerangle) * player->move_speed;
-		player->player_coords_xy[0] -= cosf(player->playerangle) * player->move_speed;
-		player->player_coords_xy[1] -= sinf(player->playerangle) * player->move_speed;
 }
 
 void	move_forward(t_player *player)
 {
 		player->player_pos_xy[0] += cosf(player->playerangle) * player->move_speed;
 		player->player_pos_xy[1] += sinf(player->playerangle) * player->move_speed;
-		player->player_coords_xy[0] += cosf(player->playerangle) * player->move_speed;
-		player->player_coords_xy[1] += sinf(player->playerangle) * player->move_speed;
 }
 
 void	move_rotate(t_player *player, int direction, float speed)

@@ -32,7 +32,7 @@ static bool world_malloc(int height, int width, char ***map)
 	return (true);
 }
 
-bool world_creator(t_world *world, Sound anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active, bool skybox)
+bool world_creator(t_world *world, t_sounds *anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active, bool skybox)
 {
     int i;
 
@@ -120,11 +120,11 @@ void	world_loader(t_core *core)
 
 	world_copy_from_chunk(get_world(WORLD_DEFAULT));
 
-	world_creator(get_world(WORLD_NETHER), MINECRAFT_AMBIANT_SOUND, 32, 32, 0, core->imgs.skybox_nether, get_block_image(NETHERRACK), HARD, false, true);
+	world_creator(get_world(WORLD_NETHER), get_sound(NETHER_AMBIANT_SOUND), 32, 32, 0, core->imgs.skybox_nether, get_block_image(NETHERRACK), HARD, false, true);
 	set_world_biomes(WORLD_NETHER, world_get_biomes(1, get_biome(BIOME_DARK)));
     world_generator(get_world(WORLD_NETHER));
 
-	world_creator(get_world(WORLD_BACKROOM), MINECRAFT_AMBIANT_SOUND, 32, 32, 0, core->imgs.backrooms_ceil, get_block_image(BACKROOM_FLOOR), HARD, false, false);
+	world_creator(get_world(WORLD_BACKROOM), get_sound(BACKROOM_AMBIANT_SOUND), 32, 32, 0, core->imgs.backrooms_ceil, get_block_image(BACKROOM_FLOOR), HARD, false, false);
 	set_world_biomes(WORLD_BACKROOM, world_get_biomes(1, get_biome(BIOME_BACKROOM)));
 	world_generator(get_world(WORLD_BACKROOM));
 }

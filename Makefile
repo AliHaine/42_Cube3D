@@ -9,13 +9,14 @@ SRCS		=	src/cub3d.c \
 				src/graphics/display.c \
 				src/graphics/animations.c \
 				src/loading/texture_loader.c \
-				src/loading/sound_loader.c \
 				src/loading/other_loader.c \
 				src/parsing/map_manager.c \
 				src/parsing/map_parse.c \
 				src/parsing/map_texture.c \
 				src/parsing/options_initializer.c \
+				src/sound/sound_loader.c \
 				src/sound/sound.c \
+				src/sound/sound_accessor.c \
 				src/struct/struct_manager.c \
 				src/struct/struct_slot.c \
 				src/struct/struct_drawing.c \

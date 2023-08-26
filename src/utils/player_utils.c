@@ -9,7 +9,5 @@ void	set_player(int x, int y, t_player *player, float angle)
 	player->player_pos_xy[1] = ((y + world->height) * 64) + 32;
 	player->player_cell_xy[0] = x;
 	player->player_cell_xy[0] = y;
-	player->player_coords_xy[0] = (y  * 64) + 32;
-	player->player_coords_xy[1] = (x  * 64) + 32;
 	player->playerangle = angle;
 }

@@ -16,6 +16,7 @@
 # include "../includes.h"
 # include "biome.h"
 
+typedef struct	s_sounds t_sounds;
 
 typedef enum {
 	WORLD_DEFAULT,
@@ -30,7 +31,7 @@ typedef struct s_world
 	char			***world;
 	char			**chunk;
 	t_biome			**biome;
-	Sound 			ambiant_sound;
+	t_sounds 		*ambiant_sound;
 	int				height;
 	int				width;
 	uint32_t		bt_color[2];
@@ -43,7 +44,7 @@ typedef struct s_world
 
 //loader
 void	world_loader(t_core *core);
-bool	world_creator(t_world *world, Sound anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active, bool skybox);
+bool	world_creator(t_world *world, t_sounds *anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active, bool skybox);
 void	chunk_generator(t_world *world, int chunk);
 
 //accessor
