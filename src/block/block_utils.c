@@ -23,4 +23,3 @@ bool	is_char_block(char c)
 		return (false);
 	return (true);
 }
-

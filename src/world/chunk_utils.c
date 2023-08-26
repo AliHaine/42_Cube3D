@@ -14,8 +14,8 @@
 
 int	get_chunk_from_pos(int x, int y)
 {
-	int cell;
-	int	line;
+	int		cell;
+	int		line;
 	t_world	*world;
 
 	cell = -1;
@@ -28,8 +28,10 @@ int	get_chunk_from_pos(int x, int y)
 		if (y < (world->height * (line + 1)))
 		{
 			while (cell++ < 2)
-				if (x < (world->width * (cell + 1))) {
-					if (cell + (line * 3) == 9) {
+				if (x < (world->width * (cell + 1)))
+				{
+					if (cell + (line * 3) == 9)
+					{
 						printf("error %d %d %d %d\n", x, y, cell, line);
 						return (cell + line);
 					}
@@ -51,9 +53,9 @@ bool    is_player_chunk_change(t_player *player, t_world *world)
 //todo si tes deja dans les back
 void	chunk_generator(t_world *world, int chunk)
 {
-	int y;
-	int x;
-	t_biome *biome;
+	int		y;
+	int		x;
+	t_biome	*biome;
 
 	y = 0;
 	x = 0;

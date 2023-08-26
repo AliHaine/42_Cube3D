@@ -12,18 +12,18 @@
 
 #include "../../includes/includes.h"
 
-static bool world_malloc(int height, int width, char ***map)
+static bool	world_malloc(int height, int width, char ***map)
 {
 	int	i;
 
 	i = 0;
-    (*map) = malloc(sizeof(char *) * (height + 1));
+	(*map) = malloc(sizeof(char *) * (height + 1));
 	if (!*map)
 		return (false);
-    (*map)[height] = 0;
+	(*map)[height] = 0;
 	while (i < height)
 	{
-        (*map)[i] = malloc(sizeof(char) * width + 1);
+		(*map)[i] = malloc(sizeof(char) * width + 1);
 		if (!(*map)[i])
 			return (false);
 		(*map)[i][width] = 0;
@@ -32,11 +32,11 @@ static bool world_malloc(int height, int width, char ***map)
 	return (true);
 }
 
-bool world_creator(t_world *world, t_sounds *anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active, bool skybox)
+bool	world_creator(t_world *world, t_sounds *anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active, bool skybox)
 {
-    int i;
+	int	i;
 
-    i = 0;
+	i = 0;
 	world->biome = 0;
 	world->ambiant_sound = anbiant_sound;
 	world->height = height;

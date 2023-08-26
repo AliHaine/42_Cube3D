@@ -19,7 +19,7 @@ t_block	*get_block(Block block)
 	return (g_blocks[block]);
 }
 
-t_block *get_block_from_char(char block_char)
+t_block	*get_block_from_char(char block_char)
 {
 	int	i;
 
@@ -33,7 +33,7 @@ t_block *get_block_from_char(char block_char)
 	return (0);
 }
 
-Block get_block_name_from_char(char block_char)
+Block	get_block_name_from_char(char block_char)
 {
 	int	i;
 
@@ -50,15 +50,6 @@ Block get_block_name_from_char(char block_char)
 mlx_image_t	*get_block_image(Block block)
 {
 	return (g_blocks[block]->image);
-}
-
-int	get_block_number()
-{
-	int	i;
-
-	i = 0;
-	while (g_blocks[i++]);
-	return (i);
 }
 
 void	set_block(t_block *block)

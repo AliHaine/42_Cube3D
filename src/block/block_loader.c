@@ -12,7 +12,7 @@
 
 #include "../../includes/includes.h"
 
-static void create_block(Block block_name, t_item *item, int strength, mlx_t *mlx, char block_char, bool is_rigid)
+static void	create_block(Block block_name, t_item *item, int strength, mlx_t *mlx, char block_char, bool is_rigid)
 {
 	char	*path;
 	t_block	*block;
@@ -31,10 +31,10 @@ static void create_block(Block block_name, t_item *item, int strength, mlx_t *ml
 	set_block(block);
 }
 
-static void create_block_animation(t_block *block, int anim_size, mlx_t *mlx)
+static void	create_block_animation(t_block *block, int anim_size, mlx_t *mlx)
 {
-	int i;
-	char *path;
+	int		i;
+	char	*path;
 
 	i = 0;
 	block->animation.is_playing = true;
@@ -57,7 +57,7 @@ static void create_block_animation(t_block *block, int anim_size, mlx_t *mlx)
 		if (i >= 10)
 			path = malloc(sizeof(char) * (ft_strlen(BlockName[block->name]) + 21));
 		else
-			path = malloc(sizeof(char) * (ft_strlen(BlockName[block->name]) + 21)); // Avant c'etait +20 mais ca faisait segfault
+			path = malloc(sizeof(char) * (ft_strlen(BlockName[block->name]) + 21));
 	}
 	free(path);
 	block->animation.image[i - 1] = 0;
@@ -69,9 +69,9 @@ void	block_loader(t_core *core)
 	create_block_animation(get_block(PORTAL), 14, core->mlx);
 	create_block(NETHERRACK, 0, 1, core->mlx, 'R', true);
 	create_block(OBSIDIAN, 0, 2, core->mlx, 'O', true);
-    create_block(CRYING_OBSIDIAN, 0, 2, core->mlx, 'L', true);
-    create_block(CRACKED_DEEPSLAT_TILES, 0, 2, core->mlx, 'P', true);
-    create_block(DEEPSLATE_COAL_ORE, 0, 2, core->mlx, 'I', true);
+	create_block(CRYING_OBSIDIAN, 0, 2, core->mlx, 'L', true);
+	create_block(CRACKED_DEEPSLAT_TILES, 0, 2, core->mlx, 'P', true);
+	create_block(DEEPSLATE_COAL_ORE, 0, 2, core->mlx, 'I', true);
 	create_block(NETHER_WART_BLOCK, 0, 2, core->mlx, 'Y', true);
 	create_block(GRASS, 0, 2, core->mlx, '@', true);
 	create_block(BACKROOM_YELLOW, 0, 0, core->mlx, '[', true);

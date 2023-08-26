@@ -63,7 +63,6 @@ t_block			*get_block(Block block);
 t_block			*get_block_from_char(char block_char);
 mlx_image_t		*get_block_image(Block block);
 Block			get_block_name_from_char(char block_char);
-int				get_block_number();
 void			set_block(t_block *block);
 
 //utils

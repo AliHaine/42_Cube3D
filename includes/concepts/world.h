@@ -60,6 +60,5 @@ int		get_chunk_from_pos(int x, int y);
 bool	is_chunk_on_corner(int chunk_num);
 bool    world_dynamic_generator(t_player *player);
 void	change_active_world(t_world	*new_world);
-void	print_entire_world(t_world *world);
 
 #endif

@@ -12,29 +12,29 @@
 
 #include "../../includes/includes.h"
 
-int get_biomes_size(t_biome **biomes)
+int	get_biomes_size(t_biome **biomes)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (!biomes)
-        return (0);
-    while (*(biomes++))
-        i++;
-    return (i);
+	i = 0;
+	if (!biomes)
+		return (0);
+	while (*(biomes++))
+		i++;
+	return (i);
 }
 
-t_biome *get_random_biome(t_biome **biomes)
+t_biome	*get_random_biome(t_biome **biomes)
 {
-    int biomes_size;
+	int	biomes_size;
 
-    biomes_size = get_biomes_size(biomes);
-    if (biomes_size == 0)
-        return (0);
-    return (biomes[get_rand_num(biomes_size, 1)]);
+	biomes_size = get_biomes_size(biomes);
+	if (biomes_size == 0)
+		return (0);
+	return (biomes[get_rand_num(biomes_size, 1)]);
 }
 
-t_block get_random_block_from_biome(t_biome *biome)
+t_block	get_random_block_from_biome(t_biome *biome)
 {
-    return (biome->block[get_rand_num(biome->block_number, 1)]);
+	return (biome->block[get_rand_num(biome->block_number, 1)]);
 }
