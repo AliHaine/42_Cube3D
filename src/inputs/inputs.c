@@ -23,10 +23,9 @@ static void	rotation_inputs(mlx_t *mlx, t_player *player)
 		move_rotate(player, 1, (float)SENSIBILITY / 10);
 }
 
-
 static void moving_inputs(mlx_t *mlx, t_player *player)
 {
-	char c;
+	float	save_pos_xy[2];
 
 	if (!player->can_move)
 	{
@@ -34,29 +33,24 @@ static void moving_inputs(mlx_t *mlx, t_player *player)
 		return ;
 	}
 	player->is_moving = true;
+	save_pos_xy[0] = player->player_pos_xy[0];
+	save_pos_xy[1] = player->player_pos_xy[1];
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
-    {
-        if (get_right_char(player) == '0')
-            move_right(player);
-    }
+		move_right(player);
 	else if (mlx_is_key_down(mlx, MLX_KEY_A))
-    {
-        if (get_left_char(player) == '0')
-            move_left(player);
-    }
+		move_left(player);
 	else if (mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_DOWN))
-    {
-        if (get_backward_char(player) == '0')
-            move_backward(player);
-    }
+		move_backward(player);
 	else if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_UP))
-    {
-		c = get_forward_char(player);
-		if (c == '0' || c != '1' && !is_rigid_block(get_block_name_from_char(c)))
-            move_forward(player);
-    }
+		move_forward(player);
 	else
 		player->is_moving = false;
+	if (is_player_under_block(player))
+	{
+		player->player_pos_xy[0] = save_pos_xy[0];
+		player->player_pos_xy[1] = save_pos_xy[1];
+		player->is_moving = false;
+	}
 	player->player_cell_xy[0] = (int)(player->player_pos_xy[0] / 64);
 	player->player_cell_xy[1] = (int)(player->player_pos_xy[1] / 64);
 }

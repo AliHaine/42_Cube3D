@@ -33,7 +33,6 @@ static void	core_init(t_core *core)
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	core->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "セグメンテーションフォルトのないプログラムは、鋭い剣のように正確に使える。", true);
 	texture_loader(core);
-	//struct_setup(core);
 	imgs_init(core->mlx, &core->imgs);
 	if (core->options.sound)
 		sound_loader();
@@ -57,7 +56,6 @@ static void	core_init(t_core *core)
     core->imgs.hearth[1]->instances[0].z = 12;
     core->imgs.hearth[1]->instances[1].z = 12;
     core->imgs.hearth[1]->instances[2].z = 12;
-//	mlx_image_to_window(core->mlx, core->imgs.map_background, 5, SCREEN_HEIGHT - 291);
 	mlx_image_to_window(core->mlx, core->imgs.inventory_gui, 0, 0);
 	core->imgs.inventory_gui->enabled = false;
     core->imgs.hearth[0]->enabled = 1;
@@ -84,7 +82,7 @@ int	main(int argc, char *argv[])
 	initialize_options(&core);
 	item_loader(&core);
 	block_loader(&core);
-	struct_setup(&core);
+	setup_slot_struct(core.mlx, &core.player);
     map_manager(argv[1], get_world(0), &core.imgs, &core.player);
     world_loader(&core);
     give_item(&core, get_item(SWORD_NETHER), 2, 32);

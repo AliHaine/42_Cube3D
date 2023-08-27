@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_texture.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 14:47:37 by ayagmur           #+#    #+#             */
+/*   Updated: 2023/08/27 14:47:39 by ayagmur          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/includes.h"
-#include "../../includes/defines.h"
 
 static void	set_color_value(const char *line, uint32_t *target_color)
 {
@@ -15,19 +26,21 @@ static void	set_color_value(const char *line, uint32_t *target_color)
 	value[2] = malloc(sizeof(char) * 4);
 	while (*line)
 	{
-		if (*line == ',') {
+		if (*line == ',')
+		{
 			value[i][b] = '\0';
 			i++;
 			b = 0;
 			line++;
 		}
-		if (b > 3 || i > 3) {
+		if (b > 3 || i > 3)
+		{
 			msg_write(1, -1, FAILURE);
 			break ;
 		}
 		value[i][b++] = *line++;
 	}
-	value[i][b-1] = '\0';
+	value[i][b - 1] = '\0';
 	*target_color = (ft_atoi_for_texture(value[0]) << 24) + (ft_atoi_for_texture(value[1]) << 16) + (ft_atoi_for_texture(value[2]) << 8) + 255;
 	free(value);
 	msg_write(1, -1, SUCCESS);
@@ -37,7 +50,8 @@ static void	get_color_from_map(t_file *file, t_world *world)
 {
 	while (file->line)
 	{
-		if (file->line[0] && file->line[0] != 'F' && file->line[0] != 'C') {
+		if (file->line[0] && file->line[0] != 'F' && file->line[0] != 'C')
+		{
 			if (file->line[0] == '\n')
 				break ;
 			get_next_line(file);
@@ -62,7 +76,8 @@ static void	get_image_from_map(t_file *file, t_imgs *imgs)
 	while (file->line)
 	{
 		direction = get_direction_code(file->line);
-		if (direction >= 4) {
+		if (direction >= 4)
+		{
 			if (file->line[0] == '\n' || is_color_char(file->line[0]))
 				break ;
 			get_next_line(file);

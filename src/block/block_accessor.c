@@ -12,7 +12,7 @@
 
 #include "../../includes/concepts/block.h"
 
-static t_block	*g_blocks[12];
+static t_block	*g_blocks[16];
 
 t_block	*get_block(Block block)
 {
@@ -55,5 +55,5 @@ mlx_image_t	*get_block_image(Block block)
 void	set_block(t_block *block)
 {
 	g_blocks[block->name] = block;
-	g_blocks[11] = 0;
+	g_blocks[15] = 0;
 }

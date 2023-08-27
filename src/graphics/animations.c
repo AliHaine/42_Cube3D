@@ -60,11 +60,11 @@ static void	play_block_animation(t_animation *animation, t_block *block)
 	block->image = animation->image[i++];
 }
 
-void	animation_listener()
+void	animation_listener(void)
 {
-	t_block *block;
+	t_block	*block;
 	t_item	*item;
-	int i;
+	int		i;
 
 	i = 0;
 	item = get_item(i);

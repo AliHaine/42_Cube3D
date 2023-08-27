@@ -106,9 +106,6 @@ bool	add_energy(t_player *player, int value);
 bool	player_have_energy(int value);
 bool	player_have_enough_energy(t_player *player, int value);
 
-	//struct
-void	struct_setup(t_core *core);
-
 void	setup_slot_struct(mlx_t *mlx, t_player *player);
 t_slot	*get_first_slot(t_slot *slot);
 

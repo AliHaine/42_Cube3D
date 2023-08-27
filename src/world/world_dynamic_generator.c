@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   world_dynamic_generator.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 14:40:18 by ayagmur           #+#    #+#             */
+/*   Updated: 2023/08/27 14:40:20 by ayagmur          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/concepts/world.h"
 
 static void	world_place_map(t_world *world, int chunk_num)
 {
-	int i;
+	int	i;
 	int	incrementation;
-	int chunk;
-	int mul;
+	int	chunk;
+	int	mul;
 
 	i = -1;
 	mul = 1;
@@ -16,9 +28,7 @@ static void	world_place_map(t_world *world, int chunk_num)
 		incrementation = -3;
 	}
 	else if (chunk_num == 7)
-	{
 		incrementation = 3;
-	}
 	else if (chunk_num == 3)
 	{
 		mul = 3;
@@ -40,7 +50,7 @@ static void	world_place_map(t_world *world, int chunk_num)
 
 static void	side_generator(t_world *world, int chunk_num)
 {
-	int i;
+	int	i;
 	int	chunk;
 	int	incrementation;
 
@@ -74,7 +84,7 @@ static void	replace_player_on_world(t_player *player, int num)
 		player->player_pos_xy[1] -= (player->player_pos_xy[1] / 2);
 }
 
-static int get_chunk_from_corner(int iterator, int chunk_num)
+static int	get_chunk_from_corner(int iterator, int chunk_num)
 {
 	if (iterator == 1)
 	{
@@ -93,7 +103,7 @@ static int get_chunk_from_corner(int iterator, int chunk_num)
 	return (chunk_num);
 }
 
-bool    world_dynamic_generator(t_player *player)
+bool	world_dynamic_generator(t_player *player)
 {
 	int		start_chunk;
 	int		chunk;

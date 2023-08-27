@@ -20,6 +20,7 @@ typedef enum {
 	BIOME_NATURE,
 	BIOME_DARK,
 	BIOME_BACKROOM,
+	BIOME_DRAGON,
 }	Biome;
 
 typedef struct s_biome

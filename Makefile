@@ -17,7 +17,6 @@ SRCS		=	src/cub3d.c \
 				src/sound/sound_loader.c \
 				src/sound/sound.c \
 				src/sound/sound_accessor.c \
-				src/struct/struct_manager.c \
 				src/struct/struct_slot.c \
 				src/struct/struct_drawing.c \
 				src/player_interaction/player_listener.c \

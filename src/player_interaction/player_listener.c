@@ -26,23 +26,25 @@ static bool	energy_listener(t_player *player, Difficulty difficulty)
 
 void	player_listener(void *params)
 {
-	t_core *core;
-	t_world *world;
+	t_core	*core;
+	t_world	*world;
 
 	core = (t_core *) params;
 	world = get_world_active();
-	//check with death_listener if player is death and draw death screen
-	if  (energy_listener(&core->player, world->difficulty))
+	if (energy_listener(&core->player, world->difficulty))
 		draw_energy_bar(core->imgs.engbar, core->player.energy);
-	if (core->player.is_moving) {
-		if (core->player.is_running) {
+	if (core->player.is_moving)
+	{
+		if (core->player.is_running)
+		{
 			play_sound_alt(get_sound(PLAYER_WALK_SOUND), false, false);
 			play_sound_alt(get_sound(PLAYER_RUN_SOUND), true, false);
 		}
 		else
 			play_sound_alt(get_sound(PLAYER_WALK_SOUND), true, false);
 	}
-	else {
+	else
+	{
 		play_sound_alt(get_sound(PLAYER_RUN_SOUND), false, false);
 		play_sound_alt(get_sound(PLAYER_WALK_SOUND), false, false);
 	}

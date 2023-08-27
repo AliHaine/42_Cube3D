@@ -17,14 +17,6 @@
 # include "../includes/enum.h"
 typedef struct s_item t_item;
 
-/*typedef struct	s_sounds
-{
-	uint32_t	ambiant;
-	uint32_t	player_hurt;
-	uint32_t	player_walk;
-	uint32_t	player_run;
-}				t_sounds;*/
-
 typedef struct s_imgs
 {
 	mlx_image_t		*img_3d;

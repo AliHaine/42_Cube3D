@@ -28,6 +28,10 @@ typedef enum {
 	BACKROOM_YELLOW,
 	BACKROOM_FLOOR,
 	BUG,
+	CHISELED_NETHER_BRICKS,
+	CRACKED_NETHER_BRICKS,
+	DRAGON_EGG,
+	GRAY_GLAZED_TERRACOTTA,
 }	Block;
 
 static const char *BlockName[] = {
@@ -42,6 +46,10 @@ static const char *BlockName[] = {
 		"backroom_yellow",
 		"backroom_floor",
 		"bug",
+		"chiseled_nether_bricks",
+		"cracked_nether_bricks",
+		"dragon_egg",
+		"gray_glazed_terracotta",
 };
 
 typedef struct s_block

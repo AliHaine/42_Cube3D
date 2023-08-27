@@ -58,6 +58,7 @@ char	get_forward_char(t_player *player);
 char	get_right_char(t_player *player);
 char	get_left_char(t_player *player);
 bool	is_player_running(t_player *player);
+bool	is_player_under_block(t_player *player);
 
 //raycastin and drawing
 

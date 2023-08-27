@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 14:51:57 by ayagmur           #+#    #+#             */
+/*   Updated: 2023/08/27 14:51:58 by ayagmur          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/includes.h"
-#include "../../includes/defines.h"
 
 bool	is_player_char(char c)
 {
@@ -8,10 +19,10 @@ bool	is_player_char(char c)
 	return (false);
 }
 
-//todo c'est quoi
 bool	is_allowed_char(char c)
 {
-	if (c == '0' || c == '1' || is_player_char(c) || is_char_block(c) || c == ' ')
+	if (c == '0' || c == '1' || is_player_char(c)
+		|| is_char_block(c) || c == ' ')
 		return (true);
 	return (false);
 }
@@ -99,7 +110,9 @@ bool	set_default_wall_texture(t_imgs *imgs)
 
 bool	is_wall_empty(const t_imgs *imgs)
 {
-	int	i = 0;
+	int	i ;
+
+	i = 0;
 	while (i < 4)
 	{
 		if (!imgs->wall_texture[i])
@@ -109,9 +122,9 @@ bool	is_wall_empty(const t_imgs *imgs)
 	return (false);
 }
 
-bool    is_color_char(char c)
+bool	is_color_char(char c)
 {
-    if (c == 'F' || c == 'C')
-        return (true);
-    return (false);
+	if (c == 'F' || c == 'C')
+		return (true);
+	return (false);
 }

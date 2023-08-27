@@ -12,7 +12,7 @@
 
 #include "../../includes/includes.h"
 
-static t_biome			g_biomes[3];
+static t_biome			g_biomes[4];
 
 t_biome	*get_biome(int num)
 {

@@ -50,3 +50,15 @@ bool	is_player_running(t_player *player)
 		return (true);
 	return (false);
 }
+
+bool	is_player_under_block(t_player *player)
+{
+	t_world	*world;
+	char	c;
+
+	world = get_world_active();
+	c = world->world[4][(int)player->player_pos_xy[1] / 64 % world->height][(int)player->player_pos_xy[0] / 64 % world->width];
+	if (c != '0' && c == '1' || is_rigid_block(get_block_name_from_char(c)))
+		return (true);
+	return (false);
+}

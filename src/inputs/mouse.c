@@ -22,8 +22,8 @@ void	mouse(enum mouse_key key, enum action action, enum modifier_key mkey, void 
 	if (!player_have_enough_energy(&core->player, 20) || core->player.is_in_inventory == true)
 		return ;
 	if (key == 0 && action == 0)
-    	hit_player(&core->player, &core->imgs);
-	else if (key == 1 && action == 0 )
+		hit_player(&core->player, &core->imgs);
+	else if (key == 1 && action == 0)
 		heal_player(&core->player, &core->imgs);
 	if (key != 0 || action == 1)
 		return ;

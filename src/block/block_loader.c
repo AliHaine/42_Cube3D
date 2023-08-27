@@ -77,4 +77,8 @@ void	block_loader(t_core *core)
 	create_block(BACKROOM_YELLOW, 0, 0, core->mlx, '[', true);
 	create_block(BACKROOM_FLOOR, 0, 0, core->mlx, ']', true);
 	create_block(BUG, 0, 0, core->mlx, '(', false);
+	create_block(CHISELED_NETHER_BRICKS, 0, 0, core->mlx, 'N', false);
+	create_block(CRACKED_NETHER_BRICKS, 0, 0, core->mlx, 'B', false);
+	create_block(DRAGON_EGG, 0, 0, core->mlx, 'D', false);
+	create_block(GRAY_GLAZED_TERRACOTTA, 0, 0, core->mlx, '?', false);
 }
