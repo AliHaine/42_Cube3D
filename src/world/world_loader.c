@@ -41,8 +41,8 @@ bool	world_creator(t_world *world, t_sounds *anbiant_sound, int height, int widt
 	world->ambiant_sound = anbiant_sound;
 	world->height = height;
 	world->width = width;
-//	world->bt_color[0] = 0;
-//	world->bt_color[1] = 0;
+	world->bt_color[0] = bt_color[0];
+	world->bt_color[1] = bt_color[1];
 	world->ceil = ceil;
 	world->floor = floor;
 	world->difficulty = difficulty;
@@ -120,11 +120,11 @@ void	world_loader(t_core *core)
 
 	world_copy_from_chunk(get_world(WORLD_DEFAULT));
 
-	world_creator(get_world(WORLD_NETHER), get_sound(NETHER_AMBIANT_SOUND), 32, 32, 0, core->imgs.skybox_nether, get_block_image(NETHERRACK), HARD, false, true);
+	world_creator(get_world(WORLD_NETHER), get_sound(NETHER_AMBIANT_SOUND), 32, 32, (uint32_t []){0, 0}, core->imgs.skybox_nether, get_block_image(NETHERRACK), HARD, false, true);
 	set_world_biomes(WORLD_NETHER, world_get_biomes(2, get_biome(BIOME_DARK), get_biome(BIOME_DRAGON)));
 	world_generator(get_world(WORLD_NETHER));
 
-	world_creator(get_world(WORLD_BACKROOM), get_sound(BACKROOM_AMBIANT_SOUND), 32, 32, 0, core->imgs.backrooms_ceil, get_block_image(BACKROOM_FLOOR), HARD, false, false);
+	world_creator(get_world(WORLD_BACKROOM), get_sound(BACKROOM_AMBIANT_SOUND), 32, 32, (uint32_t []){0, 0}, core->imgs.backrooms_ceil, get_block_image(BACKROOM_FLOOR), HARD, false, false);
 	set_world_biomes(WORLD_BACKROOM, world_get_biomes(1, get_biome(BIOME_BACKROOM)));
 	world_generator(get_world(WORLD_BACKROOM));
 }

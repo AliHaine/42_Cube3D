@@ -3,6 +3,8 @@
 
 typedef enum {
     ERROR_MAP_CHAR,
+	ERROR_PARSING_CHAR,
+	ERROR_KEY_ALREADY,
     ERROR_MAP_NAME,
     ERROR_MAP_IMG,
     ERROR_MAP_EXIST,
@@ -41,6 +43,8 @@ typedef enum {
 
 static const char *Messages[] = {
 		"\e[40;31mError \nThere is an unknow char in the world",
+		"\e[40;31mError \nThere is an unknow char in the parsing",
+		"\e[40;31mError \nTwo time te same key in map",
 		"\e[40;31mError \nThe name of the world is not compliant",
 		"\e[40;31mError \nCan't load the img",
 		"\e[40;31mError \nCan't open the world file",

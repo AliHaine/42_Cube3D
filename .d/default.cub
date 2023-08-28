@@ -1,10 +1,19 @@
 EA assets/walls/blackstone.png
 SO assets/walls/budding_amethyst.png
 WE assets/walls/carved_pumpkin.png
-NO assets/walls/tlassere.png
+NO        assets/walls/carved_pumpkin.png
 
-C 0,191,255
-F 32,139,34
+
+
+
+
+
+C      0,191,255
+F          32,139,34
+
+
+
+
 
 1110111111111111111111111
 0W0000Z001000000000000000

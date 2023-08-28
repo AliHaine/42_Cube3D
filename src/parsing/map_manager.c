@@ -34,18 +34,19 @@ static bool	map_value_init(t_world *world, t_file *file, int start)
 
 void	map_manager(char *map_name, t_world *map, t_imgs *imgs, t_player *player)
 {
-	t_file	file;
-	int		save;
+	t_file			file;
+	int				save;
+	uint32_t		bt_color[2];
 
 	msg_write(2, -1, CHECK_MAP);
 	usleep(500000 * LOAD);
 	basical_map_check(&map_name);
 	open_file(&file, map_name, O_RDONLY);
 	msg_write(1, -1, NO_ERROR);
-	texture_main(&file, imgs, map);
+	texture_main(&file, imgs, bt_color);
 	save = file.line_num;
 	map_value_init(map, &file, save);
-    world_creator(map, get_sound(NORMAL_AMBIANT_SOUND), map->height, map->width, 0, imgs->skybox, imgs->floor_texture, EASY, true, true);
+    world_creator(map, get_sound(NORMAL_AMBIANT_SOUND), map->height, map->width, bt_color, imgs->skybox, imgs->floor_texture, EASY, true, true);
 	play_sound(get_world_active()->ambiant_sound);
 	parse_main(&file, player, map);
 }

@@ -70,7 +70,7 @@ void	scroll_hook(double x, double y, void *param);
 //parsing//
 
 void	map_manager(char *argv, t_world *map, t_imgs *imgs, t_player *player);
-void	texture_main(t_file *file, t_imgs *imgs, t_world *map);
+void	texture_main(t_file *file, t_imgs *imgs, uint32_t bt_color[2]);
 bool	parse_main(t_file *file, t_player *player, t_world *map);
 void	initialize_options(t_core *core);
 

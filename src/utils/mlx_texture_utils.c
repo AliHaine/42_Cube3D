@@ -10,7 +10,11 @@ bool	set_texture_from_path(char *path, mlx_texture_t **texture)
 	else
 		*texture = mlx_load_png(path);
 	if (!*texture)
+	{
+		msg_write(2, -1, FAILURE);
 		return (false);
+	}
+	msg_write(1, -1, SUCCESS);
 	return (true);
 }
 
