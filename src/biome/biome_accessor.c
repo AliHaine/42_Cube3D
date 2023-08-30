@@ -12,11 +12,11 @@
 
 #include "../../includes/includes.h"
 
-static t_biome			g_biomes[4];
+static t_biome			g_biomes[BIOME_NUMBER];
 
-t_biome	*get_biome(int num)
+t_biome	*get_biome(Biome biome)
 {
-	return (&g_biomes[num]);
+	return (&g_biomes[biome]);
 }
 
 void	set_biome(t_biome biome, int num)

@@ -12,7 +12,7 @@
 
 #include "../../includes/concepts/block.h"
 
-static t_block	*g_blocks[17];
+static t_block	*g_blocks[BLOCK_NUMBER];
 
 t_block	*get_block(Block block)
 {
@@ -23,12 +23,11 @@ t_block	*get_block_from_char(char block_char)
 {
 	int	i;
 
-	i = 0;
-	while (g_blocks[i])
+	i = BLOCK_NUMBER;
+	while (g_blocks[i--])
 	{
 		if (g_blocks[i]->block_char == block_char)
 			return (g_blocks[i]);
-		i++;
 	}
 	return (0);
 }
@@ -55,5 +54,4 @@ mlx_image_t	*get_block_image(Block block)
 void	set_block(t_block *block)
 {
 	g_blocks[block->name] = block;
-	g_blocks[16] = 0;
 }

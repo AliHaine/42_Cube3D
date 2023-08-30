@@ -12,6 +12,20 @@
 
 #include "../../includes/includes.h"
 
+/* Create a new block with the specified properties
+ *
+ * Before call this function, make sure to follow these steps :
+ * - Add the block in UPPERCASE to the enum Block,
+ * - Then add the block name in BlockName.
+ * - Add the texture of block in asset/blocks, The texture name must match the enum value and BlockName.
+ *
+ * @param block_name	The Enum 'Block' value representing the type of Block.
+ * @param item			The item associate with
+ * the block (for looting or other..)
+ * @param strength		Higher values make harder the block to break
+ * @param block_char	The char associate to the Block, each block must have UNIQUE char
+ * @param is_rigid		Whether the block is rigid player can't through */
+
 static void	create_block(Block block_name, t_item *item, int strength, mlx_t *mlx, char block_char, bool is_rigid)
 {
 	char	*path;
@@ -65,8 +79,8 @@ static void	create_block_animation(t_block *block, int anim_size, mlx_t *mlx)
 
 void	block_loader(t_core *core)
 {
-	create_block(PORTAL, 0, 1, core->mlx, 'Z', false);
-	create_block_animation(get_block(PORTAL), 14, core->mlx);
+	create_block(NETHERPORTAL, 0, 1, core->mlx, 'Z', false);
+	create_block_animation(get_block(NETHERPORTAL), 14, core->mlx);
 	create_block(NETHERRACK, 0, 1, core->mlx, 'R', true);
 	create_block(OBSIDIAN, 0, 2, core->mlx, 'O', true);
 	create_block(CRYING_OBSIDIAN, 0, 2, core->mlx, 'L', true);
@@ -82,5 +96,10 @@ void	block_loader(t_core *core)
 	create_block(DRAGON_EGG, 0, 0, core->mlx, 'D', true);
 	create_block(GRAY_GLAZED_TERRACOTTA, 0, 0, core->mlx, '?', true);
 	create_block(REDSTONE_BLOCK, 0, 0, core->mlx, '=', true);
+	create_block(RED_MUSHROOM_BLOCK, 0, 0, core->mlx, '+', true);
+	create_block(RED_GLAZED_TERRACOTTA, 0, 0, core->mlx, '|', true);
+	create_block(CRIMSON_NYLIUM, 0, 0, core->mlx, '}', true);
+	create_block(CRIMSON_NYLIUM_SIDE, 0, 0, core->mlx, '{', true);
+
 
 }

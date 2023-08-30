@@ -21,6 +21,8 @@ typedef enum {
 	BIOME_DARK,
 	BIOME_BACKROOM,
 	BIOME_DRAGON,
+	BIOME_RED,
+	BIOME_NUMBER,
 }	Biome;
 
 typedef struct s_biome
@@ -31,7 +33,7 @@ typedef struct s_biome
 }	t_biome;
 
 //accessor
-t_biome	*get_biome(int num);
+t_biome	*get_biome(Biome biome);
 void	set_biome(t_biome biome, int num);
 
 //biome_utils

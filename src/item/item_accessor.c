@@ -12,7 +12,7 @@
 
 #include "../../includes/concepts/item.h"
 
-static t_item			*g_items[12];
+static t_item			*g_items[ITEM_NUMBER];
 
 t_item	*get_item(Item item)
 {
@@ -22,5 +22,4 @@ t_item	*get_item(Item item)
 void	set_item(t_item *item)
 {
 	g_items[item->name] = item;
-	g_items[11] = 0;
 }

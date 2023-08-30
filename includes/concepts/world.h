@@ -23,6 +23,7 @@ typedef enum {
 	WORLD_NETHER,
 	WORLD_END,
 	WORLD_BACKROOM,
+	WORLD_NUMBER,
 }	World;
 
 typedef struct s_world

@@ -17,7 +17,7 @@
 typedef struct s_item t_item;
 
 typedef enum {
-	PORTAL,
+	NETHERPORTAL,
 	NETHERRACK,
 	OBSIDIAN,
 	CRYING_OBSIDIAN,
@@ -33,6 +33,11 @@ typedef enum {
 	DRAGON_EGG,
 	GRAY_GLAZED_TERRACOTTA,
 	REDSTONE_BLOCK,
+	RED_MUSHROOM_BLOCK,
+	RED_GLAZED_TERRACOTTA,
+	CRIMSON_NYLIUM,
+	CRIMSON_NYLIUM_SIDE,
+	BLOCK_NUMBER,
 }	Block;
 
 static const char *BlockName[] = {
@@ -52,7 +57,10 @@ static const char *BlockName[] = {
 		"dragon_egg",
 		"gray_glazed_terracotta",
 		"redstone_block",
-
+		"red_mushroom_block",
+		"red_glazed_terracotta",
+		"crimson_nylium",
+		"crimson_nylium_side",
 };
 
 typedef struct s_block

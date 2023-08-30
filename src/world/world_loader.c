@@ -116,14 +116,19 @@ void	world_loader(t_core *core)
 {
 	set_biome(biome_creator(6, NETHERRACK, NETHER_WART_BLOCK, OBSIDIAN, CRYING_OBSIDIAN, CRACKED_DEEPSLAT_TILES, DEEPSLATE_COAL_ORE), BIOME_DARK);
 	set_biome(biome_creator(1, BACKROOM_YELLOW), BIOME_BACKROOM);
-	set_biome(biome_creator(5, CHISELED_NETHER_BRICKS, CRACKED_NETHER_BRICKS, DRAGON_EGG, GRAY_GLAZED_TERRACOTTA, REDSTONE_BLOCK), BIOME_DRAGON);
+	set_biome(biome_creator(4, CHISELED_NETHER_BRICKS, CRACKED_NETHER_BRICKS, DRAGON_EGG, GRAY_GLAZED_TERRACOTTA), BIOME_DRAGON);
+	set_biome(biome_creator(4, REDSTONE_BLOCK, RED_GLAZED_TERRACOTTA, CRIMSON_NYLIUM, CRIMSON_NYLIUM_SIDE), BIOME_RED);
 
 	world_copy_from_chunk(get_world(WORLD_DEFAULT));
 
+	msg_write_multiple(1, Messages[TRY_LOAD_WORLD], "nether");
+	usleep(300000 * LOAD);
 	world_creator(get_world(WORLD_NETHER), get_sound(NETHER_AMBIANT_SOUND), 32, 32, (uint32_t []){0, 0}, core->imgs.skybox_nether, get_block_image(NETHERRACK), HARD, false, true);
-	set_world_biomes(WORLD_NETHER, world_get_biomes(2, get_biome(BIOME_DARK), get_biome(BIOME_DRAGON)));
+	set_world_biomes(WORLD_NETHER, world_get_biomes(3, get_biome(BIOME_DARK), get_biome(BIOME_DRAGON), get_biome(BIOME_RED)));
 	world_generator(get_world(WORLD_NETHER));
 
+	msg_write_multiple(1, Messages[TRY_LOAD_WORLD], "BACKROOM");
+	usleep(300000 * LOAD);
 	world_creator(get_world(WORLD_BACKROOM), get_sound(BACKROOM_AMBIANT_SOUND), 32, 32, (uint32_t []){0, 0}, core->imgs.backrooms_ceil, get_block_image(BACKROOM_FLOOR), HARD, false, false);
 	set_world_biomes(WORLD_BACKROOM, world_get_biomes(1, get_biome(BIOME_BACKROOM)));
 	world_generator(get_world(WORLD_BACKROOM));

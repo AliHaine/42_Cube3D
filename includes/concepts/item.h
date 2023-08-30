@@ -26,7 +26,8 @@ typedef enum {
 	IRON,
 	FLINT,
 	LIGHTER,
-	DIAMOND_PICKAXE
+	DIAMOND_PICKAXE,
+	ITEM_NUMBER,
 }   Item;
 
 static const char *ItemName[] = {

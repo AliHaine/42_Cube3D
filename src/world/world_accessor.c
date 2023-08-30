@@ -12,7 +12,7 @@
 
 #include "../../includes/concepts/world.h"
 
-static t_world			g_worlds[4];
+static t_world			g_worlds[WORLD_NUMBER];
 
 t_world	*get_world(int num)
 {
@@ -23,8 +23,8 @@ t_world	*get_world_active()
 {
 	int	i;
 
-	i = -1;
-	while (i++ < 3)
+	i = WORLD_NUMBER;
+	while (i-- > 0)
 		if (get_world(i)->is_active)
 			return (get_world(i));
 	return (0);
