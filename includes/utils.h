@@ -53,10 +53,8 @@ uint32_t	get_pixel(mlx_texture_t *texture, int x, int y);
 mlx_image_t *rotate_image(mlx_t *mlx, mlx_texture_t *image, float angle);
 
 //move_utils//
-char	get_backward_char(t_player *player);
 char	get_forward_char(t_player *player);
-char	get_right_char(t_player *player);
-char	get_left_char(t_player *player);
+bool	is_move_key_down(mlx_t *mlx);
 bool	is_player_running(t_player *player);
 bool	is_player_under_block(t_player *player);
 

@@ -12,6 +12,8 @@
 
 #include "../../includes/includes.h"
 
+/*Give a position (in cell), return the chunk that matches the position*/
+
 int	get_chunk_from_pos(int x, int y)
 {
 	int		cell;
@@ -44,8 +46,8 @@ int	get_chunk_from_pos(int x, int y)
 
 bool    is_player_chunk_change(t_player *player, t_world *world)
 {
-	if (player->player_cell_xy[0] >= world->width && player->player_cell_xy[0] <= ((world->width * 2) - 1)
-		&& player->player_cell_xy[1] >= world->height && player->player_cell_xy[1] <= ((world->height * 2) - 1))
+	if (player->player_cell_xy[0] >= (world->width ) && player->player_cell_xy[0] <= ((world->width * 2) - 1)
+		&& player->player_cell_xy[1] >= (world->height ) && player->player_cell_xy[1] <= ((world->height * 2) - 1))
 		return (false);
 	return (true);
 }

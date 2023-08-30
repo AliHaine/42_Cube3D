@@ -15,8 +15,6 @@
 
 static void	rotation_inputs(mlx_t *mlx, t_player *player)
 {
-    if (!player->can_move)
-        return ;
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 		move_rotate(player, 0, (float)SENSIBILITY / 10);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
@@ -27,10 +25,10 @@ static void moving_inputs(mlx_t *mlx, t_player *player)
 {
 	float	save_pos_xy[2];
 
-	if (!player->can_move)
+	if (!is_move_key_down(mlx))
 	{
 		player->is_moving = false;
-		return ;
+		return;
 	}
 	player->is_moving = true;
 	save_pos_xy[0] = player->player_pos_xy[0];
@@ -43,16 +41,12 @@ static void moving_inputs(mlx_t *mlx, t_player *player)
 		move_backward(player);
 	else if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_UP))
 		move_forward(player);
-	else
-		player->is_moving = false;
 	if (is_player_under_block(player))
 	{
 		player->player_pos_xy[0] = save_pos_xy[0];
 		player->player_pos_xy[1] = save_pos_xy[1];
 		player->is_moving = false;
 	}
-	player->player_cell_xy[0] = (int)(player->player_pos_xy[0] / 64);
-	player->player_cell_xy[1] = (int)(player->player_pos_xy[1] / 64);
 }
 
 void	inputs(void *params)
@@ -63,10 +57,14 @@ void	inputs(void *params)
 	mouse_cursor(core->mlx, &core->player, core->screen_size);
 	if (mlx_is_key_down(core->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(core->mlx);
+	if (!core->player.can_move)
+		return ;
 	rotation_inputs(core->mlx, &core->player);
 	moving_inputs(core->mlx, &core->player);
     if (is_player_chunk_change(&core->player, get_world_active()))
 		world_dynamic_generator(&core->player);
+	core->player.player_cell_xy[0] = (int)(core->player.player_pos_xy[0] / 64);
+	core->player.player_cell_xy[1] = (int)(core->player.player_pos_xy[1] / 64);
 }
 
 //todo
