@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/sound.h"
+#include "../../includes/sound.h"
 
 void	init_sound_empty(void)
 {
-	t_sounds sound;
+	t_sounds	sound;
 
 	sound.sound = 0;
 	sound.sound_name = NORMAL_AMBIANT_SOUND;
@@ -31,7 +31,7 @@ void	init_sound_empty(void)
 	set_sound(sound);
 }
 
-/*void	clear_sounds(t_sounds *sounds)
+void	clear_sounds(t_sounds *sounds)
 {
 	if (sounds->player_hurt)
 		BASS_StreamFree(sounds->player_hurt);
@@ -40,12 +40,12 @@ void	init_sound_empty(void)
 	if (sounds->player_run)
 		BASS_StreamFree(sounds->player_run);
 	BASS_Free();
-}*/
+}
 
 bool	load_sound(Sound sound, char *path)
 {
 	static bool	loaded;
-	t_sounds new_sound;
+	t_sounds	new_sound;
 
 	msg_write_multiple(1, Messages[TRY_LOAD_SOUND], path);
 	new_sound.sound_name = sound;

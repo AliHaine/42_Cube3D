@@ -33,19 +33,18 @@
 # include "concepts/world.h"
 # include "concepts/block.h"
 # include "concepts/item.h"
+# include "raycast.h"
 
 
-
-//dda//
-void	raycasting(t_player *player, t_imgs *imgs, t_options *options);
-
-//display.c
 void		display(void *params);
+
+/*//dda//
+void	raycasting(t_player *player, t_imgs *imgs, t_options *options);
 
 //drawing.c
 void	columns_drawing(t_imgs *imgs, t_dda *dda, t_player *player, t_options *options);
 void	draw_energy_bar(mlx_image_t *img, int energy);
-void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *map);
+void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *map);*/
 
 //loader//
 

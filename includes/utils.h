@@ -32,9 +32,6 @@ void	free_tab(char **tab, int size);
 void	copy_tab(char **tab_src, char **tab_dst, int height, int width);
 void	ft_putstr_fd(char *s, int fd);
 int	ft_strcmp(const char *s1, const char *s2);
-bool	is_value_beetween(int value, int beet, int target);
-
-//struct//
 
 //file//
 
@@ -58,12 +55,12 @@ bool	is_move_key_down(mlx_t *mlx);
 bool	is_player_running(t_player *player);
 bool	is_player_under_block(t_player *player);
 
-//raycastin and drawing
+/*//raycastin and drawing
 
 void	fisheyes_fixor(t_dda *dda, float player_angle);
 void	get_color_wall_texture(mlx_texture_t *wall_texture, int r, t_col_drawing *tcd);
 void	get_color_block_texture(t_dda *dda, t_col_drawing *tcd);
-uint32_t	apply_fog(uint32_t color, float fog_strength);
+uint32_t	apply_fog(uint32_t color, float fog_strength);*/
 
 // inventory / s_slot
 t_slot	*get_slot(t_core *core, int s);
@@ -72,15 +69,6 @@ void	set_pos_by_id(t_slot *slot, int id);
 void	reset_slot(t_core *core, t_slot *slot);
 void	change_item_number(t_core *core, t_slot *src, short n);
 
-//block_utils
-
-//t_block *get_block_from_char(t_block **block, char block_char);
-
-//world_utils
-/*bool    is_player_chunk_change(t_player *player, t_map *map);
-int	get_chunk_from_pos(int x, int y, int m_height, int m_width);
-int	get_world_active(t_map maps[2]);
-bool    world_dynamic_generator(t_map *map, t_player *player);*/
 
 //player_utils
 void	set_player(int x, int y, t_player *player, float angle);

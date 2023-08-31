@@ -19,7 +19,7 @@ t_world	*get_world(int num)
 	return (&g_worlds[num]);
 }
 
-t_world	*get_world_active()
+t_world	*get_world_active(void)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ t_world	*get_world_active()
 	return (0);
 }
 
-t_world *get_world_from_portal(char c)
+t_world	*get_world_from_portal(char c)
 {
 	if (c == 'Z')
 		return (get_world(WORLD_NETHER));
@@ -39,12 +39,12 @@ t_world *get_world_from_portal(char c)
 	return (0);
 }
 
-void set_world(t_world world, int num)
+void	set_world(t_world world, int num)
 {
 	g_worlds[num] = world;
 }
 
-void set_world_biomes(World world, t_biome **biomes)
+void	set_world_biomes(World world, t_biome **biomes)
 {
 	g_worlds[world].biome = biomes;
 }

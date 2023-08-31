@@ -4,8 +4,6 @@ SRCS		=	src/cub3d.c \
 				src/inputs/mouse_cursor.c \
 				src/inputs/mouse.c \
 				src/inputs/scroll_hook.c \
-				src/graphics/digital_differential_analysis.c \
-				src/graphics/drawing.c \
 				src/graphics/display.c \
 				src/graphics/animations.c \
 				src/loading/texture_loader.c \
@@ -14,11 +12,14 @@ SRCS		=	src/cub3d.c \
 				src/parsing/map_parse.c \
 				src/parsing/map_texture.c \
 				src/parsing/options_initializer.c \
+				src/raycast/digital_differential_analysis.c \
+                src/raycast/drawing.c \
+                src/raycast/struct_drawing.c \
+                src/raycast/raycast_utils.c \
 				src/sound/sound_loader.c \
 				src/sound/sound.c \
 				src/sound/sound_accessor.c \
 				src/struct/struct_slot.c \
-				src/struct/struct_drawing.c \
 				src/player_interaction/player_listener.c \
 				src/player_interaction/heal.c \
 				src/player_interaction/build.c \
@@ -45,7 +46,6 @@ SRCS		=	src/cub3d.c \
 				src/utils/msg_utils.c \
 				src/utils/std_func_utils.c \
 				src/utils/file_utils.c \
-				src/utils/raycast_utils.c \
 				src/utils/move_utils.c \
 				src/utils/mlx_texture_utils.c \
 				src/utils/player_utils.c \

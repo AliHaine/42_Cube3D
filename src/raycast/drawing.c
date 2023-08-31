@@ -205,7 +205,7 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, t_player *player, t_options *opti
 	world = get_world_active();
 	setup_col_struct(&tcd, dda, world);
 	tcd.floor_d = cosf(dda->current_angle - player->playerangle);
-	while (tcd.iterator < tcd.ceil_floor_lineH)
+	while (tcd.iterator < tcd.ceil_floor_line_h)
 	{
 		if (options->skybox == true && get_world_active()->skybox == true)
 			skybox_drawing(imgs, dda, &tcd, world);
@@ -215,7 +215,7 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, t_player *player, t_options *opti
 			mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++,
 				world->bt_color[1]);
 	}
-	while (tcd.iterator < tcd.wall_lineH)
+	while (tcd.iterator < tcd.wall_line_h)
 		wall_drawing(imgs, dda, &tcd);
 	while (tcd.iterator < SCREEN_HEIGHT)
 	{

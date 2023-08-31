@@ -1,13 +1,5 @@
 #include "../../includes/includes.h"
 
-bool	is_value_beetween(int value, int beet, int target)
-{
-	if (target <= value + beet && target >= value - beet)
-		return (true);
-	return (false);
-}
-
-
 int     get_rand_num(int max_val, int sleeper)
 {
 	struct timeval tv;

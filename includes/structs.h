@@ -17,14 +17,14 @@
 # include "../includes/enum.h"
 typedef struct s_item t_item;
 
-typedef struct s_imgs
+typedef struct	s_imgs
 {
 	mlx_image_t		*img_3d;
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_player;
-	mlx_image_t 	*crosshair;
-	mlx_image_t 	*invbar;
-	mlx_image_t 	*invbar_selector;
+	mlx_image_t		*crosshair;
+	mlx_image_t		*invbar;
+	mlx_image_t		*invbar_selector;
 	mlx_image_t 	*engbar;
     mlx_image_t 	*hearth[2];
 	mlx_image_t		*map_background;
@@ -40,24 +40,6 @@ typedef struct s_imgs
 	mlx_texture_t	*cursor;
 	mlx_texture_t	*img_player_texture;
 }	t_imgs;
-
-typedef struct s_dda
-{
-	int	ray; // iterator qui va de 0 a 1279
-    float r_xy[2]; // position x et y du mur toucher sur le rayon actuel
-	float v_xy[2]; // valeur permettant de "jump" d'une case a l'autre pour trouver un mur
-	float o_xy[2];
-	float cos; //cos de l'ange actuel
-	float sin; //sin de l'ange actuel
-    float dist_hv[2]; // distance entre le mur et le joueur
-	float current_angle; // angle actuel du joueur
-    float current_angle_fix; //fish eye fix
-	int hit_hv; // determine si c'est un mur horizontal ou vertical toucher
-	int hit_direction[2]; // determine la direction du mur toucher (ouest est etc)
-	int chunk_hv[2];
-	float wall_height;
-
-}	t_dda;
 
 typedef struct s_file
 {
@@ -106,19 +88,6 @@ typedef struct s_player
 	bool			is_running;
 }	t_player;
 
-typedef struct s_col_drawing
-{
-	int			iterator;
-	uint32_t	color;
-	int			ceil_floor_lineH;
-	int			wall_lineH;
-	float		step;
-	float		current_step;
-	float		fog_strength;
-	char		hit_block;
-    float       floor_d;
-}	t_col_drawing;
-
 typedef struct s_options
 {
 	bool	floor_texture;
@@ -133,7 +102,6 @@ typedef struct s_core
 	t_options		options;
 	t_player		player;
 	t_imgs			imgs;
-	t_animation 	animations[11];
     int             screen_size[2];
 }	t_core;
 

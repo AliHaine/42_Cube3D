@@ -12,7 +12,7 @@
 
 #include "../../includes/includes.h"
 
-void	sound_loader()
+void	sound_loader(void)
 {
 	msg_write(1, -1, SOUND_INIT);
 	usleep(450000 * LOAD);
