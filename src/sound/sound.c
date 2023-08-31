@@ -31,7 +31,7 @@ void	init_sound_empty(void)
 	set_sound(sound);
 }
 
-void	clear_sounds(t_sounds *sounds)
+/*void	clear_sounds(t_sounds *sounds)
 {
 	if (sounds->player_hurt)
 		BASS_StreamFree(sounds->player_hurt);
@@ -40,7 +40,7 @@ void	clear_sounds(t_sounds *sounds)
 	if (sounds->player_run)
 		BASS_StreamFree(sounds->player_run);
 	BASS_Free();
-}
+}*/
 
 bool	load_sound(Sound sound, char *path)
 {

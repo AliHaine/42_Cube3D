@@ -37,6 +37,7 @@ static void	create_block(Block block_name, t_item *item, int strength, mlx_t *ml
 	block->strength = strength;
 	block->block_char = block_char;
 	block->is_rigid = is_rigid;
+	block->animation.is_playing = false;
 	path = malloc(sizeof(char) * (ft_strlen(BlockName[block_name]) + 19));
 	put_two_string(path, "assets/blocks/", BlockName[block_name], 0);
 	if (!set_image_from_path(mlx, path, &block->image))

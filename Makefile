@@ -62,7 +62,7 @@ NAME		=	cub3d
 TOTAL_FILES =	$(words $(SRCS))
 COUNT		=	1
 
-FLAGS		=	-Ofast -g3 #-fsanitize=address
+FLAGS		=	-Ofast -g3 -fsanitize=address
 LDFLAGS		+=	-L./src/sound/bass
 LDLIBS		+=	-lbass
 

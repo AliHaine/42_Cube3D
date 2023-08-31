@@ -66,20 +66,18 @@ void	animation_listener(void)
 	t_item	*item;
 	int		i;
 
-	i = 0;
-	item = get_item(i);
-	while (item)
+	i = ITEM_NUMBER;
+	while (i-- > 0)
 	{
+		item = get_item(i);
 		if (item->animation.is_playing)
 			play_attack_animation(&item->animation, item->image);
-		item = get_item(i++);
 	}
-	i = 0;
-	block = get_block(i);
-	while (block)
+	i = BLOCK_NUMBER;
+	while (i-- > 0)
 	{
+		block = get_block(i);
 		if (block->animation.is_playing)
 			play_block_animation(&block->animation, block);
-		block = get_block(i++);
 	}
 }

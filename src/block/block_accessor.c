@@ -24,7 +24,7 @@ t_block	*get_block_from_char(char block_char)
 	int	i;
 
 	i = BLOCK_NUMBER;
-	while (g_blocks[i--])
+	while (i-- > 0)
 	{
 		if (g_blocks[i]->block_char == block_char)
 			return (g_blocks[i]);
@@ -36,12 +36,11 @@ Block	get_block_name_from_char(char block_char)
 {
 	int	i;
 
-	i = 0;
-	while (g_blocks[i])
+	i = BLOCK_NUMBER;
+	while (i-- > 0)
 	{
 		if (g_blocks[i]->block_char == block_char)
 			return (g_blocks[i]->name);
-		i++;
 	}
 	return (0);
 }
