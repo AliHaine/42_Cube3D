@@ -75,13 +75,13 @@ static void	side_generator(t_world *world, int chunk_num)
 static void	replace_player_on_world(t_player *player, int num)
 {
 	if (num == 1)
-		player->player_pos_xy[1] += player->player_pos_xy[1];
+		player->player_pos_xy[1] += get_world_active()->height * 64;
 	else if (num == 3)
-		player->player_pos_xy[0] += player->player_pos_xy[0];
+		player->player_pos_xy[0] += get_world_active()->width * 64;
 	else if (num == 5)
-		player->player_pos_xy[0] -= (player->player_pos_xy[0] / 2);
+		player->player_pos_xy[0] -= get_world_active()->width * 64;
 	else if (num == 7)
-		player->player_pos_xy[1] -= (player->player_pos_xy[1] / 2);
+		player->player_pos_xy[1] -= get_world_active()->height * 64;
 }
 
 static int	get_chunk_from_corner(int iterator, int chunk_num)

@@ -33,7 +33,7 @@ void	mouse(enum mouse_key key, enum action action, enum modifier_key mkey, void 
 		return ;
 	time = mlx_get_time();
 	core->player.slot->item->animation.is_playing = true;
-	if (get_forward_char(&core->player) == '1'
+	if (get_hit_char(&core->player) == '1'
 		&& core->options.break_blocks == true
         && core->player.slot->item->name == DIAMOND_PICKAXE)
 		set_char_at_forward('0', &core->player, get_world_active());
