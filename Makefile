@@ -1,5 +1,6 @@
 SRCS		=	src/cub3d.c \
 				src/inputs/inputs.c \
+				src/inputs/mouse_listener.c \
 				src/inputs/moves.c \
 				src/inputs/mouse_cursor.c \
 				src/inputs/mouse.c \

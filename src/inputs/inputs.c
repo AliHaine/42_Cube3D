@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
-#include "../../includes/defines.h"
 
 static void	rotation_inputs(mlx_t *mlx, t_player *player)
 {

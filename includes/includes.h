@@ -38,14 +38,6 @@
 
 void		display(void *params);
 
-/*//dda//
-void	raycasting(t_player *player, t_imgs *imgs, t_options *options);
-
-//drawing.c
-void	columns_drawing(t_imgs *imgs, t_dda *dda, t_player *player, t_options *options);
-void	draw_energy_bar(mlx_image_t *img, int energy);
-void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *map);*/
-
 void	sprites_drawing(t_imgs *imgs, t_sprite *sprites, t_player *player);
 
 //loader//
@@ -57,6 +49,7 @@ void	mlx_hook_loader(t_core *core);
 //??
 
 void	inputs(void *params);
+void	mouse_listener(void *params);
 void	inputs_hook(struct mlx_key_data key, void *params);
 void	move_left(t_player *player);
 void	move_right(t_player *player);
@@ -75,13 +68,6 @@ void	texture_main(t_file *file, t_imgs *imgs, uint32_t bt_color[2]);
 bool	parse_main(t_file *file, t_player *player, t_world *map);
 void	initialize_options(t_core *core);
 
-//sound//
-/*void	init_sound_empty(t_sounds *sounds);
-void	clear_sounds(t_sounds *sounds);
-bool	load_sound(uint32_t *s, char *path);
-void	play_sound_alt(uint32_t s, bool play, bool loops);
-void	play_sound(uint32_t s);*/
-
 //animations//
 void    animation_listener();
 
@@ -93,8 +79,9 @@ void	display_item(t_core *core, t_slot *slot);
 void	crafting_engine(t_core *core);
 void	craft(t_core *core);
 void	teleport_player(t_player *player);
+void	player_build(t_player *player, t_options options);
 
-void	set_char_at_forward(char c, t_player *player, t_world *world);
+void	set_char_at_forward(char c, t_player *player);
 
 //heal//
 bool	is_player_death(int player_health);
@@ -115,5 +102,6 @@ void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world);
 
 //portal
 void	portal_listener(t_player *player, t_world *world);
+void	portal_open(t_player *player);
 
 #endif

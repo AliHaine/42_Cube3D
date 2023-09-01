@@ -19,9 +19,7 @@ char	get_hit_char(t_player *player)
 	t_world	*world;
 
 	world = get_world_active();
-	x = player->player_pos_xy[0] + cosf(player->playerangle) * player->move_speed;
-	y = player->player_pos_xy[1] + sinf(player->playerangle) * player->move_speed;
-	printf("%f %f\n", player->player_pos_xy[0], player->player_pos_xy[1]);
-	printf("%d %d\n", x, y);
-	return ('0');
+	x = player->player_pos_xy[0] + cosf(player->playerangle) * 55;
+	y = player->player_pos_xy[1] + sinf(player->playerangle) * 55;
+	return (world->world[get_chunk_from_pos(x / 64, y / 64)][(y / 64) % world->height][(x / 64) % world->width]);
 }

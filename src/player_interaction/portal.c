@@ -29,3 +29,8 @@ void	portal_listener(t_player *player, t_world *world)
 	change_active_world(get_world_from_portal(world->world[4][player->player_cell_xy[1] % world->height][player->player_cell_xy[0] % world->width]));
 	teleport_player(player);
 }
+
+void	portal_open(t_player *player)
+{
+	set_char_at_forward(get_block(NETHERPORTAL)->block_char, player);
+}

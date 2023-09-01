@@ -21,6 +21,7 @@ bool    hit_player(t_player *player, t_imgs *imgs)
 	player->health--;
 	take_energy(player, 15);
 	imgs->hearth[1]->instances[player->health + 1].enabled = false;
+	play_sound(get_sound(PLAYER_HURT_SOUND));
 	return (false);
 }
 
