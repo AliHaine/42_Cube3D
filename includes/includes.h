@@ -46,6 +46,8 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, t_player *player, t_options *opti
 void	draw_energy_bar(mlx_image_t *img, int energy);
 void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *map);*/
 
+void	sprites_drawing(t_imgs *imgs, t_sprite *sprites, t_player *player);
+
 //loader//
 
 //void	sound_loader(t_sounds *sounds, t_options *options);

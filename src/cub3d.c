@@ -97,8 +97,9 @@ int	main(int argc, char *argv[])
 	give_item(&core, get_item(LIGHTER), 24, 1);
 	give_item(&core, get_item(DIAMOND_PICKAXE), 12, 1);
     usleep(60000);
-	// J'init l'image la psq elle a besoin des variables initialisees par map_manager
-	// C'est censé adapter la minimap a la taille de la carte mais pas a la resolution donc ca segfault tjr
+
+	core.imgs.wall_texture[0] = mlx_load_png("assets/blocks/cobblestone.png");
+
 	msg_write(1, -1, MINIMAP_INIT);
 	usleep(800000 * LOAD);
 	core.imgs.img_map = mlx_new_image(core.mlx, 256, 256);

@@ -21,26 +21,33 @@ static void	rotation_inputs(mlx_t *mlx, t_player *player)
 		move_rotate(player, 1, (float)SENSIBILITY / 10);
 }
 
-static void moving_inputs(mlx_t *mlx, t_player *player)
+static void	choose_move(mlx_t *mlx, t_player *player)
+{
+	if (mlx_is_key_down(mlx, MLX_KEY_D))
+		move_right(player);
+	else if (mlx_is_key_down(mlx, MLX_KEY_A))
+		move_left(player);
+	else if (mlx_is_key_down(mlx, MLX_KEY_S)
+		|| mlx_is_key_down(mlx, MLX_KEY_DOWN))
+		move_backward(player);
+	else if (mlx_is_key_down(mlx, MLX_KEY_W)
+		|| mlx_is_key_down(mlx, MLX_KEY_UP))
+		move_forward(player);
+}
+
+static void	moving_inputs(mlx_t *mlx, t_player *player)
 {
 	float	save_pos_xy[2];
 
 	if (!is_move_key_down(mlx))
 	{
 		player->is_moving = false;
-		return;
+		return ;
 	}
 	player->is_moving = true;
 	save_pos_xy[0] = player->player_pos_xy[0];
 	save_pos_xy[1] = player->player_pos_xy[1];
-	if (mlx_is_key_down(mlx, MLX_KEY_D))
-		move_right(player);
-	else if (mlx_is_key_down(mlx, MLX_KEY_A))
-		move_left(player);
-	else if (mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		move_backward(player);
-	else if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_UP))
-		move_forward(player);
+	choose_move(mlx, player);
 	if (is_player_under_block(player))
 	{
 		player->player_pos_xy[0] = save_pos_xy[0];
@@ -61,26 +68,28 @@ void	inputs(void *params)
 		return ;
 	rotation_inputs(core->mlx, &core->player);
 	moving_inputs(core->mlx, &core->player);
-    if (is_player_chunk_change(&core->player, get_world_active()))
+	if (is_player_chunk_change(&core->player,
+			get_world_active()))
 		world_dynamic_generator(&core->player);
 	core->player.player_cell_xy[0] = (int)(core->player.player_pos_xy[0] / 64);
 	core->player.player_cell_xy[1] = (int)(core->player.player_pos_xy[1] / 64);
 }
 
-//todo
 void	inputs_hook(struct mlx_key_data key, void *params)
 {
 	t_core	*core;
 
 	core = (t_core *)params;
-	if (key.key == 340 && key.action == 1) {
+	if (key.key == 340 && key.action == 1)
+	{
 		core->player.is_running = true;
 		core->player.move_speed = MOVE_SPEED * 2;
 	}
-	else if (key.key == 340 && key.action == 0) {
+	else if (key.key == 340 && key.action == 0)
+	{
 		core->player.is_running = false;
 		core->player.move_speed = MOVE_SPEED;
 	}
-    if (key.key == 69 && key.action == 0)
-        inventory(core);
+	if (key.key == 69 && key.action == 0)
+		inventory(core);
 }

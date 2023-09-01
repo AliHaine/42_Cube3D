@@ -12,6 +12,17 @@
 
 #include "../../includes/includes.h"
 
+static void	set_imgs_z(t_imgs *imgs)
+{
+	imgs->img_3d->instances[0].z = 1;
+	imgs->img_map->instances[0].z = 3;
+	imgs->img_player->instances[0].z = 4;
+	imgs->crosshair->instances[0].z = 5;
+	imgs->invbar->instances[0].z = 6;
+	imgs->invbar_selector->instances[0].z = 7;
+	imgs->engbar->instances[0].z = 9;
+}
+
 static void	display_icon_in_invbar(t_slot *slot)
 {
 	t_slot				*iterator;
@@ -24,10 +35,13 @@ static void	display_icon_in_invbar(t_slot *slot)
 	{
 		if (iterator->item->name != HAND && !iterator->bar_mutex)
 		{
-			iterator->items_number_img_bar->instances[0].x = (div + ((iterator->slot_id - 1) * 61)) + 23;
+			iterator->items_number_img_bar->instances[0].x
+				= (div + ((iterator->slot_id - 1) * 61)) + 23;
 			iterator->items_number_img_bar->instances[0].enabled = true;
-			iterator->item->icon->instances[iterator->bar_icon_instance].x = div + ((iterator->slot_id - 1) * 61);
-			iterator->item->icon->instances[iterator->bar_icon_instance].enabled = true;
+			iterator->item->icon->instances[iterator->bar_icon_instance].x
+				= div + ((iterator->slot_id - 1) * 61);
+			iterator->item->icon->instances[iterator->bar_icon_instance].enabled
+				= true;
 		}
 		else
 			iterator->items_number_img_bar->instances[0].enabled = false;
@@ -48,7 +62,6 @@ static void	display_item_in_hand(t_player *player)
 	player->slot->item->image->instances[0].enabled = 1;
 }
 
-//Loop hook qui va supprimer les images, les recreer, et les reafficher en boucle
 void	display(void *params)
 {
 	t_core	*core;
@@ -62,22 +75,17 @@ void	display(void *params)
 	mlx_delete_image(core->mlx, core->imgs.img_player);
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
-	core->imgs.img_map = mlx_texture_to_image(core->mlx, core->imgs.map_texture);
+	core->imgs.img_map = mlx_texture_to_image
+		(core->mlx, core->imgs.map_texture);
 	raycasting(&core->player, &core->imgs, &core->options);
-	minimap_drawing(&core->imgs, core->player.player_pos_xy, get_world_active());
-	core->imgs.img_player = rotate_image(core->mlx, core->imgs.img_player_texture, core->player.playerangle + (PI / 2));
+	minimap_drawing(&core->imgs,
+		core->player.player_pos_xy, get_world_active());
+	core->imgs.img_player = rotate_image(core->mlx,
+			core->imgs.img_player_texture, core->player.playerangle + (PI / 2));
 	mlx_resize_image(core->imgs.img_map, 250, 250);
 	mlx_resize_image(core->imgs.img_player, 14, 14);
 	mlx_image_to_window(core->mlx, core->imgs.img_3d, 0, 0);
 	mlx_image_to_window(core->mlx, core->imgs.img_map, 20, 445);
 	mlx_image_to_window(core->mlx, core->imgs.img_player, 137, 561);
-	//Definir l'ordre des images / qui est au dessus de qui
-	core->imgs.img_3d->instances[0].z = 1;
-	//core->imgs.map_background->instances[0].z = 2;
-	core->imgs.img_map->instances[0].z = 3;
-	core->imgs.img_player->instances[0].z = 4;
-	core->imgs.crosshair->instances[0].z = 5;
-	core->imgs.invbar->instances[0].z = 6;
-	core->imgs.invbar_selector->instances[0].z = 7;
-    core->imgs.engbar->instances[0].z = 9;
+	set_imgs_z(&core->imgs);
 }

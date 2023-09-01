@@ -37,6 +37,7 @@ typedef enum {
 	RED_GLAZED_TERRACOTTA,
 	CRIMSON_NYLIUM,
 	CRIMSON_NYLIUM_SIDE,
+	FLOWER,
 	BLOCK_NUMBER,
 }	Block;
 
@@ -61,6 +62,7 @@ static const char *BlockName[] = {
 		"red_glazed_terracotta",
 		"crimson_nylium",
 		"crimson_nylium_side",
+		"flower",
 };
 
 typedef struct s_block

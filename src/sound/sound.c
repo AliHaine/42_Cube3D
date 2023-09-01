@@ -33,13 +33,13 @@ void	init_sound_empty(void)
 
 /*void	clear_sounds(t_sounds *sounds)
 {
-	if (sounds->player_hurt)
-		BASS_StreamFree(sounds->player_hurt);
-	if (sounds->player_walk)
-		BASS_StreamFree(sounds->player_walk);
-	if (sounds->player_run)
-		BASS_StreamFree(sounds->player_run);
-	BASS_Free();
+//	if (sounds->player_hurt)
+//		BASS_StreamFree(sounds->player_hurt);
+//	if (sounds->player_walk)
+//		BASS_StreamFree(sounds->player_walk);
+//	if (sounds->player_run)
+//		BASS_StreamFree(sounds->player_run);
+//	BASS_Free();
 }*/
 
 bool	load_sound(Sound sound, char *path)

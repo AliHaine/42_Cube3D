@@ -101,6 +101,5 @@ void	block_loader(t_core *core)
 	create_block(RED_GLAZED_TERRACOTTA, 0, 0, core->mlx, '|', true);
 	create_block(CRIMSON_NYLIUM, 0, 0, core->mlx, '}', true);
 	create_block(CRIMSON_NYLIUM_SIDE, 0, 0, core->mlx, '{', true);
-
-
+	create_block(FLOWER, 0, 0, core->mlx, 'T', false);
 }

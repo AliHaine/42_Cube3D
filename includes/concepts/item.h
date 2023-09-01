@@ -41,7 +41,7 @@ static const char *ItemName[] = {
 		"iron",
 		"flint",
 		"lighter",
-		"diamond_pickaxe"
+		"diamond_pickaxe",
 };
 
 typedef struct s_item

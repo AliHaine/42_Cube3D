@@ -41,6 +41,23 @@ typedef struct	s_imgs
 	mlx_texture_t	*img_player_texture;
 }	t_imgs;
 
+typedef struct s_sprite
+{
+	float			r_xy[2];
+	int				c_xy[2];
+	float			s_xy[2];
+	float			transform_xy[2];
+	float			start_xy[2];
+	float			end_xy[2];
+	float			screen_xy[2];
+	int				text_xy[2];
+	float			height;
+	float			width;
+	float			distance;
+	float			inversed_determinator;
+	mlx_texture_t	*texture;
+}	t_sprite;
+
 typedef struct s_file
 {
 	int		fd;

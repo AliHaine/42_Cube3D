@@ -6,6 +6,7 @@ SRCS		=	src/cub3d.c \
 				src/inputs/scroll_hook.c \
 				src/graphics/display.c \
 				src/graphics/animations.c \
+				src/graphics/sprites.c \
 				src/loading/texture_loader.c \
 				src/loading/other_loader.c \
 				src/parsing/map_manager.c \
@@ -62,7 +63,7 @@ NAME		=	cub3d
 TOTAL_FILES =	$(words $(SRCS))
 COUNT		=	1
 
-FLAGS		=	-Ofast -g3 -fsanitize=address
+FLAGS		=	-Ofast -g3 #-fsanitize=address
 LDFLAGS		+=	-L./src/sound/bass
 LDLIBS		+=	-lbass
 
@@ -77,21 +78,25 @@ CFLAGS		+=	-I include -I ../MLX42/include $(BASS_CFLAGS)
 RM			=	rm -rf
 
 %.o: %.c
-	@echo "\033[0;33mCompiling [$<]... ($(COUNT)/$(TOTAL_FILES) files, $(shell echo $$(($(COUNT)*100/$(TOTAL_FILES))))%)\033[0m"
+	@echo "\033[0;33m[$(shell echo $$(($(COUNT)*100/$(TOTAL_FILES))))%] Compiling [$<]... ($(COUNT)/$(TOTAL_FILES) files)\033[0m"
 	@gcc $(FLAGS) $(CFLAGS) -Ibass -c $< -o $@
 	$(eval COUNT=$(shell echo $$(($(COUNT)+1))))
 
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-	gcc $(FLAGS) $(OBJS) $(LIBFT) $(MLX42) $(BASS_LDFLAGS) $(BASS_LDLIBS) -o $(NAME)
-	install_name_tool -change @loader_path/libbass.dylib ./src/sound/bass/libbass.dylib $(NAME)
+	@echo "\033[32mFinishing...\033[0m"
+	@gcc $(FLAGS) $(OBJS) $(LIBFT) $(MLX42) $(BASS_LDFLAGS) $(BASS_LDLIBS) -o $(NAME)
+	@install_name_tool -change @loader_path/libbass.dylib ./src/sound/bass/libbass.dylib $(NAME)
+	@echo "\033[32m-- Done --\033[0m"
 
 clean:
-			$(RM) $(OBJS)
+			@echo "\033[32mCleaning objs files...\033[0m"
+			@$(RM) $(OBJS)
 
 fclean:		clean
-			$(RM) $(NAME)
+			@echo "\033[32mCleaning executables...\033[0m"
+			@$(RM) $(NAME)
 
 re:			fclean all
 
