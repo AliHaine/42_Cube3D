@@ -15,6 +15,7 @@
 - Chat
 +- Infinite world
 +- Biome + chunk
+- Build systeme with range, animation, sound ..
 
 Parsing:
     +- Work even no args

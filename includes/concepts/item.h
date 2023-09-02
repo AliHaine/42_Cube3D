@@ -50,7 +50,6 @@ typedef struct s_item
 	int				durability;
 	int				damage;
 	int				strength;
-	int				range;
 	int				max_stack;
 	mlx_image_t		*image;
 	mlx_image_t		*icon;

@@ -69,6 +69,7 @@ static void	core_init(t_core *core)
 	core->player.is_in_inventory = false;
 	core->player.can_move = true;
 	core->player.is_running = false;
+	core->player.is_building = false;
 	msg_write(1, -1, SUCCESS);
 }
 
@@ -83,7 +84,7 @@ int	main(int argc, char *argv[])
 	item_loader(&core);
 	block_loader(&core);
 	setup_slot_struct(core.mlx, &core.player);
-    map_manager(argv[1], get_world(0), &core.imgs, &core.player);
+    map_manager(argv[1], &core.imgs, &core.player);
     world_loader(&core);
     give_item(&core, get_item(SWORD_NETHER), 2, 32);
 	give_item(&core, get_item(SWORD_NETHER), 32, 52);

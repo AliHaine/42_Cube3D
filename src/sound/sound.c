@@ -15,20 +15,15 @@
 void	init_sound_empty(void)
 {
 	t_sounds	sound;
+	int			i;
 
 	sound.sound = 0;
-	sound.sound_name = NORMAL_AMBIANT_SOUND;
-	set_sound(sound);
-	sound.sound_name = NETHER_AMBIANT_SOUND;
-	set_sound(sound);
-	sound.sound_name = BACKROOM_AMBIANT_SOUND;
-	set_sound(sound);
-	sound.sound_name = PLAYER_HURT_SOUND;
-	set_sound(sound);
-	sound.sound_name = PLAYER_WALK_SOUND;
-	set_sound(sound);
-	sound.sound_name = PLAYER_RUN_SOUND;
-	set_sound(sound);
+	i = 0;
+	while (i < SOUND_NUMBER)
+	{
+		sound.sound_name = i++;
+		set_sound(sound);
+	}
 }
 
 /*void	clear_sounds(t_sounds *sounds)
@@ -72,7 +67,7 @@ void	play_sound_alt(t_sounds *sound, bool play, bool loop)
 
 void	play_sound(t_sounds *sound)
 {
-	if (!sound->sound)
+	if (!sound || !sound->sound)
 		return ;
 	BASS_ChannelStop(sound->sound);
 	BASS_ChannelSetPosition(sound->sound, 0, 0);

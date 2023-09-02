@@ -33,6 +33,8 @@ void	player_listener(void *params)
 	world = get_world_active();
 	if (energy_listener(&core->player, world->difficulty))
 		draw_energy_bar(core->imgs.engbar, core->player.energy);
+	if (core->player.is_building)
+		player_build(&core->player, core->options);
 	if (core->player.is_moving)
 	{
 		if (core->player.is_running)

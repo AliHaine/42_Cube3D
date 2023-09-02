@@ -22,7 +22,7 @@
  * @param block_name	The Enum 'Block' value representing the type of Block.
  * @param item			The item associate with
  * the block (for looting or other..)
- * @param strength		Higher values make harder the block to break
+ * @param strength		Higher values make harder the block to break. Low value is like ~10-, and high value is like ~ 120+
  * @param block_char	The char associate to the Block, each block must have UNIQUE char
  * @param is_rigid		Whether the block is rigid player can't through */
 
@@ -82,8 +82,8 @@ void	block_loader(t_core *core)
 {
 	create_block(NETHERPORTAL, 0, 1, core->mlx, 'Z', false);
 	create_block_animation(get_block(NETHERPORTAL), 14, core->mlx);
-	create_block(NETHERRACK, 0, 1, core->mlx, 'R', true);
-	create_block(OBSIDIAN, 0, 2, core->mlx, 'O', true);
+	create_block(NETHERRACK, 0, 10, core->mlx, 'R', true);
+	create_block(OBSIDIAN, 0, 120, core->mlx, 'O', true);
 	create_block(CRYING_OBSIDIAN, 0, 2, core->mlx, 'L', true);
 	create_block(CRACKED_DEEPSLAT_TILES, 0, 2, core->mlx, 'P', true);
 	create_block(DEEPSLATE_COAL_ORE, 0, 2, core->mlx, 'I', true);

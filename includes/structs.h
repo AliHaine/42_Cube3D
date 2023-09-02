@@ -103,6 +103,7 @@ typedef struct s_player
 	bool			can_move;
 	bool			is_moving;
 	bool			is_running;
+	bool			is_building;
 }	t_player;
 
 typedef struct s_options

@@ -12,7 +12,7 @@
 
 # include "../../includes/sound.h"
 
-static t_sounds g_sounds[6];
+static t_sounds g_sounds[SOUND_NUMBER];
 
 t_sounds	*get_sound(Sound sound)
 {

@@ -17,6 +17,8 @@ void	change_active_world(t_world	*new_world)
 	t_world	*old_world;
 
 	old_world = get_world_active();
+	if (new_world->world_name == old_world->world_name)
+		new_world = get_world(WORLD_DEFAULT);
 	stop_sound(old_world->ambiant_sound);
 	old_world->is_active = false;
 	new_world->is_active = true;

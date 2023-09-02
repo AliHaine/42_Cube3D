@@ -32,29 +32,6 @@ static bool	world_malloc(int height, int width, char ***map)
 	return (true);
 }
 
-bool	world_creator(t_world *world, t_sounds *anbiant_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active, bool skybox)
-{
-	int	i;
-
-	i = 0;
-	world->biome = 0;
-	world->ambiant_sound = anbiant_sound;
-	world->height = height;
-	world->width = width;
-	world->bt_color[0] = bt_color[0];
-	world->bt_color[1] = bt_color[1];
-	world->ceil = ceil;
-	world->floor = floor;
-	world->difficulty = difficulty;
-	world->world = malloc(sizeof(char **) * 9);
-	world->is_active = is_active;
-	world->skybox = skybox;
-	world_malloc(height, width, &world->chunk);
-	while (i < 9)
-		world_malloc(height * 3, width * 3, &world->world[i++]);
-	return (true);
-}
-
 static void	world_generator(t_world *world)
 {
 	int	i;
@@ -62,26 +39,6 @@ static void	world_generator(t_world *world)
 	i = -1;
 	while (i++ < 8)
 		chunk_generator(world, i);
-}
-
-static void	world_copy_from_chunk(t_world *world)
-{
-	int	chunk_yx[2];
-	int	world_iterator;
-
-	chunk_yx[0] = -1;
-	chunk_yx[1] = -1;
-	world_iterator = -1;
-	while (world_iterator++ < 8)
-	{
-		while (chunk_yx[0]++ < world->height - 1)
-		{
-			while (chunk_yx[1]++ < world->width - 1)
-				world->world[world_iterator][chunk_yx[0]][chunk_yx[1]] = world->chunk[chunk_yx[0]][chunk_yx[1]];
-			chunk_yx[1] = -1;
-		}
-		chunk_yx[0] = -1;
-	}
 }
 
 static t_biome	**world_get_biomes(int biome_number, ...)
@@ -98,38 +55,54 @@ static t_biome	**world_get_biomes(int biome_number, ...)
 	return (biomes);
 }
 
-static t_biome	biome_creator(int block_number, ...)
-{
-	t_biome	biome;
-	va_list	va_biome;
+/* Create new World with specified properties
+ * Before call this function, add the name of your
+ * World in the Enum World
+ *
+ * @param world_name	The Enum value of your world
+ * @param biomes		The biomes compositions of your world (optional)
+ * @param ambient_sound	The ambient_sound of your world (optional)
+ * @param height		The height of your world. Do not set too high value
+ * @param width			The width of your world. Do not set too high value
+ * @param bt_color		The color of ceil and floor if there is no image are define for them (optional)
+ * @param ceil			The ceil image
+ * @param floor			The floor image
+ * @param difficulty	The difficulty of the world;
+ * @param is_active		By default you have to set this boolean to false
+ * @param skybox		Set the mode of ceil (skybox or default)
+ * */
 
-	va_start(va_biome, block_number);
-	biome.block = malloc(sizeof(t_block) * block_number);
-	biome.block_number = block_number;
-	while (block_number-- > 0)
-		biome.block[block_number] = *get_block(va_arg(va_biome, Block));
-	va_end(va_biome);
-	return (biome);
+bool	world_creator(World world_name, t_biome **biomes, t_sounds *ambient_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active, bool skybox)
+{
+	int	i;
+	t_world	world;
+
+	i = 0;
+	world_name = world_name;
+	world.biome = biomes;
+	world.ambiant_sound = ambient_sound;
+	world.height = height;
+	world.width = width;
+	world.bt_color[0] = bt_color[0];
+	world.bt_color[1] = bt_color[1];
+	world.ceil = ceil;
+	world.floor = floor;
+	world.difficulty = difficulty;
+	world.world = malloc(sizeof(char **) * 9);
+	world.is_active = is_active;
+	world.skybox = skybox;
+	while (i < 9)
+		world_malloc(height * 3, width * 3, &world.world[i++]);
+	world_generator(&world);
+	set_world(world, world_name);
+	return (true);
 }
 
 void	world_loader(t_core *core)
 {
-	set_biome(biome_creator(6, NETHERRACK, NETHER_WART_BLOCK, OBSIDIAN, CRYING_OBSIDIAN, CRACKED_DEEPSLAT_TILES, DEEPSLATE_COAL_ORE), BIOME_DARK);
-	set_biome(biome_creator(1, BACKROOM_YELLOW), BIOME_BACKROOM);
-	set_biome(biome_creator(4, CHISELED_NETHER_BRICKS, CRACKED_NETHER_BRICKS, DRAGON_EGG, GRAY_GLAZED_TERRACOTTA), BIOME_DRAGON);
-	set_biome(biome_creator(4, REDSTONE_BLOCK, RED_GLAZED_TERRACOTTA, CRIMSON_NYLIUM, CRIMSON_NYLIUM_SIDE), BIOME_RED);
+	biome_loader();
 
-	world_copy_from_chunk(get_world(WORLD_DEFAULT));
+	world_creator(WORLD_NETHER, world_get_biomes(3, get_biome(BIOME_DARK), get_biome(BIOME_DRAGON), get_biome(BIOME_RED)), get_sound(NETHER_AMBIANT_SOUND), 32, 32, (uint32_t []){0, 0}, core->imgs.skybox_nether, get_block_image(NETHERRACK), HARD, false, true);
 
-	msg_write_multiple(1, Messages[TRY_LOAD_WORLD], "nether");
-	usleep(300000 * LOAD);
-	world_creator(get_world(WORLD_NETHER), get_sound(NETHER_AMBIANT_SOUND), 32, 32, (uint32_t []){0, 0}, core->imgs.skybox_nether, get_block_image(NETHERRACK), HARD, false, true);
-	set_world_biomes(WORLD_NETHER, world_get_biomes(3, get_biome(BIOME_DARK), get_biome(BIOME_DRAGON), get_biome(BIOME_RED)));
-	world_generator(get_world(WORLD_NETHER));
-
-	msg_write_multiple(1, Messages[TRY_LOAD_WORLD], "BACKROOM");
-	usleep(300000 * LOAD);
-	world_creator(get_world(WORLD_BACKROOM), get_sound(BACKROOM_AMBIANT_SOUND), 32, 32, (uint32_t []){0, 0}, core->imgs.backrooms_ceil, get_block_image(BACKROOM_FLOOR), HARD, false, false);
-	set_world_biomes(WORLD_BACKROOM, world_get_biomes(1, get_biome(BIOME_BACKROOM)));
-	world_generator(get_world(WORLD_BACKROOM));
+	world_creator(WORLD_BACKROOM, world_get_biomes(1, get_biome(BIOME_BACKROOM)), get_sound(BACKROOM_AMBIANT_SOUND), 32, 32, (uint32_t []){0, 0}, core->imgs.backrooms_ceil, get_block_image(BACKROOM_FLOOR), HARD, false, false);
 }

@@ -1,6 +1,5 @@
 SRCS		=	src/cub3d.c \
 				src/inputs/inputs.c \
-				src/inputs/mouse_listener.c \
 				src/inputs/moves.c \
 				src/inputs/mouse_cursor.c \
 				src/inputs/mouse.c \
@@ -31,13 +30,14 @@ SRCS		=	src/cub3d.c \
 				src/player_interaction/crafting.c \
 				src/player_interaction/portal.c \
 				src/player_interaction/teleportation.c \
-				src/biome/biome_accessor.c \
-				src/biome/biome_utils.c \
 				src/world/world_accessor.c \
 				src/world/world_loader.c \
 				src/world/world_utils.c \
 				src/world/chunk_utils.c \
 				src/world/world_dynamic_generator.c \
+				src/world/biome/biome_loader.c \
+				src/world/biome/biome_accessor.c \
+               	src/world/biome/biome_utils.c \
 				src/block/block_accessor.c \
 				src/block/block_loader.c \
 				src/block/block_utils.c \

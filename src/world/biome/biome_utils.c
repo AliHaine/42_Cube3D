@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/includes.h"
+#include "../../../includes/includes.h"
 
 int	get_biomes_size(t_biome **biomes)
 {

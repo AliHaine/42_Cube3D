@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/includes.h"
+#include "../../../includes/includes.h"
 
 static t_biome			g_biomes[BIOME_NUMBER];
 

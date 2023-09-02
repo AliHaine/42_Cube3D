@@ -49,7 +49,6 @@ void	mlx_hook_loader(t_core *core);
 //??
 
 void	inputs(void *params);
-void	mouse_listener(void *params);
 void	inputs_hook(struct mlx_key_data key, void *params);
 void	move_left(t_player *player);
 void	move_right(t_player *player);
@@ -63,7 +62,7 @@ void	scroll_hook(double x, double y, void *param);
 
 //parsing//
 
-void	map_manager(char *argv, t_world *map, t_imgs *imgs, t_player *player);
+void	map_manager(char *argv, t_imgs *imgs, t_player *player);
 void	texture_main(t_file *file, t_imgs *imgs, uint32_t bt_color[2]);
 bool	parse_main(t_file *file, t_player *player, t_world *map);
 void	initialize_options(t_core *core);

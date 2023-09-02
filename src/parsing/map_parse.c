@@ -33,7 +33,7 @@ bool	parse_main(t_file *file, t_player *player, t_world *world)
 	iterator = 0;
 	while (iterator < world->height)
 	{
-		if (!fill_map_tab(file->line, world->chunk[iterator], player, world, iterator))
+		if (!fill_map_tab(file->line, world->world[4][iterator], player, world, iterator))
 		{
 			msg_write(2, 2, ERROR_MAP_CHAR);
 			return (false);

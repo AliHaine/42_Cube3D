@@ -24,6 +24,9 @@ typedef enum e_sound {
 	PLAYER_HURT_SOUND,
 	PLAYER_WALK_SOUND,
 	PLAYER_RUN_SOUND,
+	BLOCK_MINING_SOUND,
+	BLOCK_BREAK_SOUND,
+	SOUND_NUMBER,
 }	Sound;
 
 typedef struct	s_sounds

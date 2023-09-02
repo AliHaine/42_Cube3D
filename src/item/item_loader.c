@@ -17,6 +17,8 @@ static void	create_item(Item item_name, mlx_t *mlx)
 	char	*path;
 	t_item	*item;
 
+	msg_write_multiple(1, Messages[TRY_LOAD_ITEM], ItemName[item_name]);
+	usleep(300000 * LOAD);
 	item = malloc(sizeof(t_item));
 	item->name = item_name;
 	item->animation.image = 0;
@@ -36,12 +38,11 @@ static void	create_item(Item item_name, mlx_t *mlx)
 	set_item(item);
 }
 
-static void	create_item_stats(t_item *item, int dura, int damage, int strength, int range)
+static void	create_item_stats(t_item *item, int dura, int damage, int strength)
 {
 	item->durability = dura;
 	item->damage = damage;
 	item->strength = strength;
-	item->range = range;
 }
 
 static void create_item_animation(t_item *item, int anim_size, int x_depth, int y_depth, mlx_t *mlx)
@@ -76,46 +77,46 @@ static void create_item_animation(t_item *item, int anim_size, int x_depth, int 
 void	item_loader(t_core *core)
 {
 	create_item(HAND, core->mlx);
-	create_item_stats(get_item(HAND), -1, 2, 10, 3);
+	create_item_stats(get_item(HAND), -1, 2, 3);
 	create_item_animation(get_item(HAND), 4, 150, 0, core->mlx);
 
 	create_item(SWORD_NETHER, core->mlx);
-	create_item_stats(get_item(SWORD_NETHER), 10, 5, 1, 3);
+	create_item_stats(get_item(SWORD_NETHER), 10, 5, 1);
 	create_item_animation(get_item(SWORD_NETHER), 3, 150, 0, core->mlx);
 
 	create_item(SWORD_DIAMOND, core->mlx);
-    create_item_stats(get_item(SWORD_DIAMOND), 10, 5, 1, 3);
+    create_item_stats(get_item(SWORD_DIAMOND), 10, 5, 1);
 	create_item_animation(get_item(SWORD_DIAMOND), 5, 150, 0, core->mlx);
 
 	create_item(SWORD_RUBY, core->mlx);
-    create_item_stats(get_item(SWORD_RUBY), 10, 5, 1, 3);
+    create_item_stats(get_item(SWORD_RUBY), 10, 5, 1);
 	create_item_animation(get_item(SWORD_RUBY), 5, 150, 0, core->mlx);
 
 	create_item(SWORD_IRON, core->mlx);
-	create_item_stats(get_item(SWORD_IRON), 10, 5, 1, 3);
+	create_item_stats(get_item(SWORD_IRON), 10, 5, 1);
 	create_item_animation(get_item(SWORD_IRON), 4, 150, 0, core->mlx);
 
 	create_item(STICK, core->mlx);
-	create_item_stats(get_item(STICK), -1, 2, 1, 3);
+	create_item_stats(get_item(STICK), -1, 2, 2);
 	create_item_animation(get_item(STICK), 6, 0, -50, core->mlx);
 
 	create_item(DIAMOND, core->mlx);
-	create_item_stats(get_item(DIAMOND), -1, 2, 1, 3);
+	create_item_stats(get_item(DIAMOND), -1, 2, 2);
 
 	create_item(IRON, core->mlx);
-	create_item_stats(get_item(IRON), -1, 2, 1, 3);
+	create_item_stats(get_item(IRON), -1, 2, 2);
 	create_item_animation(get_item(IRON), 4, 0, -50, core->mlx);
 
 	create_item(FLINT, core->mlx);
-	create_item_stats(get_item(FLINT), -1, 2, 1, 3);
+	create_item_stats(get_item(FLINT), -1, 2, 2);
 	create_item_animation(get_item(FLINT), 4, 0, -50, core->mlx);
 
 	create_item(LIGHTER, core->mlx);
-	create_item_stats(get_item(LIGHTER), 10, 2, 1, 3);
+	create_item_stats(get_item(LIGHTER), 10, 2, 2);
 	create_item_animation(get_item(LIGHTER), 3, 0, 150, core->mlx);
 
 	create_item(DIAMOND_PICKAXE, core->mlx);
-	create_item_stats(get_item(DIAMOND_PICKAXE), 10, 2, 1, 3);
+	create_item_stats(get_item(DIAMOND_PICKAXE), 10, 2, 5);
 	create_item_animation(get_item(DIAMOND_PICKAXE), 4, 0, 150, core->mlx);
 }
 
