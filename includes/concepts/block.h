@@ -38,6 +38,12 @@ typedef enum {
 	CRIMSON_NYLIUM,
 	CRIMSON_NYLIUM_SIDE,
 	FLOWER,
+	BLOCK_END_PORTAL,
+	BLOCK_END_STONE,
+	BLOCK_END_STONE_BRICKS,
+	BLOCK_CHORUS_PLANT,
+	BLOCK_CHORUS_FLOWER_DEAD,
+	BLOCK_CHORUS_FLOWER,
 	BLOCK_NUMBER,
 }	Block;
 
@@ -63,6 +69,12 @@ static const char *BlockName[] = {
 		"crimson_nylium",
 		"crimson_nylium_side",
 		"flower",
+		"block_end_portal",
+		"end_stone_bricks",
+		"end_stone",
+		"chorus_plant",
+		"chorus_flower_dead",
+		"chorus_flower",
 };
 
 typedef struct s_block
@@ -77,7 +89,7 @@ typedef struct s_block
 }	t_block;
 
 //loader
-void	block_loader(t_core *core);
+void	block_loader(mlx_t *mlx);
 
 //accessor
 t_block			*get_block(Block block);

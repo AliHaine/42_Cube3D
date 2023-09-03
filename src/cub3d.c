@@ -82,10 +82,11 @@ int	main(int argc, char *argv[])
 	core_init(&core);
 	initialize_options(&core);
 	item_loader(&core);
-	block_loader(&core);
+	block_loader(core.mlx);
 	setup_slot_struct(core.mlx, &core.player);
     map_manager(argv[1], &core.imgs, &core.player);
     world_loader(&core);
+	portal_loader();
     give_item(&core, get_item(SWORD_NETHER), 2, 32);
 	give_item(&core, get_item(SWORD_NETHER), 32, 52);
     give_item(&core, get_item(SWORD_DIAMOND), 5, 1);

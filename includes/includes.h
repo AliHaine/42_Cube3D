@@ -33,6 +33,7 @@
 # include "concepts/world.h"
 # include "concepts/block.h"
 # include "concepts/item.h"
+# include "concepts/portal.h"
 # include "raycast.h"
 
 
@@ -42,7 +43,6 @@ void	sprites_drawing(t_imgs *imgs, t_sprite *sprites, t_player *player);
 
 //loader//
 
-//void	sound_loader(t_sounds *sounds, t_options *options);
 void	texture_loader(t_core *core);
 void	mlx_hook_loader(t_core *core);
 
@@ -97,10 +97,5 @@ void	setup_slot_struct(mlx_t *mlx, t_player *player);
 t_slot	*get_first_slot(t_slot *slot);
 
 void setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world);
-
-
-//portal
-void	portal_listener(t_player *player, t_world *world);
-void	portal_open(t_player *player);
 
 #endif

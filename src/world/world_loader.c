@@ -103,6 +103,6 @@ void	world_loader(t_core *core)
 	biome_loader();
 
 	world_creator(WORLD_NETHER, world_get_biomes(3, get_biome(BIOME_DARK), get_biome(BIOME_DRAGON), get_biome(BIOME_RED)), get_sound(NETHER_AMBIANT_SOUND), 32, 32, (uint32_t []){0, 0}, core->imgs.skybox_nether, get_block_image(NETHERRACK), HARD, false, true);
-
+	world_creator(WORLD_END, world_get_biomes(2, get_biome(BIOME_END), get_biome(BIOME_CHORUS)), get_sound(NETHER_AMBIANT_SOUND), 32, 32, (uint32_t []){0, 0}, core->imgs.skybox_nether, get_block_image(BLOCK_END_STONE), NORMAL, false, true);
 	world_creator(WORLD_BACKROOM, world_get_biomes(1, get_biome(BIOME_BACKROOM)), get_sound(BACKROOM_AMBIANT_SOUND), 32, 32, (uint32_t []){0, 0}, core->imgs.backrooms_ceil, get_block_image(BACKROOM_FLOOR), HARD, false, false);
 }

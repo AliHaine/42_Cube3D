@@ -28,7 +28,6 @@ SRCS		=	src/cub3d.c \
 				src/player_interaction/inventory.c \
 				src/player_interaction/inventory_manager.c \
 				src/player_interaction/crafting.c \
-				src/player_interaction/portal.c \
 				src/player_interaction/teleportation.c \
 				src/world/world_accessor.c \
 				src/world/world_loader.c \
@@ -44,6 +43,9 @@ SRCS		=	src/cub3d.c \
 				src/item/item_accessor.c \
 				src/item/item_loader.c \
 				src/item/item.c \
+				src/block/portal/portal_accessor.c \
+				src/block/portal/portal_loader.c \
+				src/block/portal/portal.c \
 				src/utils/map_utils.c \
 				src/utils/msg_utils.c \
 				src/utils/std_func_utils.c \

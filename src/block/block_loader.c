@@ -78,28 +78,36 @@ static void	create_block_animation(t_block *block, int anim_size, mlx_t *mlx)
 	block->animation.image[i - 1] = 0;
 }
 
-void	block_loader(t_core *core)
+void	block_loader(mlx_t *mlx)
 {
-	create_block(NETHERPORTAL, 0, 1, core->mlx, 'Z', false);
-	create_block_animation(get_block(NETHERPORTAL), 14, core->mlx);
-	create_block(NETHERRACK, 0, 10, core->mlx, 'R', true);
-	create_block(OBSIDIAN, 0, 120, core->mlx, 'O', true);
-	create_block(CRYING_OBSIDIAN, 0, 2, core->mlx, 'L', true);
-	create_block(CRACKED_DEEPSLAT_TILES, 0, 2, core->mlx, 'P', true);
-	create_block(DEEPSLATE_COAL_ORE, 0, 2, core->mlx, 'I', true);
-	create_block(NETHER_WART_BLOCK, 0, 2, core->mlx, 'Y', true);
-	create_block(GRASS, 0, 2, core->mlx, '@', true);
-	create_block(BACKROOM_YELLOW, 0, 0, core->mlx, '[', true);
-	create_block(BACKROOM_FLOOR, 0, 0, core->mlx, ']', true);
-	create_block(BUG, 0, 0, core->mlx, '(', false);
-	create_block(CHISELED_NETHER_BRICKS, 0, 0, core->mlx, 'N', true);
-	create_block(CRACKED_NETHER_BRICKS, 0, 0, core->mlx, 'B', true);
-	create_block(DRAGON_EGG, 0, 0, core->mlx, 'D', true);
-	create_block(GRAY_GLAZED_TERRACOTTA, 0, 0, core->mlx, '?', true);
-	create_block(REDSTONE_BLOCK, 0, 0, core->mlx, '=', true);
-	create_block(RED_MUSHROOM_BLOCK, 0, 0, core->mlx, '+', true);
-	create_block(RED_GLAZED_TERRACOTTA, 0, 0, core->mlx, '|', true);
-	create_block(CRIMSON_NYLIUM, 0, 0, core->mlx, '}', true);
-	create_block(CRIMSON_NYLIUM_SIDE, 0, 0, core->mlx, '{', true);
-	create_block(FLOWER, 0, 0, core->mlx, 'T', false);
+	create_block(NETHERPORTAL, 0, 1, mlx, 'Z', false);
+	create_block_animation(get_block(NETHERPORTAL), 14, mlx);
+	create_block(NETHERRACK, 0, 10, mlx, 'R', true);
+	create_block(OBSIDIAN, 0, 120, mlx, 'O', true);
+	create_block(CRYING_OBSIDIAN, 0, 2, mlx, 'L', true);
+	create_block(CRACKED_DEEPSLAT_TILES, 0, 2, mlx, 'P', true);
+	create_block(DEEPSLATE_COAL_ORE, 0, 2, mlx, 'I', true);
+	create_block(NETHER_WART_BLOCK, 0, 2, mlx, 'Y', true);
+	create_block(GRASS, 0, 2, mlx, '@', true);
+	create_block(BACKROOM_YELLOW, 0, 55, mlx, '[', true);
+	create_block(BACKROOM_FLOOR, 0, 45, mlx, ']', true);
+	create_block(BUG, 0, 0, mlx, '(', false);
+	create_block(CHISELED_NETHER_BRICKS, 0, 45, mlx, 'N', true);
+	create_block(CRACKED_NETHER_BRICKS, 0, 45, mlx, 'B', true);
+	create_block(DRAGON_EGG, 0, 0, mlx, 'D', true);
+	create_block(GRAY_GLAZED_TERRACOTTA, 0, 0, mlx, '?', true);
+	create_block(REDSTONE_BLOCK, 0, 0, mlx, '=', true);
+	create_block(RED_MUSHROOM_BLOCK, 0, 0, mlx, '+', true);
+	create_block(RED_GLAZED_TERRACOTTA, 0, 0, mlx, '|', true);
+	create_block(CRIMSON_NYLIUM, 0, 69, mlx, '}', true);
+	create_block(CRIMSON_NYLIUM_SIDE, 0, 68, mlx, '{', true);
+	create_block(FLOWER, 0, 0, mlx, 'T', false);
+	create_block(BLOCK_END_PORTAL, 0, 350, mlx, '$', false);
+	create_block_animation(get_block(BLOCK_END_PORTAL), 39, mlx);
+	create_block(BLOCK_END_STONE, 0, 45, mlx, 'x', true);
+	create_block(BLOCK_END_STONE_BRICKS, 0, 80, mlx, 'X', true);
+	create_block(BLOCK_CHORUS_PLANT, 0, 45, mlx, 'k', true);
+	create_block(BLOCK_CHORUS_FLOWER_DEAD, 0, 150, mlx, 'K', true);
+	create_block(BLOCK_CHORUS_FLOWER, 0, 85, mlx, 'l', true);
+
 }

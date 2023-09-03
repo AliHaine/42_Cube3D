@@ -3,32 +3,5 @@ MAP
 N,S,W,E = player, 1 = mur, 0 = vide, V = creeper, Z = zombie, D = porte
 
 Commencer a ajouter des ennemis
-si le png nest pas un png
-et si la world n'est pas un fichier
-et si ya pas d'argument ?
-
-casser les murs que avec les pioches
-
 
 bug petit croix
-faire que on puisse casser/marcher/build les murs des autres chunk (bug frontiere)
-mettre les backroom creer un bug
-mettre le system de range
-
-
- = 1 cellx 7 celly 0 posx 462.437042 posy 12.013840
-chunk = 1 cellx 7 celly 0 posx 462.437042 posy 24.027679
-chunk = 1 cellx 7 celly 0 posx 462.437042 posy 48.055359
-chunk = 1 cellx 7 celly 0 posx 462.437042 posy 96.110718
-b portal generated at chunk 2 x 3 y 1
-chunk = 1 cellx 7 celly 0 posx 462.437042 posy 192.221436
-chunk = 1 cellx 7 celly 0 posx 462.437042 posy 384.442871
-chunk = 1 cellx 7 celly 0 posx 462.437042 posy 768.885742
-chunk = 1 cellx 7 celly 0 posx 462.437042 posy 1537.771484
-chunk = 1 cellx 7 celly 0 posx 462.437042 posy 3075.542969
-chunk = 1 cellx 7 celly 0 posx 462.437042 posy 6151.085938
-chunk = 1 cellx 7 celly 0 posx 462.437042 posy 12302.171875
-chunk = 1 cellx 7 celly 0 posx 462.437042 posy 24604.343750
-chunk = 1 cellx 7 celly 0 posx 462.437042 posy 49208.687500
-chunk = 1 cellx 7 celly 0 posx 462.437042 posy 98417.375000
-chunk = 1 cellx 7 celly 0 posx 462.437042 posy 196834.750000
