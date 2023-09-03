@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/03 18:54:38 by ayagmur           #+#    #+#             */
+/*   Updated: 2023/09/03 18:54:39 by ayagmur          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/includes.h"
 
 void	set_char_at_forward(char c, t_player *player)
@@ -14,14 +26,16 @@ void	set_char_at_forward(char c, t_player *player)
 
 static void	process_build(t_player *player, t_block *block, t_item *item)
 {
-	static int i = 0;
+	static int	i = 0;
 
-	if (i <= 0) {
+	if (i <= 0)
+	{
 		play_sound_alt(get_sound(BLOCK_MINING_SOUND), true, true);
 		i = block->strength;
 	}
 	i -= item->strength;
-	if (i <= 0) {
+	if (i <= 0)
+	{
 		play_sound_alt(get_sound(BLOCK_MINING_SOUND), false, false);
 		play_sound(get_sound(BLOCK_BREAK_SOUND));
 		set_char_at_forward('0', player);

@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parse.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/03 19:06:36 by ayagmur           #+#    #+#             */
+/*   Updated: 2023/09/03 19:06:37 by ayagmur          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/includes.h"
 
 //todo
-static bool	fill_map_tab(char *line, char *tab, t_player *player, t_world *world, int iterator)
+static bool	fill_map_tab(char *line, t_player *player, t_world *world, int iterator)
 {
 	int	i;
 
@@ -14,26 +26,26 @@ static bool	fill_map_tab(char *line, char *tab, t_player *player, t_world *world
 		{
 			player->have_player = true;
 			set_player(i, iterator, player, 0);
-			tab[i] = '0';
+			world->world[4][iterator][i] = '0';
 		}
 		else
-			tab[i] = line[i];
+			world->world[4][iterator][i] = line[i];
 		i++;
 	}
 	while (i < world->width)
-		tab[i++] = ' ';
-	tab[i] = '\0';
+		world->world[4][iterator][i++] = '0';
+	world->world[4][iterator][i] = '\0';
 	return (true);
 }
 
 bool	parse_main(t_file *file, t_player *player, t_world *world)
 {
-	int iterator;
+	int	iterator;
 
 	iterator = 0;
 	while (iterator < world->height)
 	{
-		if (!fill_map_tab(file->line, world->world[4][iterator], player, world, iterator))
+		if (!fill_map_tab(file->line, player, world, iterator))
 		{
 			msg_write(2, 2, ERROR_MAP_CHAR);
 			return (false);

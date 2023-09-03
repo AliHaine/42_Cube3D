@@ -152,18 +152,18 @@ void	ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player,
 	if (tcd->iterator == 360)
 	{
 		tcd->iterator++;
-		return;
+		return ;
 	}
 	if (fog_strength > 1)
 	{
 		mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++,
-					  (0 << 24) | (0 << 16) | (0 << 8) | 255);
+			(0 << 24) | (0 << 16) | (0 << 8) | 255);
 		return ;
 	}
 	value = (((int)(player->player_pos_xy[0] + dda->cos
-											   * d) % 64)
-			 + ((int)(player->player_pos_xy[1] + dda->sin
-												 * d) % 64) * 64) * 4;
+				* d) % 64)
+				+ ((int)(player->player_pos_xy[1] + dda->sin
+				* d) % 64) * 64) * 4;
 	if (value < 0)
 		value = -value;
 	color = get_rgb_color(world->ceil->pixels[value],
@@ -174,7 +174,7 @@ void	ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player,
 	mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, color);
 }
 
-void	floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player, t_world *world)
+void	floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_player *player, t_world *world)
 {
 	const float	s = (MID_HEIGHT * 64) / (tcd->iterator - MID_HEIGHT);
 	const float	d = (s / cosf(dda->current_angle - player->playerangle));
@@ -185,7 +185,7 @@ void	floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player
 	if (tcd->iterator == 360)
 	{
 		tcd->iterator++;
-		return;
+		return ;
 	}
 	if (fog_strength > 1)
 	{

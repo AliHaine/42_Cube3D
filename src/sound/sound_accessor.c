@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/sound.h"
+#include "../../includes/sound.h"
 
-static t_sounds g_sounds[SOUND_NUMBER];
+static t_sounds	g_sounds[SOUND_NUMBER];
 
 t_sounds	*get_sound(Sound sound)
 {

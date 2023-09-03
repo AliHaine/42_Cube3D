@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/03 18:52:07 by ayagmur           #+#    #+#             */
+/*   Updated: 2023/09/03 18:52:08 by ayagmur          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/includes.h"
 
 void	set_player(int x, int y, t_player *player, float angle)
 {
-	t_world *world;
+	t_world	*world;
 
 	world = get_world_active();
 	player->player_pos_xy[0] = ((x + world->width) * 64) + 32;

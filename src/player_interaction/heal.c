@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heal.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/03 18:55:39 by ayagmur           #+#    #+#             */
+/*   Updated: 2023/09/03 18:55:40 by ayagmur          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/includes.h"
 
 bool	is_player_death(int player_health)
@@ -14,7 +26,7 @@ static bool	is_player_full_life(int player_health)
 	return (false);
 }
 
-bool    hit_player(t_player *player, t_imgs *imgs)
+bool	hit_player(t_player *player, t_imgs *imgs)
 {
 	if (is_player_death(player->health))
 		return (true);

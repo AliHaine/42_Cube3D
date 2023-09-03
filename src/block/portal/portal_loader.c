@@ -20,7 +20,7 @@
 
 void	create_portal(Portal portal, World world, Block block)
 {
-	t_portal new_portal;
+	t_portal	new_portal;
 
 	new_portal.portal_name = portal;
 	new_portal.world_destination = get_world(world);
@@ -28,7 +28,7 @@ void	create_portal(Portal portal, World world, Block block)
 	set_portal(new_portal);
 }
 
-void portal_loader()
+void	portal_loader()
 {
 	create_portal(PORTAL_NETHER, WORLD_NETHER, NETHERPORTAL);
 	create_portal(PORTAL_END, WORLD_END, BLOCK_END_PORTAL);

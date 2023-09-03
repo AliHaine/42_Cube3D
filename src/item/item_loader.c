@@ -45,10 +45,10 @@ static void	create_item_stats(t_item *item, int dura, int damage, int strength)
 	item->strength = strength;
 }
 
-static void create_item_animation(t_item *item, int anim_size, int x_depth, int y_depth, mlx_t *mlx)
+static void	create_item_animation(t_item *item, int anim_size, int x_depth, int y_depth, mlx_t *mlx)
 {
-	int i;
-	char *path;
+	int		i;
+	char	*path;
 
 	i = 0;
 	item->animation.is_playing = false;
@@ -119,4 +119,3 @@ void	item_loader(t_core *core)
 	create_item_stats(get_item(DIAMOND_PICKAXE), 10, 2, 5);
 	create_item_animation(get_item(DIAMOND_PICKAXE), 4, 0, 150, core->mlx);
 }
-

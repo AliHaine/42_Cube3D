@@ -25,6 +25,10 @@ void	sound_loader(void)
 		msg_write(2, 2, ERROR_FATAL);
 	else
 		msg_write(1, -1, SUCCESS);
+	if (!load_sound(END_AMBIANT_SOUND, "assets/sounds/end_ambiant.mp3"))
+		msg_write(2, 2, ERROR_FATAL);
+	else
+		msg_write(1, -1, SUCCESS);
 	if (!load_sound(BACKROOM_AMBIANT_SOUND, "assets/sounds/backroom_ambiant.mp3"))
 		msg_write(2, 2, ERROR_FATAL);
 	else

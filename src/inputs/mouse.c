@@ -26,7 +26,7 @@ static void	mouse_left_action_one(t_player *player)
 	player->is_building = true;
 }
 
-static void mouse_right_action(t_player *player)
+static void	mouse_right_action(t_player *player)
 {
 	if (player->slot->item->name == LIGHTER && get_hit_char(player) == get_block(OBSIDIAN)->block_char)
 		portal_open(player);
