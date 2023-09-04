@@ -6,7 +6,6 @@ SRCS		=	src/cub3d.c \
 				src/inputs/scroll_hook.c \
 				src/graphics/display.c \
 				src/graphics/animations.c \
-				src/graphics/sprites.c \
 				src/loading/texture_loader.c \
 				src/loading/other_loader.c \
 				src/parsing/map_manager.c \

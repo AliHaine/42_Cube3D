@@ -39,8 +39,6 @@
 
 void		display(void *params);
 
-void	sprites_drawing(t_imgs *imgs, t_sprite *sprites, t_player *player);
-
 //loader//
 
 void	texture_loader(t_core *core);

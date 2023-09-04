@@ -74,7 +74,7 @@ static t_biome	**world_get_biomes(int biome_number, ...)
 
 bool	world_creator(World world_name, t_biome **biomes, t_sounds *ambient_sound, int height, int width, const uint32_t bt_color[2], mlx_image_t *ceil, mlx_image_t *floor, Difficulty difficulty, bool is_active, bool skybox)
 {
-	int	i;
+	int		i;
 	t_world	world;
 
 	i = 0;

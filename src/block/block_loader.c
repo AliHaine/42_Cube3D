@@ -103,7 +103,6 @@ void	block_loader(mlx_t *mlx)
 	create_block(CRIMSON_NYLIUM_SIDE, 0, 68, mlx, '{', true);
 	create_block(FLOWER, 0, 0, mlx, 'T', false);
 	create_block(BLOCK_END_PORTAL, 0, 350, mlx, '$', false);
-	create_block_animation(get_block(BLOCK_END_PORTAL), 39, mlx);
 	create_block(BLOCK_END_STONE, 0, 45, mlx, 'x', true);
 	create_block(BLOCK_END_STONE_BRICKS, 0, 80, mlx, 'X', true);
 	create_block(BLOCK_CHORUS_PLANT, 0, 45, mlx, 'k', true);

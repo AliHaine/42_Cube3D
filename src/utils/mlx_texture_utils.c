@@ -3,7 +3,8 @@
 bool	set_texture_from_path(char *path, mlx_texture_t **texture)
 {
 	msg_write_multiple(1, Messages[TRY_LOAD_TEXTURE], path);
-	if (path[ft_strlen(path) - 1] == '\n') {
+	if (path[ft_strlen(path) - 1] == '\n')
+	{
 		path[ft_strlen(path) - 1] = '\0';
 		*texture = mlx_load_png(path);
 	}
@@ -20,7 +21,7 @@ bool	set_texture_from_path(char *path, mlx_texture_t **texture)
 
 bool	set_image_from_path(mlx_t *mlx, char *path, mlx_image_t **image)
 {
-	mlx_texture_t *texture;
+	mlx_texture_t	*texture;
 
 	if (!set_texture_from_path(path, &texture))
 		return (false);
@@ -38,7 +39,7 @@ void	delete_image_from_struct(mlx_t *mlx, t_imgs *imgs)
 
 uint32_t	get_rgb_color(unsigned short r, unsigned short g, unsigned short b, unsigned short a)
 {
-	return ((r << 24) | (g << 16) | (b  << 8) | a);
+	return ((r << 24) | (g << 16) | (b << 8) | a);
 }
 
 uint32_t	get_pixel(mlx_texture_t *texture, int x, int y)
@@ -48,9 +49,9 @@ uint32_t	get_pixel(mlx_texture_t *texture, int x, int y)
 
 	step = (x + y * texture->width) * 4;
 	color = (texture->pixels[step] << 24)
-			+ (texture->pixels[step + 1] << 16)
-			+ (texture->pixels[step + 2] << 8)
-			+ (texture->pixels[step + 3]);
+		+ (texture->pixels[step + 1] << 16)
+		+ (texture->pixels[step + 2] << 8)
+		+ (texture->pixels[step + 3]);
 	return (color);
 }
 

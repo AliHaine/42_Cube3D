@@ -119,29 +119,29 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *world)
 
 void	skybox_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_world *world)
 {
-	int					skyboxTexX;
-	int					skyboxTexY;
+	int					skybox_tex_x;
+	int					skybox_tex_y;
 	int					value;
 	uint32_t			color;
 	static const float	vertical_offset = -89.f * SCREEN_HEIGHT;
 
-	skyboxTexX = (int)((fmodf(dda->current_angle + PI_2, PI_2))
+	skybox_tex_x = (int)((fmodf(dda->current_angle + PI_2, PI_2))
 			/ PI_2 * (float)world->ceil->width) % (int)world->ceil->width;
-	skyboxTexY = (int)((tcd->iterator - vertical_offset)
+	skybox_tex_y = (int)((tcd->iterator - vertical_offset)
 			* ((float)world->ceil->height / (float)world->ceil->width));
-	if (skyboxTexY <= 0)
-		skyboxTexY = 0;
+	if (skybox_tex_y <= 0)
+		skybox_tex_y = 0;
 	else
-		skyboxTexY %= (int)world->ceil->height;
-	value = (skyboxTexX + skyboxTexY * (int)world->ceil->width) * 4;
+		skybox_tex_y %= (int)world->ceil->height;
+	value = (skybox_tex_x + skybox_tex_y * (int)world->ceil->width) * 4;
 	color = get_rgb_color(world->ceil->pixels[value],
-						  world->ceil->pixels[value + 1],
-						  world->ceil->pixels[value + 2],
-						  world->ceil->pixels[value + 3]);
+			world->ceil->pixels[value + 1],
+			world->ceil->pixels[value + 2],
+			world->ceil->pixels[value + 3]);
 	mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, color);
 }
 
-void	ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player, t_world *world)
+void	ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_player *player, t_world *world)
 {
 	const float	s = (MID_HEIGHT * 64) / (MID_HEIGHT - tcd->iterator);
 	const float	d = (s / cosf(dda->current_angle - player->playerangle));
@@ -161,15 +161,15 @@ void	ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd,t_player *player,
 		return ;
 	}
 	value = (((int)(player->player_pos_xy[0] + dda->cos
-				* d) % 64)
-				+ ((int)(player->player_pos_xy[1] + dda->sin
-				* d) % 64) * 64) * 4;
+			* d) % 64)
+			+ ((int)(player->player_pos_xy[1] + dda->sin
+			* d) % 64) * 64) * 4;
 	if (value < 0)
 		value = -value;
 	color = get_rgb_color(world->ceil->pixels[value],
-						  world->ceil->pixels[value + 1],
-						  world->ceil->pixels[value + 2],
-						  world->ceil->pixels[value + 3]);
+			world->ceil->pixels[value + 1],
+			world->ceil->pixels[value + 2],
+			world->ceil->pixels[value + 3]);
 	color = apply_fog(color, fog_strength);
 	mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, color);
 }
