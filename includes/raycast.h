@@ -29,7 +29,6 @@ typedef struct s_dda
 	int		hit_hv;
 	int		hit_direction[2];
 	int		chunk_hv[2];
-	float	wall_height;
 }	t_dda;
 
 typedef struct s_col_drawing

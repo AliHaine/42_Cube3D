@@ -22,7 +22,8 @@ typedef enum {
 	PORTAL_NUMBER,
 }	Portal;
 
-typedef struct s_portal {
+typedef struct s_portal
+{
 	Portal portal_name;
 	t_world *world_destination;
 	t_block *block_portal;

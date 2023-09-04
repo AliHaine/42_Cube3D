@@ -32,7 +32,7 @@ void	get_color_wall_texture(mlx_texture_t *wall_texture, int r, t_col_drawing *t
 {
 	int	value;
 
-	value = ((r % 64) + ((int)tcd->current_step * (int)wall_texture->width)) * 4;
+	value = ((r % wall_texture->height) + ((int)tcd->current_step * (int)wall_texture->width)) * 4;
 	if (value >= 16384)
 		return ;
 	tcd->color = get_rgb_color(wall_texture->pixels[value], wall_texture->pixels[value + 1],
@@ -51,11 +51,9 @@ void	get_color_block_texture(t_dda *dda, t_col_drawing *tcd)
 	else
 		r = (int) dda->r_xy[0];
 	if (tcd->hit_block == '(' && (int)mlx_get_time() % 2 == 0)
-		value = ((r % 64) + ((int)tcd->current_step * (int)block_texture->width) + get_rand_num(3, 0)) * 4;
+		value = ((r % (int)block_texture->height) + ((int)tcd->current_step * (int)block_texture->height) + get_rand_num(3, 0)) * 4;
 	else
-		value = ((r % 64) + ((int)tcd->current_step * (int)block_texture->width)) * 4;
-	if (value >= 16384)
-		return ;
+		value = ((r % (int)block_texture->height) + ((int)tcd->current_step * (int)block_texture->height)) * 4;
 	tcd->color = get_rgb_color(block_texture->pixels[value], block_texture->pixels[value + 1],
 			block_texture->pixels[value + 2], block_texture->pixels[value + 3]);
 }

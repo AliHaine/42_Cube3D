@@ -16,7 +16,7 @@
 
 static void	play_attack_animation(t_animation *animation, mlx_image_t *def)
 {
-	static int		i = 0;
+	static int	i = 0;
 
 	if (!animation->image)
 		return ;
