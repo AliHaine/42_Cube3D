@@ -38,5 +38,6 @@ void	set_portal(t_portal portal);
 
 void	portal_listener(t_player *player, t_world *world);
 void	portal_open(t_player *player);
+void	portal_close(t_player *player);
 
 #endif

@@ -33,3 +33,8 @@ void	portal_open(t_player *player)
 {
 	set_char_at_forward(get_block(NETHERPORTAL)->block_char, player);
 }
+
+void	portal_close(t_player *player)
+{
+	set_char_at_forward(get_block(CRYING_OBSIDIAN)->block_char, player);
+}

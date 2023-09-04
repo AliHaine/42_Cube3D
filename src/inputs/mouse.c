@@ -28,8 +28,13 @@ static void	mouse_left_action_one(t_player *player)
 
 static void	mouse_right_action(t_player *player)
 {
-	if (player->slot->item->name == LIGHTER && get_hit_char(player) == get_block(OBSIDIAN)->block_char)
+	if (player->slot->item->name == LIGHTER && (get_hit_char(player)
+			== get_block(OBSIDIAN)->block_char || get_hit_char(player)
+			== get_block(CRYING_OBSIDIAN)->block_char))
 		portal_open(player);
+	if (player->slot->item->name == WATER_BUCKET && get_hit_char(player)
+		== get_block(NETHERPORTAL)->block_char)
+		portal_close(player);
 }
 
 void	mouse(enum mouse_key key, enum action action, enum modifier_key mkey, void *param)
