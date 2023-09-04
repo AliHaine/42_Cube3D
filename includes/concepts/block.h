@@ -14,7 +14,8 @@
 # define BLOCK_H
 
 # include "../includes.h"
-typedef struct s_item t_item;
+
+typedef struct s_item	t_item;
 
 typedef enum {
 	NETHERPORTAL,
@@ -47,34 +48,34 @@ typedef enum {
 	BLOCK_NUMBER,
 }	Block;
 
-static const char *BlockName[] = {
-		"netherportal",
-		"netherrack",
-		"obsidian",
-		"crying_obsidian",
-		"cracked_deepslate_tiles",
-		"deepslate_coal_ore",
-		"nether_wart_block",
-		"grass",
-		"backroom_yellow",
-		"backroom_floor",
-		"bug",
-		"chiseled_nether_bricks",
-		"cracked_nether_bricks",
-		"dragon_egg",
-		"gray_glazed_terracotta",
-		"redstone_block",
-		"red_mushroom_block",
-		"red_glazed_terracotta",
-		"crimson_nylium",
-		"crimson_nylium_side",
-		"flower",
-		"block_end_portal",
-		"end_stone_bricks",
-		"end_stone",
-		"chorus_plant",
-		"chorus_flower_dead",
-		"chorus_flower",
+static const char		*g_block_name[] = {
+	"netherportal",
+	"netherrack",
+	"obsidian",
+	"crying_obsidian",
+	"cracked_deepslate_tiles",
+	"deepslate_coal_ore",
+	"nether_wart_block",
+	"grass",
+	"backroom_yellow",
+	"backroom_floor",
+	"bug",
+	"chiseled_nether_bricks",
+	"cracked_nether_bricks",
+	"dragon_egg",
+	"gray_glazed_terracotta",
+	"redstone_block",
+	"red_mushroom_block",
+	"red_glazed_terracotta",
+	"crimson_nylium",
+	"crimson_nylium_side",
+	"flower",
+	"block_end_portal",
+	"end_stone_bricks",
+	"end_stone",
+	"chorus_plant",
+	"chorus_flower_dead",
+	"chorus_flower",
 };
 
 typedef struct s_block
@@ -83,13 +84,13 @@ typedef struct s_block
 	char			block_char;
 	t_item			*item;
 	int				strength;
-	t_animation 	animation;
+	t_animation		animation;
 	mlx_image_t		*image;
 	bool			is_rigid;
 }	t_block;
 
 //loader
-void	block_loader(mlx_t *mlx);
+void			block_loader(mlx_t *mlx);
 
 //accessor
 t_block			*get_block(Block block);
@@ -99,7 +100,7 @@ Block			get_block_name_from_char(char block_char);
 void			set_block(t_block *block);
 
 //utils
-bool	is_rigid_block(Block block);
-bool	is_char_block(char c);
+bool			is_rigid_block(Block block);
+bool			is_char_block(char c);
 
 #endif

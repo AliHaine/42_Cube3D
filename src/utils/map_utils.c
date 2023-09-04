@@ -94,7 +94,7 @@ bool	set_default_wall_texture(t_imgs *imgs)
 
 	max = 0;
 	msg_write(1, -1, EMPTY_WALL);
-	msg_write_multiple(1, Messages[TRY_LOAD_TEXTURE], DEFAULT_WALL);
+	msg_write_multiple(1, g_messages[TRY_LOAD_TEXTURE], DEFAULT_WALL);
 	default_wall = mlx_load_png(DEFAULT_WALL);
 	if (!default_wall)
 		msg_write(2, 1, ERROR_FATAL);
@@ -119,12 +119,5 @@ bool	is_wall_empty(const t_imgs *imgs)
 			return (true);
 		i++;
 	}
-	return (false);
-}
-
-bool	is_color_char(char c)
-{
-	if (c == 'F' || c == 'C')
-		return (true);
 	return (false);
 }

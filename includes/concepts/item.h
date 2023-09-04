@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef ITEM_H
-#define ITEM_H
+# define ITEM_H
 
 # include "../includes.h"
 
@@ -29,21 +29,21 @@ typedef enum {
 	DIAMOND_PICKAXE,
 	WATER_BUCKET,
 	ITEM_NUMBER,
-}   Item;
+}	Item;
 
-static const char *ItemName[] = {
-		"hand",
-		"sword_nether",
-		"sword_diamond",
-		"sword_ruby",
-		"sword_iron",
-		"stick",
-		"diamond",
-		"iron",
-		"flint",
-		"lighter",
-		"diamond_pickaxe",
-		"water_bucket",
+static const char	*g_item_name[] = {
+	"hand",
+	"sword_nether",
+	"sword_diamond",
+	"sword_ruby",
+	"sword_iron",
+	"stick",
+	"diamond",
+	"iron",
+	"flint",
+	"lighter",
+	"diamond_pickaxe",
+	"water_bucket",
 };
 
 typedef struct s_item
@@ -55,8 +55,8 @@ typedef struct s_item
 	int				max_stack;
 	mlx_image_t		*image;
 	mlx_image_t		*icon;
-	int             instance_number;
-	t_animation 	animation;
+	int				instance_number;
+	t_animation		animation;
 }	t_item;
 
 //loader
@@ -66,6 +66,6 @@ void	item_loader(t_core *core);
 t_item	*get_item(Item item);
 void	set_item(t_item *item);
 
-void    give_item(t_core *core, t_item *item, int slot_id, int number);
+void	give_item(t_core *core, t_item *item, int slot_id, int number);
 
 #endif

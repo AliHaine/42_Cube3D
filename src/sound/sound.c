@@ -42,7 +42,7 @@ bool	load_sound(Sound sound, char *path)
 	static bool	loaded;
 	t_sounds	new_sound;
 
-	msg_write_multiple(1, Messages[TRY_LOAD_SOUND], path);
+	msg_write_multiple(1, g_messages[TRY_LOAD_SOUND], path);
 	new_sound.sound_name = sound;
 	loaded |= BASS_Init(-1, 48000, 0, 0, 0);
 	if (!loaded)

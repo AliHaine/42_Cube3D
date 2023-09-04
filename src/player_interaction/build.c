@@ -40,8 +40,6 @@ static void	process_build(t_player *player, t_block *block, t_item *item)
 		play_sound(get_sound(BLOCK_BREAK_SOUND));
 		set_char_at_forward('0', player);
 		player->is_building = false;
-		//f (block->item)
-			//todo give item refaire le systeme de slot
 	}
 }
 

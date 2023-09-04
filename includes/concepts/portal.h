@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #ifndef PORTAL_H
-#define PORTAL_H
+# define PORTAL_H
 
-#include "../includes.h"
+# include "../includes.h"
 
 typedef enum {
 	PORTAL_NETHER,
@@ -24,21 +24,21 @@ typedef enum {
 
 typedef struct s_portal
 {
-	Portal portal_name;
-	t_world *world_destination;
-	t_block *block_portal;
+	Portal		portal_name;
+	t_world		*world_destination;
+	t_block		*block_portal;
 }	t_portal;
 
 //laoder
-void portal_loader();
+void		portal_loader(void);
 
 //accessor
-t_portal *get_portal(Portal portal);
-t_portal *get_portal_from_char(char c);
-void	set_portal(t_portal portal);
+t_portal	*get_portal(Portal portal);
+t_portal	*get_portal_from_char(char c);
+void		set_portal(t_portal portal);
 
-void	portal_listener(t_player *player, t_world *world);
-void	portal_open(t_player *player);
-void	portal_close(t_player *player);
+void		portal_listener(t_player *player, t_world *world);
+void		portal_open(t_player *player);
+void		portal_close(t_player *player);
 
 #endif

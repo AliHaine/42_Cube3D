@@ -45,7 +45,7 @@ static void	horizontal_cast(t_dda *dda, float playerpos[2])
 	dda->r_xy[1] = playerpos[1];
 	if (dda->sin > 0.001)
 	{
-		dda->r_xy[1] = ((int)(playerpos[1] / 64) * 64) + 64;
+		dda->r_xy[1] = ((int)(playerpos[1] / 64) *64) + 64;
 		dda->r_xy[0] = (playerpos[1] - dda->r_xy[1]) * tan + playerpos[0];
 		dda->o_xy[1] = 64;
 		dda->o_xy[0] = -dda->o_xy[1] * tan;
@@ -53,7 +53,7 @@ static void	horizontal_cast(t_dda *dda, float playerpos[2])
 	}
 	else if (dda->sin < -0.001)
 	{
-		dda->r_xy[1] = ((int)(playerpos[1] / 64) * 64) - 0.0002;
+		dda->r_xy[1] = ((int)(playerpos[1] / 64) *64) - 0.0002;
 		dda->r_xy[0] = (playerpos[1] - dda->r_xy[1]) * tan + playerpos[0];
 		dda->o_xy[1] = -64;
 		dda->o_xy[0] = -dda->o_xy[1] * tan;
@@ -72,7 +72,7 @@ static void	vertical_cast(t_dda *dda, float playerpos[2])
 	dda->r_xy[1] = playerpos[1];
 	if (dda->cos > 0.001)
 	{
-		dda->r_xy[0] = ((int)(playerpos[0] / 64) * 64) + 64;
+		dda->r_xy[0] = ((int)(playerpos[0] / 64) *64) + 64;
 		dda->r_xy[1] = (playerpos[0] - dda->r_xy[0]) * tan + playerpos[1];
 		dda->o_xy[0] = 64;
 		dda->o_xy[1] = -dda->o_xy[0] * tan;
@@ -80,7 +80,7 @@ static void	vertical_cast(t_dda *dda, float playerpos[2])
 	}
 	else if (dda->cos < -0.001)
 	{
-		dda->r_xy[0] = ((int)(playerpos[0] / 64) * 64) - 0.0002;
+		dda->r_xy[0] = ((int)(playerpos[0] / 64) *64) - 0.0002;
 		dda->r_xy[1] = (playerpos[0] - dda->r_xy[0]) * tan + playerpos[1];
 		dda->o_xy[0] = -64;
 		dda->o_xy[1] = -dda->o_xy[0] * tan;

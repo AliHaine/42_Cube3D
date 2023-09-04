@@ -20,19 +20,19 @@ static void	reverse_attributes(t_slot *first, t_slot *second)
 	first->item = second->item;
 	first->icon_instance = second->icon_instance;
 	first->bar_icon_instance = second->bar_icon_instance;
-    first->items_number_img = second->items_number_img;
-    first->items_number = second->items_number;
-    first->items_number_img_bar = second->items_number_img_bar;
+	first->items_number_img = second->items_number_img;
+	first->items_number = second->items_number;
+	first->items_number_img_bar = second->items_number_img_bar;
 	first->bar_mutex = second->bar_mutex;
 	second->item = save.item;
 	second->icon_instance = save.icon_instance;
 	second->bar_icon_instance = save.bar_icon_instance;
-    second->items_number_img = save.items_number_img;
-    second->items_number = save.items_number;
-    second->items_number_img_bar = save.items_number_img_bar;
+	second->items_number_img = save.items_number_img;
+	second->items_number = save.items_number;
+	second->items_number_img_bar = save.items_number_img_bar;
 	second->bar_mutex = save.bar_mutex;
-    if (second->slot_id > 9)
-        second->items_number_img_bar->instances[0].enabled = false;
+	if (second->slot_id > 9)
+		second->items_number_img_bar->instances[0].enabled = false;
 }
 
 static void	set_on_void_slot(t_core *core, t_slot *slot, int s)
@@ -131,7 +131,7 @@ void	give_one_to(t_core *core, t_slot *src, t_slot *dst)
 		&& dst->slot_id != 46)
 	{
 		change_item_number(core, src, src->items_number - 1);
-			give_item(core, get_item(src->item->name), dst->slot_id, 1);
+		give_item(core, get_item(src->item->name), dst->slot_id, 1);
 		display_item(core, dst);
 	}
 }

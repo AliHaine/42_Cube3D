@@ -55,7 +55,7 @@ static void	get_color_from_map(t_file *file, uint32_t bt_color[2])
 	first_key = 'F';
 	if (!file->line || file->line[0] != 'F' && file->line[0] != 'C' || file->line[1] != ' ')
 		msg_write(2, 2, ERROR_PARSING_CHAR);
-	msg_write_multiple(1, Messages[TRY_LOAD_COLOR], file->line);
+	msg_write_multiple(1, g_messages[TRY_LOAD_COLOR], file->line);
 	usleep(300000 * LOAD);
 	if (file->line[0] != 'F')
 	{
@@ -67,7 +67,7 @@ static void	get_color_from_map(t_file *file, uint32_t bt_color[2])
 	get_next_line(file);
 	if (!file->line && file->line[0] != 'F' && file->line[0] != 'C' || file->line[1] != ' ')
 		msg_write(2, 2, ERROR_PARSING_CHAR);
-	msg_write_multiple(1, Messages[TRY_LOAD_COLOR], file->line);
+	msg_write_multiple(1, g_messages[TRY_LOAD_COLOR], file->line);
 	usleep(300000 * LOAD);
 	if (file->line[0] == first_key)
 		msg_write(2, 2, ERROR_KEY_ALREADY);

@@ -27,7 +27,7 @@ void	msg_write(int fd, int exitVal, MsgType msg)
 {
 	const char	*str;
 
-	str = Messages[msg];
+	str = g_messages[msg];
 	while (*str)
 		write(fd, str++, 1);
 	write(fd, "\n", 1);

@@ -34,10 +34,10 @@ static void	erase_items(t_core *core)
 	while (act->next)
 	{
 		if (act->bar_icon_instance != -1)
-        {
-            act->item->icon->instances[act->icon_instance].enabled = false;
-            act->items_number_img->instances[0].enabled = false;
-        }
+		{
+			act->item->icon->instances[act->icon_instance].enabled = false;
+			act->items_number_img->instances[0].enabled = false;
+		}
 		act = act->next;
 	}
 }

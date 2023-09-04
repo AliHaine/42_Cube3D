@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #ifndef BIOME_H
-#define BIOME_H
+# define BIOME_H
 
-#include "block.h"
-typedef struct s_block t_block;
+# include "block.h"
+
+typedef struct s_block	t_block;
 
 typedef enum {
 	BIOME_NATURE,
@@ -29,14 +30,14 @@ typedef enum {
 
 typedef struct s_biome
 {
-	Biome name;
-	t_block *block;
-	int	block_number;
+	Biome	name;
+	t_block	*block;
+	int		block_number;
 }	t_biome;
 
 //accessor
-t_biome	*get_biome(Biome biome);
-void	set_biome(t_biome biome, int num);
+t_biome		*get_biome(Biome biome);
+void		set_biome(t_biome biome, int num);
 
 //biome_utils
 t_biome		*get_random_biome(t_biome **biome);

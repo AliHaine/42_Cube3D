@@ -15,23 +15,23 @@
 
 # include "includes.h"
 # include "../includes/enum.h"
-typedef struct s_item t_item;
 
-typedef struct	s_imgs
-{
+typedef struct s_item	t_item;
+
+typedef struct s_imgs {
 	mlx_image_t		*img_3d;
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_player;
 	mlx_image_t		*crosshair;
 	mlx_image_t		*invbar;
 	mlx_image_t		*invbar_selector;
-	mlx_image_t 	*engbar;
-    mlx_image_t 	*hearth[2];
+	mlx_image_t		*engbar;
+	mlx_image_t		*hearth[2];
 	mlx_image_t		*map_background;
 	mlx_image_t		*inventory_gui;
-	mlx_image_t     *floor_texture;
+	mlx_image_t		*floor_texture;
 	mlx_image_t		*skybox;
-    mlx_image_t		*skybox_nether;
+	mlx_image_t		*skybox_nether;
 	mlx_image_t		*skybox_end;
 	mlx_image_t		*backrooms_ceil;
 	mlx_texture_t	*map_texture;
@@ -42,30 +42,13 @@ typedef struct	s_imgs
 	mlx_texture_t	*img_player_texture;
 }	t_imgs;
 
-typedef struct s_sprite
-{
-	float			r_xy[2];
-	int				c_xy[2];
-	float			s_xy[2];
-	float			transform_xy[2];
-	float			start_xy[2];
-	float			end_xy[2];
-	float			screen_xy[2];
-	int				text_xy[2];
-	float			height;
-	float			width;
-	float			distance;
-	float			inversed_determinator;
-	mlx_texture_t	*texture;
-}	t_sprite;
-
 typedef struct s_file
 {
 	int		fd;
 	int		line_num;
 	char	*line;
 	char	*file_path;
-	char 	*storage;
+	char	*storage;
 }	t_file;
 
 typedef struct s_animation
@@ -79,8 +62,8 @@ typedef struct s_slot
 {
 	short			slot_id;
 	t_item			*item;
-    uint32_t		icon_instance;
-    uint32_t		bar_icon_instance;
+	uint32_t		icon_instance;
+	uint32_t		bar_icon_instance;
 	short			items_number;
 	mlx_image_t		*items_number_img;
 	mlx_image_t		*items_number_img_bar;
@@ -121,7 +104,7 @@ typedef struct s_core
 	t_options		options;
 	t_player		player;
 	t_imgs			imgs;
-    int             screen_size[2];
+	int				screen_size[2];
 }	t_core;
 
 #endif
