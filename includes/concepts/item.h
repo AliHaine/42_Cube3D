@@ -27,6 +27,7 @@ typedef enum {
 	FLINT,
 	LIGHTER,
 	DIAMOND_PICKAXE,
+	WATER_BUCKET,
 	ITEM_NUMBER,
 }   Item;
 
@@ -42,6 +43,7 @@ static const char *ItemName[] = {
 		"flint",
 		"lighter",
 		"diamond_pickaxe",
+		"water_bucket",
 };
 
 typedef struct s_item

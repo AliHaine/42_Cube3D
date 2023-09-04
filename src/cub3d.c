@@ -98,6 +98,7 @@ int	main(int argc, char *argv[])
 	give_item(&core, get_item(FLINT), 36, 1);
 	give_item(&core, get_item(LIGHTER), 24, 1);
 	give_item(&core, get_item(DIAMOND_PICKAXE), 12, 1);
+	give_item(&core, get_item(WATER_BUCKET), 9, 1);
     usleep(60000);
 	msg_write(1, -1, MINIMAP_INIT);
 	usleep(800000 * LOAD);

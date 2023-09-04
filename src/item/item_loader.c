@@ -118,4 +118,8 @@ void	item_loader(t_core *core)
 	create_item(DIAMOND_PICKAXE, core->mlx);
 	create_item_stats(get_item(DIAMOND_PICKAXE), 10, 2, 5);
 	create_item_animation(get_item(DIAMOND_PICKAXE), 4, 0, 150, core->mlx);
+
+	create_item(WATER_BUCKET, core->mlx);
+	create_item_stats(get_item(WATER_BUCKET), -1, 2, 1);
+	create_item_animation(get_item(WATER_BUCKET), 3, 0, 150, core->mlx);
 }

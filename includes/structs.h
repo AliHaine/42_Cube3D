@@ -32,6 +32,7 @@ typedef struct	s_imgs
 	mlx_image_t     *floor_texture;
 	mlx_image_t		*skybox;
     mlx_image_t		*skybox_nether;
+	mlx_image_t		*skybox_end;
 	mlx_image_t		*backrooms_ceil;
 	mlx_texture_t	*map_texture;
 	mlx_texture_t	*trans;
