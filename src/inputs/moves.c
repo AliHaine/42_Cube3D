@@ -11,31 +11,71 @@
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
-#include "../../includes/defines.h"
-#include "../../includes/structs.h"
 
 void	move_left(t_player *player)
 {
-		player->player_pos_xy[0] += cosf(player->playerangle - PI / 2) * player->move_speed;
-		player->player_pos_xy[1] += sinf(player->playerangle - PI / 2) * player->move_speed;
+	const float	dir_x = cosf(player->playerangle);
+	const float	dir_y = sinf(player->playerangle);
+	float		step_x;
+	float		step_y;
+	float		alpha;
+
+	if (dir_y > 0)
+		alpha = acos(check_overflow(dir_x));
+	else
+		alpha = -acos(check_overflow(dir_x));
+	step_y = sinf(alpha + M_PI / 2) * player->move_speed;
+	if (!is_block(player->player_pos_xy[0], player->player_pos_xy[1] - step_y))
+		player->player_pos_xy[1] -= step_y;
+	step_x = cosf(alpha + M_PI / 2) * player->move_speed;
+	if (!is_block(player->player_pos_xy[0] - step_x, player->player_pos_xy[1]))
+		player->player_pos_xy[0] -= step_x;
 }
 
 void	move_right(t_player *player)
 {
-		player->player_pos_xy[0] -= cosf(player->playerangle - PI / 2) * player->move_speed;
-		player->player_pos_xy[1] -= sinf(player->playerangle - PI / 2) * player->move_speed;
+	const float	dir_x = cosf(player->playerangle);
+	const float	dir_y = sinf(player->playerangle);
+	float		step_x;
+	float		step_y;
+	float		alpha;
+
+	if (dir_y > 0)
+		alpha = acos(check_overflow(dir_x));
+	else
+		alpha = -acos(check_overflow(dir_x));
+	step_y = sinf(alpha + M_PI / 2) * player->move_speed;
+	if (!is_block(player->player_pos_xy[0], player->player_pos_xy[1] + step_y))
+		player->player_pos_xy[1] += step_y;
+	step_x = cosf(alpha + M_PI / 2) * player->move_speed;
+	if (!is_block(player->player_pos_xy[0] + step_x, player->player_pos_xy[1]))
+		player->player_pos_xy[0] += step_x;
 }
 
 void	move_backward(t_player *player)
 {
-		player->player_pos_xy[0] -= cosf(player->playerangle) * player->move_speed;
-		player->player_pos_xy[1] -= sinf(player->playerangle) * player->move_speed;
+	float	step_x;
+	float	step_y;
+
+	step_x = cosf(player->playerangle) * player->move_speed;
+	step_y = sinf(player->playerangle) * player->move_speed;
+	if (!is_block(player->player_pos_xy[0], player->player_pos_xy[1] - step_y))
+		player->player_pos_xy[1] -= step_y;
+	if (!is_block(player->player_pos_xy[0] - step_x, player->player_pos_xy[1]))
+		player->player_pos_xy[0] -= step_x;
 }
 
 void	move_forward(t_player *player)
 {
-		player->player_pos_xy[0] += cosf(player->playerangle) * player->move_speed;
-		player->player_pos_xy[1] += sinf(player->playerangle) * player->move_speed;
+	float	step_x;
+	float	step_y;
+
+	step_x = cosf(player->playerangle) * player->move_speed;
+	step_y = sinf(player->playerangle) * player->move_speed;
+	if (!is_block(player->player_pos_xy[0] + step_x, player->player_pos_xy[1]))
+		player->player_pos_xy[0] += step_x;
+	if (!is_block(player->player_pos_xy[0], player->player_pos_xy[1] + step_y))
+		player->player_pos_xy[1] += step_y;
 }
 
 void	move_rotate(t_player *player, int direction, float speed)

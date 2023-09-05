@@ -28,14 +28,24 @@ bool	is_player_running(t_player *player)
 	return (false);
 }
 
-bool	is_player_under_block(t_player *player)
+bool	is_block(float x, float y)
 {
 	t_world	*world;
 	char	c;
 
 	world = get_world_active();
-	c = world->world[get_chunk_from_pos((int)player->player_pos_xy[0] / 64, (int)player->player_pos_xy[1] / 64)][(int)player->player_pos_xy[1] / 64 % world->height][(int)player->player_pos_xy[0] / 64 % world->width];
+	c = world->world[get_chunk_from_pos((int)x / 64, (int)y / 64)]
+	[(int)y / 64 % world->height][(int)x / 64 % world->width];
 	if (c != '0' && c == '1' || is_rigid_block(get_block_name_from_char(c)))
 		return (true);
 	return (false);
+}
+
+float	check_overflow(float val)
+{
+	if (val > 1)
+		return (1);
+	else if (val < -1)
+		return (-1);
+	return (val);
 }

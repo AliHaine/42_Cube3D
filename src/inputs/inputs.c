@@ -24,35 +24,25 @@ static void	choose_move(mlx_t *mlx, t_player *player)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
 		move_right(player);
-	else if (mlx_is_key_down(mlx, MLX_KEY_A))
+	if (mlx_is_key_down(mlx, MLX_KEY_A))
 		move_left(player);
-	else if (mlx_is_key_down(mlx, MLX_KEY_S)
+	if (mlx_is_key_down(mlx, MLX_KEY_S)
 		|| mlx_is_key_down(mlx, MLX_KEY_DOWN))
 		move_backward(player);
-	else if (mlx_is_key_down(mlx, MLX_KEY_W)
+	if (mlx_is_key_down(mlx, MLX_KEY_W)
 		|| mlx_is_key_down(mlx, MLX_KEY_UP))
 		move_forward(player);
 }
 
 static void	moving_inputs(mlx_t *mlx, t_player *player)
 {
-	float	save_pos_xy[2];
-
 	if (!is_move_key_down(mlx))
 	{
 		player->is_moving = false;
 		return ;
 	}
 	player->is_moving = true;
-	save_pos_xy[0] = player->player_pos_xy[0];
-	save_pos_xy[1] = player->player_pos_xy[1];
 	choose_move(mlx, player);
-	if (is_player_under_block(player))
-	{
-		player->player_pos_xy[0] = save_pos_xy[0];
-		player->player_pos_xy[1] = save_pos_xy[1];
-		player->is_moving = false;
-	}
 }
 
 void	inputs(void *params)
