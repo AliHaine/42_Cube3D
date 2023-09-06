@@ -26,7 +26,7 @@ static bool	set_map_size_value(t_file *file, int map_hw[2])
 		get_next_line(file);
 		map_hw[0]++;
 	}
-	if (map_hw[1] <= 2 || map_hw[0] <= 1 || map_hw[1] > 60 || map_hw[0] > 30)
+	if (map_hw[1] <= 2 || map_hw[0] <= 1 || map_hw[1] > 32 || map_hw[0] > 32)
 		return (false);
 	return (true);
 }

@@ -24,7 +24,7 @@
 # define SENSIBILITY 2
 # define DEFAULT_WALL ".d/default_wall.png"
 # define BASS_SAMPLE_LOOP 4
-# define MOVE_SPEED 30
+# define MOVE_SPEED 12
 # define FOG_DISTANCE 1500
 
 #endif
