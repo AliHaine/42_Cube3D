@@ -18,7 +18,6 @@ static void	create_item(Item item_name, mlx_t *mlx)
 	t_item	*item;
 
 	msg_write_multiple(1, g_messages[TRY_LOAD_ITEM], g_item_name[item_name]);
-	usleep(300000 * LOAD);
 	item = malloc(sizeof(t_item));
 	item->name = item_name;
 	item->animation.image = 0;

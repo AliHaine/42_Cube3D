@@ -56,7 +56,6 @@ static void	get_color_from_map(t_file *file, uint32_t bt_color[2])
 	if (!file->line || file->line[0] != 'F' && file->line[0] != 'C' || file->line[1] != ' ')
 		msg_write(2, 2, ERROR_PARSING_CHAR);
 	msg_write_multiple(1, g_messages[TRY_LOAD_COLOR], file->line);
-	usleep(300000 * LOAD);
 	if (file->line[0] != 'F')
 	{
 		first_key = 'C';
@@ -68,7 +67,6 @@ static void	get_color_from_map(t_file *file, uint32_t bt_color[2])
 	if (!file->line && file->line[0] != 'F' && file->line[0] != 'C' || file->line[1] != ' ')
 		msg_write(2, 2, ERROR_PARSING_CHAR);
 	msg_write_multiple(1, g_messages[TRY_LOAD_COLOR], file->line);
-	usleep(300000 * LOAD);
 	if (file->line[0] == first_key)
 		msg_write(2, 2, ERROR_KEY_ALREADY);
 	if (file->line[0] != 'F')
@@ -114,7 +112,6 @@ static void	get_image_from_map(t_file *file, t_imgs *imgs)
 void	texture_main(t_file *file, t_imgs *imgs, uint32_t bt_color[2])
 {
 	msg_write(1, -1, GET_MAP_CONTENT);
-	usleep(500000 * LOAD);
 	get_next_line(file);
 	get_image_from_map(file, imgs);
 	get_color_from_map(file, bt_color);

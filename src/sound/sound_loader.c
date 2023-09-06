@@ -15,7 +15,6 @@
 void	sound_loader(void)
 {
 	msg_write(1, -1, SOUND_INIT);
-	usleep(450000 * LOAD);
 	init_sound_empty();
 	if (!load_sound(NORMAL_AMBIANT_SOUND, "assets/sounds/normal_ambiant.mp3"))
 		msg_write(2, 2, ERROR_FATAL);

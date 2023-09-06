@@ -23,9 +23,8 @@
 # define FOV 1.0471975506
 # define SENSIBILITY 2
 # define DEFAULT_WALL ".d/default_wall.png"
-# define LOAD 0
 # define BASS_SAMPLE_LOOP 4
-# define MOVE_SPEED 7
+# define MOVE_SPEED 30
 # define FOG_DISTANCE 1500
 
 #endif

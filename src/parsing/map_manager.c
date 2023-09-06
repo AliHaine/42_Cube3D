@@ -51,7 +51,6 @@ void	map_manager(char *map_name, t_imgs *imgs, t_player *player)
 	int				map_hw[2];
 
 	msg_write(2, -1, CHECK_MAP);
-	usleep(500000 * LOAD);
 	basical_map_check(&map_name);
 	open_file(&file, map_name, O_RDONLY);
 	msg_write(1, -1, NO_ERROR);

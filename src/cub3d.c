@@ -27,7 +27,6 @@ static void	imgs_init(mlx_t *mlx, t_imgs *imgs)
 static void	core_init(t_core *core)
 {
 	msg_write(1, -1, CORE_INIT);
-	usleep(600000 * LOAD);
 	initialize_options(core);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	core->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "セグメンテーションフォルトのないプログラムは、鋭い剣のように正確に使える。", true);
@@ -98,9 +97,7 @@ int	main(int argc, char *argv[])
 	give_item(&core, get_item(LIGHTER), 24, 1);
 	give_item(&core, get_item(DIAMOND_PICKAXE), 12, 1);
 	give_item(&core, get_item(WATER_BUCKET), 9, 1);
-	usleep(60000);
 	msg_write(1, -1, MINIMAP_INIT);
-	usleep(800000 * LOAD);
 	core.imgs.img_map = mlx_new_image(core.mlx, 256, 256);
 	msg_write(1, -1, SUCCESS);
 	mlx_hook_loader(&core);
