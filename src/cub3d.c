@@ -12,6 +12,19 @@
 
 #include "../includes/includes.h"
 
+static void	mlx_hook_loader(t_core *core)
+{
+	mlx_loop_hook(core->mlx, &display, core);
+	mlx_loop_hook(core->mlx, &inputs, core);
+	mlx_loop_hook(core->mlx, &player_listener, core);
+	mlx_key_hook(core->mlx, &inputs_hook, core);
+	mlx_resize_hook(core->mlx, &resize_hook, core);
+	mlx_mouse_hook(core->mlx, &mouse, core);
+	mlx_scroll_hook(core->mlx, &scroll_hook, core);
+	mlx_loop_hook(core->mlx, &inventory_hook, core);
+	mlx_loop(core->mlx);
+}
+
 static void	imgs_init(mlx_t *mlx, t_imgs *imgs)
 {
 	imgs->wall_texture[0] = 0;
@@ -101,6 +114,9 @@ int	main(int argc, char *argv[])
 	core.imgs.img_map = mlx_new_image(core.mlx, 256, 256);
 	msg_write(1, -1, SUCCESS);
 	mlx_hook_loader(&core);
+	free_slot(core.player.slot);
+	free_biome();
+	free_world();
 	delete_image_from_struct(core.mlx, &core.imgs);
 	mlx_close_window(core.mlx);
 	mlx_terminate(core.mlx);

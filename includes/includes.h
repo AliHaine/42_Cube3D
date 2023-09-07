@@ -38,8 +38,7 @@ void		display(void *params);
 
 //loader
 
-void		texture_loader(t_core *core);
-void		mlx_hook_loader(t_core *core);
+void		texture_loader(t_core *core);;
 
 //inputs
 
@@ -89,6 +88,7 @@ bool		player_have_enough_energy(t_player *player, int value);
 
 void		setup_slot_struct(mlx_t *mlx, t_player *player);
 t_slot		*get_first_slot(t_slot *slot);
+void		free_slot(t_slot *slot);
 
 void		setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world);
 

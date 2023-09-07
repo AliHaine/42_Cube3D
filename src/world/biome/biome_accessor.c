@@ -23,3 +23,12 @@ void	set_biome(t_biome biome, int num)
 {
 	g_biomes[num] = biome;
 }
+
+void	free_biome(void)
+{
+	int	i;
+
+	i = BIOME_NUMBER;
+	while (i-- > 0)
+		free(get_biome(i)->block);
+}

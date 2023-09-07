@@ -7,7 +7,6 @@ SRCS		=	src/cub3d.c \
 				src/graphics/display.c \
 				src/graphics/animations.c \
 				src/loading/texture_loader.c \
-				src/loading/other_loader.c \
 				src/parsing/map_manager.c \
 				src/parsing/map_parse.c \
 				src/parsing/map_texture.c \
@@ -57,15 +56,13 @@ SRCS		=	src/cub3d.c \
 				src/utils/inventory_utils.c \
 				src/utils/inventory_utils_bis.c \
 				src/utils/ft_split.c
-
-
 OBJS		=	$(SRCS:.c=.o)
 
 NAME		=	cub3d
 TOTAL_FILES =	$(words $(SRCS))
 COUNT		=	1
 
-FLAGS		=	-Ofast -g3 -fsanitize=address
+FLAGS		=	-Ofast
 LDFLAGS		+=	-L./src/sound/bass
 LDLIBS		+=	-lbass
 

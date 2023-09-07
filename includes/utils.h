@@ -27,7 +27,7 @@ int			ft_strlen(const char *s);
 int			ft_atoi_for_texture(const char *s);
 char		*ft_itoa(int n);
 bool		is_str_blank(const char *s);
-void		free_tab(char **tab, int size);
+void		free_tab_three(char ***tab);
 void		copy_tab(char **tab_src, char **tab_dst, int height, int width);
 void		ft_putstr_fd(char *s, int fd);
 int			ft_strcmp(const char *s1, const char *s2);

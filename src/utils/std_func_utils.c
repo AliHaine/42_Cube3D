@@ -134,11 +134,20 @@ bool	is_str_blank(const char *s)
 	return (true);
 }
 
-void	free_tab(char **tab, int size)
+void	free_tab_three(char ***tab)
 {
-	while (size-- >= 0)
-		free(tab[size]);
-	free(tab);
+	int	i;
+	int	y;
+
+	i = 9;
+	y = 0;
+	while (i-- > 0)
+	{
+		while (tab[i][y])
+			free(tab[i][y++]);
+		y = 0;
+		free(tab[i]);
+	}
 }
 
 void	copy_tab(char **tab_src, char **tab_dst, int height, int width)
