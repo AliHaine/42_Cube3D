@@ -47,7 +47,7 @@ void	basical_map_check(char **map_name)
 {
 	int		fd;
 
-	if (!*map_name)
+	if (!*map_name || ft_strlen(*map_name) <= 4)
 	{
 		msg_write(2, -1, ERROR_ARGS);
 		msg_write(1, -1, SET_DEFAULT_MAP);

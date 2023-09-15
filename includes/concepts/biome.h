@@ -38,6 +38,7 @@ typedef struct s_biome
 //accessor
 t_biome		*get_biome(Biome biome);
 void		set_biome(t_biome biome, int num);
+void		free_biome(void);
 
 //biome_utils
 t_biome		*get_random_biome(t_biome **biome);

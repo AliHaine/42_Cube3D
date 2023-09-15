@@ -24,12 +24,12 @@ static void	other_loader(mlx_t *mlx, t_imgs *imgs)
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/skybox.png", &imgs->skybox))
 		msg_write(2, 2, ERROR_FATAL);
-    if (!set_image_from_path(mlx, "assets/skybox_nether.png", &imgs->skybox_nether))
-        msg_write(2, 2, ERROR_FATAL);
+	if (!set_image_from_path(mlx, "assets/skybox_nether.png", &imgs->skybox_nether))
+		msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/skybox_end.png", &imgs->skybox_end))
 		msg_write(2, 2, ERROR_FATAL);
-    if (!set_texture_from_path("assets/guis/inventory_gui2.png", &imgs->inventory_gui_texture))
-        msg_write(2, 2, ERROR_FATAL);
+	if (!set_texture_from_path("assets/guis/inventory_gui2.png", &imgs->inventory_gui_texture))
+		msg_write(2, 2, ERROR_FATAL);
 	if (!set_texture_from_path("assets/cursor.png", &imgs->cursor))
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_texture_from_path("assets/guis/minimap_background.png", &imgs->map_texture))

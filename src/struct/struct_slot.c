@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct_slot.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/07 20:38:24 by ayagmur           #+#    #+#             */
+/*   Updated: 2023/09/07 20:38:26 by ayagmur          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/includes.h"
 
 static t_slot	*add_new_noed(mlx_t *mlx, short val, t_slot *current, t_item *hand_item)
@@ -40,6 +52,21 @@ static t_slot	*add_first_noed(mlx_t *mlx, t_item *hand_item)
 	return (first);
 }
 
+void	free_slot(t_slot *slot)
+{
+	t_slot	*current;
+
+	while (slot->prev)
+		slot = slot->prev;
+	current = slot;
+	while (current)
+	{
+		slot = slot->next;
+		free(current);
+		current = slot;
+	}
+}
+
 void	setup_slot_struct(mlx_t *mlx, t_player *player)
 {
 	int	i;
@@ -49,7 +76,7 @@ void	setup_slot_struct(mlx_t *mlx, t_player *player)
 	while (i-- > 0)
 		player->slot = add_new_noed(mlx, i, player->slot, get_item(HAND));
 	player->slot = player->slot->next;
-    player->slot->prev = 0;
+	player->slot->prev = 0;
 }
 
 t_slot	*get_first_slot(t_slot *slot)
