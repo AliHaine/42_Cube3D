@@ -24,6 +24,20 @@ static void	imgs_init(mlx_t *mlx, t_imgs *imgs)
 	imgs->img_player = mlx_texture_to_image(mlx, imgs->img_player_texture);
 }
 
+void	init_sprites(t_core *core)
+{
+	core->sprites = (t_sprite **)malloc(sizeof(t_sprite *) * 2);
+
+	core->sprites[0] = (t_sprite *)malloc(sizeof(t_sprite));
+	core->sprites[0]->is_seen = false;
+	core->sprites[0]->c_xy[0] = 37;
+	core->sprites[0]->c_xy[1] = 35;
+	core->sprites[0]->sp_xy[0] = ((float)core->sprites[0]->c_xy[0] + 0.5f) * 64;
+	core->sprites[0]->sp_xy[1] = ((float)core->sprites[0]->c_xy[1] + 0.5f) * 64;
+
+	core->sprites[1] = NULL;
+}
+
 static void	core_init(t_core *core)
 {
 	msg_write(1, -1, CORE_INIT);
@@ -34,6 +48,7 @@ static void	core_init(t_core *core)
 	imgs_init(core->mlx, &core->imgs);
 	if (core->options.sound)
 		sound_loader();
+
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
 	mlx_set_cursor(core->mlx, mlx_create_cursor(core->imgs.trans));
@@ -83,6 +98,7 @@ int	main(int argc, char *argv[])
 	block_loader(core.mlx);
 	setup_slot_struct(core.mlx, &core.player);
 	map_manager(argv[1], &core.imgs, &core.player);
+	init_sprites(&core);
 	world_loader(&core);
 	portal_loader();
 	give_item(&core, get_item(SWORD_NETHER), 2, 32);

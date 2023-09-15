@@ -17,6 +17,7 @@
 # include "../includes/enum.h"
 
 typedef struct s_item	t_item;
+typedef struct s_sprite	t_sprite;
 
 typedef struct s_imgs {
 	mlx_image_t		*img_3d;
@@ -34,6 +35,7 @@ typedef struct s_imgs {
 	mlx_image_t		*skybox_nether;
 	mlx_image_t		*skybox_end;
 	mlx_image_t		*backrooms_ceil;
+	mlx_image_t		*monster;
 	mlx_texture_t	*map_texture;
 	mlx_texture_t	*trans;
 	mlx_texture_t	*wall_texture[4];
@@ -88,6 +90,8 @@ typedef struct s_player
 	bool			is_moving;
 	bool			is_running;
 	bool			is_building;
+	float			cos;
+	float			sin;
 }	t_player;
 
 typedef struct s_options
@@ -104,6 +108,7 @@ typedef struct s_core
 	t_options		options;
 	t_player		player;
 	t_imgs			imgs;
+	t_sprite		**sprites;
 	int				screen_size[2];
 }	t_core;
 

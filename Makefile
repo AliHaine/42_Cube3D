@@ -14,6 +14,7 @@ SRCS		=	src/cub3d.c \
 				src/parsing/options_initializer.c \
 				src/raycast/digital_differential_analysis.c \
                 src/raycast/drawing.c \
+                src/raycast/sprites.c \
                 src/raycast/struct_drawing.c \
                 src/raycast/raycast_utils.c \
 				src/sound/sound_loader.c \

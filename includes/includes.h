@@ -23,6 +23,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "structs.h"
+# include "raycast.h"
 # include "utils.h"
 # include "defines.h"
 # include <sys/time.h>
@@ -32,7 +33,6 @@
 # include "concepts/block.h"
 # include "concepts/item.h"
 # include "concepts/portal.h"
-# include "raycast.h"
 
 void		display(void *params);
 

@@ -225,8 +225,15 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, t_player *player, t_options *opti
 			mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++,
 				world->bt_color[1]);
 	}
+	//printf("%f %f\n", dda->dist_hv[dda->hit_hv], dda->sprites[0]->dist);
 	while (tcd.iterator < tcd.wall_line_h)
+	{
 		wall_drawing(imgs, dda, &tcd);
+//		if (dda->dist_hv[dda->hit_hv] < dda->sprites[0]->dist)
+//			wall_drawing(imgs, dda, &tcd);
+//		else
+//			tcd.iterator++;
+	}
 	while (tcd.iterator < SCREEN_HEIGHT)
 	{
 		if (options->floor_texture == true)
