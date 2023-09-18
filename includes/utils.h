@@ -65,4 +65,7 @@ void		change_item_number(t_core *core, t_slot *src, short n);
 //player_utils
 void		set_player(int x, int y, t_player *player, float angle);
 
+//crafting utils
+bool		lighter_check(t_slot *craft_table[10]);
+
 #endif

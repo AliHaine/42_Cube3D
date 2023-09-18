@@ -12,19 +12,6 @@
 
 #include "../../includes/includes.h"
 
-void	detect_sprite(t_sprite **sprites, int c_x, int c_y)
-{
-	int	s;
-
-	s = -1;
-	while (sprites[++s])
-	{
-		if (sprites[s]->c_xy[0] == c_x
-			&& sprites[s]->c_xy[1] == c_y)
-			sprites[s]->is_seen = true;
-	}
-}
-
 static void	jump_to_next(t_dda *dda, const float playerpos[2], bool val)
 {
 	int		m_xy[2];
@@ -44,7 +31,6 @@ static void	jump_to_next(t_dda *dda, const float playerpos[2], bool val)
 				- -dda->sin * (dda->r_xy[1] - playerpos[1]);
 			break ;
 		}
-		detect_sprite(dda->sprites, m_xy[0], m_xy[1]);
 		dda->r_xy[0] += dda->o_xy[0];
 		dda->r_xy[1] += dda->o_xy[1];
 	}
@@ -106,16 +92,15 @@ static void	vertical_cast(t_dda *dda, float playerpos[2])
 	dda->v_xy[1] = dda->r_xy[1];
 }
 
-void	raycasting(t_player *player, t_sprite **sprites,  t_imgs *imgs, t_options *options)
+void	raycasting(t_player *player, t_sprite **sprites, t_imgs *imgs, t_options *options)
 {
 	float		start_angle;
+	float		dists[SCREEN_WIDTH];
 	t_dda		dda;
 
 	dda.ray = -1;
 	dda.sprites = sprites;
 	start_angle = player->playerangle - (FOV / 2);
-	//sprites[0]->dist = sqrtf(powf(player->player_pos_xy[0] - sprites[0]->sp_xy[0], 2) + powf(player->player_pos_xy[1] - sprites[0]->sp_xy[1], 2));
-	//draw_sprites(player, sprites, imgs);
 	while (dda.ray++ < RAY_NUMBER - 1)
 	{
 		dda.hit_direction[0] = -1;
@@ -140,8 +125,9 @@ void	raycasting(t_player *player, t_sprite **sprites,  t_imgs *imgs, t_options *
 			dda.hit_hv = 1;
 			dda.chunk_hv[0] = dda.chunk_hv[1];
 		}
+		dists[dda.ray] = dda.dist_hv[dda.hit_hv];
 		fisheyes_fixor(&dda, player->playerangle);
 		columns_drawing(imgs, &dda, player, options);
 	}
-	draw_sprites(player, sprites, imgs);
+	draw_sprites(player, sprites, imgs, dists);
 }

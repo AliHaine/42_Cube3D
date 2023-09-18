@@ -56,7 +56,8 @@ SRCS		=	src/cub3d.c \
 				src/utils/get_next_line/get_next_line_utils.c \
 				src/utils/inventory_utils.c \
 				src/utils/inventory_utils_bis.c \
-				src/utils/ft_split.c
+				src/utils/ft_split.c \
+				src/utils/crafting_utils.c
 OBJS		=	$(SRCS:.c=.o)
 
 NAME		=	cub3d

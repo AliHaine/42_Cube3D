@@ -19,9 +19,7 @@ typedef struct s_world	t_world;
 
 typedef struct s_sprite
 {
-	bool	is_seen;
 	float	dist;
-	int		c_xy[2];
 	float	sp_xy[2];
 	int		x;
 	int		y;
@@ -30,6 +28,8 @@ typedef struct s_sprite
 	float	offset[2];
 	float	s_pos[3];
 	float	tmp[2];
+	int		sc_xy[2];
+	int		scale;
 }			t_sprite;
 
 typedef struct s_dda
@@ -78,6 +78,6 @@ void		get_color_block_texture(t_dda *dda, t_col_drawing *tcd);
 uint32_t	apply_fog(uint32_t color, float fog_strength);
 
 // sprites.c
-void		draw_sprites(t_player *player, t_sprite **sprites, t_imgs *imgs);
+void		draw_sprites(t_player *player, t_sprite **sprites, t_imgs *imgs, const float *dists);
 
 #endif

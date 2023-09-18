@@ -42,11 +42,9 @@ void	init_sprites(t_core *core)
 	core->sprites = (t_sprite **)malloc(sizeof(t_sprite *) * 2);
 
 	core->sprites[0] = (t_sprite *)malloc(sizeof(t_sprite));
-	core->sprites[0]->is_seen = false;
-	core->sprites[0]->c_xy[0] = 37;
-	core->sprites[0]->c_xy[1] = 35;
-	core->sprites[0]->sp_xy[0] = ((float)core->sprites[0]->c_xy[0] + 0.5f) * 64;
-	core->sprites[0]->sp_xy[1] = ((float)core->sprites[0]->c_xy[1] + 0.5f) * 64;
+	core->sprites[0]->sp_xy[0] = (37 + 0.5f) * 64;
+	core->sprites[0]->sp_xy[1] = (35 + 0.5f) * 64;
+	core->sprites[0]->scale = 576;
 
 	core->sprites[1] = NULL;
 }
