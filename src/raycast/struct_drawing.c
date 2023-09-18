@@ -30,7 +30,7 @@ void	setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world)
 	tcd->wall_line_h = (SCREEN_HEIGHT + wall_height) / 2;
 	tcd->step = 64.0f / (float)convertor;
 	tcd->current_step = 0.0f;
-	tcd->fog_strength = dda->dist_hv[0] / FOG_DISTANCE;
+	tcd->fog_strength = dda->dist_hv[dda->hit_hv] / FOG_DISTANCE;
 	tcd->hit_block = world->world[dda->chunk_hv[0]][((int)dda->r_xy[1] / 64) % world->height][((int)dda->r_xy[0] / 64) % world->width];
 	if (tcd->wall_line_h > SCREEN_HEIGHT)
 	{

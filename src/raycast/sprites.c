@@ -5,6 +5,9 @@ static void	init_vars(t_sprite *sp, t_player *player, mlx_image_t *img)
 {
 	sp->dist = sqrtf(powf(player->player_pos_xy[0] - sp->sp_xy[0], 2)
 			+ powf(player->player_pos_xy[1] - sp->sp_xy[1], 2));
+	sp->fog = sp->dist / FOG_DISTANCE;
+	if (sp->fog > 1)
+		return ;
 	sp->s_pos[2] = SCREEN_HEIGHT / 2;
 	sp->s_pos[0] = (sp->sp_xy[0] - player->player_pos_xy[0]);
 	sp->s_pos[1] = (sp->sp_xy[1] - player->player_pos_xy[1]);
@@ -38,7 +41,10 @@ static void	draw_sp_pixel(t_sprite *sp, mlx_image_t *img_3d, mlx_image_t *img, c
 		color = (img->pixels[value] << 24) | (img->pixels[value + 1]
 				<< 16) | (img->pixels[value + 2] << 8) | img->pixels[value + 3];
 	if (color != 0 && dists[sp->sc_xy[0]] > sp->dist)
+	{
+		color = apply_fog(color, sp->fog);
 		mlx_put_pixel(img_3d, sp->sc_xy[0], sp->sc_xy[1], color);
+	}
 }
 
 static void	draw_sprite(t_sprite *sp, mlx_image_t *img_3d, mlx_image_t *img, const float *dists)
@@ -66,8 +72,10 @@ static void	draw_sprite(t_sprite *sp, mlx_image_t *img_3d, mlx_image_t *img, con
 void	enemy_attack_move(t_sprite *sp, t_player *player)
 {
 	const t_world	*world = get_world_active();
-	const float		step = 2.f;
+	const float		step = 1.f;
 
+	if (sp->dist < 50)
+		return ;
 	if ((int)sp->sp_xy[0] > (int)player->player_pos_xy[0] && (world->world[get_chunk_from_pos((int)(sp->sp_xy[0] - step) / 64, (int)sp->sp_xy[1] / 64)][(int)(sp->sp_xy[1] / 64) % world->height][(int)((sp->sp_xy[0] - step) / 64) % world->width] == '0'))
 		sp->sp_xy[0] -= step;
 	else if ((int)sp->sp_xy[0] < (int)player->player_pos_xy[0] && (world->world[get_chunk_from_pos((int)(sp->sp_xy[0] / 64 + step), (int)sp->sp_xy[1] / 64)][(int)(sp->sp_xy[1] / 64) % world->height][(int)((sp->sp_xy[0] + step) / 64) % world->width] == '0'))
@@ -88,6 +96,8 @@ void	draw_sprites(t_player *player, t_sprite **sprites, t_imgs *imgs, const floa
 	while (sprites[++s])
 	{
 		init_vars(sprites[s], player, imgs->monster);
+		if (sprites[s]->fog > 1)
+			continue ;
 		draw_sprite(sprites[s], imgs->img_3d, imgs->monster, dists);
 		enemy_attack_move(sprites[s], player);
 	}

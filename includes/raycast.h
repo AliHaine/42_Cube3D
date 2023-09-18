@@ -30,6 +30,7 @@ typedef struct s_sprite
 	float	tmp[2];
 	int		sc_xy[2];
 	int		scale;
+	float	fog;
 }			t_sprite;
 
 typedef struct s_dda
