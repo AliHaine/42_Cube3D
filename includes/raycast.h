@@ -19,6 +19,9 @@ typedef struct s_world	t_world;
 
 typedef struct s_sprite
 {
+	char	c;
+	bool	hostile;
+	int		scale;
 	float	dist;
 	float	sp_xy[2];
 	int		x;
@@ -29,7 +32,6 @@ typedef struct s_sprite
 	float	s_pos[3];
 	float	tmp[2];
 	int		sc_xy[2];
-	int		scale;
 	float	fog;
 }			t_sprite;
 
@@ -47,7 +49,6 @@ typedef struct s_dda
 	int			hit_hv;
 	int			hit_direction[2];
 	int			chunk_hv[2];
-	t_sprite	**sprites;
 }	t_dda;
 
 typedef struct s_col_drawing
@@ -64,7 +65,7 @@ typedef struct s_col_drawing
 }	t_col_drawing;
 
 //dda//
-void		raycasting(t_player *player, t_sprite **sprites, t_imgs *imgs, t_options *options);
+void		raycasting(t_player *player, t_imgs *imgs, t_options *options);
 
 //drawing.c
 void		columns_drawing(t_imgs *imgs, t_dda *dda, t_player *player, t_options *options);
@@ -79,6 +80,6 @@ void		get_color_block_texture(t_dda *dda, t_col_drawing *tcd);
 uint32_t	apply_fog(uint32_t color, float fog_strength);
 
 // sprites.c
-void		draw_sprites(t_player *player, t_sprite **sprites, t_imgs *imgs, const float *dists);
+void		draw_sprites(t_player *player, t_imgs *imgs, const float *dists);
 
 #endif

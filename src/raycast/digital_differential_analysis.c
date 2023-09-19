@@ -92,14 +92,13 @@ static void	vertical_cast(t_dda *dda, float playerpos[2])
 	dda->v_xy[1] = dda->r_xy[1];
 }
 
-void	raycasting(t_player *player, t_sprite **sprites, t_imgs *imgs, t_options *options)
+void	raycasting(t_player *player, t_imgs *imgs, t_options *options)
 {
 	float		start_angle;
 	float		dists[SCREEN_WIDTH];
 	t_dda		dda;
 
 	dda.ray = -1;
-	dda.sprites = sprites;
 	start_angle = player->playerangle - (FOV / 2);
 	while (dda.ray++ < RAY_NUMBER - 1)
 	{
@@ -129,5 +128,5 @@ void	raycasting(t_player *player, t_sprite **sprites, t_imgs *imgs, t_options *o
 		fisheyes_fixor(&dda, player->playerangle);
 		columns_drawing(imgs, &dda, player, options);
 	}
-	draw_sprites(player, sprites, imgs, dists);
+	draw_sprites(player, imgs, dists);
 }

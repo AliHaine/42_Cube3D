@@ -15,6 +15,7 @@ char		**ft_split(char const *s, char c);
 
 bool		is_player_char(char c);
 bool		is_allowed_char(char c);
+bool		is_sprite_char(char c);
 short		get_direction_code(char *s);
 bool		set_default_wall_texture(t_imgs *imgs);
 bool		is_wall_empty(const t_imgs *imgs);

@@ -32,6 +32,7 @@ typedef struct s_world
 	char			***world;
 	t_biome			**biome;
 	t_sounds		*ambiant_sound;
+	t_sprite		**sprites;
 	int				height;
 	int				width;
 	uint32_t		bt_color[2];

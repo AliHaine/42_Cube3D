@@ -60,6 +60,7 @@ void		map_manager(char *argv, t_imgs *imgs, t_player *player);
 void		texture_main(t_file *file, t_imgs *imgs, uint32_t bt_color[2]);
 bool		parse_main(t_file *file, t_player *player, t_world *map);
 void		initialize_options(t_core *core);
+void		add_sprite(t_world *world, char c, int y, int x);
 
 //animations//
 void		animation_listener(void);

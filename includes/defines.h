@@ -25,6 +25,6 @@
 # define DEFAULT_WALL ".d/default_wall.png"
 # define BASS_SAMPLE_LOOP 4
 # define MOVE_SPEED 12
-# define FOG_DISTANCE 1500
+# define FOG_DISTANCE 1250
 
 #endif

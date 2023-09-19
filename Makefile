@@ -11,6 +11,7 @@ SRCS		=	src/cub3d.c \
 				src/parsing/map_parse.c \
 				src/parsing/map_texture.c \
 				src/parsing/options_initializer.c \
+				src/parsing/sprites_parse.c \
 				src/raycast/digital_differential_analysis.c \
                 src/raycast/drawing.c \
                 src/raycast/sprites.c \

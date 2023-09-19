@@ -91,6 +91,7 @@ bool	world_creator(World world_name, t_biome **biomes, t_sounds *ambient_sound, 
 	world.world = malloc(sizeof(char **) * 9);
 	world.is_active = is_active;
 	world.skybox = skybox;
+	world.sprites = NULL;
 	while (i < 9)
 		world_malloc(height * 3, width * 3, &world.world[i++]);
 	world_generator(&world);

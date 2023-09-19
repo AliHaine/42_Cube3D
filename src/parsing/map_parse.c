@@ -22,12 +22,16 @@ static bool	fill_map_tab(char *line, t_player *player, t_world *world, int itera
 	{
 		if (!is_allowed_char(line[i]))
 			return (false);
-		if (is_player_char(line[i]))
+		else if (is_sprite_char(line[i]))
+			add_sprite(world, line[i], iterator, i);
+		else if (is_player_char(line[i]))
 		{
 			player->have_player = true;
 			set_player(i, iterator, player, 0);
 			world->world[4][iterator][i] = '0';
 		}
+		else if (line[i] == ' ')
+			world->world[4][iterator][i] = '0';
 		else
 			world->world[4][iterator][i] = line[i];
 		i++;

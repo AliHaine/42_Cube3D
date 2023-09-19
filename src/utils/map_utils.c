@@ -19,10 +19,17 @@ bool	is_player_char(char c)
 	return (false);
 }
 
+bool	is_sprite_char(char c)
+{
+	if (c == '>')
+		return (true);
+	return (false);
+}
+
 bool	is_allowed_char(char c)
 {
 	if (c == '0' || c == '1' || is_player_char(c)
-		|| is_char_block(c) || c == ' ')
+		|| is_char_block(c) || c == ' ' || is_sprite_char(c))
 		return (true);
 	return (false);
 }
