@@ -95,6 +95,7 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *world)
 	int				case_xy[2];
 	int				pxy[2];
 	static uint32_t	wall_color = (109 << 24) | (96 << 16) | (77 << 8) | 255;
+	static uint32_t default_color = (212 << 24) | (188 << 16) | (148 << 8) | 255;
 
 	pxy[1] = -1;
 	while (++pxy[1] < 286)
@@ -113,6 +114,9 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *world)
 			else if (world->world[get_chunk_from_pos(case_xy[0], case_xy[1])]
 				[case_xy[1] % world->height][case_xy[0] % world->width] != '0')
 				mlx_put_pixel(imgs->img_map, pxy[0], pxy[1], wall_color);
+			else if (world->world[get_chunk_from_pos(case_xy[0], case_xy[1])]
+					[case_xy[1] % world->height][case_xy[0] % world->width] == '0')
+				mlx_put_pixel(imgs->img_map, pxy[0], pxy[1], default_color);
 		}
 	}
 }

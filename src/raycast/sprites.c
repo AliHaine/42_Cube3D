@@ -73,7 +73,6 @@ static void	draw_sprite(t_sprite *sp, mlx_image_t *img_3d, mlx_texture_t *img, c
 
 void	enemy_attack_move(t_sprite *sp, t_player *player)
 {
-	t_world			*world;
 	float			step;
 	float			angle;
 	float			dx;
@@ -82,23 +81,14 @@ void	enemy_attack_move(t_sprite *sp, t_player *player)
 	if (sp->dist < 50 || sp->dist > 1000)
 		return ;
 	step = 5.f;
-	world = get_world_active();
 	angle = atan2f(player->player_pos_xy[1]
 			- sp->sp_xy[1], player->player_pos_xy[0] - sp->sp_xy[0]);
 	dx = cosf(angle) * step;
 	dy = sinf(angle) * step;
-	if (get_world_char_at_pos((int)(sp->sp_xy[0] + dx) / 64, (int)sp->sp_xy[1] / 64))
+	if (get_world_char_at_pos((int)(sp->sp_xy[0] + dx) / 64, (int)sp->sp_xy[1] / 64) == '0')
 		sp->sp_xy[0] += dx;
-	/*if (world->world[get_chunk_from_pos((int)(sp->sp_xy[0] + dx) / 64,
-			(int)sp->sp_xy[1] / 64)][(int)(sp->sp_xy[1] / 64) % world->height]
-			[(int)((sp->sp_xy[0] + dx) / 64) % world->width] == '0')
-		sp->sp_xy[0] += dx;*/
-	if (get_world_char_at_pos((int)sp->sp_xy[0] / 64, (int)(sp->sp_xy[1] + dy) / 64))
+	if (get_world_char_at_pos((int)sp->sp_xy[0] / 64, (int)(sp->sp_xy[1] + dy) / 64) == '0')
 		sp->sp_xy[1] += dy;
-	/*if (world->world[get_chunk_from_pos((int)sp->sp_xy[0] / 64,
-				(int)(sp->sp_xy[1] + dy) / 64)][(int)((sp->sp_xy[1] + dy) / 64)
-			% world->height][(int)(sp->sp_xy[0] / 64) % world->width] == '0')
-		sp->sp_xy[1] += dy;*/
 }
 
 bool	sprite_are_sorted(t_sprite **sprite)

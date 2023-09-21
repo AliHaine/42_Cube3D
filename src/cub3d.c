@@ -94,6 +94,17 @@ static void	core_init(t_core *core)
 	core->player.can_move = true;
 	core->player.is_running = false;
 	core->player.is_building = false;
+
+	core->imgs.img_map = mlx_texture_to_image
+			(core->mlx, core->imgs.map_texture);
+	//core->imgs.img_player = rotate_image(core->mlx,
+	//									 core->imgs.img_player_texture, core->player.playerangle + (PI / 2));
+	mlx_resize_image(core->imgs.img_map, 250, 250);
+	mlx_resize_image(core->imgs.img_player, 14, 14);
+	mlx_image_to_window(core->mlx, core->imgs.img_3d, 0, 0);
+	mlx_image_to_window(core->mlx, core->imgs.img_map, 20, 445);
+	mlx_image_to_window(core->mlx, core->imgs.img_player, 137, 561);
+
 	msg_write(1, -1, SUCCESS);
 }
 
@@ -125,7 +136,7 @@ int	main(int argc, char *argv[])
 	give_item(&core, get_item(DIAMOND_PICKAXE), 12, 1);
 	give_item(&core, get_item(WATER_BUCKET), 9, 1);
 	msg_write(1, -1, MINIMAP_INIT);
-	core.imgs.img_map = mlx_new_image(core.mlx, 256, 256);
+	//core.imgs.img_map = mlx_new_image(core.mlx, 256, 256);
 	msg_write(1, -1, SUCCESS);
 	mlx_hook_loader(&core);
 	free_slot(core.player.slot);
