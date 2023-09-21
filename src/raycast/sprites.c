@@ -91,14 +91,18 @@ void	enemy_attack_move(t_sprite *sp, t_player *player)
 			- sp->sp_xy[1], player->player_pos_xy[0] - sp->sp_xy[0]);
 	dx = cosf(angle) * step;
 	dy = sinf(angle) * step;
-	if (world->world[get_chunk_from_pos((int)(sp->sp_xy[0] + dx) / 64,
+	if (get_world_char_at_pos((int)(sp->sp_xy[0] + dx) / 64, (int)sp->sp_xy[1] / 64))
+		sp->sp_xy[0] += dx;
+	/*if (world->world[get_chunk_from_pos((int)(sp->sp_xy[0] + dx) / 64,
 			(int)sp->sp_xy[1] / 64)][(int)(sp->sp_xy[1] / 64) % world->height]
 			[(int)((sp->sp_xy[0] + dx) / 64) % world->width] == '0')
-		sp->sp_xy[0] += dx;
-	if (world->world[get_chunk_from_pos((int)sp->sp_xy[0] / 64,
+		sp->sp_xy[0] += dx;*/
+	if (get_world_char_at_pos((int)sp->sp_xy[0] / 64, (int)(sp->sp_xy[1] + dy) / 64))
+		sp->sp_xy[1] += dy;
+	/*if (world->world[get_chunk_from_pos((int)sp->sp_xy[0] / 64,
 				(int)(sp->sp_xy[1] + dy) / 64)][(int)((sp->sp_xy[1] + dy) / 64)
 			% world->height][(int)(sp->sp_xy[0] / 64) % world->width] == '0')
-		sp->sp_xy[1] += dy;
+		sp->sp_xy[1] += dy;*/
 }
 
 void	draw_sprites(t_player *player, t_imgs *imgs, const float *dists)

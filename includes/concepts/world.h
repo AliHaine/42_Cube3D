@@ -51,6 +51,7 @@ void		chunk_generator(t_world *world, int chunk);
 //accessor
 t_world		*get_world(int num);
 t_world		*get_world_active(void);
+char		get_world_char_at_pos(int x, int y);
 void		set_world(t_world world, int num);
 void		free_world(void);
 
