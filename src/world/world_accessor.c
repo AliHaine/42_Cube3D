@@ -35,7 +35,6 @@ char get_world_char_at_pos(int x, int y)
 	t_world	*world;
 
 	world = get_world_active();
-
 	return (world->world[get_chunk_from_pos(x, y)][y % world->height][x % world->width]);
 }
 

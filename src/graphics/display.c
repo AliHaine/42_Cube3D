@@ -66,26 +66,29 @@ void	display(void *params)
 {
 	t_core	*core;
 
+
 	core = (t_core *) params;
 	animation_listener();
 	display_item_in_hand(&core->player);
 	display_icon_in_invbar(get_first_slot(core->player.slot));
-	mlx_delete_image(core->mlx, core->imgs.img_map);
-	mlx_delete_image(core->mlx, core->imgs.img_3d);
-	mlx_delete_image(core->mlx, core->imgs.img_player);
-	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
-			SCREEN_HEIGHT);
-	core->imgs.img_map = mlx_texture_to_image
-		(core->mlx, core->imgs.map_texture);
+	///mlx_delete_image(core->mlx, core->imgs.img_map);
+	///mlx_delete_image(core->mlx, core->imgs.img_3d);
+	///mlx_delete_image(core->mlx, core->imgs.img_player);
+	//core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
+	//		SCREEN_HEIGHT);
+	//core->imgs.img_map = mlx_texture_to_image
+	//	(core->mlx, core->imgs.map_texture);
+
 	raycasting(&core->player, &core->imgs, &core->options);
-	minimap_drawing(&core->imgs,
-		core->player.player_pos_xy, get_world_active());
+
+	minimap_drawing(&core->imgs, core->player.player_pos_xy, get_world_active());
+	mlx_delete_image(core->mlx, core->imgs.img_player);
 	core->imgs.img_player = rotate_image(core->mlx,
 			core->imgs.img_player_texture, core->player.playerangle + (PI / 2));
-	mlx_resize_image(core->imgs.img_map, 250, 250);
-	mlx_resize_image(core->imgs.img_player, 14, 14);
-	mlx_image_to_window(core->mlx, core->imgs.img_3d, 0, 0);
-	mlx_image_to_window(core->mlx, core->imgs.img_map, 20, 445);
+	//mlx_resize_image(core->imgs.img_map, 250, 250);
+	//mlx_resize_image(core->imgs.img_player, 14, 14);
+	//mlx_image_to_window(core->mlx, core->imgs.img_3d, 0, 0);
+	//mlx_image_to_window(core->mlx, core->imgs.img_map, 20, 445);
 	mlx_image_to_window(core->mlx, core->imgs.img_player, 137, 561);
 	set_imgs_z(&core->imgs);
 }
