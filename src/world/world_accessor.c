@@ -46,12 +46,15 @@ void	set_world(t_world world, int num)
 
 void	free_world(void)
 {
-	int	i;
+	int		i;
+	t_world	*world;
 
 	i = WORLD_NUMBER;
 	while (i-- > 0)
 	{
-		free_tab_three(get_world(i)->world);
-		free(get_world(i)->biome);
+		world = get_world(i);
+		free_all_sprites(&world->sprites);
+		free_tab_three(world->world);
+		free(world->biome);
 	}
 }

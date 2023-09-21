@@ -21,7 +21,8 @@ bool	is_player_char(char c)
 
 bool	is_sprite_char(char c)
 {
-	if (c == '>')
+	if (c == '>' || c == '*' || c == '<' || c == 'v'
+		|| c == '^')
 		return (true);
 	return (false);
 }

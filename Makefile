@@ -11,7 +11,7 @@ SRCS		=	src/cub3d.c \
 				src/parsing/map_parse.c \
 				src/parsing/map_texture.c \
 				src/parsing/options_initializer.c \
-				src/parsing/sprites_parse.c \
+				src/parsing/sprites_manager.c \
 				src/raycast/digital_differential_analysis.c \
                 src/raycast/drawing.c \
                 src/raycast/sprites.c \
@@ -59,6 +59,7 @@ SRCS		=	src/cub3d.c \
 				src/utils/inventory_utils_bis.c \
 				src/utils/ft_split.c \
 				src/utils/crafting_utils.c
+
 OBJS		=	$(SRCS:.c=.o)
 
 NAME		=	cub3d

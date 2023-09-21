@@ -19,20 +19,21 @@ typedef struct s_world	t_world;
 
 typedef struct s_sprite
 {
-	char	c;
-	bool	hostile;
-	int		scale;
-	float	dist;
-	float	sp_xy[2];
-	int		x;
-	int		y;
-	int		size[2];
-	float	t_pos[2];
-	float	offset[2];
-	float	s_pos[3];
-	float	tmp[2];
-	int		sc_xy[2];
-	float	fog;
+	char			c;
+	bool			hostile;
+	int				scale;
+	float			dist;
+	float			sp_xy[2];
+	int				x;
+	int				y;
+	int				size[2];
+	float			t_pos[2];
+	float			offset[2];
+	float			s_pos[3];
+	float			tmp[2];
+	int				sc_xy[2];
+	float			fog;
+	mlx_texture_t	*texture;
 }			t_sprite;
 
 typedef struct s_dda
