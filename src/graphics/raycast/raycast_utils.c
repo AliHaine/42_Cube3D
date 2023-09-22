@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/includes.h"
+#include "../../../includes/includes.h"
 
 uint32_t	apply_fog(uint32_t color, float fog_strength)
 {

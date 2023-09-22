@@ -12,11 +12,11 @@ SRCS		=	src/cub3d.c \
 				src/parsing/map_texture.c \
 				src/parsing/options_initializer.c \
 				src/parsing/sprites_manager.c \
-				src/raycast/digital_differential_analysis.c \
-                src/raycast/drawing.c \
-                src/raycast/sprites.c \
-                src/raycast/struct_drawing.c \
-                src/raycast/raycast_utils.c \
+				src/graphics/raycast/digital_differential_analysis.c \
+                src/graphics/raycast/drawing.c \
+                src/graphics/raycast/sprites.c \
+                src/graphics/raycast/struct_drawing.c \
+                src/graphics/raycast/raycast_utils.c \
 				src/sound/sound_loader.c \
 				src/sound/sound.c \
 				src/sound/sound_accessor.c \

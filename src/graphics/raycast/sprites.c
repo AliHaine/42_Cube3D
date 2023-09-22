@@ -1,5 +1,5 @@
 
-#include "../../includes/includes.h"
+#include "../../../includes/includes.h"
 
 static void	init_vars(t_sprite *sp, t_player *player, mlx_texture_t *img)
 {

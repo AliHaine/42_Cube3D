@@ -33,7 +33,6 @@ static void	imgs_init(mlx_t *mlx, t_imgs *imgs)
 	imgs->wall_texture[3] = 0;
 	imgs->img_3d = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	imgs->inventory_gui = mlx_texture_to_image(mlx, imgs->inventory_gui_texture);
-	imgs->map_background = mlx_texture_to_image(mlx, imgs->map_texture);
 	imgs->img_player = mlx_texture_to_image(mlx, imgs->img_player_texture);
 }
 

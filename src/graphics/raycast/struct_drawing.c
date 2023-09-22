@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/includes.h"
+#include "../../../includes/includes.h"
 
 void	setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world)
 {

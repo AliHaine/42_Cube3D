@@ -21,7 +21,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/includes.h"
+#include "../../../includes/includes.h"
 
 static void	draw_pixel_to_img2(mlx_image_t *img, int e, int x, int y, uint32_t color)
 {
