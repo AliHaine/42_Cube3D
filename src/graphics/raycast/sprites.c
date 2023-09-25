@@ -7,8 +7,8 @@ static void	init_vars(t_sprite *sp, t_player *player, mlx_texture_t *img)
 	if (sp->fog > 1)
 		return ;
 	sp->s_pos[2] = SCREEN_HEIGHT / 2.f;
-	sp->s_pos[0] = (sp->sp_xy[0] - player->player_pos_xy[0]);
-	sp->s_pos[1] = (sp->sp_xy[1] - player->player_pos_xy[1]);
+	sp->s_pos[0] = (sp->sp_xy[0] - player->player_coords_xy[0]);
+	sp->s_pos[1] = (sp->sp_xy[1] - player->player_coords_xy[1]);
 	sp->tmp[0] = sp->s_pos[1] * -player->cos + sp->s_pos[0] * player->sin;
 	sp->tmp[1] = sp->s_pos[0] * player->cos + sp->s_pos[1] * player->sin;
 	sp->s_pos[0] = sp->tmp[0];
@@ -81,8 +81,8 @@ void	enemy_attack_move(t_sprite *sp, t_player *player)
 	if (sp->dist < 50 || sp->dist > 1000)
 		return ;
 	step = 5.f;
-	angle = atan2f(player->player_pos_xy[1]
-			- sp->sp_xy[1], player->player_pos_xy[0] - sp->sp_xy[0]);
+	angle = atan2f(player->player_coords_xy[1]
+			- sp->sp_xy[1], player->player_coords_xy[0] - sp->sp_xy[0]);
 	dx = cosf(angle) * step;
 	dy = sinf(angle) * step;
 	if (get_world_char_at_pos((int)(sp->sp_xy[0] + dx) / 64, (int)sp->sp_xy[1] / 64) == '0')
@@ -119,8 +119,8 @@ void	sort_sprites(t_player *player)
 	ij[0] = -1;
 	while (world->sprites[++ij[0]])
 	{
-		dxy[0] = player->player_pos_xy[0] - world->sprites[ij[0]]->sp_xy[0];
-		dxy[1] = player->player_pos_xy[1] - world->sprites[ij[0]]->sp_xy[1];
+		dxy[0] = player->player_coords_xy[0] - world->sprites[ij[0]]->sp_xy[0];
+		dxy[1] = player->player_coords_xy[1] - world->sprites[ij[0]]->sp_xy[1];
 		world->sprites[ij[0]]->dist = sqrtf(dxy[0] * dxy[0] + dxy[1] * dxy[1]);
 	}
 	while (!sprite_are_sorted(world->sprites))

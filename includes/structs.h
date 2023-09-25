@@ -77,6 +77,7 @@ typedef struct s_player
 {
 	float			player_pos_xy[2];
 	int				player_cell_xy[2];
+	float			player_coords_xy[2];
 	float			playerangle;
 	int				health;
 	bool			have_player;
