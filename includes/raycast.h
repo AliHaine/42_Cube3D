@@ -17,25 +17,6 @@
 
 typedef struct s_world	t_world;
 
-typedef struct s_sprite
-{
-	char			c;
-	bool			hostile;
-	int				scale;
-	float			dist;
-	float			sp_xy[2];
-	int				x;
-	int				y;
-	int				size[2];
-	float			t_pos[2];
-	float			offset[2];
-	float			s_pos[3];
-	float			tmp[2];
-	int				sc_xy[2];
-	float			fog;
-	mlx_texture_t	*texture;
-}			t_sprite;
-
 typedef struct s_dda
 {
 	int			ray;
@@ -79,8 +60,5 @@ void		fisheyes_fixor(t_dda *dda, float player_angle);
 void		get_color_wall_texture(mlx_texture_t *wall_texture, int r, t_col_drawing *tcd);
 void		get_color_block_texture(t_dda *dda, t_col_drawing *tcd);
 uint32_t	apply_fog(uint32_t color, float fog_strength);
-
-// sprites.c
-void		draw_sprites(t_player *player, t_imgs *imgs, const float *dists);
 
 #endif

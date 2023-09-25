@@ -6,25 +6,25 @@ static void	init_vars(t_sprite *sp, t_player *player, mlx_texture_t *img)
 	sp->fog = sp->dist / FOG_DISTANCE;
 	if (sp->fog > 1)
 		return ;
-	sp->s_pos[2] = SCREEN_HEIGHT / 2.f;
-	sp->s_pos[0] = (sp->sp_xy[0] - player->player_coords_xy[0]);
-	sp->s_pos[1] = (sp->sp_xy[1] - player->player_coords_xy[1]);
-	sp->tmp[0] = sp->s_pos[1] * -player->cos + sp->s_pos[0] * player->sin;
-	sp->tmp[1] = sp->s_pos[0] * player->cos + sp->s_pos[1] * player->sin;
-	sp->s_pos[0] = sp->tmp[0];
-	sp->s_pos[1] = sp->tmp[1];
-	sp->s_pos[0] = (sp->s_pos[0] * -1280 / sp->s_pos[1]) + (SCREEN_WIDTH / 2.f);
-	sp->s_pos[1] = (sp->s_pos[2] * 70 / sp->s_pos[1]) + (SCREEN_HEIGHT / 2.f);
-	sp->size[0] = (int)((float)(img->width * sp->scale) / sp->tmp[1]);
-	sp->size[1] = (int)((float)(img->height * sp->scale) / sp->tmp[1]);
-	if (sp->size[0] < 0)
-		sp->size[0] = 0;
-	if (sp->size[1] < 0)
-		sp->size[1] = 0;
-	sp->t_pos[0] = (float)img->width;
-	sp->offset[0] = (float)img->width / (float)sp->size[0];
-	sp->offset[1] = (float)img->height / (float)sp->size[1];
-	sp->x = 0;
+	sp->vars.s_pos[2] = SCREEN_HEIGHT / 2.f;
+	sp->vars.s_pos[0] = (sp->sp_xy[0] - player->player_coords_xy[0]);
+	sp->vars.s_pos[1] = (sp->sp_xy[1] - player->player_coords_xy[1]);
+	sp->vars.tmp[0] = sp->vars.s_pos[1] * -player->cos + sp->vars.s_pos[0] * player->sin;
+	sp->vars.tmp[1] = sp->vars.s_pos[0] * player->cos + sp->vars.s_pos[1] * player->sin;
+	sp->vars.s_pos[0] = sp->vars.tmp[0];
+	sp->vars.s_pos[1] = sp->vars.tmp[1];
+	sp->vars.s_pos[0] = (sp->vars.s_pos[0] * -1280 / sp->vars.s_pos[1]) + (SCREEN_WIDTH / 2.f);
+	sp->vars.s_pos[1] = (sp->vars.s_pos[2] * 70 / sp->vars.s_pos[1]) + (SCREEN_HEIGHT / 2.f);
+	sp->vars.size[0] = (int)((float)(img->width * sp->scale) / sp->vars.tmp[1]);
+	sp->vars.size[1] = (int)((float)(img->height * sp->scale) / sp->vars.tmp[1]);
+	if (sp->vars.size[0] < 0)
+		sp->vars.size[0] = 0;
+	if (sp->vars.size[1] < 0)
+		sp->vars.size[1] = 0;
+	sp->vars.t_pos[0] = (float)img->width;
+	sp->vars.offset[0] = (float)img->width / (float)sp->vars.size[0];
+	sp->vars.offset[1] = (float)img->height / (float)sp->vars.size[1];
+	sp->vars.x = 0;
 }
 
 static void	draw_sp_pixel(t_sprite *sp, mlx_image_t *img_3d, mlx_texture_t *img, const float *dists)
@@ -33,41 +33,41 @@ static void	draw_sp_pixel(t_sprite *sp, mlx_image_t *img_3d, mlx_texture_t *img,
 	int			value;
 
 	color = 0;
-	value = ((int)sp->t_pos[1] * (int)img->width
-			- (int)sp->t_pos[0]) * 4;
+	value = ((int)sp->vars.t_pos[1] * (int)img->width
+			- (int)sp->vars.t_pos[0]) * 4;
 	if (value > 0 && value < ((img->height * img->width) * 4) - 4)
 		color = (img->pixels[value] << 24) | (img->pixels[value + 1]
 				<< 16) | (img->pixels[value + 2] << 8) | img->pixels[value + 3];
-	if (color != 0 && dists[sp->sc_xy[0]] > sp->dist)
+	if (color != 0 && dists[sp->vars.sc_xy[0]] > sp->dist)
 	{
 		color = apply_fog(color, sp->fog);
-		mlx_put_pixel(img_3d, sp->sc_xy[0], sp->sc_xy[1], color);
+		mlx_put_pixel(img_3d, sp->vars.sc_xy[0], sp->vars.sc_xy[1], color);
 	}
 }
 
 static void	draw_sprite(t_sprite *sp, mlx_image_t *img_3d, mlx_texture_t *img, const float *dists)
 {
-	while (sp->x++ < sp->size[0])
+	while (sp->vars.x++ < sp->vars.size[0])
 	{
-		sp->sc_xy[0] = (int)(sp->s_pos[0] - (float)sp->x) + (sp->size[0] / 2);
-		if (sp->sc_xy[0] >= SCREEN_WIDTH || sp->sc_xy[0] < 0)
+		sp->vars.sc_xy[0] = (int)(sp->vars.s_pos[0] - (float)sp->vars.x) + (sp->vars.size[0] / 2);
+		if (sp->vars.sc_xy[0] >= SCREEN_WIDTH || sp->vars.sc_xy[0] < 0)
 		{
-			sp->t_pos[0] -= sp->offset[0];
+			sp->vars.t_pos[0] -= sp->vars.offset[0];
 			continue ;
 		}
-		sp->t_pos[1] = (float)img->height;
-		sp->y = 0;
-		while (sp->y++ < sp->size[1] && ((int)sp->t_pos[1] * img->width
-				- (int)sp->t_pos[0] >= 0))
+		sp->vars.t_pos[1] = (float)img->height;
+		sp->vars.y = 0;
+		while (sp->vars.y++ < sp->vars.size[1] && ((int)sp->vars.t_pos[1] * img->width
+				- (int)sp->vars.t_pos[0] >= 0))
 		{
-			sp->sc_xy[1] = (int)(sp->s_pos[1] - (float)sp->y);
-			if (sp->sc_xy[1] >= 0 && sp->sc_xy[1] < SCREEN_HEIGHT)
+			sp->vars.sc_xy[1] = (int)(sp->vars.s_pos[1] - (float)sp->vars.y);
+			if (sp->vars.sc_xy[1] >= 0 && sp->vars.sc_xy[1] < SCREEN_HEIGHT)
 			{
 				draw_sp_pixel(sp, img_3d, img, dists);
 			}
-			sp->t_pos[1] -= sp->offset[1];
+			sp->vars.t_pos[1] -= sp->vars.offset[1];
 		}
-		sp->t_pos[0] -= sp->offset[0];
+		sp->vars.t_pos[0] -= sp->vars.offset[0];
 	}
 }
 
@@ -89,6 +89,8 @@ void	enemy_attack_move(t_sprite *sp, t_player *player)
 		sp->sp_xy[0] += dx;
 	if (get_world_char_at_pos((int)sp->sp_xy[0] / 64, (int)(sp->sp_xy[1] + dy) / 64) == '0')
 		sp->sp_xy[1] += dy;
+	sp->cell_xy[0] = (int)sp->sp_xy[0] / 64;
+	sp->cell_xy[1] = (int)sp->sp_xy[1] / 64;
 }
 
 bool	sprite_are_sorted(t_sprite **sprite)

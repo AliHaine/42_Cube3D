@@ -123,8 +123,12 @@ void	add_sprite(t_world *world, char c, int y, int x)
 	if (!world->sprites[len])
 		return ;
 	world->sprites[len]->c = c;
-	world->sprites[len]->sp_xy[0] = ((float)(x + world->width) + 0.5f) * 64;
-	world->sprites[len]->sp_xy[1] = ((float)(y + world->height) + 0.5f) * 64;
+	world->sprites[len]->cell_xy[0] = (int)(x + world->width);
+	world->sprites[len]->cell_xy[1] = (int)(y + world->height);
+	world->sprites[len]->sp_xy[0] = ((float)
+			(world->sprites[len]->cell_xy[0]) + 0.5f) * 64;
+	world->sprites[len]->sp_xy[1] = ((float)
+			(world->sprites[len]->cell_xy[1]) + 0.5f) * 64;
 	select_options(world->sprites[len], c);
 	world->world[4][y][x] = '0';
 }

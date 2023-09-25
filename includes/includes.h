@@ -34,6 +34,7 @@
 # include "concepts/block.h"
 # include "concepts/item.h"
 # include "concepts/portal.h"
+# include "concepts/sprites.h"
 
 void		display(void *params);
 
@@ -61,12 +62,6 @@ void		map_manager(char *argv, t_imgs *imgs, t_player *player);
 void		texture_main(t_file *file, t_imgs *imgs, uint32_t bt_color[2]);
 bool		parse_main(t_file *file, t_player *player, t_world *map);
 void		initialize_options(t_core *core);
-
-//sprites manager//
-void		add_sprite(t_world *world, char c, int y, int x);
-void		delete_sprite(t_sprite **sprites, int s);
-void		free_all_sprites(t_sprite ***sprites);
-t_sprite	*get_sprite_by_int(t_sprite **sprites, int x, int y);
 
 //animations//
 void		animation_listener(void);
