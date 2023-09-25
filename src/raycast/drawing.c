@@ -87,14 +87,15 @@ static void	wall_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd)
 	tcd->current_step += tcd->step;
 }
 
-//todo bug with size width
+//todo bug with size wwidth
 void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *world)
 {
 	const int		start_y = ((playerpos[1] + world->height) / 4) - (286 / 2);
 	const int		start_x = ((playerpos[0] + world->width) / 4) - (286 / 2);
 	int				case_xy[2];
 	int				pxy[2];
-	static uint32_t	wall_color = (109 << 24) | (96 << 16) | (77 << 8) | 255;
+	static uint32_t	wall_color = (109 << 24) | (96 << 16) | (77 << 8) | 220;
+	uint32_t		picked;
 
 	pxy[1] = -1;
 	while (++pxy[1] < 286)
@@ -104,15 +105,20 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *world)
 		while (++pxy[0] < 286)
 		{
 			case_xy[0] = ((pxy[0] + start_x) / 16);
-			if (get_pixel(imgs->map_texture, pxy[0], pxy[1]) != -692152577)
-				continue ;
-			else if (case_xy[1] < 0 || case_xy[0] < 0
+			picked = get_pixel(imgs->map_texture, pxy[0], pxy[1]);
+			if (picked == -692152577 && (((case_xy[1] < 0 || case_xy[0] < 0
 				|| case_xy[1] > (world->height * 3) - 1
-				|| case_xy[0] > (world->width * 3) - 1)
+				|| case_xy[0] > (world->width * 3) - 1))
+				|| (world->world[get_chunk_from_pos(case_xy[0], case_xy[1])]
+				[case_xy[1] % world->height][case_xy[0] % world->width] != '0')))
 				mlx_put_pixel(imgs->img_map, pxy[0], pxy[1], wall_color);
-			else if (world->world[get_chunk_from_pos(case_xy[0], case_xy[1])]
-				[case_xy[1] % world->height][case_xy[0] % world->width] != '0')
-				mlx_put_pixel(imgs->img_map, pxy[0], pxy[1], wall_color);
+			else
+			{
+				if (picked == 0)
+					continue ;
+				int r = (pxy[0] + pxy[1] * imgs->map_texture->width) * 4;
+				imgs->img_map->pixels[r + 3] = 220;
+			}
 		}
 	}
 }
