@@ -21,7 +21,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/includes.h"
+#include "../../../includes/includes.h"
 
 static void	draw_pixel_to_img2(mlx_image_t *img, int e, int x, int y, uint32_t color)
 {
@@ -166,9 +166,9 @@ void	ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_player *player
 			(0 << 24) | (0 << 16) | (0 << 8) | 255);
 		return ;
 	}
-	value = (((int)(player->player_pos_xy[0] + dda->cos
+	value = (((int)(player->player_coords_xy[0] + dda->cos
 			* d) % 64)
-			+ ((int)(player->player_pos_xy[1] + dda->sin
+			+ ((int)(player->player_coords_xy[1] + dda->sin
 			* d) % 64) * 64) * 4;
 	if (value < 0)
 		value = -value;

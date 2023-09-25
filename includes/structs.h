@@ -28,7 +28,6 @@ typedef struct s_imgs {
 	mlx_image_t		*invbar_selector;
 	mlx_image_t		*engbar;
 	mlx_image_t		*hearth[2];
-	mlx_image_t		*map_background;
 	mlx_image_t		*inventory_gui;
 	mlx_image_t		*floor_texture;
 	mlx_image_t		*skybox;
@@ -78,6 +77,7 @@ typedef struct s_player
 {
 	float			player_pos_xy[2];
 	int				player_cell_xy[2];
+	float			player_coords_xy[2];
 	float			playerangle;
 	int				health;
 	bool			have_player;
