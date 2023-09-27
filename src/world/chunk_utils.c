@@ -37,10 +37,11 @@ int	get_chunk_from_pos(int x, int y)
 	return (0);
 }
 
-bool	is_player_chunk_change(t_player *player, t_world *world)
+bool	is_chunk_change(int cells[][2], t_world *world)
 {
-	if (player->player_cell_xy[0] >= (world->width) && player->player_cell_xy[0] <= ((world->width * 2) - 1)
-		&& player->player_cell_xy[1] >= (world->height) && player->player_cell_xy[1] <= ((world->height * 2) - 1))
+	if (cells[0][0] >= (world->width) && cells[0][0] <= ((world->width * 2) - 1)
+		&& cells[0][1] >= (world->height)
+		&& cells[0][1] <= ((world->height * 2) - 1))
 		return (false);
 	return (true);
 }

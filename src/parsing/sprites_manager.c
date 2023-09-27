@@ -129,6 +129,8 @@ void	add_sprite(t_world *world, char c, int y, int x)
 			(world->sprites[len]->cell_xy[0]) + 0.5f) * 64;
 	world->sprites[len]->sp_xy[1] = ((float)
 			(world->sprites[len]->cell_xy[1]) + 0.5f) * 64;
+	world->sprites[len]->chunk_sp_xy[0] = world->sprites[len]->sp_xy[0];
+	world->sprites[len]->chunk_sp_xy[1] = world->sprites[len]->sp_xy[1];
 	select_options(world->sprites[len], c);
 	world->world[4][y][x] = '0';
 }

@@ -56,11 +56,12 @@ void		set_world(t_world world, int num);
 void		free_world(void);
 
 //utils
-bool		is_player_chunk_change(t_player *player, t_world *world);
+bool		is_chunk_change(int cells[][2], t_world *world);
 int			get_chunk_from_pos(int x, int y);
 bool		is_chunk_on_corner(int chunk_num);
 bool		world_dynamic_generator(t_player *player);
 void		change_active_world(t_world	*new_world);
+void		replace_on_world(float coords[][2], int num);
 
 //biome
 void		biome_loader(void);

@@ -72,18 +72,6 @@ static void	side_generator(t_world *world, int chunk_num)
 		chunk_generator(world, chunk + (incrementation * i));
 }
 
-static void	replace_player_on_world(t_player *player, int num)
-{
-	if (num == 1)
-		player->player_pos_xy[1] += get_world_active()->height * 64;
-	else if (num == 3)
-		player->player_pos_xy[0] += get_world_active()->width * 64;
-	else if (num == 5)
-		player->player_pos_xy[0] -= get_world_active()->width * 64;
-	else if (num == 7)
-		player->player_pos_xy[1] -= get_world_active()->height * 64;
-}
-
 static int	get_chunk_from_corner(int iterator, int chunk_num)
 {
 	if (iterator == 1)
@@ -120,7 +108,7 @@ bool	world_dynamic_generator(t_player *player)
 		chunk = get_chunk_from_corner(iterator, start_chunk);
 		world_place_map(world, chunk);
 		side_generator(world, chunk);
-		replace_player_on_world(player, chunk);
+		replace_on_world(&player->player_pos_xy, chunk);
 	}
 	return (0);
 }

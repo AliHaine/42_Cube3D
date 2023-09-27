@@ -57,7 +57,7 @@ void	inputs(void *params)
 		return ;
 	rotation_inputs(core->mlx, &core->player);
 	moving_inputs(core->mlx, &core->player);
-	if (is_player_chunk_change(&core->player,
+	if (is_chunk_change(&core->player.player_cell_xy,
 			get_world_active()))
 		world_dynamic_generator(&core->player);
 	core->player.player_cell_xy[0] = (int)(core->player.player_pos_xy[0] / 64);
