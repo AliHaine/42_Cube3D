@@ -33,11 +33,13 @@ typedef struct s_biome
 	Biome	name;
 	t_block	*block;
 	int		block_number;
+	t_sprite **sprites;
 }	t_biome;
 
 //accessor
 t_biome		*get_biome(Biome biome);
 void		set_biome(t_biome biome, int num);
+void		set_biome_sprites(t_sprite **sprites, Biome biome);
 void		free_biome(void);
 
 //biome_utils

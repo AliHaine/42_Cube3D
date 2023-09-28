@@ -87,19 +87,19 @@ void	enemy_attack_move(t_sprite *sp, t_player *player)
 			- sp->sp_xy[1], player->player_coords_xy[0] - sp->sp_xy[0]);
 	dx = cosf(angle) * step;
 	dy = sinf(angle) * step;
-	if (get_world_char_at_pos((int)(sp->chunk_sp_xy[0] + dx) / 64, (int)sp->chunk_sp_xy[1] / 64) == '0')
+	if (is_chunk_change(&sp->cell_xy, world))
+	{
+		replace_on_world(&sp->chunk_sp_xy, get_chunk_from_pos((int)sp->chunk_sp_xy[0] / 64, (int)sp->chunk_sp_xy[1] / 64), world);
+	}
+	if (!is_block(sp->chunk_sp_xy[0] + dx, sp->chunk_sp_xy[1]))
 	{
 		sp->sp_xy[0] += dx;
 		sp->chunk_sp_xy[0] += dx;
 	}
-	if (get_world_char_at_pos((int)sp->chunk_sp_xy[0] / 64, (int)(sp->chunk_sp_xy[1] + dy) / 64) == '0')
+	if (!is_block(sp->chunk_sp_xy[0], sp->chunk_sp_xy[1] + dy))
 	{
 		sp->sp_xy[1] += dy;
 		sp->chunk_sp_xy[1] += dy;
-	}
-	if (is_chunk_change(&sp->cell_xy, world))
-	{
-		replace_on_world(&sp->chunk_sp_xy, get_chunk_from_pos(sp->chunk_sp_xy[0] / 64, sp->chunk_sp_xy[1] / 64));
 	}
 	sp->cell_xy[0] = (int)sp->chunk_sp_xy[0] / 64;
 	sp->cell_xy[1] = (int)sp->chunk_sp_xy[1] / 64;

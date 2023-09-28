@@ -61,7 +61,7 @@ int			get_chunk_from_pos(int x, int y);
 bool		is_chunk_on_corner(int chunk_num);
 bool		world_dynamic_generator(t_player *player);
 void		change_active_world(t_world	*new_world);
-void		replace_on_world(float coords[][2], int num);
+void		replace_on_world(float coords[][2], int num, t_world *world);
 
 //biome
 void		biome_loader(void);

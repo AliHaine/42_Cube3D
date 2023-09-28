@@ -29,7 +29,6 @@
 # include <sys/time.h>
 # include "enum.h"
 # include "sound.h"
-//# include "imgs.h"
 # include "concepts/world.h"
 # include "concepts/block.h"
 # include "concepts/item.h"

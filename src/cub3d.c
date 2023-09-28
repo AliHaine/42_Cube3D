@@ -96,8 +96,6 @@ static void	core_init(t_core *core)
 
 	core->imgs.img_map = mlx_texture_to_image
 			(core->mlx, core->imgs.map_texture);
-	//core->imgs.img_player = rotate_image(core->mlx,
-	//									 core->imgs.img_player_texture, core->player.playerangle + (PI / 2));
 	mlx_resize_image(core->imgs.img_map, 250, 250);
 	mlx_resize_image(core->imgs.img_player, 14, 14);
 	mlx_image_to_window(core->mlx, core->imgs.img_3d, 0, 0);

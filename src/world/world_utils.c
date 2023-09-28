@@ -25,14 +25,14 @@ void	change_active_world(t_world	*new_world)
 	play_sound(new_world->ambiant_sound);
 }
 
-void	replace_on_world(float coords[][2], int num)
+void	replace_on_world(float coords[][2], int num, t_world *world)
 {
 	if (num == 1)
-		coords[0][1] += get_world_active()->height * 64;
+		coords[0][1] += world->height * 64;
 	else if (num == 3)
-		coords[0][0] += get_world_active()->width * 64;
+		coords[0][0] += world->width * 64;
 	else if (num == 5)
-		coords[0][0] -= get_world_active()->width * 64;
+		coords[0][0] -= world->width * 64;
 	else if (num == 7)
-		coords[0][1] -= get_world_active()->height * 64;
+		coords[0][1] -= world->height * 64;
 }

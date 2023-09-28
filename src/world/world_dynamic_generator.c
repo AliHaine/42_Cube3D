@@ -108,7 +108,7 @@ bool	world_dynamic_generator(t_player *player)
 		chunk = get_chunk_from_corner(iterator, start_chunk);
 		world_place_map(world, chunk);
 		side_generator(world, chunk);
-		replace_on_world(&player->player_pos_xy, chunk);
+		replace_on_world(&player->player_pos_xy, chunk, world);
 	}
 	return (0);
 }

@@ -6,21 +6,20 @@ SRCS		=	src/cub3d.c \
 				src/inputs/scroll_hook.c \
 				src/graphics/display.c \
 				src/graphics/animations.c \
-				src/loading/texture_loader.c \
+				src/graphics/texture_loader.c \
+				src/graphics/raycast/digital_differential_analysis.c \
+                src/graphics/raycast/drawing.c \
+                src/graphics/raycast/struct_drawing.c \
+                src/graphics/raycast/raycast_utils.c \
+                src/graphics/sprite/sprites.c \
 				src/parsing/map_manager.c \
 				src/parsing/map_parse.c \
 				src/parsing/map_texture.c \
 				src/parsing/options_initializer.c \
 				src/parsing/sprites_manager.c \
-				src/graphics/raycast/digital_differential_analysis.c \
-                src/graphics/raycast/drawing.c \
-                src/graphics/raycast/sprites.c \
-                src/graphics/raycast/struct_drawing.c \
-                src/graphics/raycast/raycast_utils.c \
 				src/sound/sound_loader.c \
 				src/sound/sound.c \
 				src/sound/sound_accessor.c \
-				src/struct/struct_slot.c \
 				src/player_interaction/player_listener.c \
 				src/player_interaction/heal.c \
 				src/player_interaction/build.c \
@@ -58,7 +57,8 @@ SRCS		=	src/cub3d.c \
 				src/utils/inventory_utils.c \
 				src/utils/inventory_utils_bis.c \
 				src/utils/ft_split.c \
-				src/utils/crafting_utils.c
+				src/utils/crafting_utils.c \
+				src/utils/struct_slot.c
 
 OBJS		=	$(SRCS:.c=.o)
 
