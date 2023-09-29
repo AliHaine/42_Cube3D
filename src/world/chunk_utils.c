@@ -60,7 +60,7 @@ void	chunk_generator(t_world *world, int chunk)
 		while (x++ < world->width)
 		{
 			world->world[chunk][y][x] = '0';
-			if (!get_rand_num(4, 1))
+			if (!get_rand_num(10, 1))
 			{
 				if (!get_rand_num(10000, 1))
 					world->world[chunk][y][x] = '(';

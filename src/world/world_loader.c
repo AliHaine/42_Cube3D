@@ -12,6 +12,26 @@
 
 #include "../../includes/includes.h"
 
+void sprites_generator(t_world *world)
+{
+	int chunk;
+	int xy[2];
+
+	chunk = -1;
+	while (++chunk < 9)
+	{
+		xy[1] = -1;
+		while (++xy[1] < world->height)
+		{
+			xy[0] = -1;
+			while (++xy[0] < world->width)
+				if (!get_rand_num(5, 1))
+					add_sprite(world, chunk, get_rand_sprite_char(world), xy[1], xy[0]);
+		}
+	}
+	reload_sprite_pos(world);
+}
+
 static bool	world_malloc(int height, int width, char ***map)
 {
 	int	i;
@@ -78,7 +98,7 @@ bool	world_creator(World world_name, t_biome **biomes, t_sounds *ambient_sound, 
 	t_world	world;
 
 	i = 0;
-	world_name = world_name;
+	world.world_name = world_name;
 	world.biome = biomes;
 	world.ambiant_sound = ambient_sound;
 	world.height = height;
@@ -91,10 +111,14 @@ bool	world_creator(World world_name, t_biome **biomes, t_sounds *ambient_sound, 
 	world.world = malloc(sizeof(char **) * 9);
 	world.is_active = is_active;
 	world.skybox = skybox;
-	world.sprites = NULL;
+	world.sprites = malloc(sizeof(t_sprite **) * 9);
 	while (i < 9)
+	{
+		world.sprites[i] = NULL;
 		world_malloc(height * 3, width * 3, &world.world[i++]);
+	}
 	world_generator(&world);
+	sprites_generator(&world);
 	set_world(world, world_name);
 	return (true);
 }

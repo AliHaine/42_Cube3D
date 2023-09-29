@@ -109,6 +109,7 @@ bool	world_dynamic_generator(t_player *player)
 		world_place_map(world, chunk);
 		side_generator(world, chunk);
 		replace_on_world(&player->player_pos_xy, chunk, world);
+		sprites_place(world, chunk);
 	}
 	return (0);
 }

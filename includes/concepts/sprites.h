@@ -10,7 +10,11 @@ typedef enum {
 	RED_FLOWER,
 	PINK_FLOWER,
 	WEEDS,
-	TOTAL_LENGTH,
+	CRIMSON_FUNGUS,
+	FIRE_CORAL,
+	WARPD_FUNFUS,
+	WITHER_ROSE,
+	SPRITES_NUMBER,
 }	Sprite;
 
 static const char		*g_sprites_name[] = {
@@ -19,6 +23,10 @@ static const char		*g_sprites_name[] = {
 	"poppy",
 	"pink_tulip",
 	"carrots_stage1",
+	"crimson_fungus",
+	"fire_coral",
+	"warped_fungus",
+	"wither_rose"
 };
 
 typedef struct s_sprite_calc
@@ -39,6 +47,8 @@ typedef struct s_sprite
 	bool			hostile;
 	int				scale;
 	float			dist;
+	int				x_origin;
+	int				y_origin;
 	float			sp_xy[2];
 	float			chunk_sp_xy[2];
 	int				chunk_save;
@@ -50,9 +60,13 @@ typedef struct s_sprite
 
 void		draw_sprites(t_player *player, t_imgs *imgs, const float *dists);
 
-void		add_sprite(t_world *world, char c, int y, int x);
+void		sprites_place(t_world *world, int chunk);
+void		reload_sprite_pos(t_world *world);
+void		add_sprite(t_world *world, int chunk, char c, int y, int x);
 void		delete_sprite(t_sprite **sprites, int s);
-void		free_all_sprites(t_sprite ***sprites);
+void		free_all_sprites(t_world *world);
 t_sprite	*get_sprite_by_int(t_sprite **sprites, int x, int y);
+
+char		get_rand_sprite_char(t_world *world);
 
 #endif

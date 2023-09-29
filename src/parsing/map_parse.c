@@ -23,7 +23,7 @@ static bool	fill_map_tab(char *line, t_player *player, t_world *world, int itera
 		if (!is_allowed_char(line[i]))
 			return (false);
 		else if (is_sprite_char(line[i]))
-			add_sprite(world, line[i], iterator, i);
+			add_sprite(world, 4, line[i], iterator, i);
 		else if (is_player_char(line[i]))
 		{
 			player->have_player = true;
@@ -58,6 +58,8 @@ bool	parse_main(t_file *file, t_player *player, t_world *world)
 		get_next_line(file);
 	}
 	if (!player->have_player)
+	{
 		msg_write(2, 2, ERROR_PLAYER);
+	}
 	return (true);
 }
