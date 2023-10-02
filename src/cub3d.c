@@ -48,17 +48,8 @@ void	init_sprites(t_core *core)
 	core->sprites[1] = NULL;
 }
 
-static void	core_init(t_core *core)
+void	init_gui(t_core *core)
 {
-	msg_write(1, -1, CORE_INIT);
-	initialize_options(core);
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	core->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "セグメンテーションフォルトのないプログラムは、鋭い剣のように正確に使える。", true);
-	texture_loader(core);
-	imgs_init(core->mlx, &core->imgs);
-	if (core->options.sound)
-		sound_loader();
-
 	core->imgs.img_3d = mlx_new_image(core->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
 	mlx_set_cursor(core->mlx, mlx_create_cursor(core->imgs.trans));
@@ -83,6 +74,19 @@ static void	core_init(t_core *core)
 	core->imgs.inventory_gui->enabled = false;
 	core->imgs.hearth[0]->enabled = 1;
 	core->imgs.hearth[1]->enabled = 1;
+}
+
+static void	core_init(t_core *core)
+{
+	msg_write(1, -1, CORE_INIT);
+	initialize_options(core);
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	core->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "セグメンテーションフォルトのないプログラムは、鋭い剣のように正確に使える。", true);
+	texture_loader(core);
+	imgs_init(core->mlx, &core->imgs);
+	if (core->options.sound)
+		sound_loader();
+	init_gui(core);
 	core->screen_size[0] = SCREEN_WIDTH;
 	core->screen_size[1] = SCREEN_HEIGHT;
 	core->player.have_player = false;
@@ -93,16 +97,29 @@ static void	core_init(t_core *core)
 	core->player.can_move = true;
 	core->player.is_running = false;
 	core->player.is_building = false;
-
 	core->imgs.img_map = mlx_texture_to_image
-			(core->mlx, core->imgs.map_texture);
+		(core->mlx, core->imgs.map_texture);
 	mlx_resize_image(core->imgs.img_map, 250, 250);
 	mlx_resize_image(core->imgs.img_player, 14, 14);
 	mlx_image_to_window(core->mlx, core->imgs.img_3d, 0, 0);
 	mlx_image_to_window(core->mlx, core->imgs.img_map, 20, 445);
 	mlx_image_to_window(core->mlx, core->imgs.img_player, 137, 561);
-
 	msg_write(1, -1, SUCCESS);
+}
+
+void	give_start_items(t_core *core)
+{
+	give_item(core, get_item(SWORD_NETHER), 2, 32);
+	give_item(core, get_item(SWORD_NETHER), 32, 52);
+	give_item(core, get_item(SWORD_DIAMOND), 5, 1);
+	give_item(core, get_item(SWORD_IRON), 1, 1);
+	give_item(core, get_item(SWORD_RUBY), 8, 1);
+	give_item(core, get_item(STICK), 14, 3);
+	give_item(core, get_item(DIAMOND), 16, 2);
+	give_item(core, get_item(IRON), 22, 1);
+	give_item(core, get_item(FLINT), 36, 1);
+	give_item(core, get_item(DIAMOND_PICKAXE), 12, 1);
+	give_item(core, get_item(WATER_BUCKET), 9, 1);
 }
 
 int	main(int argc, char *argv[])
@@ -120,20 +137,8 @@ int	main(int argc, char *argv[])
 	init_sprites(&core);
 	world_loader(&core);
 	portal_loader();
-	give_item(&core, get_item(SWORD_NETHER), 2, 32);
-	give_item(&core, get_item(SWORD_NETHER), 32, 52);
-	give_item(&core, get_item(SWORD_DIAMOND), 5, 1);
-	give_item(&core, get_item(SWORD_IRON), 1, 1);
-	give_item(&core, get_item(SWORD_RUBY), 8, 1);
-	give_item(&core, get_item(STICK), 14, 3);
-	give_item(&core, get_item(DIAMOND), 16, 2);
-	give_item(&core, get_item(IRON), 22, 1);
-	give_item(&core, get_item(FLINT), 36, 1);
-	give_item(&core, get_item(LIGHTER), 24, 1);
-	give_item(&core, get_item(DIAMOND_PICKAXE), 12, 1);
-	give_item(&core, get_item(WATER_BUCKET), 9, 1);
+	give_start_items(&core);
 	msg_write(1, -1, MINIMAP_INIT);
-	//core.imgs.img_map = mlx_new_image(core.mlx, 256, 256);
 	msg_write(1, -1, SUCCESS);
 	mlx_hook_loader(&core);
 	free_slot(core.player.slot);

@@ -1,31 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprites.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngalzand <ngalzand@student.42mulhouse.fr>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/02 12:48:42 by ngalzand          #+#    #+#             */
+/*   Updated: 2023/10/02 12:48:51 by ngalzand         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../../includes/includes.h"
-
-static void	init_vars(t_sprite *sp, t_player *player, mlx_texture_t *img)
-{
-	sp->fog = sp->dist / FOG_DISTANCE;
-	if (sp->fog > 1)
-		return ;
-	sp->vars.s_pos[2] = SCREEN_HEIGHT / 2.f;
-	sp->vars.s_pos[0] = (sp->sp_xy[0] - player->player_pos_xy[0]);
-	sp->vars.s_pos[1] = (sp->sp_xy[1] - player->player_pos_xy[1]);
-	sp->vars.tmp[0] = sp->vars.s_pos[1] * -player->cos + sp->vars.s_pos[0] * player->sin;
-	sp->vars.tmp[1] = sp->vars.s_pos[0] * player->cos + sp->vars.s_pos[1] * player->sin;
-	sp->vars.s_pos[0] = sp->vars.tmp[0];
-	sp->vars.s_pos[1] = sp->vars.tmp[1];
-	sp->vars.s_pos[0] = (sp->vars.s_pos[0] * -1280 / sp->vars.s_pos[1]) + (SCREEN_WIDTH / 2.f);
-	sp->vars.s_pos[1] = (sp->vars.s_pos[2] * 70 / sp->vars.s_pos[1]) + (SCREEN_HEIGHT / 2.f);
-	sp->vars.size[0] = (int)((float)(img->width * sp->scale) / sp->vars.tmp[1]);
-	sp->vars.size[1] = (int)((float)(img->height * sp->scale) / sp->vars.tmp[1]);
-	if (sp->vars.size[0] < 0)
-		sp->vars.size[0] = 0;
-	if (sp->vars.size[1] < 0)
-		sp->vars.size[1] = 0;
-	sp->vars.t_pos[0] = (float)img->width;
-	sp->vars.offset[0] = (float)img->width / (float)sp->vars.size[0];
-	sp->vars.offset[1] = (float)img->height / (float)sp->vars.size[1];
-	sp->vars.x = 0;
-}
 
 static void	draw_sp_pixel(t_sprite *sp, mlx_image_t *img_3d, mlx_texture_t *img, const float *dists)
 {
@@ -69,40 +54,6 @@ static void	draw_sprite(t_sprite *sp, mlx_image_t *img_3d, mlx_texture_t *img, c
 		}
 		sp->vars.t_pos[0] -= sp->vars.offset[0];
 	}
-}
-
-void	enemy_attack_move(t_sprite *sp, t_player *player)
-{
-	float			step;
-	float			angle;
-	float			dx;
-	float			dy;
-
-	t_world *world = get_world_active();
-
-	if (sp->dist < 50 || sp->dist > 1000)
-		return ;
-	step = 5.f;
-	angle = atan2f(player->player_coords_xy[1]
-			- sp->sp_xy[1], player->player_coords_xy[0] - sp->sp_xy[0]);
-	dx = cosf(angle) * step;
-	dy = sinf(angle) * step;
-	if (is_chunk_change(&sp->cell_xy, world))
-	{
-		replace_on_world(&sp->chunk_sp_xy, get_chunk_from_pos((int)sp->chunk_sp_xy[0] / 64, (int)sp->chunk_sp_xy[1] / 64), world);
-	}
-	if (!is_block(sp->chunk_sp_xy[0] + dx, sp->chunk_sp_xy[1]))
-	{
-		sp->sp_xy[0] += dx;
-		sp->chunk_sp_xy[0] += dx;
-	}
-	if (!is_block(sp->chunk_sp_xy[0], sp->chunk_sp_xy[1] + dy))
-	{
-		sp->sp_xy[1] += dy;
-		sp->chunk_sp_xy[1] += dy;
-	}
-	sp->cell_xy[0] = (int)sp->chunk_sp_xy[0] / 64;
-	sp->cell_xy[1] = (int)sp->chunk_sp_xy[1] / 64;
 }
 
 bool	sprite_are_sorted(t_sprite **sprite)
@@ -169,12 +120,10 @@ void	draw_sprites(t_player *player, t_imgs *imgs, const float *dists)
 		sort_sprites(player, &world->sprites[chunk]);
 		while (world->sprites[chunk][++s])
 		{
-			init_vars(world->sprites[chunk][s], player, world->sprites[chunk][s]->texture);
+			init_sprite_vars(world->sprites[chunk][s], player, world->sprites[chunk][s]->texture);
 			if (world->sprites[chunk][s]->fog > 1 || world->sprites[chunk][s]->dist < 15)
 				continue ;
 			draw_sprite(world->sprites[chunk][s], imgs->img_3d, world->sprites[chunk][s]->texture, dists);
-			if (world->sprites[chunk][s]->hostile)
-				enemy_attack_move(world->sprites[chunk][s], player);
 		}
 	}
 }

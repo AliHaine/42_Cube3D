@@ -69,7 +69,7 @@ void		animation_listener(void);
 void		player_listener(void *params);
 void		inventory(t_core *core);
 void		inventory_hook(void *params);
-void		display_item(t_core *core, t_slot *slot);
+void		display_item(t_slot *slot);
 void		crafting_engine(t_core *core);
 void		craft(t_core *core);
 void		teleport_player(t_player *player);
@@ -91,6 +91,6 @@ void		setup_slot_struct(mlx_t *mlx, t_player *player);
 t_slot		*get_first_slot(t_slot *slot);
 void		free_slot(t_slot *slot);
 
-void		setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world);
+void		setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world, t_player *player);
 
 #endif

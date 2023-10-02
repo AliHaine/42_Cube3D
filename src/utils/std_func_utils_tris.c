@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   defines.h                                          :+:      :+:    :+:   */
+/*   std_func_utils_tris.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngalzand <ngalzand@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/11 17:03:42 by ngalzand          #+#    #+#             */
-/*   Updated: 2023/05/11 17:03:46 by ngalzand         ###   ########.fr       */
+/*   Created: 2023/10/02 15:38:04 by ngalzand          #+#    #+#             */
+/*   Updated: 2023/10/02 15:38:06 by ngalzand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+#include "../../includes/includes.h"
 
-# define PI 3.141592653589793
-# define SCREEN_HEIGHT 720
-# define SCREEN_WIDTH 1280
-# define RAY_NUMBER 1280
-# define DIST_BETWEEN_RAY 0.000818
-# define FOV 1.0471975506
-# define SENSIBILITY 2
-# define DEFAULT_WALL ".d/default_wall.png"
-# define BASS_SAMPLE_LOOP 4
-# define MOVE_SPEED 12
-# define FOG_DISTANCE 1000
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	if (!s1 || !s2)
+		return (-1);
+	while (s1[i] && s2[i])
+	{
+		if (*((unsigned char *)(s1 + i)) != *((unsigned char *)(s2 + i)))
+			return (*((unsigned char *)(s1 + i))
+					- *((unsigned char *)(s2 + i)));
+		i++;
+	}
+	return (*((unsigned char *)(s1 + i)) - *((unsigned char *)(s2 + i)));
+}

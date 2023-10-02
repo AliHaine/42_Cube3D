@@ -73,6 +73,22 @@ static void	create_item_animation(t_item *item, int anim_size, int x_depth, int 
 	item->animation.image[i - 1] = 0;
 }
 
+static void	item_loader_bis(t_core *core)
+{
+	create_item(FLINT, core->mlx);
+	create_item_stats(get_item(FLINT), -1, 2, 2);
+	create_item_animation(get_item(FLINT), 4, 0, -50, core->mlx);
+	create_item(LIGHTER, core->mlx);
+	create_item_stats(get_item(LIGHTER), 10, 2, 2);
+	create_item_animation(get_item(LIGHTER), 3, 0, 150, core->mlx);
+	create_item(DIAMOND_PICKAXE, core->mlx);
+	create_item_stats(get_item(DIAMOND_PICKAXE), 10, 2, 5);
+	create_item_animation(get_item(DIAMOND_PICKAXE), 4, 0, 150, core->mlx);
+	create_item(WATER_BUCKET, core->mlx);
+	create_item_stats(get_item(WATER_BUCKET), -1, 2, 1);
+	create_item_animation(get_item(WATER_BUCKET), 3, 0, 150, core->mlx);
+}
+
 void	item_loader(t_core *core)
 {
 	create_item(HAND, core->mlx);
@@ -98,16 +114,5 @@ void	item_loader(t_core *core)
 	create_item(IRON, core->mlx);
 	create_item_stats(get_item(IRON), -1, 2, 2);
 	create_item_animation(get_item(IRON), 4, 0, -50, core->mlx);
-	create_item(FLINT, core->mlx);
-	create_item_stats(get_item(FLINT), -1, 2, 2);
-	create_item_animation(get_item(FLINT), 4, 0, -50, core->mlx);
-	create_item(LIGHTER, core->mlx);
-	create_item_stats(get_item(LIGHTER), 10, 2, 2);
-	create_item_animation(get_item(LIGHTER), 3, 0, 150, core->mlx);
-	create_item(DIAMOND_PICKAXE, core->mlx);
-	create_item_stats(get_item(DIAMOND_PICKAXE), 10, 2, 5);
-	create_item_animation(get_item(DIAMOND_PICKAXE), 4, 0, 150, core->mlx);
-	create_item(WATER_BUCKET, core->mlx);
-	create_item_stats(get_item(WATER_BUCKET), -1, 2, 1);
-	create_item_animation(get_item(WATER_BUCKET), 3, 0, 150, core->mlx);
+	item_loader_bis(core);
 }

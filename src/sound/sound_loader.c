@@ -12,6 +12,26 @@
 
 #include "../../includes/includes.h"
 
+static void	sound_loader_bis(void)
+{
+	if (!load_sound(PLAYER_WALK_SOUND, "assets/sounds/player_walk.mp3"))
+		msg_write(2, 2, ERROR_FATAL);
+	else
+		msg_write(1, -1, SUCCESS);
+	if (!load_sound(PLAYER_RUN_SOUND, "assets/sounds/player_run.mp3"))
+		msg_write(2, 2, ERROR_FATAL);
+	else
+		msg_write(1, -1, SUCCESS);
+	if (!load_sound(BLOCK_MINING_SOUND, "assets/sounds/block_mining.mp3"))
+		msg_write(2, 2, ERROR_FATAL);
+	else
+		msg_write(1, -1, SUCCESS);
+	if (!load_sound(BLOCK_BREAK_SOUND, "assets/sounds/block_break.mp3"))
+		msg_write(2, 2, ERROR_FATAL);
+	else
+		msg_write(1, -1, SUCCESS);
+}
+
 void	sound_loader(void)
 {
 	msg_write(1, -1, SOUND_INIT);
@@ -36,21 +56,6 @@ void	sound_loader(void)
 		msg_write(2, 2, ERROR_FATAL);
 	else
 		msg_write(1, -1, SUCCESS);
-	if (!load_sound(PLAYER_WALK_SOUND, "assets/sounds/player_walk.mp3"))
-		msg_write(2, 2, ERROR_FATAL);
-	else
-		msg_write(1, -1, SUCCESS);
-	if (!load_sound(PLAYER_RUN_SOUND, "assets/sounds/player_run.mp3"))
-		msg_write(2, 2, ERROR_FATAL);
-	else
-		msg_write(1, -1, SUCCESS);
-	if (!load_sound(BLOCK_MINING_SOUND, "assets/sounds/block_mining.mp3"))
-		msg_write(2, 2, ERROR_FATAL);
-	else
-		msg_write(1, -1, SUCCESS);
-	if (!load_sound(BLOCK_BREAK_SOUND, "assets/sounds/block_break.mp3"))
-		msg_write(2, 2, ERROR_FATAL);
-	else
-		msg_write(1, -1, SUCCESS);
+	sound_loader_bis();
 	msg_write(1, -1, SUCCESS);
 }

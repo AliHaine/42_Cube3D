@@ -9,14 +9,18 @@ SRCS		=	src/cub3d.c \
 				src/graphics/texture_loader.c \
 				src/graphics/raycast/digital_differential_analysis.c \
                 src/graphics/raycast/drawing.c \
+                src/graphics/raycast/ceil_and_floor.c \
                 src/graphics/raycast/struct_drawing.c \
                 src/graphics/raycast/raycast_utils.c \
                 src/graphics/sprite/sprites.c \
+                src/graphics/sprite/sprites_manager.c \
+                src/graphics/sprite/sprites_utils.c \
+                src/graphics/sprite/sprites_utils_bis.c \
+                src/graphics/sprite/move_multiple_sprites.c \
 				src/parsing/map_manager.c \
 				src/parsing/map_parse.c \
 				src/parsing/map_texture.c \
 				src/parsing/options_initializer.c \
-				src/parsing/sprites_manager.c \
 				src/sound/sound_loader.c \
 				src/sound/sound.c \
 				src/sound/sound_accessor.c \
@@ -48,6 +52,8 @@ SRCS		=	src/cub3d.c \
 				src/utils/map_utils.c \
 				src/utils/msg_utils.c \
 				src/utils/std_func_utils.c \
+				src/utils/std_func_utils_bis.c \
+				src/utils/std_func_utils_tris.c \
 				src/utils/file_utils.c \
 				src/utils/move_utils.c \
 				src/utils/mlx_texture_utils.c \
@@ -56,6 +62,7 @@ SRCS		=	src/cub3d.c \
 				src/utils/get_next_line/get_next_line_utils.c \
 				src/utils/inventory_utils.c \
 				src/utils/inventory_utils_bis.c \
+				src/utils/inventory_utils_tris.c \
 				src/utils/ft_split.c \
 				src/utils/crafting_utils.c \
 				src/utils/struct_slot.c
@@ -66,7 +73,7 @@ NAME		=	cub3d
 TOTAL_FILES =	$(words $(SRCS))
 COUNT		=	1
 
-FLAGS		=	-Ofast
+FLAGS		=	-Ofast -g3 -fsanitize=address
 LDFLAGS		+=	-L./src/sound/bass
 LDLIBS		+=	-lbass
 

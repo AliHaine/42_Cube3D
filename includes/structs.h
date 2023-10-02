@@ -77,7 +77,6 @@ typedef struct s_player
 {
 	float			player_pos_xy[2];
 	int				player_cell_xy[2];
-	float			player_coords_xy[2];
 	float			playerangle;
 	int				health;
 	bool			have_player;
@@ -100,6 +99,7 @@ typedef struct s_options
 	bool	skybox;
 	bool	sound;
 	bool	break_blocks;
+	bool	sprites;
 }	t_options;
 
 typedef struct s_core

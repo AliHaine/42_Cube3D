@@ -26,7 +26,7 @@ static bool	diamond_sword(t_core *core, t_slot *craft_table[10])
 			if (craft_table[9]->item->name == HAND)
 			{
 				give_item(core, get_item(SWORD_DIAMOND), 46, 1);
-				display_item(core, get_slot(core, 46));
+				display_item(get_slot(core, 46));
 			}
 			return (true);
 		}
@@ -53,7 +53,7 @@ static bool	lighter(t_core *core, t_slot *craft_table[10])
 					if (craft_table[9]->item->name == HAND)
 					{
 						give_item(core, get_item(LIGHTER), 46, 1);
-						display_item(core, get_slot(core, 46));
+						display_item(get_slot(core, 46));
 					}
 					return (true);
 				}

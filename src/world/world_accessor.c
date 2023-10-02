@@ -52,7 +52,7 @@ void	free_world(void)
 	while (i-- > 0)
 	{
 		world = get_world(i);
-//		free_all_sprites(world);
+		free_all_sprites(world);
 		free_tab_three(world->world);
 		free(world->biome);
 	}

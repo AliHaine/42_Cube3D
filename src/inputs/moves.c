@@ -25,15 +25,11 @@ void	move_left(t_player *player)
 	else
 		alpha = -acos(check_overflow(dir_x));
 	step_y = sinf(alpha + M_PI / 2) * player->move_speed;
-	if (!is_block(player->player_pos_xy[0], player->player_pos_xy[1] - step_y)) {
+	if (!is_block(player->player_pos_xy[0], player->player_pos_xy[1] - step_y))
 		player->player_pos_xy[1] -= step_y;
-		player->player_coords_xy[1] -= step_y;
-	}
 	step_x = cosf(alpha + M_PI / 2) * player->move_speed;
-	if (!is_block(player->player_pos_xy[0] - step_x, player->player_pos_xy[1])) {
+	if (!is_block(player->player_pos_xy[0] - step_x, player->player_pos_xy[1]))
 		player->player_pos_xy[0] -= step_x;
-		player->player_coords_xy[0] -= step_x;
-	}
 }
 
 void	move_right(t_player *player)
@@ -49,15 +45,11 @@ void	move_right(t_player *player)
 	else
 		alpha = -acos(check_overflow(dir_x));
 	step_y = sinf(alpha + M_PI / 2) * player->move_speed;
-	if (!is_block(player->player_pos_xy[0], player->player_pos_xy[1] + step_y)) {
+	if (!is_block(player->player_pos_xy[0], player->player_pos_xy[1] + step_y))
 		player->player_pos_xy[1] += step_y;
-		player->player_coords_xy[1] += step_y;
-	}
 	step_x = cosf(alpha + M_PI / 2) * player->move_speed;
-	if (!is_block(player->player_pos_xy[0] + step_x, player->player_pos_xy[1])) {
+	if (!is_block(player->player_pos_xy[0] + step_x, player->player_pos_xy[1]))
 		player->player_pos_xy[0] += step_x;
-		player->player_coords_xy[0] += step_x;
-	}
 }
 
 void	move_backward(t_player *player)
@@ -67,14 +59,10 @@ void	move_backward(t_player *player)
 
 	step_x = cosf(player->playerangle) * player->move_speed;
 	step_y = sinf(player->playerangle) * player->move_speed;
-	if (!is_block(player->player_pos_xy[0], player->player_pos_xy[1] - step_y)) {
+	if (!is_block(player->player_pos_xy[0], player->player_pos_xy[1] - step_y))
 		player->player_pos_xy[1] -= step_y;
-		player->player_coords_xy[1] -= step_y;
-	}
-	if (!is_block(player->player_pos_xy[0] - step_x, player->player_pos_xy[1])) {
+	if (!is_block(player->player_pos_xy[0] - step_x, player->player_pos_xy[1]))
 		player->player_pos_xy[0] -= step_x;
-		player->player_coords_xy[0] -= step_x;
-	}
 }
 
 void	move_forward(t_player *player)
@@ -84,14 +72,10 @@ void	move_forward(t_player *player)
 
 	step_x = cosf(player->playerangle) * player->move_speed;
 	step_y = sinf(player->playerangle) * player->move_speed;
-	if (!is_block(player->player_pos_xy[0] + step_x, player->player_pos_xy[1])) {
+	if (!is_block(player->player_pos_xy[0] + step_x, player->player_pos_xy[1]))
 		player->player_pos_xy[0] += step_x;
-		player->player_coords_xy[0] += step_x;
-	}
-	if (!is_block(player->player_pos_xy[0], player->player_pos_xy[1] + step_y)) {
+	if (!is_block(player->player_pos_xy[0], player->player_pos_xy[1] + step_y))
 		player->player_pos_xy[1] += step_y;
-		player->player_coords_xy[1] += step_y;
-	}
 }
 
 void	move_rotate(t_player *player, int direction, float speed)

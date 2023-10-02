@@ -61,4 +61,9 @@ void		get_color_wall_texture(mlx_texture_t *wall_texture, int r, t_col_drawing *
 void		get_color_block_texture(t_dda *dda, t_col_drawing *tcd);
 uint32_t	apply_fog(uint32_t color, float fog_strength);
 
+//ceil and floor
+void		skybox_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_world *world);
+void		ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_player *player);
+void		floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_player *player);
+
 #endif

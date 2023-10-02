@@ -87,7 +87,6 @@ static void	wall_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd)
 	tcd->current_step += tcd->step;
 }
 
-//todo bug with size wwidth
 void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *world)
 {
 	const int		start_y = ((playerpos[1] + world->height) / 4) - (286 / 2);
@@ -95,7 +94,6 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *world)
 	int				case_xy[2];
 	int				pxy[2];
 	static uint32_t	wall_color = (109 << 24) | (96 << 16) | (77 << 8) | 220;
-	uint32_t		picked;
 
 	pxy[1] = -1;
 	while (++pxy[1] < 286)
@@ -105,112 +103,17 @@ void	minimap_drawing(t_imgs *imgs, const float playerpos[2], t_world *world)
 		while (++pxy[0] < 286)
 		{
 			case_xy[0] = ((pxy[0] + start_x) / 16);
-			picked = get_pixel(imgs->map_texture, pxy[0], pxy[1]);
-			if (picked == -692152577 && (((case_xy[1] < 0 || case_xy[0] < 0
-				|| case_xy[1] > (world->height * 3) - 1
-				|| case_xy[0] > (world->width * 3) - 1))
-				|| (world->world[get_chunk_from_pos(case_xy[0], case_xy[1])]
-				[case_xy[1] % world->height][case_xy[0] % world->width] != '0')))
+			if (get_pixel(imgs->map_texture, pxy[0], pxy[1])
+				== -692152577 && (((case_xy[1] < 0 || case_xy[0] < 0
+							|| case_xy[1] > (world->height * 3) - 1
+							|| case_xy[0] > (world->width * 3) - 1))
+					|| (world->world[get_chunk_from_pos(case_xy[0], case_xy[1])]
+						[case_xy[1] % world->height][case_xy[0] % world->width] != '0')))
 				mlx_put_pixel(imgs->img_map, pxy[0], pxy[1], wall_color);
-			else
-			{
-				if (picked == 0)
-					continue ;
-				int r = (pxy[0] + pxy[1] * imgs->map_texture->width) * 4;
-				imgs->img_map->pixels[r + 3] = 220;
-			}
+			else if (get_pixel(imgs->map_texture, pxy[0], pxy[1]) != 0)
+				imgs->img_map->pixels[((pxy[0] + pxy[1] * imgs->map_texture->width) * 4) + 3] = 220;
 		}
 	}
-}
-
-void	skybox_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_world *world)
-{
-	int					skybox_tex_x;
-	int					skybox_tex_y;
-	int					value;
-	uint32_t			color;
-	static const float	vertical_offset = -89.f * SCREEN_HEIGHT;
-
-	skybox_tex_x = (int)((fmodf(dda->current_angle + PI_2, PI_2))
-			/ PI_2 * (float)world->ceil->width) % (int)world->ceil->width;
-	skybox_tex_y = (int)((tcd->iterator - vertical_offset)
-			* ((float)world->ceil->height / (float)world->ceil->width));
-	if (skybox_tex_y <= 0)
-		skybox_tex_y = 0;
-	else
-		skybox_tex_y %= (int)world->ceil->height;
-	value = (skybox_tex_x + skybox_tex_y * (int)world->ceil->width) * 4;
-	color = get_rgb_color(world->ceil->pixels[value],
-			world->ceil->pixels[value + 1],
-			world->ceil->pixels[value + 2],
-			world->ceil->pixels[value + 3]);
-	mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, color);
-}
-
-void	ceil_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_player *player, t_world *world)
-{
-	const float	s = (MID_HEIGHT * 64) / (MID_HEIGHT - tcd->iterator);
-	const float	d = (s / cosf(dda->current_angle - player->playerangle));
-	const float	fog_strength = d / FOG_DISTANCE;
-	int			value;
-	uint32_t	color;
-
-	if (tcd->iterator == 360)
-	{
-		tcd->iterator++;
-		return ;
-	}
-	if (fog_strength > 1)
-	{
-		mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++,
-			(0 << 24) | (0 << 16) | (0 << 8) | 255);
-		return ;
-	}
-	value = (((int)(player->player_coords_xy[0] + dda->cos
-			* d) % 64)
-			+ ((int)(player->player_coords_xy[1] + dda->sin
-			* d) % 64) * 64) * 4;
-	if (value < 0)
-		value = -value;
-	color = get_rgb_color(world->ceil->pixels[value],
-			world->ceil->pixels[value + 1],
-			world->ceil->pixels[value + 2],
-			world->ceil->pixels[value + 3]);
-	color = apply_fog(color, fog_strength);
-	mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, color);
-}
-
-void	floor_drawing(t_imgs *imgs, t_dda *dda, t_col_drawing *tcd, t_player *player, t_world *world)
-{
-	const float	s = (MID_HEIGHT * 64) / (tcd->iterator - MID_HEIGHT);
-	const float	d = (s / cosf(dda->current_angle - player->playerangle));
-	const float	fog_strength = d / FOG_DISTANCE;
-	int			value;
-	uint32_t	color;
-
-	if (tcd->iterator == 360)
-	{
-		tcd->iterator++;
-		return ;
-	}
-	if (fog_strength > 1)
-	{
-		mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++,
-			(0 << 24) | (0 << 16) | (0 << 8) | 255);
-		return ;
-	}
-	value = (((int)(player->player_pos_xy[0] + dda->cos
-					* d) % 64)
-			+ ((int)(player->player_pos_xy[1] + dda->sin
-					* d) % 64) * 64) * 4;
-	if (value < 0)
-		value = -value;
-	color = get_rgb_color(world->floor->pixels[value],
-			world->floor->pixels[value + 1],
-			world->floor->pixels[value + 2],
-			world->floor->pixels[value + 3]);
-	color = apply_fog(color, fog_strength);
-	mlx_put_pixel(imgs->img_3d, dda->ray, tcd->iterator++, color);
 }
 
 void	columns_drawing(t_imgs *imgs, t_dda *dda, t_player *player, t_options *options)
@@ -219,14 +122,13 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, t_player *player, t_options *opti
 	t_world			*world;
 
 	world = get_world_active();
-	setup_col_struct(&tcd, dda, world);
-	tcd.floor_d = cosf(dda->current_angle - player->playerangle);
+	setup_col_struct(&tcd, dda, world, player);
 	while (tcd.iterator < tcd.ceil_floor_line_h)
 	{
 		if (options->skybox == true && get_world_active()->skybox == true)
 			skybox_drawing(imgs, dda, &tcd, world);
 		else if (options->skybox == true)
-			ceil_drawing(imgs, dda, &tcd, player, world);
+			ceil_drawing(imgs, dda, &tcd, player);
 		else
 			mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++,
 				world->bt_color[1]);
@@ -236,7 +138,7 @@ void	columns_drawing(t_imgs *imgs, t_dda *dda, t_player *player, t_options *opti
 	while (tcd.iterator < SCREEN_HEIGHT)
 	{
 		if (options->floor_texture == true)
-			floor_drawing(imgs, dda, &tcd, player, world);
+			floor_drawing(imgs, dda, &tcd, player);
 		else
 			mlx_put_pixel(imgs->img_3d, dda->ray, tcd.iterator++,
 				world->bt_color[0]);

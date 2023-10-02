@@ -19,19 +19,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5df6833-95b4-4c03-9033-6dabe51c6018" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/sprites/crimson_fungus.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/fire_coral.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/warped_fungus.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/wither_rose.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.d/default.cub" beforeDir="false" afterPath="$PROJECT_DIR$/.d/default.cub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/concepts/sprites.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/concepts/sprites.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/concepts/world.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/concepts/world.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/defines.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/defines.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/includes.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/includes.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/raycast.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/raycast.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/structs.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/structs.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/utils.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cub3d.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/cub3d.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/raycast/drawing.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/raycast/drawing.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/raycast/struct_drawing.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/raycast/struct_drawing.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/graphics/sprite/sprites.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/sprite/sprites.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/sprite/sprites_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/sprite/sprites_utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/texture_loader.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/texture_loader.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/inputs/moves.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/inputs/moves.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/item/item_loader.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/item/item_loader.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parsing/map_parse.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/map_parse.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parsing/sprites_manager.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/sprites_manager.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/world/chunk_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/world/chunk_utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/options_initializer.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/options_initializer.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/sprites_manager.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/player_interaction/crafting.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/player_interaction/crafting.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/player_interaction/inventory.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/player_interaction/inventory.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/player_interaction/inventory_manager.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/player_interaction/inventory_manager.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sound/sound_loader.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/sound/sound_loader.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/crafting_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/crafting_utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/map_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/map_utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/player_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/player_utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/std_func_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/std_func_utils.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/world/world_accessor.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/world/world_accessor.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/world/world_dynamic_generator.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/world/world_dynamic_generator.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/world/world_loader.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/world/world_loader.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,25 +76,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "OCFindUsagesOptions.isSearchForTextOccurrences": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.sourceCode.C/C++",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;OCFindUsagesOptions.isSearchForTextOccurrences&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.C/C++&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/assets/sprites" />
@@ -133,7 +149,10 @@
       <workItem from="1695906827367" duration="3337000" />
       <workItem from="1695983067664" duration="1109000" />
       <workItem from="1695988206412" duration="13450000" />
-      <workItem from="1696001859483" duration="7461000" />
+      <workItem from="1696001859483" duration="7561000" />
+      <workItem from="1696240207075" duration="5467000" />
+      <workItem from="1696251014126" duration="17000" />
+      <workItem from="1696251129144" duration="5192000" />
     </task>
     <task id="LOCAL-00001" summary="sp">
       <created>1695819087052</created>
@@ -142,7 +161,14 @@
       <option name="project" value="LOCAL" />
       <updated>1695819087052</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="sprites end">
+      <created>1696009493434</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1696009493434</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,6 +176,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="sp" />
-    <option name="LAST_COMMIT_MESSAGE" value="sp" />
+    <MESSAGE value="sprites end" />
+    <option name="LAST_COMMIT_MESSAGE" value="sprites end" />
   </component>
 </project>

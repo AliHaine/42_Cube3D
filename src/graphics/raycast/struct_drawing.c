@@ -12,7 +12,7 @@
 
 #include "../../../includes/includes.h"
 
-void	setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world)
+void	setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world, t_player *player)
 {
 	int	convertor;
 	int	wall_height;
@@ -25,6 +25,7 @@ void	setup_col_struct(t_col_drawing *tcd, t_dda *dda, t_world *world)
 		return ;
 	}
 	wall_height = (SCREEN_HEIGHT * 64) / dda->dist_hv[0];
+	tcd->floor_d = cosf(dda->current_angle - player->playerangle);
 	tcd->ceil_floor_line_h = (SCREEN_HEIGHT - wall_height) / 2;
 	convertor = (64 * SCREEN_HEIGHT) / dda->dist_hv[0];
 	tcd->wall_line_h = (SCREEN_HEIGHT + wall_height) / 2;

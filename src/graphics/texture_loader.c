@@ -38,8 +38,6 @@ static void	other_loader(mlx_t *mlx, t_imgs *imgs)
 		msg_write(2, 2, ERROR_FATAL);
 	if (!set_image_from_path(mlx, "assets/blocks/backrooms_ceil.png", &imgs->backrooms_ceil))
 		msg_write(2, 2, ERROR_FATAL);
-	if (!set_image_from_path(mlx, "assets/trash_do_not_remove/e_0.png", &imgs->monster))
-		msg_write(2, 2, ERROR_FATAL);
 }
 
 static void	icon_loader(mlx_t *mlx, t_imgs *imgs)

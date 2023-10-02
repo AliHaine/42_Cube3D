@@ -17,8 +17,6 @@ static void	free_splited(char **var)
 	int	i;
 
 	i = -1;
-	if (!var)
-		return ;
 	while (var[++i])
 		free(var[i]);
 	free(var);
@@ -30,6 +28,7 @@ static void	init_vars(t_options *options)
 	options->skybox = false;
 	options->sound = false;
 	options->break_blocks = false;
+	options->sprites = false;
 }
 
 static bool	create_options_file(t_file *file)
@@ -47,6 +46,7 @@ static bool	create_options_file(t_file *file)
 	ft_putstr_fd("SKYBOX=TRUE\n", file->fd);
 	ft_putstr_fd("SOUND=TRUE\n", file->fd);
 	ft_putstr_fd("BREAK_BLOCKS=TRUE\n", file->fd);
+	ft_putstr_fd("SPRITES=TRUE\n", file->fd);
 	close_file(file);
 	if (!open_file(file, "./includes/options", O_RDONLY))
 		return (false);
@@ -55,26 +55,21 @@ static bool	create_options_file(t_file *file)
 
 static void	set_option(t_options *options, char **var)
 {
-	if (ft_strcmp(var[0], "FLOOR_TEXTURE") == 0)
-	{
-		if (ft_strcmp(var[1], "TRUE\n") == 0 || ft_strcmp(var[1], "TRUE") == 0)
+	if (ft_strcmp(var[0], "FLOOR_TEXTURE") == 0 && (ft_strcmp(var[1], "TRUE\n")
+			== 0 || ft_strcmp(var[1], "TRUE") == 0))
 			options->floor_texture = true;
-	}
-	else if (ft_strcmp(var[0], "SKYBOX") == 0)
-	{
-		if (ft_strcmp(var[1], "TRUE\n") == 0 || ft_strcmp(var[1], "TRUE") == 0)
+	else if (ft_strcmp(var[0], "SKYBOX") == 0 && (ft_strcmp(var[1], "TRUE\n")
+			== 0 || ft_strcmp(var[1], "TRUE") == 0))
 			options->skybox = true;
-	}
-	else if (ft_strcmp(var[0], "SOUND") == 0)
-	{
-		if (ft_strcmp(var[1], "TRUE\n") == 0 || ft_strcmp(var[1], "TRUE") == 0)
+	else if (ft_strcmp(var[0], "SOUND") == 0 && (ft_strcmp(var[1], "TRUE\n")
+			== 0 || ft_strcmp(var[1], "TRUE") == 0))
 			options->sound = true;
-	}
-	else if (ft_strcmp(var[0], "BREAK_BLOCKS") == 0)
-	{
-		if (ft_strcmp(var[1], "TRUE\n") == 0 || ft_strcmp(var[1], "TRUE") == 0)
+	else if (ft_strcmp(var[0], "BREAK_BLOCKS") == 0 && (ft_strcmp(var[1],
+				"TRUE\n") == 0 || ft_strcmp(var[1], "TRUE") == 0))
 			options->break_blocks = true;
-	}
+	else if (ft_strcmp(var[0], "SPRITES") == 0 && (ft_strcmp(var[1], "TRUE\n")
+			== 0 || ft_strcmp(var[1], "TRUE") == 0))
+		options->sprites = true;
 	else
 		msg_write(2, -1, UNKNOWN_OPTION);
 	if (ft_strcmp(var[1], "TRUE\n") != 0 && ft_strcmp(var[1], "FALSE\n") != 0

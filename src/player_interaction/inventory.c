@@ -12,7 +12,7 @@
 
 #include "../../includes/includes.h"
 
-void	display_item(t_core *core, t_slot *slot)
+void	display_item(t_slot *slot)
 {
 	if (slot && slot->item && slot->item->icon && slot->item->name != HAND)
 	{
@@ -53,7 +53,7 @@ static void	open_inv(t_core *core)
 	while (act->next)
 	{
 		if (act->icon_instance != -1)
-			display_item(core, act);
+			display_item(act);
 		act = act->next;
 	}
 	is_init = true;

@@ -43,8 +43,6 @@ typedef struct s_sprite_calc
 
 typedef struct s_sprite
 {
-	char			c;
-	bool			hostile;
 	int				scale;
 	float			dist;
 	int				x_origin;
@@ -61,11 +59,15 @@ typedef struct s_sprite
 void		draw_sprites(t_player *player, t_imgs *imgs, const float *dists);
 
 void		sprites_place(t_world *world, int chunk);
-void		reload_sprite_pos(t_world *world);
-void		add_sprite(t_world *world, int chunk, char c, int y, int x);
-void		delete_sprite(t_sprite **sprites, int s);
+void		add_sprite(t_world *world, int chunk, char c, int xy[2]);
+
+void		sprites_generator(t_world *world);
+void		select_sprite(t_sprite *sp, char c);
+void		init_sprite_vars(t_sprite *sp, t_player *player, mlx_texture_t *img);
 void		free_all_sprites(t_world *world);
-t_sprite	*get_sprite_by_int(t_sprite **sprites, int x, int y);
+void		realloc_sprites(t_sprite ***sprites, int len);
+void		reload_sprite_pos(t_world *world);
+void		move_multiple_sprites(t_world *world, int dir);
 
 char		get_rand_sprite_char(t_world *world);
 

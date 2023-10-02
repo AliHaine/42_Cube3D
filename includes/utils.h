@@ -62,6 +62,9 @@ int			detect_pointed_slot(t_core *core, int x, int y);
 void		set_pos_by_id(t_slot *slot, int id);
 void		reset_slot(t_core *core, t_slot *slot);
 void		change_item_number(t_core *core, t_slot *src, short n);
+void		reverse_attributes(t_slot *first, t_slot *second);
+void		follow_cursor(t_core *core, t_slot *s);
+void		set_on_void_slot(t_core *core, t_slot *slot, int s);
 
 //player_utils
 void		set_player(int x, int y, t_player *player, float angle);
