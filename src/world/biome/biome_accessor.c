@@ -24,11 +24,6 @@ void	set_biome(t_biome biome, int num)
 	g_biomes[num] = biome;
 }
 
-void	set_biome_sprites(t_sprite **sprites, Biome biome)
-{
-	g_biomes[biome].sprites = sprites;
-}
-
 void	free_biome(void)
 {
 	int	i;

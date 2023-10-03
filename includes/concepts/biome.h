@@ -33,7 +33,6 @@ typedef struct s_biome
 	Biome	name;
 	t_block	*block;
 	int		block_number;
-	t_sprite **sprites;
 }	t_biome;
 
 //accessor
