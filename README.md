@@ -1,6 +1,9 @@
 # Cub3d - Minecraft : セグメンテーションフォルトのないプログラムは、鋭い剣のように正確に使える。
 ## Cub3d is a project at the school 42. We work on it in groups of 2 students. The project involves creating a game similar Wolfeinstein 3D (1992), using Raycasting to develop a "Fake" 3d game (2.5D) with a 2D map. We implement it in C and whithout the use of any GameEngine; instead, we had to utilize MLX as the graphic lib (similar to SDL but significantly less powerful).
 ---
+[![Image](https://i.goopics.net/gn5v60.png)](https://goopics.net/i/gn5v60)
+[![Image](https://i.goopics.net/km1wsr.png)](https://goopics.net/i/km1wsr)
+
 ## Authors and Features
 -   [@AliY](https://www.github.com/alihaine)  notably implemented:
     -   DDA (most optimized Raycasting method)
@@ -43,7 +46,7 @@ make
 ```
 ---
 ## 0.0 Introduction
-This readme is primarily an explanation of how to create a 'Thing' from *'nothing'* and how the *'infinite World'* works. While I will often refer to myself as "I" since this is my part of the project, it's worth noting that my teammate contribution such as: skybox, sprite, crafting, fog and many more have been crucial features for the project. So of course, the part of my teammate are equally significant. **It was a perfect collaboration between us**, and that collaboration allowed us to create a project like this.
+This readme is primarily an explanation of how to create a 'Thing' from *'nothing'*. While I will often refer to myself as "I" since this is my part of the project, it's worth noting that my teammate contribution such as: skybox, sprite, crafting, fog and many more have been crucial features for the project. So of course, the part of my teammate are equally significant. **It was a perfect collaboration between us**, and that collaboration allowed us to create a project like this.
 
 *This is not a tutorial or a comprehensive explanation of the entire project or C concepts (such as Enum, Struct..)*
 
@@ -185,10 +188,32 @@ The main issues that I encountered is with the 'depth function', imagine that si
 Func1 call Func2, which call Func3, which call Func4 [...]. If only Func4 needs, for example to acces a Block, I had to pass the entire blocks_list through Func1, Func2 and Func3 just for deliver it to Func4.. Not only is this an inneficient coding practice, but it also breaks the encapsulation concept, as I had to send the entire blocks_list for getting a Block though X Func. And it's even worse if I pass the Core Struct directly everywhere..
 [![Image](https://i.goopics.net/r0x9jf.png)](https://goopics.net/i/r0x9jf)
 
----
+To resolve this issue, I used global static variables in an Accessor file (block_accessor.c..), to facilitate acces to the required element from anywhere. These global static variables are specifically used for fundamental concepts that are frequently utilized in various part of the program, such as Blocks or Items. Here are some functions that work with the global static variable of Block in the accessor
 
-## 2.0 The World
+```
+static t_block	*g_blocks[BLOCK_NUMBER];
 
-Minecraft, without an infinite World, wouldn't truly be Minecraft. Therefore, it was necessary to **implement an infinite World**, even though it posed some challenges. By 'infinte World' I mean a **World where the player can walk in any direction indefinitely** and generate the map chunk by chunk.
+t_block	*get_block(Block block)
+{
+	return (g_blocks[block]);
+}
 
+t_block	*get_block_from_char(char block_char)
+{
+	int	i;
+
+	i = BLOCK_NUMBER;
+	while (i-- > 0)
+	{
+		if (g_blocks[i]->block_char == block_char)
+			return (g_blocks[i]);
+	}
+	return (0);
+}
+
+mlx_image_t	*get_block_image(Block block)
+{
+	return (g_blocks[block]->image);
+}
+```
 
