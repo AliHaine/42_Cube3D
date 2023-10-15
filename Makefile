@@ -80,8 +80,19 @@ LDLIBS		+=	-lbass
 BASS_CFLAGS	=	-I./src/sound/bass
 BASS_LDFLAGS	=	-L./src/sound/bass
 BASS_LDLIBS	=	-lbass
+BASS_OS_LIBS :=
 
-MLX42		=	"../MLX42/build/libmlx42.a" -I include -lglfw -lm -ldl -framework Cocoa -framework OpenGL -framework IOKit -L "/Users/$$USER/.brew/opt/glfw/lib"
+OS := $(shell uname)
+OS_FLAGS :=
+ifeq ($(OS),Darwin)
+	OS_FLAGS += -I include -lglfw -lm -ldl -framework Cocoa -framework OpenGL -framework IOKit -L "/Users/$$USER/.brew/opt/glfw/lib"
+	BASS_OS_LIBS = @loader_path/libbass.dylib ./src/sound/bass/libbass.dylib
+else
+	OS_FLAGS += -I include -ldl -lglfw -pthread -lm
+	BASS_OS_LIBS = @loader_path/libbass.so ./src/sound/bass/libbass.so
+endif
+
+MLX42		=	"libs/MLX42/build/libmlx42.a" $(OS_FLAGS)
 
 CFLAGS		+=	-I include -I ../MLX42/include $(BASS_CFLAGS)
 
@@ -97,7 +108,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 	@echo "\033[32mFinishing...\033[0m"
 	@gcc $(FLAGS) $(OBJS) $(LIBFT) $(MLX42) $(BASS_LDFLAGS) $(BASS_LDLIBS) -o $(NAME)
-	@install_name_tool -change @loader_path/libbass.dylib ./src/sound/bass/libbass.dylib $(NAME)
+	@install_name_tool -change $(BASS_OS_LIBS) $(NAME)
 	@echo "\033[32m-- Done --\033[0m"
 
 clean:
