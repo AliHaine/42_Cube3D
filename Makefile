@@ -1,4 +1,4 @@
-SRCS		=	src/cub3d.c \
+SRC		=	src/cub3d.c \
 				src/inputs/inputs.c \
 				src/inputs/moves.c \
 				src/inputs/mouse_cursor.c \
@@ -67,60 +67,48 @@ SRCS		=	src/cub3d.c \
 				src/utils/crafting_utils.c \
 				src/utils/struct_slot.c
 
-OBJS		=	$(SRCS:.c=.o)
+UNAME := $(shell uname)
 
-NAME		=	cub3d
-TOTAL_FILES =	$(words $(SRCS))
-COUNT		=	1
+PATH_MLX = ./libs/MLX42
 
-FLAGS		=	-Ofast -g3
-LDFLAGS		+=	-L./src/sound/bass
-LDLIBS		+=	-lbass
+OBJS_DEFAULT	= ${SRC:.c=.o}
 
-BASS_CFLAGS	=	-I./src/sound/bass
-BASS_LDFLAGS	=	-L./src/sound/bass
-BASS_LDLIBS	=	-lbass
-BASS_OS_LIBS :=
+CFLAGS = -Ofast
 
-OS := $(shell uname)
-OS_FLAGS :=
-ifeq ($(OS),Darwin)
-	OS_FLAGS += -I include -lglfw -lm -ldl -framework Cocoa -framework OpenGL -framework IOKit -L "/Users/$$USER/.brew/opt/glfw/lib"
-	BASS_OS_LIBS = @loader_path/libbass.dylib ./src/sound/bass/libbass.dylib
+ifeq ($(UNAME), Darwin)
+FLAGS = -L./libs/bass -lbass "./libs/MLX42/build/libmlx42.a" -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -framework OpenGL -framework AppKit
+LINUX = false
+MACH_EXTRA = install_name_tool -change @loader_path/libbass.dylib ./libs/bass/libbass.dylib $(NAME)
 else
-	OS_FLAGS += -I include -ldl -lglfw -pthread -lm
-	BASS_OS_LIBS = @loader_path/libbass.so ./src/sound/bass/libbass.so
+FLAGS = -Ibass -L./libs/bass -lbass "./libs/MLX42/build/libmlx42.a" -Iinclude -ldl -lglfw -pthread -lm -Wl,-rpath=./libs/bass/,-rpath=./libs/MLX42/
+LINUX = true
 endif
 
-MLX42		=	"libs/MLX42/build/libmlx42.a" $(OS_FLAGS)
+NAME = cub3D
+CC = gcc
+RM = rm -rf
 
-CFLAGS		+=	-I include -I ../MLX42/include $(BASS_CFLAGS)
+all: ${NAME}
 
-RM			=	rm -rf
+.c.o:
+			${CC} ${CFLAGS} -Imlx -Ibass -c $< -o ${<:.c=.o} -D LINUX=${LINUX}
 
-%.o: %.c
-	@echo "\033[0;33m[$(shell echo $$(($(COUNT)*100/$(TOTAL_FILES))))%] Compiling [$<]... ($(COUNT)/$(TOTAL_FILES) files)\033[0m"
-	@gcc $(FLAGS) $(CFLAGS) -Ibass -c $< -o $@
-	$(eval COUNT=$(shell echo $$(($(COUNT)+1))))
-
-all:		$(NAME)
-
-$(NAME):	$(OBJS)
-	@echo "\033[32mFinishing...\033[0m"
-	@gcc $(FLAGS) $(OBJS) $(LIBFT) $(MLX42) $(BASS_LDFLAGS) $(BASS_LDLIBS) -o $(NAME)
-	@install_name_tool -change $(BASS_OS_LIBS) $(NAME)
-	@echo "\033[32m-- Done --\033[0m"
+$(NAME): $(OBJS_DEFAULT)
+			cmake -B libs/MLX42/build -S libs/MLX42
+			cmake --build libs/MLX42/build -j4
+			${CC} $(CFLAGS) -o $(NAME) $(OBJS_DEFAULT) $(OBJS_BONUS) $(FLAGS)
+			${MACH_EXTRA}
 
 clean:
-			@echo "\033[32mCleaning objs files...\033[0m"
-			@$(RM) $(OBJS)
+			${RM} ${OBJS_DEFAULT}
 
-fclean:		clean
-			@echo "\033[32mCleaning executables...\033[0m"
-			@$(RM) $(NAME)
+fclean: clean
+			${RM} ./libs/MLX42/build
+			${RM} ${NAME}
 
-re:			fclean all
-
-bonus:		$(NAME)
+re: fclean all
 
 .PHONY:		all clean fclean re
+
+
+
