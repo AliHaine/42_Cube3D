@@ -6,7 +6,7 @@
 /*   By: ngalzand <ngalzand@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:47:51 by ngalzand          #+#    #+#             */
-/*   Updated: 2023/05/11 16:47:54 by ngalzand         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:25:33 by ngalzand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static void	set_imgs_z(t_imgs *imgs)
 	imgs->img_3d->instances[0].z = 1;
 	imgs->img_map->instances[0].z = 3;
 	imgs->img_player->instances[0].z = 4;
-	imgs->crosshair->instances[0].z = 5;
+	imgs->crosshair->instances[0].z = 7;
+    imgs->crosshair->instances[0].x = (SCREEN_WIDTH / 2) - 8;
+    imgs->crosshair->instances[0].y = (SCREEN_HEIGHT / 2) - 8;
 	imgs->invbar->instances[0].z = 6;
 	imgs->invbar_selector->instances[0].z = 7;
 	imgs->engbar->instances[0].z = 9;

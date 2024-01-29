@@ -6,7 +6,7 @@
 /*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 01:08:55 by ayagmur           #+#    #+#             */
-/*   Updated: 2023/08/20 01:08:59 by ayagmur          ###   ########.fr       */
+/*   Updated: 2024/01/29 12:41:07 by ngalzand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	player_listener(void *params)
 	t_world	*world;
 
 	core = (t_core *) params;
+    if (core->player.is_moving && !core->player.is_in_inventory)
+        moving_handling_item(core);
 	world = get_world_active();
 	if (energy_listener(&core->player, world->difficulty))
 		draw_energy_bar(core->imgs.engbar, core->player.energy);

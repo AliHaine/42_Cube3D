@@ -6,7 +6,7 @@
 /*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 22:23:37 by ayagmur           #+#    #+#             */
-/*   Updated: 2023/08/22 22:23:39 by ayagmur          ###   ########.fr       */
+/*   Updated: 2024/01/25 12:58:58 by ngalzand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	chunk_generator(t_world *world, int chunk)
 			world->world[chunk][y][x] = '0';
 			if (!get_rand_num(10, 1))
 			{
-				if (!get_rand_num(10000, 1))
+				if (!get_rand_num(1000, 1))
 					world->world[chunk][y][x] = '(';
 				else if (biome != NULL)
 					world->world[chunk][y][x] = get_random_block_from_biome(biome).block_char;

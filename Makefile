@@ -76,11 +76,11 @@ OBJS_DEFAULT	= ${SRC:.c=.o}
 CFLAGS = -Ofast
 
 ifeq ($(UNAME), Darwin)
-FLAGS = -L./libs/bass -lbass "./libs/MLX42/build/libmlx42.a" -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -framework OpenGL -framework AppKit
+FLAGS = -L./libs/bass -lbass "./libs/MLX42/build/libmlx42.a" -lglfw -framework OpenGL -framework AppKit
 LINUX = false
 MACH_EXTRA = install_name_tool -change @loader_path/libbass.dylib ./libs/bass/libbass.dylib $(NAME)
 else
-FLAGS = -Ibass -L./libs/bass -lbass "./libs/MLX42/build/libmlx42.a" -Iinclude -ldl -lglfw -pthread -lm -Wl,-rpath=./libs/bass/,-rpath=./libs/MLX42/
+FLAGS = -Ibass -L./libs/bass -lbass "./libs/MLX42/build/libmlx42.a" -ldl -lglfw -pthread -lm -Wl,-rpath=./libs/bass/,-rpath=./libs/MLX42/
 LINUX = true
 endif
 

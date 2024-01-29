@@ -6,11 +6,42 @@
 /*   By: ayagmur <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 23:51:57 by ayagmur           #+#    #+#             */
-/*   Updated: 2023/06/30 23:52:00 by ayagmur          ###   ########.fr       */
+/*   Updated: 2024/01/24 15:37:20 by ngalzand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/includes.h"
+
+void    moving_handling_item(t_core *core)
+{
+    static int p = 0;
+    static int pos = 0;
+    static t_slot *save = 0;
+    static double time = 0;
+
+    if (save == 0)
+        save = core->player.slot;
+    else if (core->player.slot != save) {
+        save->item->image->instances[0].y = SCREEN_HEIGHT - save->item->image->height;
+        save = core->player.slot;
+        pos = 0;
+    }
+    if (p == 0 && mlx_get_time() - time >= 0.05 && pos < 4) {
+        p = 0;
+        pos += 1;
+        time = mlx_get_time();
+        save->item->image->instances[0].y += 7;
+    } else if (p == 1 || (mlx_get_time() - time >= 0.05 && pos == 4)) {
+        if (pos == 0) {
+            p = 0;
+            return;
+        }
+        p = 1;
+        pos -= 1;
+        time = mlx_get_time();
+        save->item->image->instances[0].y -= 7;
+    }
+}
 
 //playing any animation attack
 

@@ -6,7 +6,7 @@
 /*   By: ngalzand <ngalzand@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:47:16 by ngalzand          #+#    #+#             */
-/*   Updated: 2023/05/11 16:47:19 by ngalzand         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:17:22 by ngalzand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ bool		parse_main(t_file *file, t_player *player, t_world *map);
 void		initialize_options(t_core *core);
 
 //animations//
+void        moving_handling_item(t_core *core);
 void		animation_listener(void);
 
 	//player interaction//

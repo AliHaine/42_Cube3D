@@ -6,7 +6,7 @@
 /*   By: ngalzand <ngalzand@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:48:19 by ngalzand          #+#    #+#             */
-/*   Updated: 2023/05/11 16:48:26 by ngalzand         ###   ########.fr       */
+/*   Updated: 2024/01/29 12:35:46 by ngalzand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	move_left(t_player *player)
 		alpha = acos(check_overflow(dir_x));
 	else
 		alpha = -acos(check_overflow(dir_x));
-	step_y = sinf(alpha + M_PI / 2) * player->move_speed;
+	step_y = sinf(alpha + M_PI / 2) * ((float)player->move_speed / 2.f);
 	if (!is_block(player->player_pos_xy[0], player->player_pos_xy[1] - step_y))
 		player->player_pos_xy[1] -= step_y;
-	step_x = cosf(alpha + M_PI / 2) * player->move_speed;
+	step_x = cosf(alpha + M_PI / 2) * ((float)player->move_speed / 2.f);
 	if (!is_block(player->player_pos_xy[0] - step_x, player->player_pos_xy[1]))
 		player->player_pos_xy[0] -= step_x;
 }
@@ -44,10 +44,10 @@ void	move_right(t_player *player)
 		alpha = acos(check_overflow(dir_x));
 	else
 		alpha = -acos(check_overflow(dir_x));
-	step_y = sinf(alpha + M_PI / 2) * player->move_speed;
+	step_y = sinf(alpha + M_PI / 2) * ((float)player->move_speed / 2.f);
 	if (!is_block(player->player_pos_xy[0], player->player_pos_xy[1] + step_y))
 		player->player_pos_xy[1] += step_y;
-	step_x = cosf(alpha + M_PI / 2) * player->move_speed;
+	step_x = cosf(alpha + M_PI / 2) * ((float)player->move_speed / 2.f);
 	if (!is_block(player->player_pos_xy[0] + step_x, player->player_pos_xy[1]))
 		player->player_pos_xy[0] += step_x;
 }

@@ -6,7 +6,7 @@
 /*   By: ngalzand <ngalzand@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:03:42 by ngalzand          #+#    #+#             */
-/*   Updated: 2023/05/11 17:03:46 by ngalzand         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:19:37 by ngalzand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define SENSIBILITY 2
 # define DEFAULT_WALL ".d/default_wall.png"
 # define BASS_SAMPLE_LOOP 4
-# define MOVE_SPEED 12
+# define MOVE_SPEED 5
 # define FOG_DISTANCE 1000
 
 #endif
